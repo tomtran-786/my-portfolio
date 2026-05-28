@@ -1,7 +1,7 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'Your Name — Finance & Data Portfolio',
+  title: 'Tom Tran - Portfolio',
   description: 'Finance, data analysis, and business strategy portfolio',
 }
 

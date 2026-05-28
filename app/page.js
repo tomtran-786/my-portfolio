@@ -147,7 +147,7 @@ export default function Portfolio() {
 
           <div style={{ display: 'flex', gap: '1rem' }}>
             <motion.a
-  href="/Resume_TranVoManhTuan.pdf"
+  href="/Resume_Tran Vo Manh Tuan.pdf"
   download="CV_Tran_Vo_Manh_Tuan.pdf"
   whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(124,58,237,0.5)' }}
   whileTap={{ scale: 0.97 }}

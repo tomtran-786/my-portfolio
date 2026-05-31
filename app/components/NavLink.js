@@ -16,7 +16,7 @@ export default function NavLink({ href, label, activeSection }) {
       style={{
         color: isActive ? '#a78bfa' : '#cbd5e1',
         textDecoration: 'none',
-        fontSize: 14,
+        fontSize: 18,
         fontWeight: 500,
         cursor: 'pointer',
         position: 'relative',

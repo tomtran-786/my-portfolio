@@ -10,6 +10,7 @@ import NavLink from './components/NavLink'
 import GoToTop from './components/Gototop'
 import Timeline from './components/Timeline'
 import Projects from './components/Projects'
+import Certifications from './components/Certifications'
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('home')
@@ -62,9 +63,15 @@ export default function Portfolio() {
           &lt;tomtran/&gt;
         </span>
         <div style={{ display: 'flex', gap: '2rem' }}>
-          {['Home', 'Projects', 'Experience', 'Contact'].map(s => (
-            <NavLink key={s} href={`#${s.toLowerCase()}`} label={s} activeSection={activeSection} />
-          ))}
+          {[
+  { label: 'Home', href: '#home' },
+  { label: 'My Works', href: '#projects' },
+  { label: 'Timeline', href: '#experience' },
+  { label: 'My Certifications', href: '#cert' },
+  { label: 'Contact', href: '#contact' },
+].map(({ label, href }) => (
+  <NavLink key={label} href={href} label={label} activeSection={activeSection} />
+))}
         </div>
       </nav>
 
@@ -241,10 +248,15 @@ export default function Portfolio() {
 
 {/* EDUCATION */}
 <section style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 0.4rem' }}>
-    <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0' }}>Education</span>
-    <div style={{ flex: 1, height: '0.5px', background: 'rgba(139,92,246,0.2)' }} />
+  <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
+  <div>
+    <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Education</span>
+    <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
+      Where I experienced my academic journey
+    </p>
   </div>
+  <div style={{ flex: 1, height: '0.5px', background: 'rgba(139,92,246,0.2)', marginLeft: 16 }} />
+</div>
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -275,13 +287,20 @@ export default function Portfolio() {
     <div style={{ fontWeight: 600, fontFamily: "'Montserrat', sans-serif", fontSize: 16, color: '#A29BFE', whiteSpace: 'nowrap', marginLeft: 20 }}>Expected 2028</div>
   </motion.div>
 </section>
+{/* CERTIFICATIONS */}
+<Certifications />
 
 {/* CONTACT */}
-      <section style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 0.4rem' }}>
-    <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0' }}>Contact</span>
- <div style={{ flex: 1, height: '0.6px', background: 'rgba(139,92,246,0.2)' }} />
+      <section id="contact" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
+  <div>
+    <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Contact</span>
+    <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
+      Where you can reach out to me
+    </p>
   </div>
+  <div style={{ flex: 1, height: '0.6px', background: 'rgba(139,92,246,0.2)', marginLeft: 16 }} />
+</div>
         <div style={{
           background: '#0f1629', border: '0.5px solid rgba(139,92,246,0.2)',
           borderRadius: 15, padding: '3.1rem', textAlign: 'center', maxWidth: 625, margin: '0 auto'

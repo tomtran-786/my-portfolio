@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+
 
 const projects = [
   {
@@ -20,7 +21,7 @@ const projects = [
     category: 'Market Research',
     title: 'Mindflow - Market Analysis',
     desc: 'Competitive landscape study with customer segmentation and growth projections.',
-    image: "/apec.jpeg",
+    image: "/apec.png",
     highlights: ['Customer segmentation', 'Growth projections', 'Competitive landscape', 'Business Model Analysis', 'Cost-Benefit Analysis'],
     tags: ['NotebookLM', 'Excel', 'Gemini'],
     link: 'https://docs.google.com/document/d/1uUeDXTasFKTTIk1FaE-1w5xGx_iC2dxf/edit',
@@ -30,7 +31,7 @@ const projects = [
     category: 'Data Analysis',
     title: 'Phun Xam Vic',
     desc: 'Automated ETL pipeline pulling live market data into structured dashboards.',
-    image: '/phun_xam_vic.jpg',
+    image: '/phun_xam_vic.png',
     highlights: ['Live market data', 'Automated ETL', 'Structured dashboards'],
     tags: ['Python', 'Excel', 'Looker Studio'],
     link: 'https://github.com/tomtran-786/Phun-Xam-Vic---Data-Analysis/tree/main',
@@ -38,11 +39,19 @@ const projects = [
 ]
 
 const ALL = 'All'
-const categories = [ALL, 'Investment Analysis', 'Market Research', 'Data Engineering', 'Consulting Case']
+const categories = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case']
 
 export default function Projects() {
   const [active, setActive] = useState(ALL)
   const [selected, setSelected] = useState(null)
+   useEffect(() => {
+    if (selected) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [selected])
 
   const filtered = active === ALL ? projects : projects.filter(p => p.category === active)
 
@@ -125,10 +134,10 @@ export default function Projects() {
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {proj.tags.map(tag => (
                   <span key={tag} style={{
-                    fontSize: 11, fontWeight: 500,
-                    background: 'rgba(139,92,246,0.12)', color: '#a78bfa',
+                    fontSize: 12, fontWeight: 600,
+                    background: 'rgba(139,92,246,0.12)', color: '#fff',
                     border: '0.5px solid rgba(139,92,246,0.3)',
-                    borderRadius: 6, padding: '3px 9px',
+                    borderRadius: 25, padding: '3px 9px',
                   }}>{tag}</span>
                 ))}
               </div>
@@ -137,33 +146,34 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
-            style={{
-              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              zIndex: 100, padding: '2rem',
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.25 }}
-              onClick={e => e.stopPropagation()}
-              style={{
-                background: '#0f1629', borderRadius: 18, overflow: 'hidden',
-                maxWidth: 680, width: '100%',
-                border: '0.5px solid rgba(139,92,246,0.3)',
-                boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
-              }}
-            >
+     {/* Modal */}
+<AnimatePresence>
+  {selected && (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => setSelected(null)}
+      style={{
+        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        zIndex: 9999, padding: '2rem',
+        overflowY: 'auto',
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.25 }}
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: '#0f1629', borderRadius: 18, overflow: 'hidden',
+          maxWidth: 680, width: '100%',
+          border: '0.5px solid rgba(139,92,246,0.3)',
+          boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+        }}
+      >
               {/* Modal image */}
               <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b' }}>
                 <Image
@@ -201,7 +211,7 @@ export default function Projects() {
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {selected.highlights.map(h => (
                       <span key={h} style={{
-                        fontSize: 13, fontWeight: 500, color: '#e2e8f0',
+                        fontSize: 14, fontWeight: 600, color: '#fff',
                         background: 'rgba(255,255,255,0.06)',
                         border: '0.5px solid rgba(255,255,255,0.1)',
                         borderRadius: 8, padding: '6px 14px',
@@ -219,10 +229,10 @@ export default function Projects() {
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {selected.tags.map(tag => (
                       <span key={tag} style={{
-                        fontSize: 13, fontWeight: 500,
-                        background: 'rgba(139,92,246,0.12)', color: '#a78bfa',
+                        fontSize: 14, fontWeight: 600,
+                        background: 'rgba(139,92,246,0.12)', color: '#fff',
                         border: '0.5px solid rgba(139,92,246,0.3)',
-                        borderRadius: 8, padding: '6px 14px',
+                        borderRadius: 25, padding: '6px 14px',
                       }}>{tag}</span>
                     ))}
                   </div>

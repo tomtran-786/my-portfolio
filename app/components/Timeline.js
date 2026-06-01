@@ -153,7 +153,7 @@ function TextBlock({ exp, align }) {
       {/* Tools */}
       {exp.tools && (
         <p style={{
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: "'Montserrat', sans-serif",
           fontSize: 12,
           fontWeight: 400,
           color: '#B2BEC3',

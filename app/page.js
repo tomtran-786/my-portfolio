@@ -18,19 +18,34 @@ export default function Portfolio() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 })
 
   useEffect(() => {
-    const sections = ['home', 'projects', 'experience', 'contact']
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => { if (e.isIntersecting) setActiveSection(e.target.id) })
-      },
-      { threshold: 0.4 }
-    )
+  const sections = ['home', 'projects', 'experience', 'education', 'certifications', 'contact']
+
+  const handleScroll = () => {
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
+
+    if (nearBottom) {
+      setActiveSection('contact')
+      return
+    }
+
+    let current = 'home'
     sections.forEach(id => {
       const el = document.getElementById(id)
-      if (el) observer.observe(el)
+      if (el) {
+        const rect = el.getBoundingClientRect()
+        if (rect.top <= 300) {
+          current = id
+        }
+      }
     })
-    return () => observer.disconnect()
-  }, [])
+    setActiveSection(current)
+  }
+
+  // Dùng scroll event trên document thay vì window
+  document.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
+  return () => document.removeEventListener('scroll', handleScroll)
+}, []) // [] là đúng — không cần activeSection trong deps
   return (
     <main style={{ background: '#0a0e1a', minHeight: '100vh', color: '#f1f5f9', fontFamily: "'Syne', sans-serif", overflowX: 'hidden' }}>
 
@@ -67,7 +82,8 @@ export default function Portfolio() {
   { label: 'Home', href: '#home' },
   { label: 'My Works', href: '#projects' },
   { label: 'Timeline', href: '#experience' },
-  { label: 'My Certifications', href: '#cert' },
+  { label: 'Education', href: '#education' },
+  { label: 'My Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ].map(({ label, href }) => (
   <NavLink key={label} href={href} label={label} activeSection={activeSection} />
@@ -247,7 +263,7 @@ export default function Portfolio() {
 <Timeline />
 
 {/* EDUCATION */}
-<section style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
+<section id="education" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
   <div>
     <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Education</span>

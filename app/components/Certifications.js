@@ -70,8 +70,7 @@ export default function Certifications() {
   }
 
   return (
-    <section id="cert" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
-
+   <section id="certifications" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
       {/* Header */}
       <div style={{ marginBottom: '2.5rem' }}>
         <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0', margin: '0 0 0.4rem', lineHeight: 1.1 }}>

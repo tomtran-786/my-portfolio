@@ -45,13 +45,21 @@ export default function Projects() {
   const [active, setActive] = useState(ALL)
   const [selected, setSelected] = useState(null)
    useEffect(() => {
-    if (selected) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => { document.body.style.overflow = '' }
-  }, [selected])
+  if (!selected) return
+
+  const handleScroll = () => setSelected(null)
+  const handleNavClick = (e) => {
+    if (e.target.closest('nav')) setSelected(null)
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  document.addEventListener('click', handleNavClick)
+
+  return () => {
+    window.removeEventListener('scroll', handleScroll)
+    document.removeEventListener('click', handleNavClick)
+  }
+}, [selected])
 
   const filtered = active === ALL ? projects : projects.filter(p => p.category === active)
 

@@ -4,6 +4,17 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// Map tool → màu + icon
+const toolStyle = {
+  'Stata':           { color: '#1a5276', bg: '#d6eaf8', logo: '/logos/stata.svg' },
+  'Python':          { color: '#3572A5', bg: '#e8f0fe', logo: '/logos/python.svg' },
+  'Excel':           { color: '#217346', bg: '#d5f5e3', logo: '/logos/excel.svg' },
+  'Looker Studio':   { color: '#4285F4', bg: '#e8f0fe', logo: '/logos/looker.svg' },
+  'NotebookLM':      { color: '#ea4335', bg: '#fce8e6', logo: '/logos/notebooklm.svg' },
+  'Gemini':          { color: '#1a73e8', bg: '#e8f0fe', logo: '/logos/gemini.svg' },
+  'Powerpoint':      { color: '#d24726', bg: '#fde9e4', logo: '/logos/powerpoint.svg' },
+}
+const getToolStyle = (tag) => toolStyle[tag] || { color: '#7c3aed', bg: 'rgba(139,92,246,0.12)' }
 
 const projects = [
   {
@@ -12,8 +23,8 @@ const projects = [
     title: 'Unpacking the "Black Box": The Multidimensional Impact of Institutional Quality on Bilateral Services Trade',
     desc: 'This paper examines the impact of institutional quality and cultural distance on global services trade within a gravity model framework.',
     image: "/Research.png",
-    highlights: ['77 countries panel', 'Gravity Model', 'PPML'],
-    tags: ['Stata', 'Python', 'Finance', 'International Trade'],
+    highlights: ['77 countries panel', 'Gravity Model', 'PPML','Finance', 'International Trade'],
+    tags: ['Stata', 'Python'],
     link: 'https://drive.google.com/file/d/1xFxPuf6ykARBo1waxaLqcBMRiCsad5xj/view?usp=sharing',
   },
   {
@@ -21,10 +32,10 @@ const projects = [
     category: 'Market Research',
     title: 'Mindflow - Market Analysis',
     desc: 'Competitive landscape study with customer segmentation and growth projections.',
-    image: "/apec.png",
+    image: "/Mindflow.png",
     highlights: ['Customer segmentation', 'Growth projections', 'Competitive landscape', 'Business Model Analysis', 'Cost-Benefit Analysis'],
     tags: ['NotebookLM', 'Excel', 'Gemini'],
-    link: 'https://docs.google.com/document/d/1uUeDXTasFKTTIk1FaE-1w5xGx_iC2dxf/edit',
+    link: 'https://drive.google.com/file/d/1OwGnORnC7wxXaYlUFP-ephV0sCxtBsXk/view?usp=sharing',
   },
   {
     id: 3,
@@ -35,33 +46,147 @@ const projects = [
     highlights: ['Live market data', 'Automated ETL', 'Structured dashboards'],
     tags: ['Python', 'Excel', 'Looker Studio'],
     link: 'https://github.com/tomtran-786/Phun-Xam-Vic---Data-Analysis/tree/main',
-  }
+  },
+  {
+    id: 4,
+    category: 'Market Research',
+    title: 'SME Lending and Transational Data as a moat',
+    desc: 'A deep landscape and competitor analysis adopted from a VNG assignment during my job application as a Strategic Finance Intern.',
+    image: '/VNG.jpg',
+    highlights: ['Landscape Analysis', 'Competitor Analysis', 'Credit lending'],
+    tags: ['NotebookLM', 'Powerpoint'],
+    link: 'https://drive.google.com/file/d/1Vkv03y4sedCX6xB1TBuW9aGCMyBeBEg4/view?usp=sharing',
+  },
 ]
 
 const ALL = 'All'
-const categories = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case']
+const categoryList = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case']
+
+// Card với hover state nội bộ
+function ProjectCard({ proj, index, onClick }) {
+  const [hovered, setHovered] = useState(false)
+
+  return (
+    <motion.div
+      key={proj.id}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onClick={onClick}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      animate={{
+        y: hovered ? -8 : 0,
+        boxShadow: hovered
+          ? '0 16px 40px rgba(124,58,237,0.3)'
+          : '0 4px 20px rgba(0,0,0,0.3)',
+      }}
+      style={{
+        background: '#0f1629',
+        border: hovered
+          ? '0.5px solid rgba(139,92,246,0.6)'
+          : '0.5px solid rgba(139,92,246,0.2)',
+        borderRadius: 14, overflow: 'hidden', cursor: 'pointer',
+        transition: 'border 0.2s',
+      }}
+    >
+      {/* Cover image */}
+      <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b', overflow: 'hidden' }}>
+        <Image
+          src={proj.image}
+          alt={proj.title}
+          fill
+          sizes="33vw"
+          style={{
+            objectFit: 'cover',
+            transform: hovered ? 'scale(1.05)' : 'scale(1)',
+            transition: 'transform 0.5s ease',
+          }}
+        />
+        <div style={{
+          position: 'absolute', top: 12, left: 12,
+          background: '#7c3aed', color: '#fff',
+          fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 999,
+        }}>
+          {proj.category}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div style={{ padding: '1rem 1.2rem 1.2rem' }}>
+        {/* Title đổi màu tím khi hover */}
+        <h3 style={{
+          fontSize: 17, fontWeight: 700,
+          color: hovered ? '#a78bfa' : '#fff',
+          marginBottom: '0.5rem',
+          lineHeight: 1.4,
+          transition: 'color 0.2s ease',
+        }}>
+          {proj.title}
+        </h3>
+
+        <p style={{ fontSize: 13, color: '#B2BEC3', lineHeight: 1.7, marginBottom: '0.8rem' }}>
+          {proj.desc}
+        </p>
+
+        {/* Tags với màu riêng */}
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          {proj.tags.map(tag => {
+  const { color, bg, logo } = getToolStyle(tag)
+  return (
+    <span key={tag} style={{
+      fontSize: 11, fontWeight: 600,
+      background: bg, color: color,
+      borderRadius: 25, padding: '3px 10px',
+      display: 'inline-flex', alignItems: 'center', gap: 5,
+    }}>
+      {logo && (
+        <img
+          src={logo}
+          alt={tag}
+          style={{ width: 14, height: 14, objectFit: 'contain' }}
+        />
+      )}
+      {tag}
+    </span>
+  )
+})}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default function Projects() {
   const [active, setActive] = useState(ALL)
   const [selected, setSelected] = useState(null)
-   useEffect(() => {
-  if (!selected) return
 
-  const handleScroll = () => setSelected(null)
-  const handleNavClick = (e) => {
-    if (e.target.closest('nav')) setSelected(null)
-  }
+  // Khóa scroll khi modal mở
+  useEffect(() => {
+    document.body.style.overflow = selected ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [selected])
 
-  window.addEventListener('scroll', handleScroll, { passive: true })
-  document.addEventListener('click', handleNavClick)
-
-  return () => {
-    window.removeEventListener('scroll', handleScroll)
-    document.removeEventListener('click', handleNavClick)
-  }
-}, [selected])
+  // Đóng modal khi scroll hoặc click nav
+  useEffect(() => {
+    if (!selected) return
+    const handleScroll = () => setSelected(null)
+    const handleNavClick = (e) => { if (e.target.closest('nav')) setSelected(null) }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    document.addEventListener('click', handleNavClick)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      document.removeEventListener('click', handleNavClick)
+    }
+  }, [selected])
 
   const filtered = active === ALL ? projects : projects.filter(p => p.category === active)
+
+  // Đếm số project theo category
+  const countFor = (cat) => cat === ALL
+    ? projects.length
+    : projects.filter(p => p.category === cat).length
 
   return (
     <section id="projects" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
@@ -76,121 +201,81 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Filter tabs */}
+      {/* Filter tabs với bộ đếm */}
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: '2.5rem' }}>
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => setActive(cat)}
-            style={{
-              padding: '8px 18px', borderRadius: 999, fontSize: 14, fontWeight: 600,
-              cursor: 'pointer', border: '0.5px solid rgba(139,92,246,0.4)',
-              background: active === cat ? '#7c3aed' : 'rgba(139,92,246,0.08)',
-              color: active === cat ? '#fff' : '#a78bfa',
-              transition: 'all 0.2s',
-            }}
-          >
-            {cat}
-          </button>
-        ))}
+        {categoryList.map(cat => {
+          const count = countFor(cat)
+          const isActive = active === cat
+          return (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              style={{
+                padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 600,
+                cursor: 'pointer', border: '0.5px solid rgba(139,92,246,0.4)',
+                background: isActive ? '#7c3aed' : 'rgba(139,92,246,0.08)',
+                color: isActive ? '#fff' : '#a78bfa',
+                transition: 'all 0.2s',
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+              }}
+            >
+              {cat}
+              <span style={{
+                fontSize: 11, fontWeight: 700,
+                background: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(139,92,246,0.2)',
+                color: isActive ? '#fff' : '#a78bfa',
+                borderRadius: 999, padding: '1px 7px',
+                minWidth: 20, textAlign: 'center',
+              }}>
+                {count}
+              </span>
+            </button>
+          )
+        })}
       </div>
 
       {/* Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
         {filtered.map((proj, i) => (
-          <motion.div
+          <ProjectCard
             key={proj.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -6 }}
+            proj={proj}
+            index={i}
             onClick={() => setSelected(proj)}
-            style={{
-              background: '#0f1629',
-              border: '0.5px solid rgba(139,92,246,0.2)',
-              borderRadius: 14, overflow: 'hidden', cursor: 'pointer',
-              boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-            }}
-          >
-            {/* Cover image */}
-            <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b' }}>
-              <Image
-                src={proj.image}
-                alt={proj.title}
-                fill
-                sizes="33vw"
-                style={{ objectFit: 'cover' }}
-              />
-              <div style={{
-                position: 'absolute', top: 12, left: 12,
-                background: '#7c3aed', color: '#fff',
-                fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 999,
-              }}>
-                {proj.category}
-              </div>
-            </div>
-
-            {/* Content */}
-            <div style={{ padding: '1rem 1.2rem 1.2rem' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>
-                {proj.title}
-              </h3>
-              <p style={{ fontSize: 13, color: '#fff', lineHeight: 1.7, marginBottom: '0.8rem' }}>
-                {proj.desc}
-              </p>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {proj.tags.map(tag => (
-                  <span key={tag} style={{
-                    fontSize: 12, fontWeight: 600,
-                    background: 'rgba(139,92,246,0.12)', color: '#fff',
-                    border: '0.5px solid rgba(139,92,246,0.3)',
-                    borderRadius: 25, padding: '3px 9px',
-                  }}>{tag}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          />
         ))}
       </div>
 
-     {/* Modal */}
-<AnimatePresence>
-  {selected && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={() => setSelected(null)}
-      style={{
-        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        zIndex: 9999, padding: '2rem',
-        overflowY: 'auto',
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        transition={{ duration: 0.25 }}
-        onClick={e => e.stopPropagation()}
-        style={{
-          background: '#0f1629', borderRadius: 18, overflow: 'hidden',
-          maxWidth: 680, width: '100%',
-          border: '0.5px solid rgba(139,92,246,0.3)',
-          boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
-        }}
-      >
+      {/* Modal */}
+      <AnimatePresence>
+        {selected && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelected(null)}
+            style={{
+              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              zIndex: 9999, padding: '2rem', overflowY: 'auto',
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.25 }}
+              onClick={e => e.stopPropagation()}
+              style={{
+                background: '#0f1629', borderRadius: 18, overflow: 'hidden',
+                maxWidth: 680, width: '100%',
+                border: '0.5px solid rgba(139,92,246,0.3)',
+                boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+              }}
+            >
               {/* Modal image */}
               <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b' }}>
-                <Image
-                  src={selected.image}
-                  alt={selected.title}
-                  fill
-                  sizes="680px"
-                  style={{ objectFit: 'cover' }}
-                />
+                <Image src={selected.image} alt={selected.title} fill sizes="680px" style={{ objectFit: 'cover' }} />
               </div>
 
               {/* Modal content */}
@@ -203,7 +288,7 @@ export default function Projects() {
                   {selected.category}
                 </div>
 
-                <h3 style={{ fontSize: 26, fontWeight: 700, color: '#fff', marginBottom: '0.6rem' }}>
+                <h3 style={{ fontSize: 24, fontWeight: 700, color: '#fff', marginBottom: '0.6rem', lineHeight: 1.4 }}>
                   {selected.title}
                 </h3>
                 <p style={{ fontSize: 15, color: '#B2BEC3', lineHeight: 1.75, marginBottom: '1.2rem' }}>
@@ -212,14 +297,13 @@ export default function Projects() {
 
                 {/* Key highlights */}
                 <div style={{ marginBottom: '1.2rem' }}>
-                  <div style={{
-                    fontSize: 11, fontWeight: 700, color: '#475569',
-                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem',
-                  }}>Key Highlights</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+                    Key Highlights
+                  </div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {selected.highlights.map(h => (
                       <span key={h} style={{
-                        fontSize: 14, fontWeight: 600, color: '#fff',
+                        fontSize: 13, fontWeight: 600, color: '#fff',
                         background: 'rgba(255,255,255,0.06)',
                         border: '0.5px solid rgba(255,255,255,0.1)',
                         borderRadius: 8, padding: '6px 14px',
@@ -228,21 +312,32 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Tech stack */}
+                {/* Tech stack với màu */}
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{
-                    fontSize: 11, fontWeight: 700, color: '#475569',
-                    letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem',
-                  }}>Tech Stack</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+                    Tech Stack
+                  </div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {selected.tags.map(tag => (
-                      <span key={tag} style={{
-                        fontSize: 14, fontWeight: 600,
-                        background: 'rgba(139,92,246,0.12)', color: '#fff',
-                        border: '0.5px solid rgba(139,92,246,0.3)',
-                        borderRadius: 25, padding: '6px 14px',
-                      }}>{tag}</span>
-                    ))}
+                    {selected.tags.map(tag => {
+  const { color, bg, logo } = getToolStyle(tag)
+  return (
+    <span key={tag} style={{
+      fontSize: 11, fontWeight: 600,
+      background: bg, color: color,
+      borderRadius: 25, padding: '3px 10px',
+      display: 'inline-flex', alignItems: 'center', gap: 5,
+    }}>
+      {logo && (
+        <img
+          src={logo}
+          alt={tag}
+          style={{ width: 14, height: 14, objectFit: 'contain' }}
+        />
+      )}
+      {tag}
+    </span>
+  )
+})}
                   </div>
                 </div>
 

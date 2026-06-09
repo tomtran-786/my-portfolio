@@ -116,7 +116,7 @@ export default function Portfolio() {
   <span style={{ color: '#a78bfa' }}>Tuan (Tom)</span>{' '}Tran
 </h1>
 
-          <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 20, color: '#a78bfa', marginBottom: '1.2rem', minHeight: 28 }}>
+          <div style={{ fontWeight: 600, fontFamily: "'Montserrat', sans-serif", fontSize: 25, color: '#a78bfa', marginBottom: '1.2rem', minHeight: 28 }}>
             <span style={{ color: '#475569' }}>// </span>
             <TypeAnimation
               sequence={[
@@ -172,7 +172,7 @@ export default function Portfolio() {
           <div style={{ display: 'flex', gap: '1rem' }}>
             <motion.a
   href="/Resume_Tran Vo Manh Tuan.pdf"
-  download="CV_Tran_Vo_Manh_Tuan.pdf"
+  download="Resume_Tran_Vo_Manh_Tuan.pdf"
   whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(124,58,237,0.5)' }}
   whileTap={{ scale: 0.97 }}
   transition={{ type: 'spring', stiffness: 400, damping: 20 }}

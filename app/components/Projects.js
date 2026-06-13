@@ -55,8 +55,18 @@ const projects = [
     image: '/VNG.jpg',
     highlights: ['Landscape Analysis', 'Competitor Analysis', 'Credit lending'],
     tags: ['NotebookLM', 'Powerpoint'],
-    link: 'https://drive.google.com/file/d/1Vkv03y4sedCX6xB1TBuW9aGCMyBeBEg4/view?usp=sharing',
+    link: 'https://drive.google.com/file/d/1Vkv03y4sedCX6xB1TBuW9aGCMyBeBEg4/view?usp=sharing'
   },
+  {
+    id: 5,
+    category: 'Consulting Case',
+    title: 'Cosmo Launch: Winning Sensory-First Premium',
+    desc: 'A data-driven NPD launch plan for Cosmo - a sensory -first premium product in 2026 adopted from a Unilever assignment during my job application as a CSP Planning Intern.',
+    image: '/Unilever.jpg',
+    highlights: ['Landscape Analysis', 'Competitor Analysis', 'Credit lending'],
+    tags: ['NotebookLM', 'Powerpoint'],
+    link: 'https://drive.google.com/file/d/14W1O3aFSrPmrmwhGcCrI3XILGVEWKwcp/view?usp=drive_link'
+  }
 ]
 
 const ALL = 'All'

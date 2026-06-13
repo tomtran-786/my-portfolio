@@ -221,7 +221,7 @@ export default function Certifications() {
       <div style={{
         textAlign: 'center', marginTop: '0.75rem',
         fontFamily: "'Montserrat', sans-serif",
-        fontSize: 11, color: '#475569',
+        fontSize: 11, color: '#fff', fontWeight: 500, fontSize: 12
       }}>
         {page + 1} / {totalPages}
       </div>

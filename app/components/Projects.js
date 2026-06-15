@@ -63,7 +63,7 @@ const projects = [
     title: 'Cosmo Launch: Winning Sensory-First Premium',
     desc: 'A data-driven NPD launch plan for Cosmo - a sensory -first premium product in 2026 adopted from a Unilever assignment during my job application as a CSP Planning Intern.',
     image: '/unilever.jpg',
-    highlights: ['Landscape Analysis', 'Competitor Analysis', 'Credit lending'],
+    highlights: ['Landscape Analysis', 'Competitor Analysis', 'Product Launch Strategy'],
     tags: ['NotebookLM', 'Powerpoint'],
     link: 'https://drive.google.com/file/d/14W1O3aFSrPmrmwhGcCrI3XILGVEWKwcp/view?usp=drive_link'
   }

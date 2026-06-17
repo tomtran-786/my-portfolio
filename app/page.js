@@ -85,6 +85,7 @@ export default function Portfolio() {
   { label: 'Education', href: '#education' },
   { label: 'My Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
+  { label: "Teaching", href: "/teaching" },
 ].map(({ label, href }) => (
   <NavLink key={label} href={href} label={label} activeSection={activeSection} />
 ))}

@@ -3,15 +3,19 @@
 import { motion } from 'framer-motion'
 
 export default function NavLink({ href, label, activeSection }) {
-  const isActive = href === `#${activeSection}`
+  const isAnchor = href.startsWith('#')
+  const isActive = isAnchor && href === `#${activeSection}`
 
   return (
     <motion.a
       href={href}
       onClick={(e) => {
-        e.preventDefault()
-        const id = href.replace('#', '')
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+        if (isAnchor) {
+          e.preventDefault()
+          const id = href.replace('#', '')
+          document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+        }
+        // Không phải anchor → để <a href> navigate bình thường
       }}
       style={{
         color: isActive ? '#a78bfa' : '#cbd5e1',

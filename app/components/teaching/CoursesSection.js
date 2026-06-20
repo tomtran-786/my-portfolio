@@ -1,8 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import coursesData from "@/data/teaching/courses";
+
+const CATEGORIES = [
+  { id: "all", label: "Tất cả" },
+  { id: "ielts", label: "IELTS" },
+  { id: "toeic", label: "TOEIC" },
+  { id: "giao-tiep", label: "Giao Tiếp" },
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -50,9 +58,28 @@ const s = {
     fontSize: 15,
     lineHeight: 1.7,
     maxWidth: "36rem",
-    marginBottom: "3rem",
+    marginBottom: "2rem",
     fontFamily: "Montserrat, sans-serif",
   },
+  // Tabs lọc category
+  tabRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "0.6rem",
+    marginBottom: "2.5rem",
+  },
+  tabBtn: (active) => ({
+    background: active ? "#F2684A" : "#373254",
+    color: active ? "#fff" : "#D8D4EA",
+    border: "none",
+    fontSize: 13,
+    fontWeight: 600,
+    padding: "0.55rem 1.25rem",
+    borderRadius: "9999px",
+    fontFamily: "Montserrat, sans-serif",
+    cursor: "pointer",
+    transition: "background 0.2s, color 0.2s",
+  }),
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
@@ -135,10 +162,23 @@ const s = {
     textDecoration: "none",
     fontFamily: "Montserrat, sans-serif",
   }),
+  emptyState: {
+    color: "#ADA8C4",
+    fontSize: 14,
+    fontFamily: "Montserrat, sans-serif",
+    textAlign: "center",
+    padding: "3rem 0",
+  },
 };
 
 export default function CoursesSection() {
   const { sectionLabel, headline, subtext, items, cta, ctaHref } = coursesData;
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const filteredItems =
+    activeCategory === "all"
+      ? items
+      : items.filter((item) => item.category === activeCategory);
 
   return (
     <section style={s.section} id="courses">
@@ -153,36 +193,67 @@ export default function CoursesSection() {
         <p style={s.subtext}>{subtext}</p>
       </motion.div>
 
-      {/* Cards — flat items[] */}
-      <motion.div
-        style={s.grid}
-        initial="hidden" whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-      >
-        {items.map((item) => (
-          <motion.div key={item.id} variants={fadeUp} style={s.card(item.highlighted)}>
-            {item.highlighted && (
-              <span style={s.popularBadge}>⭐ {item.tag}</span>
-            )}
-
-            <span style={s.cardIcon}>{item.icon}</span>
-            {!item.highlighted && <span style={s.cardTag}>{item.tag}</span>}
-            <h3 style={s.cardTitle}>{item.title}</h3>
-            <p style={s.cardDesc}>{item.description}</p>
-
-            <div style={s.metaRow}>
-              <div style={s.metaItem}><span style={s.metaIcon}>📶</span>{item.level}</div>
-              <div style={s.metaItem}><span style={s.metaIcon}>👥</span>{item.format}</div>
-              <div style={s.metaItem}><span style={s.metaIcon}>🗓</span>{item.duration}</div>
-            </div>
-
-            <Link href={ctaHref} style={s.cardCta(item.highlighted)}>
-              {cta}
-            </Link>
-          </motion.div>
+      {/* Tabs lọc category */}
+      <div style={s.tabRow}>
+        {CATEGORIES.map((cat) => (
+          <button
+            key={cat.id}
+            style={s.tabBtn(activeCategory === cat.id)}
+            onClick={() => setActiveCategory(cat.id)}
+          >
+            {cat.label}
+          </button>
         ))}
-      </motion.div>
+      </div>
+
+      {/* Cards — fade khi đổi tab + hover lift */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeCategory}
+          style={s.grid}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={stagger}
+        >
+          {filteredItems.length === 0 ? (
+            <p style={s.emptyState}>Chưa có khóa học trong mục này.</p>
+          ) : (
+            filteredItems.map((item) => (
+              <motion.div
+                key={item.id}
+                variants={fadeUp}
+                style={s.card(item.highlighted)}
+                whileHover={{
+                  y: -10,
+                  boxShadow: "0 16px 32px rgba(0,0,0,0.35)",
+                  borderColor: "rgba(242,104,74,0.4)",
+                }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+              >
+                {item.highlighted && (
+                  <span style={s.popularBadge}>⭐ {item.tag}</span>
+                )}
+
+                <span style={s.cardIcon}>{item.icon}</span>
+                {!item.highlighted && <span style={s.cardTag}>{item.tag}</span>}
+                <h3 style={s.cardTitle}>{item.title}</h3>
+                <p style={s.cardDesc}>{item.description}</p>
+
+                <div style={s.metaRow}>
+                  <div style={s.metaItem}><span style={s.metaIcon}>📶</span>{item.level}</div>
+                  <div style={s.metaItem}><span style={s.metaIcon}>👥</span>{item.format}</div>
+                  <div style={s.metaItem}><span style={s.metaIcon}>🗓</span>{item.duration}</div>
+                </div>
+
+                <Link href={ctaHref} style={s.cardCta(item.highlighted)}>
+                  {cta}
+                </Link>
+              </motion.div>
+            ))
+          )}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }

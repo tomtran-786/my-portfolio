@@ -2,12 +2,11 @@ const aboutData = {
   sectionLabel: "Về tôi",
   headline: "Không chỉ dạy tiếng Anh — tôi dạy cách tư duy bằng tiếng Anh",
   paragraphs: [
-    "Tôi bắt đầu dạy tiếng Anh từ năm lớp 12 — thời điểm nhiều bạn bè nhờ tôi ôn thi vì biết tôi học chuyên Anh tại THPT Chuyên Nguyễn Tất Thành, Quảng Ngãi. Từ những buổi ôn nhỏ đó, tôi nhận ra mình thực sự thích việc giúp người khác \"vỡ ra\" một điểm ngữ pháp hay tự tin nói được câu đầu tiên bằng tiếng Anh.",
-    "Bên cạnh sự nghiệp chính trong phân tích dữ liệu, giảng dạy là nơi tôi được kết nối với con người theo cách khác — không qua con số mà qua những bước tiến nhỏ mỗi buổi học. Đó là lý do tôi vẫn tiếp tục dạy đến hôm nay.",
+    "Tôi bắt đầu dạy tiếng Anh từ năm lớp 12. Khi đó, nhiều bạn bè biết tôi học chuyên Anh tại THPT Chuyên Nguyễn Tất Thành (Quảng Ngãi) nên hay nhờ tôi kèm ôn thi. Qua những buổi học chung, tôi nhận ra mình thực sự tìm thấy niềm vui khi giúp người khác hiểu rõ một điểm ngữ pháp hoặc tự tin giao tiếp những câu tiếng Anh đầu tiên.",
+    "Hiện nay, dù tập trung vào công việc phân tích dữ liệu, việc đi dạy vẫn mang lại cho tôi một sự cân bằng. Thay vì làm việc với các tập dữ liệu khô khan, tôi được tương tác với con người và nhìn thấy sự tiến bộ thực tế của họ sau từng buổi học. Nhờ niềm vui thiết thực này mà tôi vẫn tiếp tục duy trì việc dạy học cho đến tận bây giờ.",
   ],
-  // Thay bằng ảnh thật của bạn đặt tại /public/teaching/about.jpg
   image: {
-    src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=700&fit=crop&q=80",
+    src: "/teaching/me.jpeg",
     alt: "Tom Tran - English Teacher",
   },
   stats: [
@@ -19,7 +18,7 @@ const aboutData = {
     "IELTS 7.5",
     "TOEIC L&R 980",
     "Chứng chỉ TOEIC Teaching (ALAP)",
-    "Chuyên Anh — THPT Nguyễn Tất Thành, QNg",
+    "Chuyên Anh — THPT Nguyễn Tất Thành, Quảng Ngãi",
   ],
 };
 

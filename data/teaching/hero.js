@@ -5,8 +5,6 @@ const heroData = {
     before: "Thầy giáo tiếng Anh giúp bạn",
     after: "chinh phục mọi kì thi",
     image: {
-      // Thay bằng ảnh thật của bạn trong /public/teaching/hero-inline.jpg
-      src: "/teaching/hero-inline.jpg",
       alt: "Tom Tran - English Teacher",
     },
   },
@@ -27,10 +25,10 @@ const heroData = {
     count: "30+ Học viên hài lòng",
     // Thay bằng ảnh thật của học viên (cần có sự đồng ý)
     avatars: [
-      { src: "/teaching/avatars/student-1.jpg", alt: "Học viên 1" },
-      { src: "/teaching/avatars/student-2.jpg", alt: "Học viên 2" },
-      { src: "/teaching/avatars/student-3.jpg", alt: "Học viên 3" },
-      { src: "/teaching/avatars/student-4.jpg", alt: "Học viên 4" },
+      { src: "/teaching/feedback_Chau.png", alt: "Tô Bảo Châu" },
+      { src: "/teaching/feedback_MinhThu.png", alt: "Trần Minh Thư" },
+      { src: "/teaching/feedback-DucMinh.png", alt: "Nông Đức Minh" },
+      { src: "/teaching/feedback-KieuMy.png", alt: "Lê Thị Kiều My" },
     ],
   },
 };

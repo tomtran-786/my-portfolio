@@ -1,7 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import testimonialsData from "@/data/teaching/testimonials";
+
+const ITEMS_PER_PAGE = 3;
 
 const stagger = {
   hidden: {},
@@ -62,6 +65,7 @@ const s = {
     display: "flex",
     flexDirection: "column",
     gap: "1.25rem",
+    cursor: "default",
   },
   quoteIcon: {
     color: "#F2684A",
@@ -120,6 +124,42 @@ const s = {
     color: "#F2684A",
     marginLeft: "auto",
   },
+  // Pagination controls
+  pagination: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    marginTop: "2.5rem",
+  },
+  pageBtn: (disabled) => ({
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
+    background: disabled ? "rgba(255,255,255,0.05)" : "#373254",
+    border: "none",
+    color: disabled ? "#5C5878" : "#D8D4EA",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: disabled ? "default" : "pointer",
+    flexShrink: 0,
+  }),
+  pageDots: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+  },
+  pageDot: (active) => ({
+    width: active ? 22 : 8,
+    height: 8,
+    borderRadius: "9999px",
+    background: active ? "#F2684A" : "rgba(255,255,255,0.15)",
+    border: "none",
+    cursor: "pointer",
+    padding: 0,
+    transition: "width 0.25s ease, background 0.25s ease",
+  }),
 };
 
 function StarIcon() {
@@ -130,8 +170,30 @@ function StarIcon() {
   );
 }
 
+function ArrowIcon({ direction }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" strokeWidth="2.5"
+      strokeLinecap="round" strokeLinejoin="round">
+      <polyline points={direction === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6"} />
+    </svg>
+  );
+}
+
 export default function TestimonialsSection() {
   const { sectionLabel, headline, subtext, items } = testimonialsData;
+  const [page, setPage] = useState(0);
+
+  const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+  const paginatedItems = items.slice(
+    page * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+  );
+
+  const goToPage = (p) => {
+    if (p < 0 || p >= totalPages) return;
+    setPage(p);
+  };
 
   return (
     <section style={s.section} id="testimonials">
@@ -147,32 +209,80 @@ export default function TestimonialsSection() {
         <p style={s.subtext}>{subtext}</p>
       </motion.div>
 
-      {/* Cards */}
-      <motion.div
-        style={s.grid}
-        initial="hidden" whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={stagger}
-      >
-        {items.map((item) => (
-          <motion.div key={item.id} variants={fadeUp} style={s.card}>
-            <div style={s.quoteIcon}>"</div>
-            <p style={s.quote}>{item.quote}</p>
-            <span style={s.resultBadge}>🎉 {item.result}</span>
-            <div style={s.footer}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={item.avatar} alt={item.name} style={s.avatar} />
-              <div>
-                <p style={s.name}>{item.name}</p>
-                <p style={s.role}>{item.role}</p>
+      {/* Cards — đổi page sẽ fade ra/vào */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={page}
+          style={s.grid}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={stagger}
+        >
+          {paginatedItems.map((item) => (
+            <motion.div
+              key={item.id}
+              variants={fadeUp}
+              style={s.card}
+              whileHover={{
+                y: -10,
+                boxShadow: "0 16px 32px rgba(0,0,0,0.35)",
+                borderColor: "rgba(242,104,74,0.4)",
+              }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <div style={s.quoteIcon}>"</div>
+              <p style={s.quote}>{item.quote}</p>
+              <span style={s.resultBadge}>🎉 {item.result}</span>
+              <div style={s.footer}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.avatar} alt={item.name} style={s.avatar} />
+                <div>
+                  <p style={s.name}>{item.name}</p>
+                  <p style={s.role}>{item.role}</p>
+                </div>
+                <div style={s.stars}>
+                  {Array.from({ length: item.rating }).map((_, i) => <StarIcon key={i} />)}
+                </div>
               </div>
-              <div style={s.stars}>
-                {Array.from({ length: item.rating }).map((_, i) => <StarIcon key={i} />)}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Pagination — chỉ hiện khi có nhiều hơn 1 trang */}
+      {totalPages > 1 && (
+        <div style={s.pagination}>
+          <button
+            style={s.pageBtn(page === 0)}
+            onClick={() => goToPage(page - 1)}
+            disabled={page === 0}
+            aria-label="Trang trước"
+          >
+            <ArrowIcon direction="left" />
+          </button>
+
+          <div style={s.pageDots}>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                style={s.pageDot(i === page)}
+                onClick={() => goToPage(i)}
+                aria-label={`Trang ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            style={s.pageBtn(page === totalPages - 1)}
+            onClick={() => goToPage(page + 1)}
+            disabled={page === totalPages - 1}
+            aria-label="Trang sau"
+          >
+            <ArrowIcon direction="right" />
+          </button>
+        </div>
+      )}
     </section>
   );
 }

@@ -9,6 +9,7 @@ const coursesData = {
       id: "ielts-basic",
       icon: "📘",
       tag: "IELTS",
+      category: "ielts",
       title: "IELTS Basic",
       description:
         "Dành cho người mới bắt đầu hoặc chưa có nền tảng vững. Xây dựng từ vựng, ngữ pháp và 4 kỹ năng cơ bản để đạt mục tiêu band 4.0.",
@@ -20,6 +21,7 @@ const coursesData = {
     {
       id: "ielts-intermediate",
       icon: "🎯",
+      category: "ielts",
       tag: "Phổ biến nhất",
       title: "IELTS Intermediate",
       description:
@@ -32,6 +34,7 @@ const coursesData = {
     {
       id: "toeic-basic",
       icon: "📝",
+      category: "toeic",
       tag: "TOEIC",
       title: "TOEIC Basic",
       description:
@@ -44,19 +47,21 @@ const coursesData = {
     {
       id: "toeic-intermediate",
       icon: "🚀",
-      tag: "TOEIC",
+      tag: "Phổ biến nhất",
       title: "TOEIC Intermediate",
       description:
         "Nâng điểm TOEIC lên 500+ với lộ trình luyện đề chuyên sâu, mở rộng từ vựng business và tăng tốc độ xử lý Listening & Reading.",
       level: "Intermediate → 500+",
       format: "1-1 hoặc nhóm 3–5",
       duration: "Linh hoạt theo học viên",
-      highlighted: false,
+      category: "toeic",
+      highlighted: true,
     },
     {
       id: "communication",
       icon: "💬",
       tag: "Giao tiếp",
+      category: "giao-tiep",
       title: "Tiếng Anh Giao Tiếp",
       description:
         "Tập trung vào phản xạ, phát âm và sự tự tin khi nói. Học cách dùng tiếng Anh tự nhiên trong công việc và cuộc sống hàng ngày.",

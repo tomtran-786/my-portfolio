@@ -7,34 +7,43 @@ const testimonialsData = {
     {
       id: 1,
       // Thay bằng ảnh thật (cần có sự đồng ý của học viên)
-      avatar: "https://i.pravatar.cc/100?img=47",
-      name: "Nguyễn Minh Anh",
-      role: "Marketing Executive",
-      result: "IELTS 7.0 sau 5 tháng",
+      avatar: "/teaching/feedback-DucMinh.png",
+      name: "Nông Đức Minh",
+      role: "Sinh viên Đại học Bách Khoa Hà Nội (HUST)",
+      result: "Từ MẤT GỐC đạt được TOEIC 300 và VSTEP B1 sau 2 tháng",
       rating: 5,
       quote:
-        "Trước khi học với Tom, tôi đã thi IELTS 2 lần và mãi kẹt ở 5.5. Cách tiếp cận của thầy rất khác — thay vì nhồi đề, thầy giúp tôi hiểu tại sao mình mắc lỗi. Lần thứ 3 tôi đạt 7.0.",
+        "Mình đã học TOEIC trong 2 tháng với thầy Tuấn và hoàn toàn hài lòng. Lộ trình rõ ràng, tài liệu bám sát đề thi, thầy giảng dạy dễ hiểu, nhiệt tình và luôn hỗ trợ học viên. Sau khóa học, mình tiến bộ rõ rệt ở cả Listening và Reading. Cảm ơn thầy Tuấn rất nhiều!",
     },
     {
       id: 2,
-      avatar: "https://i.pravatar.cc/100?img=12",
-      name: "Trần Quốc Bảo",
-      role: "Software Engineer",
-      result: "Tự tin họp với team quốc tế",
+      avatar: "/teaching/feedback_MinhThu.png",
+      name: "Trần Minh Thư",
+      role: "Học sinh cấp 3 ở Nghệ An",
+      result: "Đạt được chứng chỉ IELTS Academic 6.0 trong 3 tháng",
       rating: 5,
-      quote:
-        "Tôi biết tiếng Anh nhưng cứ run mỗi khi họp với đồng nghiệp nước ngoài. Sau 3 tháng học giao tiếp với Tom, tôi không chỉ hết run mà còn chủ động dẫn dắt meeting.",
+      quote: "Em cải thiện khả năng đọc và nghe của mình trong lộ trình 3 tháng cùng thầy Tuấn và đạt được chứng chỉ IELTS để xét tuyển Đại học."
     },
     {
       id: 3,
-      avatar: "https://i.pravatar.cc/100?img=33",
-      name: "Lê Phương Thảo",
-      role: "Finance Analyst",
-      result: "Thăng chức nhờ tiếng Anh",
+      avatar: "/teaching/feedback-KieuMy.png",
+      name: "Lê Thị Kiều My",
+      role: "Sinh viên Đại học Tài chính - Marketing (UFM)",
+      result: "Tự tin thuyết trình Tiếng Anh trước lớp",
       rating: 5,
-      quote:
-        "Tom không chỉ dạy tiếng Anh — thầy còn giúp tôi trình bày báo cáo, viết email chuyên nghiệp và thuyết phục sếp bằng tiếng Anh. 6 tháng sau tôi được thăng lên regional role.",
+      quote: "Thầy Tuấn đã giúp em cải thiện sự tự tin và phát âm Tiếng Anh của mình khi nói. Đồng thời, kiến thức về thuyết trình của thầy cũng rất sâu sắc, giúp em đạt điểm A trong môn thuyết trình ở trường đại học."
     },
+        {
+      id: 4,
+      avatar: "/teaching/feedback_Chau.png",
+      name: "Tô Bảo Châu",
+      role: "Học sinh lớp 8 - Trường THCS Nguyễn Trãi",
+      result: "Nâng điểm số Tiếng Anh trên lớp từ 7 lên 9.",
+      rating: 5,
+      quote:"Thầy Tuấn đã giúp em nâng cao và duy trì mức điểm trung bình là 9 trong suốt năm lớp 7 và 8. Ngoài ra, thầy cũng là 1 người tận tâm và nhiệt tình, luôn giải đáp thắc mắc về bài của em."
+    },
+
+
   ],
 };
 

@@ -8,13 +8,17 @@ import TeachingGoToTop from "@/app/components/teaching/TeachingGoToTop";
 
 export default function TeachingPage() {
   return (
-    <main style={{ padding: "1.5rem 1rem" }}>
-      <TeachingNavbar />
-      <HeroSection />
-      <CoursesSection />
-      <AboutSection />
-      <TestimonialsSection />
-      <CTASection />
+    // Không padding ngang ở đây — để Navbar tràn sát mép trái/phải.
+    // Các section bên dưới tự có padding riêng (đã set trong từng component).
+<main style={{ padding: "0 1rem" }}>
+  <TeachingNavbar />
+      <div style={{ padding: "0 1rem" }}>
+        <HeroSection />
+        <CoursesSection />
+        <AboutSection />
+        <TestimonialsSection />
+        <CTASection />
+      </div>
       <TeachingGoToTop />
     </main>
   );

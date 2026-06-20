@@ -164,18 +164,6 @@ function ArrowIcon() {
   );
 }
 
-// Placeholder avatar khi chưa có ảnh thật
-const PLACEHOLDER_AVATARS = [
-  "https://i.pravatar.cc/100?img=47",
-  "https://i.pravatar.cc/100?img=12",
-  "https://i.pravatar.cc/100?img=33",
-  "https://i.pravatar.cc/100?img=22",
-];
-
-// Placeholder inline image khi chưa có ảnh thật
-const PLACEHOLDER_INLINE =
-  "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=200&h=120&fit=crop&q=80";
-
 export default function HeroSection() {
   const { badge, headline, subtext, cta, socialProof } = heroData;
 
@@ -186,6 +174,23 @@ export default function HeroSection() {
       animate="visible"
       style={s.section}
     >
+      <style>{`
+        .hero-cta-primary,
+        .hero-cta-arrow {
+          transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+        .hero-cta-primary:hover {
+          background: #ff7c5c;
+          transform: translateY(-3px);
+          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+        }
+        .hero-cta-arrow:hover {
+          background: #ff7c5c;
+          transform: translateY(-3px) scale(1.06);
+          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+        }
+      `}</style>
+
       {/* Badge */}
       <motion.div variants={fadeUp} style={s.badge}>
         <span style={s.badgeDot} />
@@ -196,11 +201,6 @@ export default function HeroSection() {
       <motion.h1 variants={fadeUp} style={s.headline}>
         {headline.before}{" "}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={PLACEHOLDER_INLINE}
-          alt={headline.image.alt}
-          style={s.inlineImg}
-        />
         {" "}{headline.after}
       </motion.h1>
 
@@ -211,10 +211,10 @@ export default function HeroSection() {
 
       {/* CTAs */}
       <motion.div variants={fadeUp} style={s.ctaRow}>
-        <Link href={cta.primary.href} style={s.ctaPrimary}>
+        <Link href={cta.primary.href} className="hero-cta-primary" style={s.ctaPrimary}>
           {cta.primary.label}
         </Link>
-        <Link href={cta.arrow.href} aria-label="Đặt lịch ngay" style={s.ctaArrow}>
+        <Link href={cta.arrow.href} aria-label="Đặt lịch ngay" className="hero-cta-arrow" style={s.ctaArrow}>
           <ArrowIcon />
         </Link>
       </motion.div>
@@ -222,12 +222,12 @@ export default function HeroSection() {
       {/* Social proof */}
       <motion.div variants={fadeUp} style={s.socialProof}>
         <div style={s.avatarStack}>
-          {PLACEHOLDER_AVATARS.map((src, i) => (
+          {socialProof.avatars.map((avatar, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              key={i}
-              src={src}
-              alt={`Học viên ${i + 1}`}
+              key={avatar.src}
+              src={avatar.src}
+              alt={avatar.alt}
               style={i === 0 ? s.avatarFirst : s.avatar}
             />
           ))}

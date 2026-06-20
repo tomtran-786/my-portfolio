@@ -5,27 +5,28 @@ import { motion } from "framer-motion";
 import navData from "@/data/teaching/nav";
 
 const s = {
+  // Full-width bar, dính sát lề trên, chỉ bo góc dưới — giống mẫu Englexa
   nav: {
-    maxWidth: "72rem",
-    margin: "0 auto 5rem auto",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "1rem",
-    background: "rgba(54,49,78,0.75)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    borderRadius: "9999px",
-    padding: "0.6rem 1.25rem",
-  },
+  maxWidth: "72rem",
+  margin: "1.5rem auto 5rem auto",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  gap: "1rem",
+  background: "rgba(54,49,78,0.75)",
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+  borderRadius: "9999px",
+  padding: "0.75rem 1.5rem",
+},
   left: {
     display: "flex",
     alignItems: "center",
-    gap: "0.75rem",
+    gap: "0.9rem",
     flexShrink: 0,
   },
   backBtn: {
-    width: 36, height: 36,
+    width: 38, height: 38,
     borderRadius: "50%",
     background: "#373254",
     border: "none",
@@ -40,20 +41,20 @@ const s = {
   logoBtn: {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
+    gap: "0.6rem",
     cursor: "pointer",
-    background: "none",   // reset browser button default
-    border: "none",       // reset browser button default
-    padding: 0,           // reset browser button default
+    background: "none",
+    border: "none",
+    padding: 0,
     outline: "none",
   },
   logoIcon: {
-    width: 36, height: 36,
-    borderRadius: "10px",
+    width: 40, height: 40,
+    borderRadius: "12px",
     background: "#F2684A",
     color: "#fff",
     fontWeight: 700,
-    fontSize: 13,
+    fontSize: 14,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -62,7 +63,7 @@ const s = {
   logoText: {
     fontWeight: 700,
     color: "#fff",
-    fontSize: 17,
+    fontSize: 20,
     fontFamily: "Montserrat, sans-serif",
     whiteSpace: "nowrap",
   },
@@ -70,27 +71,27 @@ const s = {
   navLinks: {
     display: "flex",
     alignItems: "center",
-    gap: "2rem",
+    gap: "2.5rem",
   },
   navLink: {
+    position: "relative",
     color: "#C9C5DC",
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 500,
     fontFamily: "Montserrat, sans-serif",
     cursor: "pointer",
     background: "none",
     border: "none",
-    padding: 0,
+    padding: "0 0 4px 0",
     outline: "none",
-    transition: "color 0.2s",
   },
   ctaBtn: {
     flexShrink: 0,
     background: "#F2684A",
     color: "#fff",
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: 600,
-    padding: "0.6rem 1.25rem",
+    padding: "0.85rem 1.75rem",
     borderRadius: "9999px",
     fontFamily: "Montserrat, sans-serif",
     whiteSpace: "nowrap",
@@ -120,10 +121,41 @@ export default function TeachingNavbar() {
       style={s.nav}
       id="top"
     >
+      <style>{`
+        .nav-link {
+          transition: color 0.2s ease;
+        }
+        .nav-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0%;
+          height: 2px;
+          background: #F2694B;
+          border-radius: 2px;
+          transition: width 0.25s ease;
+        }
+        .nav-link:hover {
+          color: #fff;
+        }
+        .nav-link:hover::after {
+          width: 100%;
+        }
+        .nav-cta {
+          transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+        .nav-cta:hover {
+          background: #ff7c5c;
+          transform: translateY(-3px);
+          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+        }
+      `}</style>
+
       {/* Trái: back + logo */}
       <div style={s.left}>
         <Link href={backLink.href} title={backLink.label} style={s.backBtn}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2.5"
             strokeLinecap="round" strokeLinejoin="round">
             <line x1="19" y1="12" x2="5" y2="12" />
@@ -132,11 +164,11 @@ export default function TeachingNavbar() {
         </Link>
 
         <button style={s.logoBtn} onClick={() => scrollTo("#top")}>
-          <span style={s.logoIcon}>{brand.logoText}</span>
-          <span style={s.logoText}>
-            {brand.name}<span style={s.accent}>.</span> {brand.accent}
-          </span>
-        </button>
+  <img src="/teaching/english-svgrepo-com.svg" alt="English with Tom" style={s.logoIcon} />
+  <span style={s.logoText}>
+    {brand.name} {brand.accent}<span style={s.accent}>.</span>
+  </span>
+</button>
       </div>
 
       {/* Giữa: nav links */}
@@ -144,6 +176,7 @@ export default function TeachingNavbar() {
         {links.map((link) => (
           <button
             key={link.href}
+            className="nav-link"
             style={s.navLink}
             onClick={() => scrollTo(link.href)}
           >
@@ -153,7 +186,7 @@ export default function TeachingNavbar() {
       </div>
 
       {/* Phải: CTA */}
-      <button style={s.ctaBtn} onClick={() => scrollTo(cta.href)}>
+      <button className="nav-cta" style={s.ctaBtn} onClick={() => scrollTo(cta.href)}>
         {cta.label}
       </button>
     </motion.nav>

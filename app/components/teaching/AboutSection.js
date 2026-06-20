@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useInView, animate } from "framer-motion";
 import aboutData from "@/data/teaching/about";
 
 const fadeUp = {
@@ -86,22 +87,32 @@ const s = {
     fontFamily: "Montserrat, sans-serif",
   },
   statsRow: {
-    display: "flex",
-    gap: "2rem",
-    borderTop: "1px solid rgba(255,255,255,0.07)",
-    paddingTop: "1.5rem",
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "1rem",
+    marginTop: "0.5rem",
   },
-  statItem: { display: "flex", flexDirection: "column", gap: "0.2rem" },
+  statItem: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.35rem",
+    background: "rgba(255,255,255,0.03)",
+    border: "1px solid rgba(255,255,255,0.12)",
+    borderRadius: "1rem",
+    padding: "1.1rem 1rem",
+  },
   statValue: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
-    color: "#fff",
-    fontSize: "1.75rem",
+    color: "#F2694B",
+    fontSize: "1.6rem",
+    fontVariantNumeric: "tabular-nums",
   },
   statLabel: {
-    color: "#ADA8C4",
+    color: "#fff",
     fontSize: 13,
     fontFamily: "Montserrat, sans-serif",
+    lineHeight: 1.4,
   },
   imageWrap: {
     position: "relative",
@@ -147,15 +158,49 @@ const s = {
   },
 };
 
-// Responsive: stack on mobile
-const innerStyle = {
-  ...s.inner,
-  // Dùng media query không được trong inline styles → dùng CSS variable fallback
-  // Component này render ok trên desktop; mobile sẽ stack tự nhiên qua grid
-};
+// Tách "30+" -> { number: 30, decimals: 0, suffix: "+" }
+// "4.9★" -> { number: 4.9, decimals: 1, suffix: "★" }
+function parseStatValue(raw) {
+  const match = String(raw).match(/^([\d.]+)(.*)$/);
+  if (!match) return { number: 0, decimals: 0, suffix: raw };
+  const numStr = match[1];
+  const suffix = match[2] || "";
+  const decimals = numStr.includes(".") ? numStr.split(".")[1].length : 0;
+  return { number: parseFloat(numStr), decimals, suffix };
+}
+
+function StatItem({ value, label, start }) {
+  const { number, decimals, suffix } = parseStatValue(value);
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+    const controls = animate(0, number, {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setDisplay(latest),
+    });
+    return () => controls.stop();
+  }, [start, number]);
+
+  const formatted = decimals > 0 ? display.toFixed(decimals) : Math.round(display);
+
+  return (
+    <div style={s.statItem}>
+      <span style={s.statValue}>
+        {formatted}
+        {suffix}
+      </span>
+      <span style={s.statLabel}>{label}</span>
+    </div>
+  );
+}
 
 export default function AboutSection() {
   const { sectionLabel, headline, paragraphs, image, stats, credentials } = aboutData;
+
+  const statsRef = useRef(null);
+  const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
 
   return (
     <section style={s.section} id="about">
@@ -163,6 +208,9 @@ export default function AboutSection() {
         @media (max-width: 768px) {
           .about-inner { grid-template-columns: 1fr !important; }
           .about-image { order: -1; }
+        }
+        @media (max-width: 420px) {
+          .about-stats { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -187,12 +235,14 @@ export default function AboutSection() {
             ))}
           </div>
 
-          <div style={s.statsRow}>
+          <div ref={statsRef} className="about-stats" style={s.statsRow}>
             {stats.map((stat) => (
-              <div key={stat.label} style={s.statItem}>
-                <span style={s.statValue}>{stat.value}</span>
-                <span style={s.statLabel}>{stat.label}</span>
-              </div>
+              <StatItem
+                key={stat.label}
+                value={stat.value}
+                label={stat.label}
+                start={statsInView}
+              />
             ))}
           </div>
         </motion.div>
@@ -211,8 +261,8 @@ export default function AboutSection() {
           <div style={s.imageBadge}>
             <span style={s.badgeIcon}>🏆</span>
             <div>
-              <p style={s.badgeText}>IELTS 8.0 · 3+ năm kinh nghiệm</p>
-              <p style={s.badgeSubtext}>Cử nhân Kinh tế, Đại học Đà Nẵng</p>
+              <p style={s.badgeText}>IELTS 7.5 · 3+ năm kinh nghiệm</p>
+              <p style={s.badgeSubtext}>Cử nhân Kinh doanh quóc tế, Đại học Ngoại Thương</p>
             </div>
           </div>
         </motion.div>

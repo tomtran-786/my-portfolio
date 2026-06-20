@@ -66,6 +66,7 @@ const s = {
     textDecoration: "none",
     fontFamily: "Montserrat, sans-serif",
     display: "inline-flex", alignItems: "center", gap: "0.5rem",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
   },
   btnSecondary: {
     background: "transparent", color: "#fff",
@@ -75,6 +76,7 @@ const s = {
     fontFamily: "Montserrat, sans-serif",
     border: "1.5px solid rgba(255,255,255,0.25)",
     display: "inline-flex", alignItems: "center", gap: "0.5rem",
+    transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease",
   },
   note: {
     color: "#7B7898", fontSize: 12,
@@ -88,6 +90,19 @@ export default function CTASection() {
 
   return (
     <section style={s.section} id="contact">
+      <style>{`
+        .cta-btn-primary:hover {
+          background: #ff7c5c;
+          transform: translateY(-3px);
+          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+        }
+        .cta-btn-secondary:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.5);
+          transform: translateY(-3px);
+        }
+      `}</style>
+
       <motion.div
         style={s.card}
         initial="hidden" whileInView="visible"
@@ -113,6 +128,7 @@ export default function CTASection() {
               href={btn.href}
               target="_blank"
               rel="noopener noreferrer"
+              className={btn.primary ? "cta-btn-primary" : "cta-btn-secondary"}
               style={btn.primary ? s.btnPrimary : s.btnSecondary}
             >
               {btn.primary ? "📧" : "💬"} {btn.label}

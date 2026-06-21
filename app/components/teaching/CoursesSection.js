@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import coursesData from "@/data/teaching/courses";
+import testimonialsData from "@/data/teaching/testimonials";
+import CourseDetailModal from "./CourseDetailModal";
 
 const CATEGORIES = [
   { id: "all", label: "Tất cả" },
@@ -95,7 +97,14 @@ const s = {
     gap: "0.75rem",
     position: "relative",
     overflow: "hidden",
+    cursor: "pointer",
   }),
+  viewDetailHint: {
+    color: "#F2684A",
+    fontSize: 12.5,
+    fontWeight: 600,
+    fontFamily: "Montserrat, sans-serif",
+  },
   popularBadge: {
     position: "absolute",
     top: "1.25rem",
@@ -172,8 +181,9 @@ const s = {
 };
 
 export default function CoursesSection() {
-  const { sectionLabel, headline, subtext, items, cta, ctaHref } = coursesData;
+  const { sectionLabel, headline, subtext, items, cta, ctaHref, faqs } = coursesData;
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   const filteredItems =
     activeCategory === "all"
@@ -230,6 +240,7 @@ export default function CoursesSection() {
                   borderColor: "rgba(242,104,74,0.4)",
                 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
+                onClick={() => setSelectedCourse(item)}
               >
                 {item.highlighted && (
                   <span style={s.popularBadge}>⭐ {item.tag}</span>
@@ -246,13 +257,31 @@ export default function CoursesSection() {
                   <div style={s.metaItem}><span style={s.metaIcon}>🗓</span>{item.duration}</div>
                 </div>
 
-                <Link href={ctaHref} style={s.cardCta(item.highlighted)}>
+                <span style={s.viewDetailHint}>Xem chi tiết khóa học →</span>
+
+                <Link
+                  href={ctaHref}
+                  style={s.cardCta(item.highlighted)}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   {cta}
                 </Link>
               </motion.div>
             ))
           )}
         </motion.div>
+      </AnimatePresence>
+
+      {/* Modal chi tiết khóa học */}
+      <AnimatePresence>
+        {selectedCourse && (
+          <CourseDetailModal
+            course={selectedCourse}
+            faqs={faqs}
+            testimonials={testimonialsData.items}
+            onClose={() => setSelectedCourse(null)}
+          />
+        )}
       </AnimatePresence>
     </section>
   );

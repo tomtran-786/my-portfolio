@@ -37,11 +37,31 @@ const testimonialsData = {
       id: 4,
       avatar: "/teaching/feedback_Chau.png",
       name: "Tô Bảo Châu",
-      role: "Học sinh lớp 8 - Trường THCS Nguyễn Trãi",
+      role: "Học sinh lớp 8 - Trường THCS Nguyễn Trãi - Hà Nội",
       result: "Nâng điểm số Tiếng Anh trên lớp từ 7 lên 9.",
       rating: 5,
       quote:"Thầy Tuấn đã giúp em nâng cao và duy trì mức điểm trung bình là 9 trong suốt năm lớp 7 và 8. Ngoài ra, thầy cũng là 1 người tận tâm và nhiệt tình, luôn giải đáp thắc mắc về bài của em."
     },
+            {
+      id: 5,
+      avatar: "/teaching/feedback-levy.jpg",
+      name: "Trương Đình Lê Vy",
+      role: "Học sinh lớp 9 - Trường THCS Lý Tự Trọng - Quảng Ngãi",
+      result: "Nâng điểm số Tiếng Anh trên lớp từ 7 lên 9.",
+      rating: 5,
+      quote: "Trải nghiệm học với thầy khá vui với lại cải thiện được phát âm nhiều rồi, Ngoài ra cũng đuọc ôn lại từ vựng trên lớp ạ."
+    },
+            {
+      id: 6,
+      avatar: "/teaching/feedback-hoangbao.jpg",
+      name: "Hoàng Gia Bảo",
+      role: "Học sinh lớp 9 - Trường THCS Lý Tự Trọng - Quảng Ngãi",
+      result: "Cải thiện khả năng phát âm Tiếng Anh khi thuyết trình.",
+      rating: 5,
+      quote: "Trong những buổi học của thầy em thấy biết được nhìều từ hơn khả năng phát âm tốt hơn và áp dụng vào thực tế nhiều hơn ạ."   },
+
+
+
 
 
   ],

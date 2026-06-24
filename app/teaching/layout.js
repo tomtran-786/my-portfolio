@@ -6,10 +6,6 @@ export const metadata = {
 
 export default function TeachingLayout({ children }) {
   return (
-    /*
-     * Override body styles từ globals.css (background navy, font Montserrat
-     * vẫn dùng được). Grid pattern và navy đặc trưng cho teaching section.
-     */
     <div
       style={{
         minHeight: "100vh",
@@ -19,11 +15,18 @@ export default function TeachingLayout({ children }) {
           linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)
         `,
         backgroundSize: "44px 44px",
-        // Override màu nền của body (globals.css đặt --navy)
         position: "relative",
       }}
     >
-      {children}
+<style>{`
+  html, body {
+    background-color: #2A2640 !important;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px) !important;
+    background-size: 44px 44px !important;
+  }
+`}</style>      {children}
     </div>
   );
 }

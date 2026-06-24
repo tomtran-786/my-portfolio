@@ -1,24 +1,35 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import navData from "@/data/teaching/nav";
 
 const s = {
-  // Full-width bar, dính sát lề trên, chỉ bo góc dưới — giống mẫu Englexa
+  // Wrapper fixed neo trên cùng, căn giữa ngang
+  navWrapper: {
+    position: "fixed",
+    top: "1.5rem",
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    padding: "0 1rem",
+    pointerEvents: "none",   // bắt click xuyên qua vùng trống
+  },
   nav: {
-  maxWidth: "72rem",
-  margin: "1.5rem auto 5rem auto",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  gap: "1rem",
-  background: "rgba(54,49,78,0.75)",
-  backdropFilter: "blur(12px)",
-  WebkitBackdropFilter: "blur(12px)",
-  borderRadius: "9999px",
-  padding: "0.75rem 1.5rem",
-},
+    maxWidth: "72rem",
+    margin: "0 auto",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "1rem",
+    background: "rgba(54,49,78,0.75)",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    borderRadius: "9999px",
+    padding: "0.75rem 1.5rem",
+    pointerEvents: "auto",   // khôi phục click cho chính navbar
+  },
   left: {
     display: "flex",
     alignItems: "center",
@@ -75,7 +86,7 @@ const s = {
   },
   navLink: {
     position: "relative",
-    color: "#C9C5DC",
+    color: "#E5E5E5",
     fontSize: 16,
     fontWeight: 500,
     fontFamily: "Montserrat, sans-serif",
@@ -113,14 +124,73 @@ function scrollTo(href) {
 export default function TeachingNavbar() {
   const { brand, links, cta, backLink } = navData;
 
+  // Đo chiều cao thực của navbar và apply trực tiếp vào body.paddingTop.
+  // KHÔNG dùng spacer div nữa: spacer chỉ đẩy được sibling cùng nhánh DOM,
+  // còn TeachingNavbar và HeroSection nằm ở 2 nhánh khác nhau (qua <main>
+  // trong layout.js) nên spacer không có tác dụng → navbar che nội dung.
+  // body.style hoạt động bất kể cấu trúc DOM, đây là cách chuẩn cho fixed navbar.
+  const wrapperRef = useRef(null);
+  const lastHeightRef = useRef(88); // fallback ban đầu
+
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const apply = () => {
+      const h = el.getBoundingClientRect().bottom;
+      // Khi navbar tự ẩn lúc cuộn xuống, wrapper co về ~0 chiều cao.
+      // Chỉ ghi đè lastHeightRef khi đo được chiều cao "thật" (navbar đang hiện),
+      // để padding-top không bị co lại theo, tránh giật layout.
+      if (h > lastHeightRef.current * 0.5) {
+        lastHeightRef.current = h;
+      }
+      document.body.style.paddingTop = `${lastHeightRef.current + 40}px`;
+    };
+
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+
+    return () => {
+      ro.disconnect();
+      document.body.style.paddingTop = "";
+    };
+  }, []);
+
+  // Ẩn khi scroll xuống, hiện khi scroll lên
+  const [visible, setVisible] = useState(true);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      // Luôn hiện khi gần top (< 60px)
+      if (currentY < 60) {
+        setVisible(true);
+      } else {
+        setVisible(currentY < lastY.current);
+      }
+      lastY.current = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      style={s.nav}
-      id="top"
-    >
+    <>
+      <div style={s.navWrapper} ref={wrapperRef}>
+        <AnimatePresence>
+        {visible && (
+          <motion.nav
+            key="navbar"
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            style={s.nav}
+            id="top"
+          >
       <style>{`
         .nav-link {
           transition: color 0.2s ease;
@@ -189,6 +259,10 @@ export default function TeachingNavbar() {
       <button className="nav-cta" style={s.ctaBtn} onClick={() => scrollTo(cta.href)}>
         {cta.label}
       </button>
-    </motion.nav>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </div>
+    </>
   );
 }

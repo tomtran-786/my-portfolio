@@ -64,7 +64,7 @@ const s = {
     margin: "0 0 1.5rem 0",
   },
   paragraph: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 15,
     lineHeight: 1.8,
     fontFamily: "Montserrat, sans-serif",
@@ -79,7 +79,7 @@ const s = {
   },
   credentialTag: {
     background: "#373254",
-    color: "#D8D4EA",
+    color: "##E5E5E5",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.3rem 0.75rem",

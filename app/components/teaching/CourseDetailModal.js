@@ -62,7 +62,7 @@ const s = {
     aspectRatio: "4 / 3",
     background: "#373254",
   },
-  image: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
+  image: { width: "100%", height: "100%", objectFit: "contain", display: "block" },
   ctaHeadline: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
@@ -115,7 +115,7 @@ const s = {
     margin: "0.2rem 0 0.4rem 0",
   },
   metaLine: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 13,
     fontFamily: "Montserrat, sans-serif",
     marginBottom: "1.25rem",
@@ -128,7 +128,7 @@ const s = {
     margin: "1.5rem 0 0.6rem 0",
   },
   paragraph: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 14.5,
     lineHeight: 1.8,
     fontFamily: "Montserrat, sans-serif",
@@ -138,7 +138,7 @@ const s = {
     display: "flex",
     alignItems: "flex-start",
     gap: "0.6rem",
-    color: "#D8D4EA",
+    color: "#E5E5E5",
     fontSize: 14.5,
     fontFamily: "Montserrat, sans-serif",
     lineHeight: 1.6,
@@ -156,7 +156,7 @@ const s = {
     alignItems: "center",
     gap: "0.4rem",
     background: "#373254",
-    color: "#D8D4EA",
+    color: "#F2684A",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.35rem 0.9rem",
@@ -172,7 +172,7 @@ const s = {
     marginBottom: "0.6rem",
   },
   sectionSubtext: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 14,
     maxWidth: "32rem",
     margin: "0 auto 1.5rem auto",
@@ -184,9 +184,46 @@ const s = {
     alignItems: "center",
     justifyContent: "center",
     gap: "0.75rem",
-    marginBottom: "2rem",
+    marginBottom: "1.25rem",
     fontFamily: "Montserrat, sans-serif",
     fontSize: 14,
+  },
+  studentCheckRow: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.5rem",
+    marginBottom: "2rem",
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: 13.5,
+    color: "#E5E5E5",
+    cursor: "pointer",
+  },
+  studentCheckbox: {
+    width: 16,
+    height: 16,
+    accentColor: "#F2684A",
+    cursor: "pointer",
+  },
+  priceOriginal: {
+    fontSize: "1.05rem",
+    color: "#7A7494",
+    textDecoration: "line-through",
+    fontWeight: 600,
+    marginRight: "0.5rem",
+  },
+  fromLabel: {
+    display: "inline-block",
+    background: "rgba(242,104,74,0.15)",
+    color: "#F2684A",
+    fontSize: 11,
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.04em",
+    padding: "0.2rem 0.55rem",
+    borderRadius: "9999px",
+    marginBottom: "0.5rem",
+    fontFamily: "Montserrat, sans-serif",
   },
   toggleTrack: {
     width: 46,
@@ -254,9 +291,9 @@ const s = {
     fontSize: "1.9rem",
     marginBottom: "0.5rem",
   },
-  planPriceUnit: { fontSize: 12.5, fontWeight: 500, color: "#ADA8C4" },
+  planPriceUnit: { fontSize: 12.5, fontWeight: 500, color: "#E5E5E5" },
   planDesc: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 13,
     lineHeight: 1.6,
     fontFamily: "Montserrat, sans-serif",
@@ -289,7 +326,7 @@ const s = {
     display: "inline-block",
   },
   faqAnswer: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 13.5,
     lineHeight: 1.7,
     fontFamily: "Montserrat, sans-serif",
@@ -323,7 +360,7 @@ const s = {
     marginBottom: "-0.4rem",
   },
   studentComment: {
-    color: "#D8D4EA",
+    color: "#E5E5E5",
     fontSize: 13.5,
     lineHeight: 1.7,
     fontFamily: "Montserrat, sans-serif",
@@ -362,7 +399,7 @@ const s = {
     fontFamily: "Montserrat, sans-serif",
   },
   studentRole: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 11.5,
     fontFamily: "Montserrat, sans-serif",
   },
@@ -406,7 +443,7 @@ const s = {
     borderRadius: "50%",
     background: "#373254",
     border: "none",
-    color: "#D8D4EA",
+    color: "#E5E5E5",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -429,6 +466,17 @@ const s = {
     transition: "all 0.25s ease",
   }),
 };
+
+// Render text với **keyword** → <strong> bold, màu trắng sáng hơn để nổi bật
+function renderBold(text) {
+  if (!text) return null;
+  const parts = text.split(/\*\*(.*?)\*\*/g);
+  return parts.map((part, i) =>
+    i % 2 === 1
+      ? <strong key={i} style={{ color: "#fff", fontWeight: 700 }}>{part}</strong>
+      : part
+  );
+}
 
 function CheckIcon() {
   return (
@@ -481,17 +529,22 @@ function CloseIcon() {
 }
 
 function formatPrice(n) {
-  return `$${n}`;
+  return `${n.toLocaleString("vi-VN")}đ`;
 }
 
-function PricingCard({ plan, billing }) {
-  const price = billing === "annual" ? plan.annualPrice : plan.monthlyPrice;
+function PricingCard({ plan, billing, discountPercent, isStudent }) {
+  const basePrice = billing === "annual" ? plan.annualPrice : plan.monthlyPrice;
+  const hasDiscount = isStudent && discountPercent > 0;
+  const finalPrice = hasDiscount ? Math.round(basePrice * (1 - discountPercent / 100)) : basePrice;
+  const unit = billing === "annual" ? "/ khóa" : "/ tháng";
   return (
     <div style={s.planCard(plan.popular)}>
       {plan.popular && <span style={s.popularTag}>Phổ biến nhất</span>}
       <p style={s.planName}>{plan.name}</p>
+      {plan.startingFrom && <span style={s.fromLabel}>Chỉ từ</span>}
       <p style={s.planPrice}>
-        {formatPrice(price)} <span style={s.planPriceUnit}>/ tháng</span>
+        {hasDiscount && <span style={s.priceOriginal}>{formatPrice(basePrice)}</span>}
+        {formatPrice(finalPrice)} <span style={s.planPriceUnit}>{unit}</span>
       </p>
       <p style={s.planDesc}>{plan.description}</p>
     </div>
@@ -512,6 +565,7 @@ function FaqItem({ faq, isOpen, onToggle }) {
 
 export default function CourseDetailModal({ course, faqs, testimonials, onClose }) {
   const [billing, setBilling] = useState("monthly");
+  const [isStudent, setIsStudent] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [testimonialDirection, setTestimonialDirection] = useState(1);
@@ -630,23 +684,23 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
             <p style={s.metaLine}>{course.level} · {course.format} · {course.duration}</p>
 
             <h3 style={s.h3}>Tổng quan</h3>
-            <p style={s.paragraph}>{detail.overview}</p>
+            <p style={s.paragraph}>{renderBold(detail.overview)}</p>
 
             <h3 style={s.h3}>Bạn sẽ học được gì</h3>
             <ul style={s.checklist}>
               {detail.whatYouLearn.map((point, i) => (
                 <li key={i} style={s.checklistItem}>
                   <span style={s.checkIconWrap}><CheckIcon /></span>
-                  <span>{point}</span>
+                  <span>{renderBold(point)}</span>
                 </li>
               ))}
             </ul>
 
             <h3 style={s.h3}>Buổi học diễn ra như thế nào</h3>
-            <p style={s.paragraph}>{detail.howLessonsWork}</p>
+            <p style={s.paragraph}>{renderBold(detail.howLessonsWork)}</p>
 
             <h3 style={s.h3}>Phù hợp với ai</h3>
-            <p style={s.paragraph}>{detail.whoItsFor}</p>
+            <p style={s.paragraph}>{renderBold(detail.whoItsFor)}</p>
           </div>
         </div>
 
@@ -669,13 +723,29 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
                 transition={{ duration: 0.2, ease: "easeOut" }}
               />
             </button>
-            <span style={{ color: billing === "annual" ? "#fff" : "#ADA8C4" }}>Theo năm</span>
-            <span style={s.savePill}>Tiết kiệm 15%</span>
+            <span style={{ color: billing === "annual" ? "#fff" : "#ADA8C4" }}>Trọn khóa</span>
+            <span style={s.savePill}>Đóng 1 lần</span>
           </div>
+
+          <label style={s.studentCheckRow}>
+            <input
+              type="checkbox"
+              checked={isStudent}
+              onChange={(e) => setIsStudent(e.target.checked)}
+              style={s.studentCheckbox}
+            />
+            Tôi là học sinh/sinh viên (giảm {detail.pricing.studentDiscountPercent}%)
+          </label>
 
           <div style={s.plansGrid}>
             {detail.pricing.plans.map((plan) => (
-              <PricingCard key={plan.id} plan={plan} billing={billing} />
+              <PricingCard
+                key={plan.id}
+                plan={plan}
+                billing={billing}
+                discountPercent={detail.pricing.studentDiscountPercent}
+                isStudent={isStudent}
+              />
             ))}
           </div>
         </div>

@@ -28,7 +28,7 @@ const s = {
     alignItems: "center",
     gap: "0.5rem",
     background: "#373254",
-    color: "#D8D4EA",
+    color: "#E5E5E5",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.35rem 0.9rem",
@@ -47,7 +47,7 @@ const s = {
     marginBottom: "0.75rem",
   },
   subtext: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 15,
     lineHeight: 1.7,
     fontFamily: "Montserrat, sans-serif",
@@ -75,7 +75,7 @@ const s = {
     marginBottom: "-0.5rem",
   },
   quote: {
-    color: "#D8D4EA",
+    color: "#E5E5E5",
     fontSize: 14,
     lineHeight: 1.8,
     fontFamily: "Montserrat, sans-serif",
@@ -114,7 +114,7 @@ const s = {
     fontSize: 14,
   },
   role: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 12,
     fontFamily: "Montserrat, sans-serif",
   },

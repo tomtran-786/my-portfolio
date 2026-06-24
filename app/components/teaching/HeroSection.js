@@ -63,7 +63,7 @@ const s = {
     transform: "translateY(-4px)",
   },
   subtext: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: "clamp(0.9rem, 2vw, 1.1rem)",
     maxWidth: "36rem",
     margin: "0 auto 2.5rem auto",
@@ -138,7 +138,7 @@ const s = {
     fontFamily: "Montserrat, sans-serif",
   },
   ratingCount: {
-    color: "#ADA8C4",
+    color: "#E5E5E5",
     fontSize: 13,
     marginTop: 2,
     fontFamily: "Montserrat, sans-serif",

@@ -49,7 +49,7 @@ const s = {
     position: "relative", zIndex: 1,
   },
   subtext: {
-    color: "#ADA8C4", fontSize: 15, lineHeight: 1.8,
+    color: "#E5E5E5", fontSize: 15, lineHeight: 1.8,
     maxWidth: "30rem", margin: "0 auto 2.5rem auto",
     fontFamily: "Montserrat, sans-serif",
     position: "relative", zIndex: 1,
@@ -79,7 +79,7 @@ const s = {
     transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease",
   },
   note: {
-    color: "#7B7898", fontSize: 12,
+    color: "#E5E5E5", fontSize: 14,
     marginTop: "1.5rem", fontFamily: "Montserrat, sans-serif",
     position: "relative", zIndex: 1,
   },

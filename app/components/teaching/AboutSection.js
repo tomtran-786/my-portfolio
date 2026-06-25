@@ -221,7 +221,6 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-80px" }}
           variants={fadeLeft}
         >
-          <span style={s.label}><span style={s.labelDot} />{sectionLabel}</span>
           <h2 style={s.headline}>{headline}</h2>
           <span style={s.accentLine} />
 

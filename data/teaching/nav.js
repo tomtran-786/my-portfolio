@@ -7,6 +7,7 @@ const navData = {
 
   links: [
     { label: "Trang chủ",      href: "#top" },
+    { label: "Khoảnh khắc",      href: "#class-moments" },
     { label: "Khóa học",       href: "#courses" },
     { label: "Về tôi",         href: "#about" },
     { label: "Học viên nói gì", href: "#testimonials" },

@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import heroData from "@/data/teaching/hero";
+import HeroIllustration from "./HeroIllustration";
 
-// Stagger container
 const containerVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
@@ -19,11 +19,15 @@ const fadeUp = {
 };
 
 const s = {
-  section: {
-    maxWidth: "52rem",
-    margin: "0 auto",
-    textAlign: "center",
-    padding: "0 1rem",
+wrapper: {
+  maxWidth: "75rem",
+  margin: "0 auto",
+  paddingLeft: "1.5rem",
+  paddingRight: "1.5rem",
+  paddingTop: "clamp(2.5rem, 6vw, 5rem)",
+  paddingBottom: "clamp(2rem, 5vw, 4rem)",
+},  textCol: {
+    maxWidth: "34rem",
   },
   badge: {
     display: "inline-flex",
@@ -48,34 +52,22 @@ const s = {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
     color: "#fff",
-    fontSize: "clamp(2rem, 5vw, 3.5rem)",
+    fontSize: "clamp(2rem, 4.5vw, 3.25rem)",
     lineHeight: 1.15,
     marginBottom: "1.5rem",
   },
-  inlineImg: {
-    display: "inline-block",
-    height: "clamp(3rem, 5vw, 5rem)",
-    width: "auto",
-    borderRadius: "1rem",
-    objectFit: "cover",
-    verticalAlign: "middle",
-    margin: "0 0.4rem",
-    transform: "translateY(-4px)",
-  },
   subtext: {
     color: "#E5E5E5",
-    fontSize: "clamp(0.9rem, 2vw, 1.1rem)",
-    maxWidth: "36rem",
-    margin: "0 auto 2.5rem auto",
+    fontSize: "clamp(0.9rem, 1.6vw, 1.1rem)",
+    margin: "0 0 2.5rem 0",
     lineHeight: 1.7,
     fontFamily: "Montserrat, sans-serif",
   },
   ctaRow: {
-    display: "flex",
     alignItems: "center",
-    justifyContent: "center",
     gap: "0.75rem",
     marginBottom: "3.5rem",
+    flexWrap: "wrap",
   },
   ctaPrimary: {
     background: "#F2684A",
@@ -86,7 +78,6 @@ const s = {
     borderRadius: "9999px",
     textDecoration: "none",
     fontFamily: "Montserrat, sans-serif",
-    transition: "background 0.2s",
   },
   ctaArrow: {
     background: "#F2684A",
@@ -100,16 +91,11 @@ const s = {
     textDecoration: "none",
   },
   socialProof: {
-    display: "flex",
-    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
     gap: "1rem",
     flexWrap: "wrap",
   },
-  avatarStack: {
-    display: "flex",
-  },
+  avatarStack: { display: "flex" },
   avatar: {
     width: 48, height: 48,
     borderRadius: "50%",
@@ -172,11 +158,10 @@ export default function HeroSection() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      style={s.section}
+      style={s.wrapper}
     >
       <style>{`
-        .hero-cta-primary,
-        .hero-cta-arrow {
+        .hero-cta-primary, .hero-cta-arrow {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
         .hero-cta-primary:hover {
@@ -189,57 +174,73 @@ export default function HeroSection() {
           transform: translateY(-3px) scale(1.06);
           box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
         }
+
+        .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 34rem) 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+        .hero-text { text-align: left; }
+        .hero-cta-row { display: flex; justify-content: flex-start; }
+        .hero-social-row { display: flex; justify-content: flex-start; }
+
+        @media (max-width: 900px) {
+          .hero-grid { grid-template-columns: 1fr; }
+          .hero-illustration { order: -1; max-width: 380px; margin: 0 auto 1.5rem auto; }
+          .hero-text { text-align: center !important; }
+          .hero-text .hero-cta-row { justify-content: center !important; }
+          .hero-text .hero-social-row { justify-content: center !important; }
+          .hero-text .hero-subtext { margin-left: auto !important; margin-right: auto !important; max-width: 36rem; }
+        }
       `}</style>
 
-      {/* Badge */}
-      <motion.div variants={fadeUp} style={s.badge}>
-        <span style={s.badgeDot} />
-        {badge}
-      </motion.div>
+      <div className="hero-grid">
+        <div className="hero-text" style={s.textCol}>
 
-      {/* Headline */}
-      <motion.h1 variants={fadeUp} style={s.headline}>
-        {headline.before}{" "}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        {" "}{headline.after}
-      </motion.h1>
+          <motion.h1 variants={fadeUp} style={s.headline}>
+            {headline.before}{" "}{headline.after}
+          </motion.h1>
 
-      {/* Subtext */}
-      <motion.p variants={fadeUp} style={s.subtext}>
-        {subtext}
-      </motion.p>
+          <motion.p variants={fadeUp} className="hero-subtext" style={s.subtext}>
+            {subtext}
+          </motion.p>
 
-      {/* CTAs */}
-      <motion.div variants={fadeUp} style={s.ctaRow}>
-        <Link href={cta.primary.href} className="hero-cta-primary" style={s.ctaPrimary}>
-          {cta.primary.label}
-        </Link>
-        <Link href={cta.arrow.href} aria-label="Đặt lịch ngay" className="hero-cta-arrow" style={s.ctaArrow}>
-          <ArrowIcon />
-        </Link>
-      </motion.div>
+          <motion.div variants={fadeUp} className="hero-cta-row" style={s.ctaRow}>
+            <Link href={cta.primary.href} className="hero-cta-primary" style={s.ctaPrimary}>
+              {cta.primary.label}
+            </Link>
+            <Link href={cta.arrow.href} aria-label="Đặt lịch ngay" className="hero-cta-arrow" style={s.ctaArrow}>
+              <ArrowIcon />
+            </Link>
+          </motion.div>
 
-      {/* Social proof */}
-      <motion.div variants={fadeUp} style={s.socialProof}>
-        <div style={s.avatarStack}>
-          {socialProof.avatars.map((avatar, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={avatar.src}
-              src={avatar.src}
-              alt={avatar.alt}
-              style={i === 0 ? s.avatarFirst : s.avatar}
-            />
-          ))}
+          <motion.div variants={fadeUp} className="hero-social-row" style={s.socialProof}>
+            <div style={s.avatarStack}>
+              {socialProof.avatars.map((avatar, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={avatar.src}
+                  src={avatar.src}
+                  alt={avatar.alt}
+                  style={i === 0 ? s.avatarFirst : s.avatar}
+                />
+              ))}
+            </div>
+            <div style={s.ratingWrap}>
+              <div style={s.stars}>
+                {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} />)}
+                <span style={s.ratingText}>{socialProof.rating}</span>
+              </div>
+              <p style={s.ratingCount}>{socialProof.count}</p>
+            </div>
+          </motion.div>
         </div>
-        <div style={s.ratingWrap}>
-          <div style={s.stars}>
-            {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} />)}
-            <span style={s.ratingText}>{socialProof.rating}</span>
-          </div>
-          <p style={s.ratingCount}>{socialProof.count}</p>
-        </div>
-      </motion.div>
+
+        <motion.div variants={fadeUp} className="hero-illustration">
+          <HeroIllustration />
+        </motion.div>
+      </div>
     </motion.section>
   );
 }

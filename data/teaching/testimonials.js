@@ -59,6 +59,14 @@ const testimonialsData = {
       result: "Cải thiện khả năng phát âm Tiếng Anh khi thuyết trình.",
       rating: 5,
       quote: "Trong những buổi học của thầy em thấy biết được nhìều từ hơn khả năng phát âm tốt hơn và áp dụng vào thực tế nhiều hơn ạ."   },
+    {  
+      id: 7,
+      avatar: "/teaching/feedback-kduong.png",
+      name: "Khánh Dương",
+      role: "Sinh viên Học viện Công nghệ Bưu chính Viễn thông (PTIT).",
+      result: "Lấy lại gốc Tiếng Anh, sẵn sàng aim TOEIC 500+",
+      rating: 5,
+      quote: "Trong những buổi học của thầy em thấy thầy đã tận tình chỉ dạy tụi em rất nhiệt huyết. Các truyền đạt của thầy luôn đào sâu vấn đề để tụi em hiểu được bản chất ngôn ngữ."   },
 
 
 

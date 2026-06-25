@@ -1,5 +1,6 @@
 import TeachingNavbar from "@/app/components/teaching/TeachingNavbar";
 import HeroSection from "@/app/components/teaching/HeroSection";
+import ClassMomentsSection from "@/app/components/teaching/ClassMomentsSection";
 import CoursesSection from "@/app/components/teaching/CoursesSection";
 import AboutSection from "@/app/components/teaching/AboutSection";
 import TestimonialsSection from "@/app/components/teaching/TestimonialsSection";
@@ -14,6 +15,7 @@ export default function TeachingPage() {
   <TeachingNavbar />
       <div style={{ padding: "0 1rem" }}>
         <HeroSection />
+        <ClassMomentsSection />
         <CoursesSection />
         <AboutSection />
         <TestimonialsSection />

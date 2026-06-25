@@ -195,7 +195,6 @@ export default function CoursesSection() {
         viewport={{ once: true, margin: "-80px" }}
         variants={fadeUp}
       >
-        <span style={s.label}><span style={s.labelDot} />{sectionLabel}</span>
         <h2 style={s.headline}>{headline}</h2>
         <p style={s.subtext}>{subtext}</p>
       </motion.div>

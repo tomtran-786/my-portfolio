@@ -62,7 +62,7 @@ const s = {
     aspectRatio: "4 / 3",
     background: "#373254",
   },
-  image: { width: "100%", height: "100%", objectFit: "contain", display: "block" },
+  image: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   ctaHeadline: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,

@@ -17,7 +17,7 @@ const s = {
     pointerEvents: "none",   // bắt click xuyên qua vùng trống
   },
   nav: {
-    maxWidth: "72rem",
+    maxWidth: "80rem",
     margin: "0 auto",
     display: "flex",
     alignItems: "center",

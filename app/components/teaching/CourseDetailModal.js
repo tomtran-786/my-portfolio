@@ -604,13 +604,18 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
   if (!course || !course.detail) return null;
   const { detail } = course;
 
-  function goToContact() {
-    onClose();
-    setTimeout(() => {
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-    }, 250);
-  }
+function goToContact() {
+  onClose();
+  setTimeout(() => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  }, 250);
+}
 
+function openSyllabus() {
+  if (detail.syllabusUrl) {
+    window.open(detail.syllabusUrl, "_blank", "noopener,noreferrer");
+  }
+}
   return (
     <motion.div
       style={s.backdrop}
@@ -663,19 +668,21 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
               <img src={detail.image.src} alt={detail.image.alt} style={s.image} />
             </div>
             <p style={s.ctaHeadline}>Sẵn sàng bắt đầu với<br />{course.title}?</p>
-            <div style={s.ctaRow}>
-              <button className="course-modal-cta-primary" style={s.ctaPrimary} onClick={goToContact}>
-                Đặt buổi học thử miễn phí
-              </button>
-              <button
-                className="course-modal-cta-arrow"
-                aria-label="Đặt lịch ngay"
-                style={s.ctaArrow}
-                onClick={goToContact}
-              >
-                <ArrowIcon />
-              </button>
-            </div>
+<div style={s.ctaRow}>
+  <button className="course-modal-cta-primary" style={s.ctaPrimary} onClick={goToContact}>
+    Đặt buổi học thử miễn phí
+  </button>
+  {detail.syllabusUrl && (
+    <button
+      className="course-modal-cta-arrow"
+      aria-label="Xem syllabus"
+      style={s.ctaArrow}
+      onClick={openSyllabus}
+    >
+      <ArrowIcon />
+    </button>
+  )}
+</div>
           </div>
 
           <div style={s.introRight}>

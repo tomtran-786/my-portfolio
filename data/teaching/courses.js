@@ -20,6 +20,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/ielts-basic-avt.png", alt: "IELTS Basic" },
+         syllabusUrl: "https://drive.google.com/file/d/1-2QWP0rGgdh7AsNM3tOS8jhxJLanfcfz/view?usp=drive_link",
         overview:
           "IELTS Basic là khóa học nền tảng dành cho học viên đang ở **Band 3.5–5.0** với mục tiêu đạt **Band 5.5–6.0**. Thay vì dạy lại lý thuyết theo từng kỹ năng riêng lẻ, khóa học tiếp cận từ nền tảng: sửa lỗi ngữ pháp làm sai lệch ý nghĩa, xây dựng phát âm hệ thống theo **IPA**, và đặt từng kỹ năng vào đúng khung bài thi IELTS Academic ngay từ buổi đầu. Lộ trình chia thành **2 giai đoạn**, Nền tảng và Cấu trúc & Tích hợp, với **3 bài luận** có chấm band score tại các mốc quan trọng để đo tiến độ thực tế.",
         whatYouLearn: [
@@ -59,6 +60,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/ielts-intermediate-avt.png", alt: "IELTS Intermediate" },
+         syllabusUrl: "https://drive.google.com/file/d/1HTIVZZyBykwFJ_Ns9K9HVX-LqsU2enFD/view?usp=drive_link",
         overview:
           "IELTS Intermediate dành cho học viên đang ở **Band 5.0–5.5** và cần đạt **Band 6.5**, mức điểm yêu cầu phổ biến nhất cho du học, visa và công việc. Khóa học không dạy lại từ đầu mà bắt đầu bằng **bài kiểm tra chẩn đoán** để xác định chính xác lỗi của từng học viên, từ đó cá nhân hóa toàn bộ lộ trình theo đúng điểm yếu thực tế. Với **40 buổi học** chia thành **4 giai đoạn** (Nền tảng, Phát triển, Tích hợp, và Thi thử & Chuẩn bị Cuối), học viên sửa lỗi có hệ thống, nâng cả **4 tiêu chí IELTS** lên **Band 6.5** đồng đều và bước vào phòng thi với chiến lược rõ ràng.",
         whatYouLearn: [

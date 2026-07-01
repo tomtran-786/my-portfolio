@@ -25,7 +25,7 @@ const projects = [
     image: "/Research.png",
     highlights: ['77 countries panel', 'Gravity Model', 'PPML','Finance', 'International Trade'],
     tags: ['Stata', 'Python'],
-    link: 'https://drive.google.com/file/d/1xFxPuf6ykARBo1waxaLqcBMRiCsad5xj/view?usp=sharing',
+    link: 'https://drive.google.com/file/d/19NL0Z4VLhkoKpsxZJSJYtplDTQBO8iGA/view?usp=drive_link',
   },
   {
     id: 2,

@@ -20,7 +20,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/ielts-basic-avt.png", alt: "IELTS Basic" },
-         syllabusUrl: "https://drive.google.com/file/d/1-2QWP0rGgdh7AsNM3tOS8jhxJLanfcfz/view?usp=drive_link",
+         syllabusUrl: "https://drive.google.com/file/d/1cdtp8BqdTBeZAx-sA47nNfprWCQuYq9X/view?usp=drive_link",
         overview:
           "IELTS Basic là khóa học nền tảng dành cho học viên đang ở **Band 3.5–5.0** với mục tiêu đạt **Band 5.5–6.0**. Thay vì dạy lại lý thuyết theo từng kỹ năng riêng lẻ, khóa học tiếp cận từ nền tảng: sửa lỗi ngữ pháp làm sai lệch ý nghĩa, xây dựng phát âm hệ thống theo **IPA**, và đặt từng kỹ năng vào đúng khung bài thi IELTS Academic ngay từ buổi đầu. Lộ trình chia thành **2 giai đoạn**, Nền tảng và Cấu trúc & Tích hợp, với **3 bài luận** có chấm band score tại các mốc quan trọng để đo tiến độ thực tế.",
         whatYouLearn: [
@@ -60,7 +60,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/ielts-intermediate-avt.png", alt: "IELTS Intermediate" },
-         syllabusUrl: "https://drive.google.com/file/d/1HTIVZZyBykwFJ_Ns9K9HVX-LqsU2enFD/view?usp=drive_link",
+         syllabusUrl: "https://drive.google.com/file/d/1vtJpiNcmD_WKwGuAc6J9R_JXiPO7zm-L/view?usp=drive_link",
         overview:
           "IELTS Intermediate dành cho học viên đang ở **Band 5.0–5.5** và cần đạt **Band 6.5**, mức điểm yêu cầu phổ biến nhất cho du học, visa và công việc. Khóa học không dạy lại từ đầu mà bắt đầu bằng **bài kiểm tra chẩn đoán** để xác định chính xác lỗi của từng học viên, từ đó cá nhân hóa toàn bộ lộ trình theo đúng điểm yếu thực tế. Với **40 buổi học** chia thành **4 giai đoạn** (Nền tảng, Phát triển, Tích hợp, và Thi thử & Chuẩn bị Cuối), học viên sửa lỗi có hệ thống, nâng cả **4 tiêu chí IELTS** lên **Band 6.5** đồng đều và bước vào phòng thi với chiến lược rõ ràng.",
         whatYouLearn: [
@@ -99,6 +99,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/toeic-basic-avt.png", alt: "TOEIC Basic" },
+        syllabusUrl: "https://drive.google.com/file/d/1YFl5QX46dVz89apeWMZaabY_0m7E2mOG/view?usp=drive_link",
         overview:
           "Khóa học dành cho người mất gốc hoặc mới bắt đầu, giúp xây dựng lại nền tảng từ vựng và ngữ pháp tiếng Anh một cách bài bản, đồng thời làm quen với cấu trúc đề thi TOEIC. Sau **6 tháng** học, học viên có nền tảng vững chắc cùng các kỹ thuật làm bài chuẩn để bước vào giai đoạn luyện kỹ năng chuyên sâu ở khóa Intermediate.",
         whatYouLearn: [
@@ -138,6 +139,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/toeic-intermediate-avt.png", alt: "TOEIC Intermediate" },
+        syllabusUrl: "https://drive.google.com/file/d/1ZOoKV_IhF5tqp0gXgaryUkowhEXyIsBn/view?usp=drive_link",
         overview:
           "Khóa học dành cho học viên đã có nền tảng từ vựng – ngữ pháp cơ bản, tập trung phát triển toàn diện **7 Part** của bài thi TOEIC bằng các kỹ thuật làm bài nâng cao và luyện đề sát với đề thi thật (bộ **ETS**). Sau **6 tháng**, học viên tự tin đạt mục tiêu **500+ TOEIC**, làm chủ chiến thuật xử lý từng dạng câu hỏi và quản lý thời gian phòng thi.",
         whatYouLearn: [
@@ -178,6 +180,7 @@ const coursesData = {
 
       detail: {
         image: { src: "/teaching/giao-tiep-avt.png", alt: "Tiếng Anh Giao Tiếp" },
+        syllabusUrl: "https://drive.google.com/file/d/1B09E_D93uUoO3xR3BWYLxyM79vgiLytc/view?usp=drive_link",
         overview:
           "Khóa Giao Tiếp dành cho người học có nền tảng ngữ pháp và từ vựng cơ bản nhưng chưa áp dụng được vào giao tiếp thực tế. Vấn đề phổ biến nhất là **dịch từng từ** từ tiếng Việt sang tiếng Anh, dẫn đến phản ứng chậm và câu nói thiếu liên kết, sai thì. Chương trình gồm **2 giai đoạn**, tổng **36 giờ** học trong **12 tuần**. Giai đoạn 1 xây nền tảng phát âm, ngữ pháp cơ bản và phản xạ câu đơn. Giai đoạn 2 phát triển khả năng nói dài, thảo luận và trình bày ý tưởng phức tạp. Học viên hoàn thành khóa học có thể giao tiếp linh hoạt và tự tin sử dụng tiếng Anh trong môi trường học thuật và đời sống tại đại học.",
         whatYouLearn: [

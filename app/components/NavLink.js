@@ -2,9 +2,8 @@
 
 import { motion } from 'framer-motion'
 
-export default function NavLink({ href, label, activeSection }) {
+export default function NavLink({ href, label }) {
   const isAnchor = href.startsWith('#')
-  const isActive = isAnchor && href === `#${activeSection}`
 
   return (
     <motion.a
@@ -15,33 +14,39 @@ export default function NavLink({ href, label, activeSection }) {
           const id = href.replace('#', '')
           document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
         }
-        // Không phải anchor → để <a href> navigate bình thường
       }}
+      initial="initial"
+      whileHover="hover"
       style={{
-        color: isActive ? '#a78bfa' : '#cbd5e1',
+        color: '#cbd5e1',
         textDecoration: 'none',
         fontSize: 18,
         fontWeight: 500,
         cursor: 'pointer',
         position: 'relative',
       }}
-      whileHover={{ color: '#a78bfa' }}
+      variants={{
+        initial: { color: '#cbd5e1' },
+        hover: { color: '#a78bfa' },
+      }}
+      transition={{ duration: 0.2 }}
     >
       {label}
-      {isActive && (
-        <motion.div
-          layoutId="underline"
-          style={{
-            position: 'absolute',
-            bottom: -6,
-            left: 0,
-            right: 0,
-            height: 2,
-            background: '#a78bfa',
-          }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        />
-      )}
+      <motion.div
+        variants={{
+          initial: { width: '0%' },
+          hover: { width: '100%' },
+        }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
+        style={{
+          position: 'absolute',
+          bottom: -6,
+          left: 0,
+          height: 2,
+          background: '#a78bfa',
+          borderRadius: 2,
+        }}
+      />
     </motion.a>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, useScroll, useSpring } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import Lottie from 'lottie-react'
 import animationData from '../public/animation.json'
@@ -13,39 +13,26 @@ import Projects from './components/Projects'
 import Certifications from './components/Certifications'
 
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState('home')
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 })
+  // Navbar visibility scroll logic
+  const [navVisible, setNavVisible] = useState(true)
+  const lastY = useRef(0)
 
   useEffect(() => {
-  const sections = ['home', 'projects', 'experience', 'education', 'certifications', 'contact']
-
-  const handleScroll = () => {
-    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
-
-    if (nearBottom) {
-      setActiveSection('contact')
-      return
-    }
-
-    let current = 'home'
-    sections.forEach(id => {
-      const el = document.getElementById(id)
-      if (el) {
-        const rect = el.getBoundingClientRect()
-        if (rect.top <= 300) {
-          current = id
-        }
+    const handleNavScroll = () => {
+      const currentY = window.scrollY
+      if (currentY < 60) {
+        setNavVisible(true)
+      } else {
+        setNavVisible(currentY < lastY.current)
       }
-    })
-    setActiveSection(current)
-  }
+      lastY.current = currentY
+    }
+    window.addEventListener('scroll', handleNavScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleNavScroll)
+  }, [])
 
-  // Dùng scroll event trên document thay vì window
-  document.addEventListener('scroll', handleScroll, { passive: true })
-  handleScroll()
-  return () => document.removeEventListener('scroll', handleScroll)
-}, []) // [] là đúng — không cần activeSection trong deps
   return (
     <main style={{ background: '#0a0e1a', minHeight: '100vh', color: '#f1f5f9', fontFamily: "'Syne', sans-serif", overflowX: 'hidden' }}>
 
@@ -68,13 +55,21 @@ export default function Portfolio() {
       <CursorGlow />
 
       {/* NAV */}
-     <nav style={{
-  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-  padding: '1.2rem 2.5rem', borderBottom: '0.5px solid rgba(139,92,246,0.2)',
-  position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-  background: 'rgba(10,14,26,0.85)', backdropFilter: 'blur(12px)'
-}}>
-        <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 20, fontWeight: 800, color: '#a78bfa' }}>
+      <AnimatePresence>
+        {navVisible && (
+          <motion.nav
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -24 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            style={{
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '1.2rem 2.5rem', borderBottom: '0.5px solid rgba(139,92,246,0.2)',
+              position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+              background: 'rgba(10,14,26,0.85)', backdropFilter: 'blur(12px)'
+            }}
+          >
+            <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 20, fontWeight: 800, color: '#a78bfa' }}>
           &lt;tomtran/&gt;
         </span>
         <div style={{ display: 'flex', gap: '2rem' }}>
@@ -87,10 +82,12 @@ export default function Portfolio() {
   { label: 'Contact', href: '#contact' },
   { label: "Teaching", href: "/teaching" },
 ].map(({ label, href }) => (
-  <NavLink key={label} href={href} label={label} activeSection={activeSection} />
+  <NavLink key={label} href={href} label={label} />
 ))}
-        </div>
-      </nav>
+          </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
 
 {/* HERO */}
 <section id="home" style={{

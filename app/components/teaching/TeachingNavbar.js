@@ -192,26 +192,6 @@ export default function TeachingNavbar() {
             id="top"
           >
       <style>{`
-        .nav-link {
-          transition: color 0.2s ease;
-        }
-        .nav-link::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          width: 0%;
-          height: 2px;
-          background: #F2694B;
-          border-radius: 2px;
-          transition: width 0.25s ease;
-        }
-        .nav-link:hover {
-          color: #fff;
-        }
-        .nav-link:hover::after {
-          width: 100%;
-        }
         .nav-cta {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
@@ -244,14 +224,35 @@ export default function TeachingNavbar() {
       {/* Giữa: nav links */}
       <div style={s.navLinks}>
         {links.map((link) => (
-          <button
+          <motion.button
             key={link.href}
-            className="nav-link"
-            style={s.navLink}
             onClick={() => scrollTo(link.href)}
+            initial="initial"
+            whileHover="hover"
+            style={s.navLink}
+            variants={{
+              initial: { color: '#E5E5E5' },
+              hover: { color: '#F2684A' },
+            }}
+            transition={{ duration: 0.2 }}
           >
             {link.label}
-          </button>
+            <motion.div
+              variants={{
+                initial: { width: '0%' },
+                hover: { width: '100%' },
+              }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              style={{
+                position: 'absolute',
+                bottom: -2,
+                left: 0,
+                height: 2,
+                background: '#F2684A',
+                borderRadius: 2,
+              }}
+            />
+          </motion.button>
         ))}
       </div>
 

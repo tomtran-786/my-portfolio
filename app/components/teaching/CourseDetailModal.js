@@ -606,10 +606,11 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
   const { detail } = course;
 
 function goToContact() {
+  document.body.style.overflow = "";
   onClose();
   setTimeout(() => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  }, 250);
+  }, 100);
 }
 
 function openSyllabus() {

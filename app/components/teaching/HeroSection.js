@@ -207,10 +207,31 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="hero-cta-row" style={s.ctaRow}>
-            <Link href={cta.primary.href} className="hero-cta-primary" style={s.ctaPrimary}>
+            <Link 
+              href={cta.primary.href} 
+              className="hero-cta-primary" 
+              style={s.ctaPrimary}
+              onClick={(e) => {
+                if (cta.primary.href.startsWith("#")) {
+                  e.preventDefault();
+                  document.getElementById(cta.primary.href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            >
               {cta.primary.label}
             </Link>
-            <Link href={cta.arrow.href} aria-label="Đặt lịch ngay" className="hero-cta-arrow" style={s.ctaArrow}>
+            <Link 
+              href={cta.arrow.href} 
+              aria-label="Đặt lịch ngay" 
+              className="hero-cta-arrow" 
+              style={s.ctaArrow}
+              onClick={(e) => {
+                if (cta.arrow.href.startsWith("#")) {
+                  e.preventDefault();
+                  document.getElementById(cta.arrow.href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            >
               <ArrowIcon />
             </Link>
           </motion.div>

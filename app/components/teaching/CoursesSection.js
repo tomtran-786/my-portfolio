@@ -258,7 +258,13 @@ export default function CoursesSection() {
                 <Link
                   href={ctaHref}
                   style={s.cardCta(item.highlighted)}
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (ctaHref.startsWith("#")) {
+                      e.preventDefault();
+                      document.getElementById(ctaHref.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
                 >
                   {cta}
                 </Link>

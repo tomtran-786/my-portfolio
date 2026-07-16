@@ -13,6 +13,11 @@ const toolStyle = {
   'NotebookLM':      { color: '#ea4335', bg: '#fce8e6', logo: '/logos/notebooklm.svg' },
   'Gemini':          { color: '#1a73e8', bg: '#e8f0fe', logo: '/logos/gemini.svg' },
   'Powerpoint':      { color: '#d24726', bg: '#fde9e4', logo: '/logos/powerpoint.svg' },
+  'Next.js':         { color: '#000000', bg: '#ececec', logo: '/logos/nextjs.svg' },
+  'React':           { color: '#0b7285', bg: '#e0f7fb', logo: '/logos/react.svg' },
+  'Tailwind':        { color: '#0e7490', bg: '#e0f5fa', logo: '/logos/tailwind.svg' },
+  'Prisma':          { color: '#2D3748', bg: '#e8eaed', logo: '/logos/prisma.svg' },
+  'Supabase':        { color: '#1c7a4d', bg: '#e3f7ed', logo: '/logos/supabase.svg' },
 }
 const getToolStyle = (tag) => toolStyle[tag] || { color: '#7c3aed', bg: 'rgba(139,92,246,0.12)' }
 
@@ -66,11 +71,21 @@ export const projects = [
     highlights: ['Landscape Analysis', 'Competitor Analysis', 'Product Launch Strategy'],
     tags: ['NotebookLM', 'Powerpoint'],
     link: 'https://drive.google.com/file/d/14W1O3aFSrPmrmwhGcCrI3XILGVEWKwcp/view?usp=drive_link'
+  },
+  {
+    id: 6,
+    category: 'Product Management',
+    title: 'Chemistery — Chemistry Course Platform',
+    desc: 'An e-learning platform I built end to end for a chemistry instructor preparing students for the national gifted student exam. I designed and set up the database, built the site, and shipped the payment and checkout flow.',
+    image: '/chemistery.png',
+    highlights: ['Database design', 'Payment & checkout', 'Course catalog', 'Order management'],
+    tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase'],
+    link: 'https://github.com/trungkt2006/portfolio-app',
   }
 ]
 
 const ALL = 'All'
-const categoryList = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case']
+const categoryList = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case', 'Product Management']
 
 // Card với hover state nội bộ
 function ProjectCard({ proj, index, onClick }) {

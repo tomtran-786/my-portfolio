@@ -8,7 +8,8 @@ export default function Timeline() {
   return (
     <section
       id="experience"
-      style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}
+      className="pf-section"
+      style={{ position: 'relative', zIndex: 5 }}
     >
       {/* Header */}
       <div style={{ marginBottom: '3.5rem' }}>
@@ -17,7 +18,7 @@ export default function Timeline() {
           fontWeight: 700,
           color: '#9B51E0',
           margin: '0 0 0.4rem',
-          lineHeight: 1.1, fontFamily: "'Montserrat', sans-serif"
+          lineHeight: 1.1, fontFamily: 'var(--font-inter)'
         }}>
           Timeline
         </h2>
@@ -35,7 +36,7 @@ export default function Timeline() {
       <div style={{ position: 'relative', maxWidth: 1100, margin: '0 auto' }}>
 
         {/* Vertical Center Line */}
-        <div style={{
+        <div className="pf-timeline-line" style={{
           position: 'absolute', left: '50%', top: 0, bottom: 0,
           width: 1, background: 'rgba(124,58,237,0.25)',
           transform: 'translateX(-50%)'
@@ -51,9 +52,8 @@ export default function Timeline() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="pf-timeline-row"
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 60px 1fr',
                 alignItems: 'center',
                 marginBottom: '5rem',
                 gap: 0,
@@ -69,7 +69,7 @@ export default function Timeline() {
               </div>
 
               {/* Center Node */}
-              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <div className="pf-timeline-node" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{
                   width: 18, height: 18,
                   borderRadius: '50%',
@@ -101,7 +101,7 @@ function TextBlock({ exp, align }) {
   const isRight = align === 'right'
 
   return (
-    <div style={{
+    <div className="pf-timeline-text" style={{
       display: 'flex', flexDirection: 'column',
       alignItems: isRight ? 'flex-end' : 'flex-start',
       textAlign: isRight ? 'right' : 'left',
@@ -153,7 +153,7 @@ function TextBlock({ exp, align }) {
       {/* Tools */}
       {exp.tools && (
         <p style={{
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: 'var(--font-inter)',
           fontSize: 12,
           fontWeight: 400,
           color: '#B2BEC3',

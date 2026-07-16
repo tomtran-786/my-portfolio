@@ -16,7 +16,7 @@ const toolStyle = {
 }
 const getToolStyle = (tag) => toolStyle[tag] || { color: '#7c3aed', bg: 'rgba(139,92,246,0.12)' }
 
-const projects = [
+export const projects = [
   {
     id: 1,
     category: 'Investment Analysis',
@@ -178,16 +178,19 @@ export default function Projects() {
     return () => { document.body.style.overflow = '' }
   }, [selected])
 
-  // Đóng modal khi scroll hoặc click nav
+  // Đóng modal khi scroll, click nav, hoặc nhấn Escape
   useEffect(() => {
     if (!selected) return
     const handleScroll = () => setSelected(null)
     const handleNavClick = (e) => { if (e.target.closest('nav')) setSelected(null) }
+    const handleKeyDown = (e) => { if (e.key === 'Escape') setSelected(null) }
     window.addEventListener('scroll', handleScroll, { passive: true })
     document.addEventListener('click', handleNavClick)
+    document.addEventListener('keydown', handleKeyDown)
     return () => {
       window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('click', handleNavClick)
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [selected])
 
@@ -199,7 +202,7 @@ export default function Projects() {
     : projects.filter(p => p.category === cat).length
 
   return (
-    <section id="projects" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
+    <section id="projects" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
 
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
@@ -245,7 +248,7 @@ export default function Projects() {
       </div>
 
       {/* Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+      <div className="pf-card-grid">
         {filtered.map((proj, i) => (
           <ProjectCard
             key={proj.id}
@@ -271,6 +274,9 @@ export default function Projects() {
             }}
           >
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label={selected.title}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}

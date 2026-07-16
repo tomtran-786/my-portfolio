@@ -4,7 +4,71 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const certs = [
+export const certs = [
+  {
+    id: 7,
+    name: 'SQL Beginner',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/sql_beginner.jpg',
+    link: 'https://xomdata.com/certificates/XA-U2UPNE',
+  },
+  {
+    id: 8,
+    name: 'SQL Intermediate',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/sql_intermediate.jpg',
+    link: 'https://xomdata.com/certificates/XA-62P2F2',
+  },
+  {
+    id: 9,
+    name: 'SQL Advanced',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/sql_advanced.jpg',
+    link: 'https://xomdata.com/certificates/XA-S3BXBJ',
+  },
+  {
+    id: 3,
+    name: 'SQL Intermediate',
+    issuer: 'DataCamp',
+    date: '2026',
+    image: '/Intermediate SQL.png',
+    link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/2b7c30c447298acf6670f5e49753e1dc6648b9dc?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
+  },
+  {
+    id: 5,
+    name: 'Data Manipulation in SQL',
+    issuer: 'DataCamp',
+    date: '2026',
+    image: '/Data Manipulation in SQL.png',
+    link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/7c1bbaa20658e5fd525ebe9987d45790c47a0a18?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
+  },
+  {
+    id: 10,
+    name: 'Python Beginner',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/python_begin_xomdata.jpg',
+    link: 'https://xomdata.com/certificates/XA-9URVA8',
+  },
+  {
+    id: 11,
+    name: 'Python Intermediate',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/python_inter_xomdata.jpg',
+    link: 'https://xomdata.com/certificates/XA-GYSDVD',
+  },
+  {
+    id: 4,
+    name: 'Introduction to Python',
+    issuer: 'DataCamp',
+    date: '2026',
+    image: '/Intro to Python.png',
+    link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/8e5a1a0ea9accd24fad972d9ff6b5d610923abdc?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
+  },
   {
     id: 1,
     name: 'Financial Modelling in Excel',
@@ -20,30 +84,6 @@ const certs = [
     date: '2026',
     image: '/Marketing Analytics.png',
     link: 'https://coursera.org/share/f8865d560ba55ff857880a69a3fa7314',
-  },
-  {
-    id: 3,
-    name: 'SQL Intermediate',
-    issuer: 'DataCamp',
-    date: '2026',
-    image: '/Intermediate SQL.png',
-    link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/2b7c30c447298acf6670f5e49753e1dc6648b9dc?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
-  },
-  {
-    id: 4,
-    name: 'Introduction to Python',
-    issuer: 'DataCamp',
-    date: '2026',
-    image: '/Intro to Python.png',
-    link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/8e5a1a0ea9accd24fad972d9ff6b5d610923abdc?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
-  },
-  {
-    id: 5,
-    name: 'Data Manipulation in SQL',
-    issuer: 'DataCamp',
-    date: '2026',
-    image: '/Data Manipulation in SQL.png',
-    link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/7c1bbaa20658e5fd525ebe9987d45790c47a0a18?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
   },
   {
     id: 6,
@@ -70,10 +110,10 @@ export default function Certifications() {
   }
 
   return (
-   <section id="certifications" style={{ padding: '4rem 2.5rem', position: 'relative', zIndex: 5 }}>
+   <section id="certifications" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
       {/* Header */}
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 52, fontWeight: 700, color: '#9B51E0', margin: '0 0 0.4rem', lineHeight: 1.1 }}>
+        <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', margin: '0 0 0.4rem', lineHeight: 1.1 }}>
           My Certifications
         </h2>
         <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
@@ -91,7 +131,7 @@ export default function Certifications() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: direction * -60 }}
             transition={{ duration: 0.35, ease: 'easeOut' }}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}
+            className="pf-card-grid"
           >
             {visible.map((cert) => (
               <motion.a
@@ -139,7 +179,7 @@ export default function Certifications() {
                       {cert.issuer}
                     </span>
                     <span style={{
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: 'var(--font-inter)',
                       fontSize: 11, color: '#475569',
                     }}>
                       {cert.date}
@@ -220,8 +260,8 @@ export default function Certifications() {
       {/* Page counter */}
       <div style={{
         textAlign: 'center', marginTop: '0.75rem',
-        fontFamily: "'Montserrat', sans-serif",
-        fontSize: 11, color: '#fff', fontWeight: 500, fontSize: 12
+        fontFamily: 'var(--font-inter)',
+        color: '#fff', fontWeight: 500, fontSize: 12
       }}>
         {page + 1} / {totalPages}
       </div>

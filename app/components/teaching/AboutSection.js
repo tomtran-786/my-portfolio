@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, useInView, animate } from "framer-motion";
 import aboutData from "@/data/teaching/about";
 
@@ -31,22 +32,6 @@ const s = {
     gap: "4rem",
     alignItems: "center",
   },
-  label: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    background: "#373254",
-    color: "#D8D4EA",
-    fontSize: 12,
-    fontWeight: 600,
-    padding: "0.35rem 0.9rem",
-    borderRadius: "9999px",
-    marginBottom: "1.25rem",
-    fontFamily: "Montserrat, sans-serif",
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-  },
-  labelDot: { width: 7, height: 7, borderRadius: "50%", background: "#F2684A" },
   headline: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
@@ -79,7 +64,7 @@ const s = {
   },
   credentialTag: {
     background: "#373254",
-    color: "##E5E5E5",
+    color: "#E5E5E5",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.3rem 0.75rem",
@@ -104,7 +89,7 @@ const s = {
   statValue: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
-    color: "#F2694B",
+    color: "#F2684A",
     fontSize: "1.6rem",
     fontVariantNumeric: "tabular-nums",
   },
@@ -197,7 +182,7 @@ function StatItem({ value, label, start }) {
 }
 
 export default function AboutSection() {
-  const { sectionLabel, headline, paragraphs, image, stats, credentials } = aboutData;
+  const { headline, paragraphs, image, stats, credentials } = aboutData;
 
   const statsRef = useRef(null);
   const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
@@ -254,14 +239,13 @@ export default function AboutSection() {
           variants={fadeRight}
           style={s.imageWrap}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image.src} alt={image.alt} style={s.img} />
+          <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 45vw" style={s.img} />
           <div style={s.imageOverlay} />
           <div style={s.imageBadge}>
-            <span style={s.badgeIcon}>🏆</span>
+            <span style={s.badgeIcon}>{image.badge.icon}</span>
             <div>
-              <p style={s.badgeText}>IELTS 7.5 · 3+ năm kinh nghiệm</p>
-              <p style={s.badgeSubtext}>Cử nhân Kinh doanh quóc tế, Đại học Ngoại Thương</p>
+              <p style={s.badgeText}>{image.badge.text}</p>
+              <p style={s.badgeSubtext}>{image.badge.subtext}</p>
             </div>
           </div>
         </motion.div>

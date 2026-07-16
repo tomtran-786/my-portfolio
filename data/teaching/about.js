@@ -1,5 +1,4 @@
 const aboutData = {
-  sectionLabel: "Về tôi",
   headline: "Không chỉ dạy tiếng Anh — tôi dạy cách tư duy bằng tiếng Anh",
   paragraphs: [
     "Tôi bắt đầu dạy tiếng Anh từ năm lớp 12. Khi đó, nhiều bạn bè biết tôi học chuyên Anh tại THPT Chuyên Nguyễn Tất Thành (Quảng Ngãi) nên hay nhờ tôi kèm ôn thi. Qua những buổi học chung, tôi nhận ra mình thực sự tìm thấy niềm vui khi giúp người khác hiểu rõ một điểm ngữ pháp hoặc tự tin giao tiếp những câu tiếng Anh đầu tiên.",
@@ -8,6 +7,11 @@ const aboutData = {
   image: {
     src: "/teaching/me.jpeg",
     alt: "Tom Tran - English Teacher",
+    badge: {
+      icon: "🏆",
+      text: "IELTS 7.5 · 3+ năm kinh nghiệm",
+      subtext: "Cử nhân Kinh doanh quốc tế, Đại học Ngoại Thương",
+    },
   },
   stats: [
     { value: "30+", label: "Học viên" },

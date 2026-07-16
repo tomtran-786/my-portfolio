@@ -1,5 +1,4 @@
 const testimonialsData = {
-  sectionLabel: "Học viên nói gì",
   headline: "Kết quả thật từ học viên thật",
   subtext: "Không phải lời hứa — đây là những gì học viên đã đạt được.",
 

@@ -1,5 +1,4 @@
 const coursesData = {
-  sectionLabel: "Khóa học",
   headline: "Lộ trình phù hợp với mọi mục tiêu",
   subtext:
     "Học 1-1 hoặc nhóm nhỏ 3–5 người. Mỗi lộ trình được cá nhân hóa theo điểm xuất phát và mục tiêu riêng của bạn.",

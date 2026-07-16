@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const s = {
@@ -57,6 +58,7 @@ const s = {
     gap: "1.25rem",
   },
   imageWrap: {
+    position: "relative",   // bắt buộc: <Image fill> neo theo parent positioned gần nhất
     borderRadius: "1.25rem",
     overflow: "hidden",
     aspectRatio: "4 / 3",
@@ -590,7 +592,13 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
   }
 
   // Khóa scroll trang nền khi modal mở + cho phép nhấn Esc để đóng
+  // Chỉ khoá cuộn khi thật sự render modal. Nếu khoá vô điều kiện, một khoá học
+  // thiếu `detail` sẽ rơi vào nhánh `return null` bên dưới -> trang bị khoá cuộn
+  // mà không có modal nào hiện ra.
+  const canRender = Boolean(course && course.detail);
+
   useEffect(() => {
+    if (!canRender) return;
     document.body.style.overflow = "hidden";
     const onKeyDown = (e) => {
       if (e.key === "Escape") onClose();
@@ -600,9 +608,9 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose]);
+  }, [onClose, canRender]);
 
-  if (!course || !course.detail) return null;
+  if (!canRender) return null;
   const { detail } = course;
 
 function goToContact() {
@@ -653,6 +661,9 @@ function openSyllabus() {
       `}</style>
 
       <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-label={course.title}
         style={s.panel}
         initial={{ opacity: 0, y: 40, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -668,8 +679,7 @@ function openSyllabus() {
         <div className="course-modal-intro" style={s.introGrid}>
           <div style={s.introLeft}>
             <div style={s.imageWrap}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={detail.image.src} alt={detail.image.alt} style={s.image} />
+              <Image src={detail.image.src} alt={detail.image.alt} fill sizes="300px" style={s.image} />
             </div>
             <p style={s.ctaHeadline}>Sẵn sàng bắt đầu với<br />{course.title}?</p>
 <div style={s.ctaRow}>
@@ -783,12 +793,11 @@ function openSyllabus() {
                     exit={(dir) => ({ opacity: 0, x: dir > 0 ? -24 : 24 })}
                     transition={{ duration: 0.25, ease: "easeOut" }}
                   >
-                    <span style={s.studentQuoteIcon}>"</span>
+                    <span style={s.studentQuoteIcon}>&ldquo;</span>
                     <p style={s.studentComment}>{activeTestimonial.quote}</p>
                     <span style={s.studentResultBadge}>🎉 {activeTestimonial.result}</span>
                     <div style={s.studentFooter}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={activeTestimonial.avatar} alt={activeTestimonial.name} style={s.studentAvatar} />
+                      <Image src={activeTestimonial.avatar} alt={activeTestimonial.name} width={44} height={44} style={s.studentAvatar} />
                       <div>
                         <p style={s.studentName}>{activeTestimonial.name}</p>
                         <p style={s.studentRole}>{activeTestimonial.role}</p>

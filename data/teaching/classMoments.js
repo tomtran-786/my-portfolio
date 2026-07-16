@@ -1,3 +1,5 @@
+export const classMomentsHeading = "Những buổi học thật, học viên thật";
+
 const classMoments = [
   {
     src: "/teaching/TOEIC101-Class01.png",

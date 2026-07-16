@@ -119,9 +119,8 @@ export default function CTASection() {
         <motion.div variants={fadeUp} style={s.btnRow}>
           {buttons.map((btn) => (
             /*
-             * Dùng <a> thay vì <Link> để:
-             * - mailto: mở app soạn mail với địa chỉ người nhận điền sẵn
-             * - https://zalo.me/... mở profile Zalo trong tab mới
+             * Dùng <a> thay vì <Link> vì cả hai href đều trỏ ra ngoài
+             * (Gmail compose và profile Zalo) và cần mở ở tab mới.
              */
             <a
               key={btn.label}

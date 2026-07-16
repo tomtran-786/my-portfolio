@@ -1,12 +1,7 @@
 const heroData = {
-  badge: "Giảng dạy Tiếng Anh Online",
-
   headline: {
     before: "Thầy giáo tiếng Anh giúp bạn",
     after: "chinh phục mọi kì thi",
-    image: {
-      alt: "Tom Tran - English Teacher",
-    },
   },
 
   subtext:
@@ -23,7 +18,6 @@ const heroData = {
   socialProof: {
     rating: "4.9/5",
     count: "30+ Học viên hài lòng",
-    // Thay bằng ảnh thật của học viên (cần có sự đồng ý)
     avatars: [
       { src: "/teaching/feedback_Chau.png", alt: "Tô Bảo Châu" },
       { src: "/teaching/feedback_MinhThu.png", alt: "Trần Minh Thư" },

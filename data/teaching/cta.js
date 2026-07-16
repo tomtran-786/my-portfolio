@@ -9,7 +9,7 @@ const ctaData = {
       primary: true,
     },
     {
-      label: "+84 398 4346 20",
+      label: "(+84) 398 434 620",
       href: "https://zalo.me/0398434620",
       primary: false,
     },

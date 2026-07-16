@@ -30,19 +30,6 @@ const s = {
     margin: "6rem auto",
     padding: "0 1rem",
   },
-  label: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    background: "#373254",
-    color: "#E5E5E5",
-    borderRadius: "9999px",
-    marginBottom: "1.25rem",
-    fontFamily: "Montserrat, sans-serif",
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-  },
-  labelDot: { width: 7, height: 7, borderRadius: "50%", background: "#F2684A" },
   headline: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
@@ -178,7 +165,7 @@ const s = {
 };
 
 export default function CoursesSection() {
-  const { sectionLabel, headline, subtext, items, cta, ctaHref, faqs } = coursesData;
+  const { headline, subtext, items, cta, ctaHref, faqs } = coursesData;
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedCourse, setSelectedCourse] = useState(null);
 
@@ -237,6 +224,15 @@ export default function CoursesSection() {
                 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 onClick={() => setSelectedCourse(item)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Xem chi tiết khóa học ${item.title}`}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedCourse(item);
+                  }
+                }}
               >
                 {item.highlighted && (
                   <span style={s.popularBadge}>⭐ {item.tag}</span>

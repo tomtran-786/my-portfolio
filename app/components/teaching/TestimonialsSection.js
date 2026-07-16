@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import testimonialsData from "@/data/teaching/testimonials";
 
@@ -23,22 +24,6 @@ const s = {
     padding: "0 1rem",
   },
   header: { marginBottom: "3rem", textAlign: "center" },
-  label: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    background: "#373254",
-    color: "#E5E5E5",
-    fontSize: 12,
-    fontWeight: 600,
-    padding: "0.35rem 0.9rem",
-    borderRadius: "9999px",
-    marginBottom: "1.25rem",
-    fontFamily: "Montserrat, sans-serif",
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-  },
-  labelDot: { width: 7, height: 7, borderRadius: "50%", background: "#F2684A" },
   headline: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
@@ -181,7 +166,7 @@ function ArrowIcon({ direction }) {
 }
 
 export default function TestimonialsSection() {
-  const { sectionLabel, headline, subtext, items } = testimonialsData;
+  const { headline, subtext, items } = testimonialsData;
   const [page, setPage] = useState(0);
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
@@ -230,12 +215,11 @@ export default function TestimonialsSection() {
               }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >
-              <div style={s.quoteIcon}>"</div>
+              <div style={s.quoteIcon}>&ldquo;</div>
               <p style={s.quote}>{item.quote}</p>
               <span style={s.resultBadge}>🎉 {item.result}</span>
               <div style={s.footer}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.avatar} alt={item.name} style={s.avatar} />
+                <Image src={item.avatar} alt={item.name} width={44} height={44} style={s.avatar} />
                 <div>
                   <p style={s.name}>{item.name}</p>
                   <p style={s.role}>{item.role}</p>

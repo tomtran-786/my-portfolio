@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import heroData from "@/data/teaching/hero";
 import HeroIllustration from "./HeroIllustration";
@@ -151,7 +152,7 @@ function ArrowIcon() {
 }
 
 export default function HeroSection() {
-  const { badge, headline, subtext, cta, socialProof } = heroData;
+  const { headline, subtext, cta, socialProof } = heroData;
 
   return (
     <motion.section
@@ -239,11 +240,12 @@ export default function HeroSection() {
           <motion.div variants={fadeUp} className="hero-social-row" style={s.socialProof}>
             <div style={s.avatarStack}>
               {socialProof.avatars.map((avatar, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   key={avatar.src}
                   src={avatar.src}
                   alt={avatar.alt}
+                  width={48}
+                  height={48}
                   style={i === 0 ? s.avatarFirst : s.avatar}
                 />
               ))}

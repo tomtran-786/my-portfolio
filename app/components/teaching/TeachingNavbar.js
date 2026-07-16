@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import navData from "@/data/teaching/nav";
 
@@ -188,6 +189,7 @@ export default function TeachingNavbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="nav-pill"
             style={s.nav}
             id="top"
           >
@@ -199,6 +201,26 @@ export default function TeachingNavbar() {
           background: #ff7c5c;
           transform: translateY(-3px);
           box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+        }
+
+        /* Dưới 768px, 5 link + logo + CTA không vừa một hàng: nội dung tràn
+           ~525px và bị cắt, khiến link lẫn CTA không bấm tới được. Cho riêng
+           cụm link cuộn ngang, còn logo và CTA luôn giữ chỗ. */
+        @media (max-width: 768px) {
+          .nav-links {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            gap: 1.25rem !important;
+            min-width: 0;
+          }
+          .nav-links::-webkit-scrollbar { display: none; }
+          .nav-links button { white-space: nowrap; flex-shrink: 0; }
+
+          .nav-pill { padding: 0.6rem 0.9rem !important; gap: 0.6rem !important; }
+          .nav-logo-text { display: none; }
+          .nav-cta { padding: 0.7rem 1.1rem !important; font-size: 13px !important; }
         }
       `}</style>
 
@@ -214,15 +236,15 @@ export default function TeachingNavbar() {
         </Link>
 
         <button style={s.logoBtn} onClick={() => scrollTo("#top")}>
-  <img src="/teaching/english-svgrepo-com.svg" alt="English with Tom" style={s.logoIcon} />
-  <span style={s.logoText}>
+  <Image src="/teaching/english-svgrepo-com.svg" alt="English with Tom" width={40} height={40} style={s.logoIcon} />
+  <span className="nav-logo-text" style={s.logoText}>
     {brand.name} {brand.accent}<span style={s.accent}>.</span>
   </span>
 </button>
       </div>
 
       {/* Giữa: nav links */}
-      <div style={s.navLinks}>
+      <div className="nav-links" style={s.navLinks}>
         {links.map((link) => (
           <motion.button
             key={link.href}

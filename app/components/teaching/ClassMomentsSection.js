@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import classMoments from "@/data/teaching/classMoments";
+import classMoments, { classMomentsHeading } from "@/data/teaching/classMoments";
 
 const s = {
   wrapper: {
@@ -11,21 +12,6 @@ const s = {
     padding: "0 1.5rem",
     paddingBottom: "clamp(3rem, 6vw, 5rem)",
   },
-  eyebrowWrap: { textAlign: "center" },
-  eyebrow: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    background: "#373254",
-    color: "#D8D4EA",
-    fontSize: 13,
-    fontWeight: 500,
-    padding: "0.4rem 1rem",
-    borderRadius: "9999px",
-    marginBottom: "1.25rem",
-    fontFamily: "Montserrat, sans-serif",
-  },
-  eyebrowDot: { width: 8, height: 8, borderRadius: "50%", background: "#F2684A" },
   heading: {
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 800,
@@ -71,7 +57,7 @@ const s = {
     cursor: "pointer",
   },
   dots: { display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.25rem" },
-  dot: { height: 8, borderRadius: "50%", border: "none", cursor: "pointer", padding: 0 },
+  dot: { height: 8, borderRadius: "9999px", border: "none", cursor: "pointer", padding: 0 },
 };
 
 function ArrowIcon({ direction }) {
@@ -103,20 +89,29 @@ export default function ClassMomentsSection() {
         .moment-dot { transition: background 0.2s ease, width 0.2s ease; }
       `}</style>
 
-      <h2 style={s.heading}>Những buổi học thật, học viên thật</h2>
+      <h2 style={s.heading}>{classMomentsHeading}</h2>
 
       <div style={s.stage}>
         <AnimatePresence mode="wait">
-          <motion.img
+          {/* Bọc motion.div quanh next/image: <Image fill> tự set position/inset
+              nên không nhận được style animate trực tiếp như motion.img trước đây. */}
+          <motion.div
             key={current.src}
-            src={current.src}
-            alt={current.caption}
-            style={s.img}
+            style={{ position: "absolute", inset: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: "easeInOut" }}
-          />
+          >
+            <Image
+              src={current.src}
+              alt={current.caption}
+              fill
+              sizes="(max-width: 900px) 100vw, 75rem"
+              priority
+              style={{ objectFit: "cover" }}
+            />
+          </motion.div>
         </AnimatePresence>
 
         {current.caption && <span style={s.caption}>{current.caption}</span>}

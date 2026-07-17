@@ -3,6 +3,26 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import TiltCard from './TiltCard'
+
+// Cùng pattern stagger/fadeUp đã dùng ở CoursesSection và TestimonialsSection
+// bên /teaching. Trước đây cả trang card trượt vào như một khối; giờ từng thẻ
+// vào lệch nhau.
+const pageVariants = {
+  hidden: (dir) => ({ opacity: 0, x: dir * 60 }),
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.35, ease: 'easeOut', staggerChildren: 0.08 },
+  },
+  exit: (dir) => ({ opacity: 0, x: dir * -60, transition: { duration: 0.25 } }),
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.34, 1.56, 0.64, 1] } },
+  exit: { opacity: 0 },
+}
 
 export const certs = [
   {
@@ -127,19 +147,20 @@ export default function Certifications() {
           <motion.div
             key={page}
             custom={direction}
-            initial={{ opacity: 0, x: direction * 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: direction * -60 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
+            variants={pageVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className="pf-card-grid"
           >
             {visible.map((cert) => (
+              <TiltCard key={cert.id}>
               <motion.a
-                key={cert.id}
+                variants={cardVariants}
                 href={cert.link}
                 target="_blank"
                 rel="noreferrer"
-                whileHover={{ y: -6, boxShadow: '0 12px 40px rgba(124,58,237,0.25)' }}
+                whileHover={{ y: -6, scale: 1.02, boxShadow: '0 12px 40px rgba(124,58,237,0.25)' }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 style={{
                   background: '#0f1629',
@@ -187,6 +208,7 @@ export default function Certifications() {
                   </div>
                 </div>
               </motion.a>
+              </TiltCard>
             ))}
 
             {/* Placeholder cards nếu trang cuối có ít hơn 3 */}

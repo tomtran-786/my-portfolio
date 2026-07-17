@@ -3,6 +3,10 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import TiltCard from './TiltCard'
+
+// Easing nảy của bản gốc: cubic-bezier(0.34, 1.56, 0.64, 1)
+const BACK_EASE = [0.34, 1.56, 0.64, 1]
 
 // Map tool → màu + icon
 const toolStyle = {
@@ -92,22 +96,26 @@ function ProjectCard({ proj, index, onClick }) {
   const [hovered, setHovered] = useState(false)
 
   return (
+    <TiltCard>
     <motion.div
-      key={proj.id}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: BACK_EASE }}
       onClick={onClick}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
+      // `y` phải nằm ở whileHover chứ không phải animate: whileInView ở trên đã
+      // khoá y:0 và nó ưu tiên cao hơn animate, nên animate={{y:-8}} bị nuốt —
+      // card chưa bao giờ nhấc lên. boxShadow thì chạy vì whileInView không đụng tới.
+      whileHover={{ y: -8 }}
       animate={{
-        y: hovered ? -8 : 0,
         boxShadow: hovered
           ? '0 16px 40px rgba(124,58,237,0.3)'
           : '0 4px 20px rgba(0,0,0,0.3)',
       }}
       style={{
+        position: 'relative',
         background: '#0f1629',
         border: hovered
           ? '0.5px solid rgba(139,92,246,0.6)'
@@ -125,7 +133,7 @@ function ProjectCard({ proj, index, onClick }) {
           sizes="33vw"
           style={{
             objectFit: 'cover',
-            transform: hovered ? 'scale(1.05)' : 'scale(1)',
+            transform: hovered ? 'scale(1.10)' : 'scale(1)',
             transition: 'transform 0.5s ease',
           }}
         />
@@ -179,7 +187,17 @@ function ProjectCard({ proj, index, onClick }) {
 })}
         </div>
       </div>
+
+      {/* Vạch gradient đáy, mờ -> rõ khi hover */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
+        background: 'linear-gradient(90deg, transparent, #7c3aed, transparent)',
+        opacity: hovered ? 1 : 0.3,
+        transition: 'opacity 0.3s ease',
+        pointerEvents: 'none',
+      }} />
     </motion.div>
+    </TiltCard>
   )
 }
 

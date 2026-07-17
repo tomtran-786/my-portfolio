@@ -5,6 +5,7 @@ import CoursesSection from "@/app/components/teaching/CoursesSection";
 import AboutSection from "@/app/components/teaching/AboutSection";
 import TestimonialsSection from "@/app/components/teaching/TestimonialsSection";
 import CTASection from "@/app/components/teaching/CTASection";
+import TeachingFooter from "@/app/components/teaching/TeachingFooter";
 import TeachingGoToTop from "@/app/components/teaching/TeachingGoToTop";
 
 export default function TeachingPage() {
@@ -21,6 +22,7 @@ export default function TeachingPage() {
         <TestimonialsSection />
         <CTASection />
       </div>
+      <TeachingFooter />
       <TeachingGoToTop />
     </main>
   );

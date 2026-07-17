@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion, useInView, animate } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import aboutData from "@/data/teaching/about";
+import CountUp from "@/app/components/CountUp";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -143,38 +144,11 @@ const s = {
   },
 };
 
-// Tách "30+" -> { number: 30, decimals: 0, suffix: "+" }
-// "4.9★" -> { number: 4.9, decimals: 1, suffix: "★" }
-function parseStatValue(raw) {
-  const match = String(raw).match(/^([\d.]+)(.*)$/);
-  if (!match) return { number: 0, decimals: 0, suffix: raw };
-  const numStr = match[1];
-  const suffix = match[2] || "";
-  const decimals = numStr.includes(".") ? numStr.split(".")[1].length : 0;
-  return { number: parseFloat(numStr), decimals, suffix };
-}
-
 function StatItem({ value, label, start }) {
-  const { number, decimals, suffix } = parseStatValue(value);
-  const [display, setDisplay] = useState(0);
-
-  useEffect(() => {
-    if (!start) return;
-    const controls = animate(0, number, {
-      duration: 1.4,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (latest) => setDisplay(latest),
-    });
-    return () => controls.stop();
-  }, [start, number]);
-
-  const formatted = decimals > 0 ? display.toFixed(decimals) : Math.round(display);
-
   return (
     <div style={s.statItem}>
       <span style={s.statValue}>
-        {formatted}
-        {suffix}
+        <CountUp value={value} start={start} />
       </span>
       <span style={s.statLabel}>{label}</span>
     </div>

@@ -1,16 +1,18 @@
 'use client'
 
-import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useSpring, AnimatePresence, useInView } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import dynamic from 'next/dynamic'
-import CursorGlow from './components/CursorGlow'
+import Cursor from './components/Cursor'
 import NavLink from './components/NavLink'
 import GoToTop from './components/Gototop'
 import Timeline from './components/Timeline'
 import Projects, { projects } from './components/Projects'
 import Certifications, { certs } from './components/Certifications'
 import { inter } from './fonts'
+import CountUp from './components/CountUp'
+import Footer from './components/Footer'
 
 const HeroLottie = dynamic(() => import('./components/HeroLottie'), { ssr: false })
 
@@ -20,6 +22,10 @@ export default function Portfolio() {
   // Navbar visibility scroll logic
   const [navVisible, setNavVisible] = useState(true)
   const lastY = useRef(0)
+
+  // Scorecard chỉ đếm khi cuộn tới — cùng cách AboutSection của /teaching làm
+  const statsRef = useRef(null)
+  const statsInView = useInView(statsRef, { once: true, margin: '-80px' })
 
   useEffect(() => {
     const handleNavScroll = () => {
@@ -53,8 +59,8 @@ export default function Portfolio() {
         }}
       />
 
-      {/* CURSOR GLOW */}
-      <CursorGlow />
+      {/* CUSTOM CURSOR */}
+      <Cursor />
 
       {/* NAV */}
       <AnimatePresence>
@@ -232,7 +238,7 @@ export default function Portfolio() {
 </section>
 
       {/* STATS */}
-      <div className="pf-stats" style={{
+      <div ref={statsRef} className="pf-stats" style={{
         margin: '0 2.5rem 3rem',
         border: '0.5px solid rgba(139,92,246,0.2)', borderRadius: 10, overflow: 'hidden',
         position: 'relative', zIndex: 5
@@ -246,7 +252,9 @@ export default function Portfolio() {
             background: '#0a0e1a', padding: '1rem 1.2rem', textAlign: 'center',
             borderRight: i < 2 ? '0.5px solid rgba(139,92,246,0.2)' : 'none'
           }}>
-            <div style={{ fontFamily: 'var(--font-inter)', fontSize: '2rem', fontWeight: 800, color: '#a78bfa' }}>{num}</div>
+            <div style={{ fontFamily: 'var(--font-inter)', fontSize: '2rem', fontWeight: 800, color: '#a78bfa', fontVariantNumeric: 'tabular-nums' }}>
+              <CountUp value={num} start={statsInView} />
+            </div>
             <div style={{ fontSize: 14, fontWeight:500, color: '#fff', marginTop: 2, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</div>
           </div>
         ))}
@@ -348,6 +356,7 @@ export default function Portfolio() {
 </div>
         </div>
       </section>
+      <Footer />
       <GoToTop />
     </main>
   )

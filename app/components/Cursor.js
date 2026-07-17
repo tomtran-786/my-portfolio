@@ -52,25 +52,31 @@ export default function Cursor() {
       x.set(e.clientX)
       y.set(e.clientY)
     }
-    const onEnter = () => setHovering(true)
-    const onLeave = () => setHovering(false)
+    // Bản gốc chỉ bắt phần tử có class .link; dự án này không dùng class đó nên
+    // lấy mọi link/nút.
+    //
+    // Dùng event delegation thay vì querySelectorAll + gắn từng listener lúc
+    // mount: cách cũ bỏ sót mọi nút sinh ra SAU đó — nút trong modal dự án ở "/"
+    // và modal khoá học ở /teaching đều không có hiệu ứng hover. mouseover/
+    // mouseout nổi bọt lên document nên bắt được cả phần tử thêm về sau.
+    const TARGET = 'a, button'
+    const onOver = (e) => {
+      if (e.target.closest?.(TARGET)) setHovering(true)
+    }
+    const onOut = (e) => {
+      // Chỉ tắt khi thật sự rời khỏi target, không phải khi đi sang phần tử con.
+      const from = e.target.closest?.(TARGET)
+      if (from && !from.contains(e.relatedTarget)) setHovering(false)
+    }
 
     document.addEventListener('mousemove', onMouseMove, { passive: true })
-
-    // Bản gốc chỉ bắt phần tử có class .link; dự án này không dùng class đó nên
-    // lấy thẳng mọi link/nút đang có.
-    const targets = document.querySelectorAll('a, button')
-    targets.forEach((el) => {
-      el.addEventListener('mouseenter', onEnter)
-      el.addEventListener('mouseleave', onLeave)
-    })
+    document.addEventListener('mouseover', onOver)
+    document.addEventListener('mouseout', onOut)
 
     return () => {
       document.removeEventListener('mousemove', onMouseMove)
-      targets.forEach((el) => {
-        el.removeEventListener('mouseenter', onEnter)
-        el.removeEventListener('mouseleave', onLeave)
-      })
+      document.removeEventListener('mouseover', onOver)
+      document.removeEventListener('mouseout', onOut)
     }
   }, [enabled, x, y])
 

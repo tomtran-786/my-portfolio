@@ -47,6 +47,65 @@ body {
 }
 
 /* ============================================================
+   Animation port từ "folio" (Ayush Singh) — https://github.com/ayush013/folio
+   Copyright (c) 2020-2022 Ayush Singh. MIT License.
+   ============================================================ */
+
+/* Path trong WaveDivider vẽ 3 chu kỳ (0..2160) còn viewBox chỉ rộng 1440.
+   Trôi đúng MỘT chu kỳ = 720 nên khi lặp lại, hình trùng khít -> không thấy mối nối. */
+@keyframes wave-drift {
+  to {
+    transform: translateX(-720px);
+  }
+}
+
+.wave-drift {
+  animation: wave-drift 38s linear infinite;
+  will-change: transform;
+}
+
+.pf-wave {
+  height: 60px;
+}
+
+.aurora-blob {
+  will-change: transform;
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, -10px) scale(1.02); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-25px, 30px) scale(1.03); }
+  50% { transform: translate(35px, -25px) scale(0.97); }
+  75% { transform: translate(-15px, 15px) scale(1.04); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, 25px) scale(0.98); }
+  50% { transform: translate(-30px, -15px) scale(1.06); }
+  75% { transform: translate(25px, -30px) scale(1.01); }
+}
+
+.aurora-drift-1 { animation: aurora-drift-1 18s ease-in-out infinite; }
+.aurora-drift-2 { animation: aurora-drift-2 22s ease-in-out infinite; }
+.aurora-drift-3 { animation: aurora-drift-3 25s ease-in-out infinite; }
+
+/* Người dùng bật giảm chuyển động thì mọi thứ trôi vô tận này phải dừng. */
+@media (prefers-reduced-motion: reduce) {
+  .wave-drift,
+  .aurora-blob {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
    Layout của portfolio "/" (tiền tố .pf-).
    Toàn bộ style của portfolio là inline, mà inline không viết được
    @media — nên các layout cần co giãn được đưa ra đây. Thuộc tính nào
@@ -241,6 +300,10 @@ body {
   .pf-footer-bottom {
     flex-direction: column;
     text-align: center;
+  }
+
+  .pf-wave {
+    height: 40px;
   }
 }
 

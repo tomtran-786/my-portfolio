@@ -13,6 +13,8 @@ import Certifications, { certs } from './components/Certifications'
 import { inter } from './fonts'
 import CountUp from './components/CountUp'
 import Footer from './components/Footer'
+import WaveDivider from './components/WaveDivider'
+import HeroAurora from './components/HeroAurora'
 
 const HeroLottie = dynamic(() => import('./components/HeroLottie'), { ssr: false })
 
@@ -53,8 +55,8 @@ export default function Portfolio() {
       {/* SCROLL PROGRESS BAR */}
       <motion.div
         style={{
-          position: 'fixed', top: 0, left: 0, right: 0, height: 2,
-          background: '#7c3aed', zIndex: 9999,
+          position: 'fixed', top: 0, left: 0, right: 0, height: 3,
+          background: 'linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%)', zIndex: 9999,
           scaleX, transformOrigin: 'left'
         }}
       />
@@ -104,6 +106,7 @@ export default function Portfolio() {
   gap: '2rem', position: 'relative', zIndex: 5,
   minHeight: '90vh', overflow: 'hidden'
 }}>
+        <HeroAurora />
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -263,8 +266,12 @@ export default function Portfolio() {
      {/* PROJECTS */}
      <Projects />
 
+<WaveDivider />
+
     {/* EXPERIENCE */}
 <Timeline />
+
+<WaveDivider flip />
 
 {/* EDUCATION */}
 <section id="education" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
@@ -307,8 +314,12 @@ export default function Portfolio() {
     <div style={{ fontWeight: 600, fontFamily: 'var(--font-inter)', fontSize: 16, color: '#A29BFE', whiteSpace: 'nowrap', marginLeft: 20 }}>Expected 2028</div>
   </motion.div>
 </section>
+<WaveDivider />
+
 {/* CERTIFICATIONS */}
 <Certifications />
+
+<WaveDivider flip />
 
 {/* CONTACT */}
       <section id="contact" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>

@@ -188,11 +188,13 @@ function ProjectCard({ proj, index, onClick }) {
         </div>
       </div>
 
-      {/* Vạch gradient đáy, mờ -> rõ khi hover */}
+      {/* Vạch gradient đáy — chỉ hiện khi hover.
+          Điểm dừng siết vào 30%..70% để phần sáng gọn giữa thay vì loang hết
+          chiều ngang card; hai bên tắt hẳn. */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
-        background: 'linear-gradient(90deg, transparent, #7c3aed, transparent)',
-        opacity: hovered ? 1 : 0.3,
+        background: 'linear-gradient(90deg, transparent 30%, #7c3aed 50%, transparent 70%)',
+        opacity: hovered ? 1 : 0,
         transition: 'opacity 0.3s ease',
         pointerEvents: 'none',
       }} />

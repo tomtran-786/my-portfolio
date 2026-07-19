@@ -226,6 +226,10 @@ export default function TeachingNavbar() {
           .nav-burger { display: flex !important; }
 
           .nav-pill { padding: 0.6rem 0.9rem !important; gap: 0.6rem !important; }
+          .nav-logo-text { font-size: 17px !important; }
+        }
+
+        @media (max-width: 340px) {
           .nav-logo-text { display: none; }
         }
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import navData from "@/data/teaching/nav";
+import MobileDrawer from "@/app/components/MobileDrawer";
 
 const s = {
   // Wrapper fixed neo trên cùng, căn giữa ngang
@@ -111,6 +112,20 @@ const s = {
     border: "none",
     outline: "none",
   },
+  burgerBtn: {
+    display: "none",
+    width: 40,
+    height: 40,
+    borderRadius: "50%",
+    background: "#373254",
+    border: "none",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    color: "#E5E5E5",
+    flexShrink: 0,
+    padding: 0,
+  },
 };
 
 function scrollTo(href) {
@@ -160,13 +175,14 @@ export default function TeachingNavbar() {
 
   // Ẩn khi scroll xuống, hiện khi scroll lên
   const [visible, setVisible] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
-      // Luôn hiện khi gần top (< 60px)
-      if (currentY < 60) {
+      // Luôn hiện khi gần top (< 60px) hoặc khi drawer mở
+      if (currentY < 60 || menuOpen) {
         setVisible(true);
       } else {
         setVisible(currentY < lastY.current);
@@ -176,7 +192,7 @@ export default function TeachingNavbar() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [menuOpen]);
 
   return (
     <>
@@ -203,24 +219,19 @@ export default function TeachingNavbar() {
           box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
         }
 
-        /* Dưới 768px, 5 link + logo + CTA không vừa một hàng: nội dung tràn
-           ~525px và bị cắt, khiến link lẫn CTA không bấm tới được. Cho riêng
-           cụm link cuộn ngang, còn logo và CTA luôn giữ chỗ. */
+        /* Mobile: ẩn nav-links và CTA khỏi thanh pill, chuyển sang hamburger drawer. */
         @media (max-width: 768px) {
-          .nav-links {
-            overflow-x: auto;
-            flex-wrap: nowrap;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            gap: 1.25rem !important;
-            min-width: 0;
-          }
-          .nav-links::-webkit-scrollbar { display: none; }
-          .nav-links button { white-space: nowrap; flex-shrink: 0; }
+          .nav-links { display: none !important; }
+          .nav-cta { display: none !important; }
+          .nav-burger { display: flex !important; }
 
           .nav-pill { padding: 0.6rem 0.9rem !important; gap: 0.6rem !important; }
           .nav-logo-text { display: none; }
-          .nav-cta { padding: 0.7rem 1.1rem !important; font-size: 13px !important; }
+        }
+
+        .nav-burger:hover {
+          background: #423d5f !important;
+          color: #F2684A !important;
         }
       `}</style>
 
@@ -278,14 +289,40 @@ export default function TeachingNavbar() {
         ))}
       </div>
 
-      {/* Phải: CTA */}
+      {/* Phải: CTA (desktop) */}
       <button className="nav-cta" style={s.ctaBtn} onClick={() => scrollTo(cta.href)}>
         {cta.label}
+      </button>
+
+      {/* Phải: hamburger (mobile) */}
+      <button
+        className="nav-burger"
+        style={s.burgerBtn}
+        type="button"
+        aria-label="Mở menu"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen(true)}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2.4"
+          strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
       </button>
           </motion.nav>
         )}
       </AnimatePresence>
     </div>
+
+    <MobileDrawer
+      open={menuOpen}
+      onClose={() => setMenuOpen(false)}
+      links={links}
+      cta={cta}
+      theme="teaching"
+    />
     </>
   );
 }

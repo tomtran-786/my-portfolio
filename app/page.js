@@ -6,6 +6,7 @@ import { TypeAnimation } from 'react-type-animation'
 import dynamic from 'next/dynamic'
 import Cursor from './components/Cursor'
 import NavLink from './components/NavLink'
+import MobileDrawer from './components/MobileDrawer'
 import GoToTop from './components/Gototop'
 import Timeline from './components/Timeline'
 import Projects, { projects } from './components/Projects'
@@ -18,11 +19,22 @@ import HeroAurora from './components/HeroAurora'
 
 const HeroLottie = dynamic(() => import('./components/HeroLottie'), { ssr: false })
 
+const NAV_LINKS = [
+  { label: 'Home', href: '#home' },
+  { label: 'My Works', href: '#projects' },
+  { label: 'Timeline', href: '#experience' },
+  { label: 'Education', href: '#education' },
+  { label: 'My Certifications', href: '#certifications' },
+  { label: 'Contact', href: '#contact' },
+  { label: 'Teaching', href: '/teaching' },
+]
+
 export default function Portfolio() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 })
   // Navbar visibility scroll logic
   const [navVisible, setNavVisible] = useState(true)
+  const [menuOpen, setMenuOpen] = useState(false)
   const lastY = useRef(0)
 
   // Scorecard chỉ đếm khi cuộn tới — cùng cách AboutSection của /teaching làm
@@ -32,7 +44,7 @@ export default function Portfolio() {
   useEffect(() => {
     const handleNavScroll = () => {
       const currentY = window.scrollY
-      if (currentY < 60) {
+      if (currentY < 60 || menuOpen) {
         setNavVisible(true)
       } else {
         setNavVisible(currentY < lastY.current)
@@ -41,7 +53,7 @@ export default function Portfolio() {
     }
     window.addEventListener('scroll', handleNavScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleNavScroll)
-  }, [])
+  }, [menuOpen])
 
   return (
     <main className={inter.variable} style={{ background: '#0a0e1a', minHeight: '100vh', color: '#f1f5f9', fontFamily: 'var(--font-inter)', overflowX: 'hidden' }}>
@@ -84,21 +96,35 @@ export default function Portfolio() {
           &lt;tomtran/&gt;
         </span>
         <div className="pf-nav-links">
-          {[
-  { label: 'Home', href: '#home' },
-  { label: 'My Works', href: '#projects' },
-  { label: 'Timeline', href: '#experience' },
-  { label: 'Education', href: '#education' },
-  { label: 'My Certifications', href: '#certifications' },
-  { label: 'Contact', href: '#contact' },
-  { label: "Teaching", href: "/teaching" },
-].map(({ label, href }) => (
-  <NavLink key={label} href={href} label={label} />
-))}
+          {NAV_LINKS.map(({ label, href }) => (
+            <NavLink key={label} href={href} label={label} />
+          ))}
           </div>
+        <button
+          className="pf-nav-burger"
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="2.2"
+            strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
           </motion.nav>
         )}
       </AnimatePresence>
+
+      <MobileDrawer
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        links={NAV_LINKS}
+        theme="portfolio"
+      />
 
 {/* HERO */}
 <section id="home" className="pf-hero" style={{

@@ -122,6 +122,26 @@ body {
   gap: 2rem;
 }
 
+.pf-nav-burger {
+  display: none;
+  background: transparent;
+  border: 0.5px solid rgba(139, 92, 246, 0.35);
+  color: #a78bfa;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.pf-nav-burger:hover {
+  background: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.6);
+}
+
 .pf-hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -212,24 +232,13 @@ body {
     padding: 1rem 1.25rem;
   }
 
-  /* 7 link không vừa một hàng trên mobile. Cho wrap thì navbar cao 157px và
-     đè lên hero. Thay vào đó giữ một hàng, cuộn ngang -> navbar thấp như desktop. */
+  /* Mobile: ẩn hàng link, mở drawer từ nút hamburger. */
   .pf-nav-links {
-    flex-wrap: nowrap;
-    gap: 1.1rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    margin-left: 1rem;
-  }
-
-  .pf-nav-links::-webkit-scrollbar {
     display: none;
   }
 
-  .pf-nav-links a {
-    font-size: 15px !important;
-    white-space: nowrap;
+  .pf-nav-burger {
+    display: flex;
   }
 
   .pf-hero {

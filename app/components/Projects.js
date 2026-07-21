@@ -83,8 +83,9 @@ export const projects = [
     desc: 'An e-learning platform I built end to end for a chemistry instructor preparing students for the national gifted student exam. I designed and set up the database, built the site, and shipped the payment and checkout flow.',
     image: '/chemistery.png',
     highlights: ['Database design', 'Payment & checkout', 'Course catalog', 'Order management'],
-    tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase'],
+    tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase', 'Looker Studio'],
     link: 'https://github.com/trungkt2006/portfolio-app',
+    dashboardLink: 'https://datastudio.google.com/reporting/91c25284-8111-4a8b-8106-698dfe304239',
   }
 ]
 
@@ -393,7 +394,7 @@ export default function Projects() {
                 </div>
 
                 {/* Buttons */}
-                <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
                   <a
                     href={selected.link}
                     target="_blank"
@@ -407,6 +408,22 @@ export default function Projects() {
                   >
                     View Project <i className="ti ti-external-link" />
                   </a>
+                  {selected.dashboardLink && (
+                    <a
+                      href={selected.dashboardLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 8,
+                        background: '#fff', color: '#0a0e1a',
+                        border: '0.5px solid rgba(139,92,246,0.5)',
+                        fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      View Dashboard <i className="ti ti-chart-bar" />
+                    </a>
+                  )}
                   <button
                     onClick={() => setSelected(null)}
                     style={{

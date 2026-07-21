@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 12,
+    name: 'Google: Academic Excellence',
+    issuer: 'Google',
+    date: '2026',
+    image: '/Gemini excellence.png',
+    link: '',
+  },
+  {
     id: 7,
     name: 'SQL Beginner',
     issuer: 'Xóm Data Academy',

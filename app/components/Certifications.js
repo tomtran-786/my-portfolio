@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 13,
+    name: 'Foundations of Business Intelligence',
+    issuer: 'Google',
+    date: '2026',
+    image: '/Foundations of BI.jpg',
+    link: 'https://coursera.org/share/fd0c358f7994114a4bce8eb105b87356',
+  },
+  {
     id: 12,
     name: 'Google: Academic Excellence',
     issuer: 'Google',

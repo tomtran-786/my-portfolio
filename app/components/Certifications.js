@@ -169,14 +169,23 @@ export default function Certifications() {
             exit="exit"
             className="pf-card-grid"
           >
-            {visible.map((cert) => (
+            {visible.map((cert) => {
+              // Chứng chỉ không có link công khai phải render thành <div>:
+              // href="" theo spec HTML resolve về chính URL đang mở, nên bấm vào
+              // sẽ mở thêm một tab chứa lại portfolio. Bỏ luôn hiệu ứng hover và
+              // con trỏ pointer để thẻ không tự quảng cáo là bấm được.
+              const hasLink = Boolean(cert.link)
+              const Card = hasLink ? motion.a : motion.div
+              const linkProps = hasLink
+                ? { href: cert.link, target: '_blank', rel: 'noreferrer' }
+                : {}
+
+              return (
               <TiltCard key={cert.id}>
-              <motion.a
+              <Card
                 variants={cardVariants}
-                href={cert.link}
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ y: -6, scale: 1.02, boxShadow: '0 12px 40px rgba(124,58,237,0.25)' }}
+                {...linkProps}
+                whileHover={hasLink ? { y: -6, scale: 1.02, boxShadow: '0 12px 40px rgba(124,58,237,0.25)' } : undefined}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 style={{
                   background: '#0f1629',
@@ -184,7 +193,7 @@ export default function Certifications() {
                   borderRadius: 16, overflow: 'hidden',
                   textDecoration: 'none',
                   display: 'block',
-                  cursor: 'pointer',
+                  cursor: hasLink ? 'pointer' : 'default',
                 }}
               >
                 {/* Image */}
@@ -196,7 +205,9 @@ export default function Certifications() {
                     src={cert.image}
                     alt={cert.name}
                     fill
-                    sizes="33vw"
+                    // Certificate là ảnh chụp dày chữ + objectFit:contain; ở <=768px
+                    // .pf-card-grid về 1 cột nên 33vw tải bản quá nhỏ để đọc được.
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     style={{ objectFit: 'contain', padding: '1.5rem' }}
                   />
                 </div>
@@ -223,9 +234,10 @@ export default function Certifications() {
                     </span>
                   </div>
                 </div>
-              </motion.a>
+              </Card>
               </TiltCard>
-            ))}
+              )
+            })}
 
             {/* Placeholder cards nếu trang cuối có ít hơn 3 */}
             {visible.length < PER_PAGE && Array.from({ length: PER_PAGE - visible.length }).map((_, i) => (
@@ -245,6 +257,7 @@ export default function Certifications() {
         <motion.button
           onClick={() => go(-1)}
           disabled={page === 0}
+          aria-label="Previous page"
           whileHover={page > 0 ? { scale: 1.1 } : {}}
           whileTap={page > 0 ? { scale: 0.95 } : {}}
           style={{
@@ -265,6 +278,10 @@ export default function Certifications() {
             <button
               key={i}
               onClick={() => { setDirection(i > page ? 1 : -1); setPage(i) }}
+              // Nút dot không có nội dung nào cả -> không có aria-label thì trình
+              // đọc màn hình chỉ nghe thấy 5 nút vô danh.
+              aria-label={`Go to page ${i + 1}`}
+              aria-current={i === page ? 'true' : undefined}
               style={{
                 width: i === page ? 24 : 8, height: 8,
                 borderRadius: 999,
@@ -280,6 +297,7 @@ export default function Certifications() {
         <motion.button
           onClick={() => go(1)}
           disabled={page === totalPages - 1}
+          aria-label="Next page"
           whileHover={page < totalPages - 1 ? { scale: 1.1 } : {}}
           whileTap={page < totalPages - 1 ? { scale: 0.95 } : {}}
           style={{

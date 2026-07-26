@@ -97,7 +97,7 @@ export default function Cursor() {
           mixBlendMode: 'difference',
           pointerEvents: 'none',
           userSelect: 'none',
-          zIndex: 10000,
+          zIndex: 'var(--z-cursor)',
           x: dotX,
           y: dotY,
         }}
@@ -117,7 +117,7 @@ export default function Cursor() {
           pointerEvents: 'none',
           userSelect: 'none',
           willChange: 'transform',
-          zIndex: 10000,
+          zIndex: 'var(--z-cursor)',
           x: followerX,
           y: followerY,
         }}

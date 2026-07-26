@@ -8,6 +8,9 @@ export default function TeachingGoToTop() {
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400);
+    // Trình duyệt khôi phục vị trí cuộn khi reload -> phải đọc scrollY ngay lúc
+    // mount, không thì nút vẫn ẩn dù đang ở giữa trang.
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -28,7 +31,7 @@ export default function TeachingGoToTop() {
             position: "fixed",
             bottom: "2rem",
             right: "2rem",
-            zIndex: 999,
+            zIndex: "var(--z-gototop)",
             width: 48,
             height: 48,
             borderRadius: "50%",

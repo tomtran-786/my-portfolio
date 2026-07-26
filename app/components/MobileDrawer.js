@@ -1,7 +1,11 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import useScrollLock from '../hooks/useScrollLock'
+import useFocusTrap from '../hooks/useFocusTrap'
 
+// Drawer dùng chung cho cả hai trang, nên nhãn a11y cũng phải theo ngôn ngữ của
+// trang: portfolio "/" là tiếng Anh (<html lang="en">), /teaching là tiếng Việt.
 const themes = {
   portfolio: {
     bg: '#0f1629',
@@ -12,6 +16,8 @@ const themes = {
     fontFamily: 'var(--font-inter)',
     ctaBg: '#7c3aed',
     ctaColor: '#fff',
+    menuLabel: 'Menu',
+    closeLabel: 'Close menu',
   },
   teaching: {
     bg: '#36314E',
@@ -22,6 +28,8 @@ const themes = {
     fontFamily: 'Montserrat, sans-serif',
     ctaBg: '#F2684A',
     ctaColor: '#fff',
+    menuLabel: 'Menu',
+    closeLabel: 'Đóng menu',
   },
 }
 
@@ -29,24 +37,26 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
   const t = themes[theme]
   const closeBtnRef = useRef(null)
 
+  // onClose là arrow tạo mới mỗi lần parent render. Trước đây nó nằm trong dep
+  // array của effect khoá cuộn: parent re-render khi drawer đang mở -> effect
+  // chạy lại -> lần này prevOverflow đọc được chính là 'hidden' -> đóng drawer
+  // khôi phục lại 'hidden' và trang kẹt không cuộn được nữa.
+  useScrollLock(open)
+  const drawerRef = useFocusTrap(open, closeBtnRef)
+
+  const onCloseRef = useRef(onClose)
+  useEffect(() => {
+    onCloseRef.current = onClose
+  })
+
   useEffect(() => {
     if (!open) return
-    const prevOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-
     const onKey = (e) => {
-      if (e.key === 'Escape') onClose?.()
+      if (e.key === 'Escape') onCloseRef.current?.()
     }
     document.addEventListener('keydown', onKey)
-
-    const focusTimer = setTimeout(() => closeBtnRef.current?.focus(), 50)
-
-    return () => {
-      document.body.style.overflow = prevOverflow
-      document.removeEventListener('keydown', onKey)
-      clearTimeout(focusTimer)
-    }
-  }, [open, onClose])
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open])
 
   const handleLinkClick = (link) => (e) => {
     if (link.onClick) {
@@ -83,7 +93,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
           background: 'rgba(0,0,0,0.55)',
           backdropFilter: open ? 'blur(2px)' : 'none',
           WebkitBackdropFilter: open ? 'blur(2px)' : 'none',
-          zIndex: 1500,
+          zIndex: 'var(--z-drawer-backdrop)',
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
           visibility: open ? 'visible' : 'hidden',
@@ -91,9 +101,10 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
         }}
       />
       <aside
+        ref={drawerRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Menu"
+        aria-label={t.menuLabel}
         aria-hidden={!open}
         style={{
           position: 'fixed',
@@ -103,7 +114,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
           width: 'min(84vw, 320px)',
           background: t.bg,
           borderLeft: `0.5px solid ${t.border}`,
-          zIndex: 1600,
+          zIndex: 'var(--z-drawer)',
           display: 'flex',
           flexDirection: 'column',
           boxShadow: '-16px 0 48px rgba(0,0,0,0.35)',
@@ -125,7 +136,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
           <button
             ref={closeBtnRef}
             onClick={onClose}
-            aria-label="Đóng menu"
+            aria-label={t.closeLabel}
             style={{
               background: 'transparent',
               border: 'none',

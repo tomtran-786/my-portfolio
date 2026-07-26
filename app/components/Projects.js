@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import TiltCard from './TiltCard'
+import useScrollLock from '../hooks/useScrollLock'
+import useFocusTrap from '../hooks/useFocusTrap'
 
 // Easing nảy của bản gốc: cubic-bezier(0.34, 1.56, 0.64, 1)
 const BACK_EASE = [0.34, 1.56, 0.64, 1]
@@ -132,7 +134,9 @@ function ProjectCard({ proj, index, onClick }) {
           src={proj.image}
           alt={proj.title}
           fill
-          sizes="33vw"
+          // .pf-card-grid sập về 1 cột ở <=768px nên card rộng ~100vw; để nguyên
+          // 33vw thì trình duyệt tải bản nhỏ hơn 3 lần khung thật -> ảnh mờ.
+          sizes="(max-width: 768px) 100vw, 33vw"
           style={{
             objectFit: 'cover',
             transform: hovered ? 'scale(1.10)' : 'scale(1)',
@@ -177,10 +181,12 @@ function ProjectCard({ proj, index, onClick }) {
       display: 'inline-flex', alignItems: 'center', gap: 5,
     }}>
       {logo && (
-        <img
+        <Image
           src={logo}
           alt={tag}
-          style={{ width: 14, height: 14, objectFit: 'contain' }}
+          width={14}
+          height={14}
+          style={{ objectFit: 'contain' }}
         />
       )}
       {tag}
@@ -209,23 +215,20 @@ export default function Projects() {
   const [active, setActive] = useState(ALL)
   const [selected, setSelected] = useState(null)
 
-  // Khóa scroll khi modal mở
-  useEffect(() => {
-    document.body.style.overflow = selected ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [selected])
+  useScrollLock(Boolean(selected))
+  const modalRef = useFocusTrap(Boolean(selected))
 
-  // Đóng modal khi scroll, click nav, hoặc nhấn Escape
+  // Đóng modal khi click nav hoặc nhấn Escape.
+  // KHÔNG đóng theo sự kiện scroll: trên iOS Safari lớp phủ không chặn được
+  // thao tác chạm, nên cú vuốt đầu tiên để đọc tiếp nội dung modal lại làm trang
+  // nền cuộn -> scroll bắn -> modal tự biến mất giữa chừng.
   useEffect(() => {
     if (!selected) return
-    const handleScroll = () => setSelected(null)
     const handleNavClick = (e) => { if (e.target.closest('nav')) setSelected(null) }
     const handleKeyDown = (e) => { if (e.key === 'Escape') setSelected(null) }
-    window.addEventListener('scroll', handleScroll, { passive: true })
     document.addEventListener('click', handleNavClick)
     document.addEventListener('keydown', handleKeyDown)
     return () => {
-      window.removeEventListener('scroll', handleScroll)
       document.removeEventListener('click', handleNavClick)
       document.removeEventListener('keydown', handleKeyDown)
     }
@@ -307,10 +310,11 @@ export default function Projects() {
             style={{
               position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              zIndex: 9999, padding: '2rem', overflowY: 'auto',
+              zIndex: 'var(--z-modal)', padding: '2rem', overflowY: 'auto',
             }}
           >
             <motion.div
+              ref={modalRef}
               role="dialog"
               aria-modal="true"
               aria-label={selected.title}
@@ -381,10 +385,12 @@ export default function Projects() {
       display: 'inline-flex', alignItems: 'center', gap: 5,
     }}>
       {logo && (
-        <img
+        <Image
           src={logo}
           alt={tag}
-          style={{ width: 14, height: 14, objectFit: 'contain' }}
+          width={14}
+          height={14}
+          style={{ objectFit: 'contain' }}
         />
       )}
       {tag}

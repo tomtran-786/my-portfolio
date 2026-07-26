@@ -42,6 +42,10 @@ export default function Portfolio() {
   const statsInView = useInView(statsRef, { once: true, margin: '-80px' })
 
   useEffect(() => {
+    // Phải mồi bằng vị trí hiện tại: trình duyệt khôi phục scroll khi reload, mà
+    // lastY khởi tạo 0 thì so sánh đầu tiên (currentY < 0) luôn sai -> navbar ẩn
+    // ngay ở cú cuộn LÊN đầu tiên, đúng ngược lại ý đồ.
+    lastY.current = window.scrollY
     const handleNavScroll = () => {
       const currentY = window.scrollY
       if (currentY < 60 || menuOpen) {
@@ -68,7 +72,7 @@ export default function Portfolio() {
       <motion.div
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, height: 3,
-          background: 'linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%)', zIndex: 9999,
+          background: 'linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%)', zIndex: 'var(--z-progress)',
           scaleX, transformOrigin: 'left'
         }}
       />
@@ -88,7 +92,7 @@ export default function Portfolio() {
             style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               borderBottom: '0.5px solid rgba(139,92,246,0.2)',
-              position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
+              position: 'fixed', top: 0, left: 0, right: 0, zIndex: 'var(--z-nav)',
               background: 'rgba(10,14,26,0.85)', backdropFilter: 'blur(12px)'
             }}
           >
@@ -103,7 +107,7 @@ export default function Portfolio() {
         <button
           className="pf-nav-burger"
           type="button"
-          aria-label="Mở menu"
+          aria-label="Open menu"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen(true)}
         >
@@ -179,15 +183,18 @@ export default function Portfolio() {
       {/* Social icons */}
 <div style={{ display: 'flex', gap: 16, marginBottom: '2rem' }}>
   {[
-    { icon: 'ti-brand-linkedin', href: 'https://linkedin.com/in/tran-vo-manh-tuan' },
-    { icon: 'ti-brand-github', href: 'https://github.com/tomtran-786' },
-    { icon: 'ti-mail', href: 'https://mail.google.com/mail/?view=cm&to=tomtran.workcontact@gmail.com' },
-  ].map(({ icon, href }) => (
+    // Nội dung thẻ chỉ là icon-font, không có text nào -> thiếu aria-label thì
+    // trình đọc màn hình chỉ đọc được URL thô. Footer.js đã làm đúng như vậy.
+    { icon: 'ti-brand-linkedin', href: 'https://linkedin.com/in/tran-vo-manh-tuan', label: 'LinkedIn' },
+    { icon: 'ti-brand-github', href: 'https://github.com/tomtran-786', label: 'GitHub' },
+    { icon: 'ti-mail', href: 'https://mail.google.com/mail/?view=cm&to=tomtran.workcontact@gmail.com', label: 'Email' },
+  ].map(({ icon, href, label }) => (
     <motion.a
       key={icon}
       href={href}
       target="_blank"
       rel="noreferrer"
+      aria-label={label}
       whileHover={{ y: -4, scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
@@ -267,8 +274,9 @@ export default function Portfolio() {
 </section>
 
       {/* STATS */}
+      {/* margin nằm trong .pf-stats (globals.css) để co theo breakpoint cho khớp
+          .pf-section — inline style không viết được @media. */}
       <div ref={statsRef} className="pf-stats" style={{
-        margin: '0 2.5rem 3rem',
         border: '0.5px solid rgba(139,92,246,0.2)', borderRadius: 10, overflow: 'hidden',
         position: 'relative', zIndex: 5
       }}>

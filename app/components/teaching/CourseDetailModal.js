@@ -1,8 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import coursesData from "@/data/teaching/courses";
+import useScrollLock from "../../hooks/useScrollLock";
+import useFocusTrap from "../../hooks/useFocusTrap";
+
+// Phải khớp `transition.duration` của panel bên dưới: goToContact chờ modal thoát
+// xong (lúc đó khoá cuộn mới được gỡ) rồi mới cuộn tới #contact.
+const EXIT_MS = 300;
 
 const s = {
   backdrop: {
@@ -11,7 +18,7 @@ const s = {
     background: "rgba(15,13,26,0.75)",
     backdropFilter: "blur(6px)",
     WebkitBackdropFilter: "blur(6px)",
-    zIndex: 100,
+    zIndex: "var(--z-modal)",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
@@ -597,28 +604,39 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
   // mà không có modal nào hiện ra.
   const canRender = Boolean(course && course.detail);
 
+  useScrollLock(canRender);
+  const panelRef = useFocusTrap(canRender);
+
+  // onClose là arrow tạo mới mỗi lần CoursesSection render. Để nó trong dep array
+  // khiến effect teardown + đăng ký lại sau mỗi lần parent re-render; giữ trong
+  // ref thì listener gắn đúng một lần cho mỗi lần mở modal.
+  const onCloseRef = useRef(onClose);
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  });
+
   useEffect(() => {
     if (!canRender) return;
-    document.body.style.overflow = "hidden";
     const onKeyDown = (e) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onCloseRef.current();
     };
     window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [onClose, canRender]);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [canRender]);
 
   if (!canRender) return null;
   const { detail } = course;
 
+  const categoryLabel =
+    coursesData.categories.find((c) => c.id === course.category)?.label ?? course.tag;
+
 function goToContact() {
-  document.body.style.overflow = "";
   onClose();
+  // Khoá cuộn chỉ được gỡ khi modal unmount xong (sau animation thoát), và lúc
+  // gỡ nó khôi phục lại vị trí cuộn cũ — cuộn sớm hơn sẽ bị ghi đè ngay.
   setTimeout(() => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  }, 100);
+  }, EXIT_MS + 80);
 }
 
 function openSyllabus() {
@@ -626,6 +644,10 @@ function openSyllabus() {
     window.open(detail.syllabusUrl, "_blank", "noopener,noreferrer");
   }
 }
+  // Modal render inline trong <section id="courses">, nhưng không tổ tiên nào của
+  // nó tạo stacking context mới (layout /teaching chỉ có position:relative, không
+  // z-index/transform), nên nó nằm cùng stacking context gốc với navbar và nút
+  // go-to-top — chỉ cần --z-modal lớn hơn --z-nav là đủ để nổi lên trên.
   return (
     <motion.div
       style={s.backdrop}
@@ -661,6 +683,7 @@ function openSyllabus() {
       `}</style>
 
       <motion.div
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-label={course.title}
@@ -668,7 +691,7 @@ function openSyllabus() {
         initial={{ opacity: 0, y: 40, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.98 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: EXIT_MS / 1000, ease: [0.22, 1, 0.36, 1] }}
         onClick={(e) => e.stopPropagation()}
       >
         <button className="course-modal-close" style={s.closeBtn} onClick={onClose} aria-label="Đóng">
@@ -697,7 +720,9 @@ function openSyllabus() {
           </div>
 
           <div style={s.introRight}>
-            <span style={s.tag}>{course.tag}</span>
+            {/* `tag` là nhãn badge trên card, có khoá dùng "Phổ biến nhất" — dùng
+                nó ở ô category sẽ hiện "PHỔ BIẾN NHẤT" thay vì IELTS/TOEIC. */}
+            <span style={s.tag}>{categoryLabel}</span>
             <h2 style={s.title}>{course.title}</h2>
             <p style={s.metaLine}>{course.level} · {course.format} · {course.duration}</p>
 

@@ -18,9 +18,30 @@
   --text-secondary: #94a3b8;
   --text-muted: #475569;
   --border: rgba(139, 92, 246, 0.2);
+
+  /* Thang z-index dùng chung cho cả hai trang.
+     Trước đây mỗi component tự chọn số nên modal /teaching (100) thua navbar
+     (1000) và nút go-to-top (999): navbar nổi đè lên modal và nuốt luôn cú click
+     vào nút đóng. Mọi giá trị z-index của phần tử fixed/overlay PHẢI lấy từ đây,
+     không đặt số trực tiếp nữa. */
+  --z-content: 5;
+  --z-gototop: 900;
+  --z-nav: 1000;
+  --z-progress: 1100;
+  --z-modal: 1200;
+  --z-drawer-backdrop: 1500;
+  --z-drawer: 1600;
+  --z-cursor: 10000;
 }
 
 html { scroll-behavior: smooth; }
+
+/* Navbar của cả hai trang đều là fixed, nên scrollIntoView() mặc định (căn
+   section vào y=0) đẩy tiêu đề section xuống dưới navbar. scroll-margin-top xử
+   lý một lần cho mọi call site thay vì phải sửa từng handler. */
+:where(section[id], div[id]) {
+  scroll-margin-top: 6.5rem;
+}
 
 body {
   background: var(--navy);
@@ -153,9 +174,12 @@ body {
   font-size: clamp(2rem, 7vw, 4rem);
 }
 
+/* margin phải nằm ở đây chứ không phải inline: nó cần khớp padding ngang của
+   .pf-section ở từng breakpoint, mà inline style thì không viết được @media. */
 .pf-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin: 0 2.5rem 3rem;
 }
 
 .pf-card-grid {
@@ -251,6 +275,12 @@ body {
   .pf-card-grid,
   .pf-timeline-row {
     grid-template-columns: 1fr;
+  }
+
+  /* Khớp padding ngang 1.25rem của .pf-section, nếu không stats thụt vào sâu
+     hơn mọi section khác 20px và tạo bậc thang thấy rõ trên điện thoại. */
+  .pf-stats {
+    margin: 0 1.25rem 2rem;
   }
 
   /* Xếp dọc thì viền phải thành viền lơ lửng -> đổi sang viền ngăn ngang.

@@ -7,6 +7,9 @@ export default function GoToTop() {
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400)
+    // Trình duyệt khôi phục vị trí cuộn khi reload, nên phải đọc scrollY ngay lúc
+    // mount; nếu chỉ chờ event thì nút vẫn ẩn dù đang ở giữa trang.
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -23,7 +26,7 @@ export default function GoToTop() {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Back to top"
           style={{
-            position: 'fixed', bottom: 32, right: 32, zIndex: 999,
+            position: 'fixed', bottom: 32, right: 32, zIndex: 'var(--z-gototop)',
             width: 44, height: 44, borderRadius: '50%',
             background: '#7c3aed', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',

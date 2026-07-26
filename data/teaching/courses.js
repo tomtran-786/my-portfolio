@@ -3,6 +3,15 @@ const coursesData = {
   subtext:
     "Học 1-1 hoặc nhóm nhỏ 3–5 người. Mỗi lộ trình được cá nhân hóa theo điểm xuất phát và mục tiêu riêng của bạn.",
 
+  // Nguồn duy nhất cho cả tab lọc ở CoursesSection lẫn nhãn category hiển thị
+  // trong CourseDetailModal — `category` của mỗi khoá phải khớp một id ở đây.
+  categories: [
+    { id: "all", label: "Tất cả" },
+    { id: "ielts", label: "IELTS" },
+    { id: "toeic", label: "TOEIC" },
+    { id: "giao-tiep", label: "Giao Tiếp" },
+  ],
+
   items: [
     {
       id: "ielts-basic",
@@ -126,6 +135,7 @@ const coursesData = {
     {
       id: "toeic-intermediate",
       icon: "🚀",
+      category: "toeic",
       tag: "Phổ biến nhất",
       title: "TOEIC Intermediate",
       description:

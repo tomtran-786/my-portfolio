@@ -14,7 +14,7 @@ const s = {
     top: "1.5rem",
     left: 0,
     right: 0,
-    zIndex: 1000,
+    zIndex: "var(--z-nav)",
     padding: "0 1rem",
     pointerEvents: "none",   // bắt click xuyên qua vùng trống
   },
@@ -179,6 +179,10 @@ export default function TeachingNavbar() {
   const lastY = useRef(0);
 
   useEffect(() => {
+    // Mồi bằng vị trí hiện tại: trình duyệt khôi phục scroll khi reload, mà lastY
+    // khởi tạo 0 thì phép so sánh đầu tiên (currentY < 0) luôn sai -> navbar ẩn
+    // ngay ở cú cuộn LÊN đầu tiên, đúng ngược lại ý đồ.
+    lastY.current = window.scrollY;
     const handleScroll = () => {
       const currentY = window.scrollY;
       // Luôn hiện khi gần top (< 60px) hoặc khi drawer mở
@@ -196,7 +200,11 @@ export default function TeachingNavbar() {
 
   return (
     <>
-      <div style={s.navWrapper} ref={wrapperRef}>
+      {/* id="top" phải nằm ở wrapper luôn-mounted, KHÔNG ở motion.nav bên trong:
+          navbar unmount mỗi khi ẩn (visible=false), nên nếu id ở đó thì
+          document.getElementById("top") trả null nửa thời gian và link /teaching#top
+          im lặng không hoạt động. Wrapper fixed neo trên cùng nên vẫn đúng vị trí. */}
+      <div style={s.navWrapper} ref={wrapperRef} id="top">
         <AnimatePresence>
         {visible && (
           <motion.nav
@@ -207,7 +215,6 @@ export default function TeachingNavbar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="nav-pill"
             style={s.nav}
-            id="top"
           >
       <style>{`
         .nav-cta {

@@ -76,6 +76,11 @@ export default function ClassMomentsSection() {
   const hasMultiple = classMoments.length > 1;
   const current = classMoments[index];
 
+  // data/teaching/classMoments.js mời người dùng tự thêm/bớt ảnh lớp. Mảng rỗng
+  // (hoặc index vượt biên) mà không guard sẽ ném khi đọc current.src và làm sập
+  // toàn bộ trang /teaching, chứ không chỉ mất mỗi carousel.
+  if (!current) return null;
+
   const goTo = (i) => {
     const total = classMoments.length;
     setIndex(((i % total) + total) % total);

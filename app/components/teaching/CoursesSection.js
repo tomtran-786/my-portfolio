@@ -7,12 +7,7 @@ import coursesData from "@/data/teaching/courses";
 import testimonialsData from "@/data/teaching/testimonials";
 import CourseDetailModal from "./CourseDetailModal";
 
-const CATEGORIES = [
-  { id: "all", label: "Tất cả" },
-  { id: "ielts", label: "IELTS" },
-  { id: "toeic", label: "TOEIC" },
-  { id: "giao-tiep", label: "Giao Tiếp" },
-];
+const CATEGORIES = coursesData.categories;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -83,11 +78,20 @@ const s = {
     overflow: "hidden",
     cursor: "pointer",
   }),
+  // Là <button> thật chứ không phải <span>: card không còn role="button" nên đây
+  // là đường vào modal bằng bàn phím. Reset lại style mặc định của button để giữ
+  // nguyên hình dáng cũ.
   viewDetailHint: {
     color: "#F2684A",
     fontSize: 12.5,
     fontWeight: 600,
     fontFamily: "Montserrat, sans-serif",
+    background: "none",
+    border: "none",
+    padding: 0,
+    cursor: "pointer",
+    textAlign: "left",
+    alignSelf: "flex-start",
   },
   popularBadge: {
     position: "absolute",
@@ -223,16 +227,12 @@ export default function CoursesSection() {
                   borderColor: "rgba(242,104,74,0.4)",
                 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
+                // Card không còn là role="button" nữa. Nó bọc một <Link> thật, nên
+                // nested-interactive: onKeyDown của card gọi preventDefault() và
+                // nuốt luôn Enter bấm trên nút CTA bên trong -> modal mở thay vì
+                // link chạy. Giờ click chuột trên card vẫn tiện như cũ, còn đường
+                // vào bằng bàn phím là nút "Xem chi tiết khóa học" bên dưới.
                 onClick={() => setSelectedCourse(item)}
-                role="button"
-                tabIndex={0}
-                aria-label={`Xem chi tiết khóa học ${item.title}`}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setSelectedCourse(item);
-                  }
-                }}
               >
                 {item.highlighted && (
                   <span style={s.popularBadge}>⭐ {item.tag}</span>
@@ -249,7 +249,17 @@ export default function CoursesSection() {
                   <div style={s.metaItem}><span style={s.metaIcon}>🗓</span>{item.duration}</div>
                 </div>
 
-                <span style={s.viewDetailHint}>Xem chi tiết khóa học →</span>
+                <button
+                  type="button"
+                  style={s.viewDetailHint}
+                  aria-label={`Xem chi tiết khóa học ${item.title}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedCourse(item);
+                  }}
+                >
+                  Xem chi tiết khóa học →
+                </button>
 
                 <Link
                   href={ctaHref}

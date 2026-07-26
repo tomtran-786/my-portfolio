@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 14,
+    name: 'Python Advanced',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/python-advanced-xomdata.jpg',
+    link: 'https://xomdata.com/certificates/XA-DWBMN3',
+  },
+  {
     id: 13,
     name: 'Foundations of Business Intelligence',
     issuer: 'Google',

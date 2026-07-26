@@ -214,7 +214,7 @@ export default function Portfolio() {
 
           <div className="pf-hero-ctas">
             <motion.a
-  href="/Resume_Tran Vo Manh Tuan.pdf"
+  href="/documents/resume-tran-vo-manh-tuan.pdf"
   download="Resume_Tran_Vo_Manh_Tuan.pdf"
   whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(124,58,237,0.5)' }}
   whileTap={{ scale: 0.97 }}

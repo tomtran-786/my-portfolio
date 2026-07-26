@@ -155,7 +155,7 @@ export default function Footer() {
               Book a coffee chat ↗
             </a>
             <a
-              href="/Resume_Tran Vo Manh Tuan.pdf"
+              href="/documents/resume-tran-vo-manh-tuan.pdf"
               download="Resume_Tran_Vo_Manh_Tuan.pdf"
               style={{ ...s.link, marginBottom: '1.1rem' }}
             >

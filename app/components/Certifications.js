@@ -30,7 +30,7 @@ export const certs = [
     name: 'Python Advanced',
     issuer: 'Xóm Data Academy',
     date: '2026',
-    image: '/python-advanced-xomdata.jpg',
+    image: '/certifications/python-advanced-xomdata.jpg',
     link: 'https://xomdata.com/certificates/XA-DWBMN3',
   },
   {
@@ -38,7 +38,7 @@ export const certs = [
     name: 'Foundations of Business Intelligence',
     issuer: 'Google',
     date: '2026',
-    image: '/Foundations of BI.jpg',
+    image: '/certifications/foundations-of-bi.jpg',
     link: 'https://coursera.org/share/fd0c358f7994114a4bce8eb105b87356',
   },
   {
@@ -46,7 +46,7 @@ export const certs = [
     name: 'Google: Academic Excellence',
     issuer: 'Google',
     date: '2026',
-    image: '/Gemini excellence.png',
+    image: '/certifications/gemini-excellence.png',
     link: '',
   },
   {
@@ -54,7 +54,7 @@ export const certs = [
     name: 'SQL Beginner',
     issuer: 'Xóm Data Academy',
     date: '2026',
-    image: '/sql_beginner.jpg',
+    image: '/certifications/sql-beginner.jpg',
     link: 'https://xomdata.com/certificates/XA-U2UPNE',
   },
   {
@@ -62,7 +62,7 @@ export const certs = [
     name: 'SQL Intermediate',
     issuer: 'Xóm Data Academy',
     date: '2026',
-    image: '/sql_intermediate.jpg',
+    image: '/certifications/sql-intermediate.jpg',
     link: 'https://xomdata.com/certificates/XA-62P2F2',
   },
   {
@@ -70,7 +70,7 @@ export const certs = [
     name: 'SQL Advanced',
     issuer: 'Xóm Data Academy',
     date: '2026',
-    image: '/sql_advanced.jpg',
+    image: '/certifications/sql-advanced.jpg',
     link: 'https://xomdata.com/certificates/XA-S3BXBJ',
   },
   {
@@ -78,7 +78,7 @@ export const certs = [
     name: 'SQL Intermediate',
     issuer: 'DataCamp',
     date: '2026',
-    image: '/Intermediate SQL.png',
+    image: '/certifications/intermediate-sql.png',
     link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/2b7c30c447298acf6670f5e49753e1dc6648b9dc?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
   },
   {
@@ -86,7 +86,7 @@ export const certs = [
     name: 'Data Manipulation in SQL',
     issuer: 'DataCamp',
     date: '2026',
-    image: '/Data Manipulation in SQL.png',
+    image: '/certifications/data-manipulation-in-sql.png',
     link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/7c1bbaa20658e5fd525ebe9987d45790c47a0a18?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
   },
   {
@@ -94,7 +94,7 @@ export const certs = [
     name: 'Python Beginner',
     issuer: 'Xóm Data Academy',
     date: '2026',
-    image: '/python_begin_xomdata.jpg',
+    image: '/certifications/python-begin-xomdata.jpg',
     link: 'https://xomdata.com/certificates/XA-9URVA8',
   },
   {
@@ -102,7 +102,7 @@ export const certs = [
     name: 'Python Intermediate',
     issuer: 'Xóm Data Academy',
     date: '2026',
-    image: '/python_inter_xomdata.jpg',
+    image: '/certifications/python-inter-xomdata.jpg',
     link: 'https://xomdata.com/certificates/XA-GYSDVD',
   },
   {
@@ -110,7 +110,7 @@ export const certs = [
     name: 'Introduction to Python',
     issuer: 'DataCamp',
     date: '2026',
-    image: '/Intro to Python.png',
+    image: '/certifications/intro-to-python.png',
     link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/8e5a1a0ea9accd24fad972d9ff6b5d610923abdc?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
   },
   {
@@ -118,7 +118,7 @@ export const certs = [
     name: 'Financial Modelling in Excel',
     issuer: 'DataCamp',
     date: '2026',
-    image: '/Financial Modeling in Excel.png',
+    image: '/certifications/financial-modeling-in-excel.png',
     link: 'https://www.datacamp.com/completed/statement-of-accomplishment/course/603d77ba9021a290acff8f54430242cc416a7dbd?utm_medium=organic_social&utm_campaign=sharewidget&utm_content=soa',
   },
   {
@@ -126,7 +126,7 @@ export const certs = [
     name: 'Assess for Success: Marketing Analytics and Measurement',
     issuer: 'Google',
     date: '2026',
-    image: '/Marketing Analytics.png',
+    image: '/certifications/marketing-analytics.png',
     link: 'https://coursera.org/share/f8865d560ba55ff857880a69a3fa7314',
   },
   {
@@ -134,7 +134,7 @@ export const certs = [
     name: 'Foundations of Digital Marketing and E-commerce',
     issuer: 'Google',
     date: '2026',
-    image: '/Foundations of Digital Marketing and E-commerce.png',
+    image: '/certifications/foundations-of-digital-marketing-and-e-commerce.png',
     link: 'https://coursera.org/share/ad48c74138c52dddba8ec265dc478ccf'
   }
 ]

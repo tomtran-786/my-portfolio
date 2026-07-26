@@ -6,7 +6,7 @@ export const experiences = [
     company: "Scientific Research Competition (SVNCKH)",
     description: "My first academic competition",
     location: "Ho Chi Minh City",
-    image: "/Research.png"
+    image: "/projects/research.png"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const experiences = [
     company: "Mindflow (APEC Innovation)",
     description: "My first Start-up Competition",
     location: "Ho Chi Minh City",
-    image: "/GCN tham gia pack 1-93_page-0001.jpg"
+    image: "/experience/mindflow-apec.jpg"
   },
   {
     id: 3,
@@ -24,6 +24,6 @@ export const experiences = [
     company: "Phun Xam Vic",
     description: "My first real-world project",
     location: "Remote",
-    image: "/phunxamvic.png" 
+    image: "/experience/phun-xam-vic.png"
   }
 ];

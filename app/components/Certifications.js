@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 15,
+    name: 'Git for Data People',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/certifications/git-for-data.png',
+    link: 'https://xomdata.com/certificates/XA-MUDLQT',
+  },
+  {
     id: 14,
     name: 'Python Advanced',
     issuer: 'Xóm Data Academy',

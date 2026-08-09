@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 16,
+    name: 'Data Visualization with Matplotlib',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/certifications/data-viz-with-matplotlib.svg',
+    link: 'https://xomdata.com/certificates/XA-WN3R5G',
+  },
+  {
     id: 15,
     name: 'Git for Data People',
     issuer: 'Xóm Data Academy',

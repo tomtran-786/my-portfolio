@@ -172,11 +172,11 @@ export default function Certifications() {
   return (
    <section id="certifications" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
       {/* Header */}
-      <div style={{ marginBottom: '2.5rem' }}>
-        <h2 className="pf-section-title" style={{ fontWeight: 700, margin: '0 0 0.4rem' }}>
+      <div className="pf-section-heading">
+        <h2 className="pf-section-title" style={{ fontWeight: 700, margin: 0 }}>
           My Certifications
         </h2>
-        <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
+        <p className="pf-section-subtitle pf-section-context" style={{ fontWeight: 500 }}>
           Professional certifications that validate my expertise
         </p>
       </div>
@@ -209,7 +209,7 @@ export default function Certifications() {
               <Card
                 variants={cardVariants}
                 {...linkProps}
-                whileHover={hasLink ? { y: -6, scale: 1.02, boxShadow: '0 18px 46px rgba(12,73,143,0.18)' } : undefined}
+                whileHover={hasLink ? { y: -6, scale: 1.02, boxShadow: 'var(--pf-shadow-hover)' } : undefined}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 style={{
                   background: 'var(--pf-surface)',
@@ -218,7 +218,7 @@ export default function Certifications() {
                   textDecoration: 'none',
                   display: 'block',
                   cursor: hasLink ? 'pointer' : 'default',
-                  boxShadow: 'var(--pf-shadow-card)',
+                  boxShadow: hasLink ? 'var(--pf-shadow-card)' : 'none',
                 }}
               >
                 {/* Image */}
@@ -279,7 +279,7 @@ export default function Certifications() {
             width: 44, height: 44, borderRadius: '50%',
             border: '1px solid var(--pf-border-strong)',
             background: page === 0 ? 'var(--pf-bg-soft)' : 'var(--pf-brand-soft)',
-            color: page === 0 ? 'rgba(23,38,54,0.36)' : 'var(--pf-brand)',
+            color: page === 0 ? 'var(--pf-disabled-text)' : 'var(--pf-brand)',
             fontSize: 20, cursor: page === 0 ? 'not-allowed' : 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
@@ -300,7 +300,7 @@ export default function Certifications() {
               style={{
                 width: i === page ? 24 : 8, height: 8,
                 borderRadius: 999,
-                background: i === page ? 'var(--pf-brand)' : 'rgba(12,73,143,0.2)',
+                background: i === page ? 'var(--pf-brand)' : 'var(--pf-pagination-dot)',
                 border: 'none', cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 padding: 0,
@@ -319,7 +319,7 @@ export default function Certifications() {
             width: 44, height: 44, borderRadius: '50%',
             border: '1px solid var(--pf-border-strong)',
             background: page === totalPages - 1 ? 'var(--pf-bg-soft)' : 'var(--pf-brand-soft)',
-            color: page === totalPages - 1 ? 'rgba(23,38,54,0.36)' : 'var(--pf-brand)',
+            color: page === totalPages - 1 ? 'var(--pf-disabled-text)' : 'var(--pf-brand)',
             fontSize: 20, cursor: page === totalPages - 1 ? 'not-allowed' : 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}

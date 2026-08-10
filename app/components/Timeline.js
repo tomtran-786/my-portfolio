@@ -12,16 +12,15 @@ export default function Timeline() {
       style={{ position: 'relative', zIndex: 5 }}
     >
       {/* Header */}
-      <div style={{ marginBottom: '3.5rem' }}>
+      <div className="pf-section-heading">
         <h2 className="pf-section-title" style={{
           fontWeight: 700,
-          margin: '0 0 0.4rem',
+          margin: 0,
         }}>
           Timeline
         </h2>
-        <p className="pf-section-subtitle" style={{
+        <p className="pf-section-subtitle pf-section-context" style={{
           fontWeight: 500,
-          margin: 0,
         }}>
           A quick recap of proud moments
         </p>

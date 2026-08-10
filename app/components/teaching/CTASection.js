@@ -27,18 +27,6 @@ const s = {
     overflow: "hidden",
     boxShadow: "var(--teach-shadow-card)",
   },
-  decorCircle: {
-    position: "absolute", top: -80, right: -80,
-    width: 280, height: 280, borderRadius: "50%",
-    background: "radial-gradient(circle, var(--teach-brand-soft) 0%, transparent 70%)",
-    pointerEvents: "none",
-  },
-  decorCircle2: {
-    position: "absolute", bottom: -60, left: -60,
-    width: 200, height: 200, borderRadius: "50%",
-    background: "radial-gradient(circle, var(--teach-brand-soft) 0%, transparent 70%)",
-    pointerEvents: "none",
-  },
   emoji: { fontSize: 48, display: "block", marginBottom: "1.25rem" },
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
@@ -93,7 +81,7 @@ export default function CTASection() {
         .cta-btn-primary:hover {
           background: var(--teach-brand-hover) !important;
           transform: translateY(-3px);
-          box-shadow: 0 10px 28px rgba(65, 48, 40, 0.24);
+          box-shadow: var(--teach-shadow-hover);
         }
         .cta-btn-secondary:hover {
           background: var(--teach-brand-soft) !important;
@@ -108,9 +96,6 @@ export default function CTASection() {
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <div style={s.decorCircle} />
-        <div style={s.decorCircle2} />
-
         <motion.span variants={fadeUp} style={s.emoji}>✉️</motion.span>
         <motion.h2 variants={fadeUp} style={s.headline}>{headline}</motion.h2>
         <motion.p variants={fadeUp} style={s.subtext}>{subtext}</motion.p>

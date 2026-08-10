@@ -12,7 +12,6 @@ const heroData = {
       label: "Đặt buổi học thử miễn phí",
       href: "#contact",
     },
-    arrow: { href: "#contact" },
   },
 
   socialProof: {

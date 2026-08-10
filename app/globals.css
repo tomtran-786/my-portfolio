@@ -30,7 +30,14 @@
   --z-cursor: 10000;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+html[data-color-mode='dark'] {
+  color-scheme: dark;
+}
 
 /* Navbar của cả hai trang đều là fixed, nên scrollIntoView() mặc định (căn
    section vào y=0) đẩy tiêu đề section xuống dưới navbar. scroll-margin-top xử
@@ -62,18 +69,71 @@ body {
   --pf-accent: #297fd6;
   --pf-link: #336699;
   --pf-success: #1c7a4d;
+  --pf-success-soft: rgba(28, 122, 77, 0.08);
+  --pf-success-border: rgba(28, 122, 77, 0.24);
   --pf-border: rgba(23, 38, 54, 0.14);
   --pf-border-strong: rgba(12, 73, 143, 0.32);
   --pf-brand-soft: rgba(12, 73, 143, 0.08);
   --pf-accent-soft: rgba(41, 127, 214, 0.11);
   --pf-overlay: rgba(23, 38, 54, 0.84);
-  --pf-shadow-card: 0 12px 34px rgba(23, 38, 54, 0.1);
+  --pf-shadow-card: 0 6px 20px rgba(23, 38, 54, 0.08);
   --pf-shadow-hover: 0 18px 46px rgba(12, 73, 143, 0.18);
+  --pf-on-brand: #ffffff;
+  --pf-nav-bg: rgba(255, 255, 255, 0.9);
+  --pf-nav-shadow: 0 4px 24px rgba(23, 38, 54, 0.06);
+  --pf-modal-shadow: 0 24px 60px rgba(23, 38, 54, 0.32);
+  --pf-disabled-text: rgba(23, 38, 54, 0.36);
+  --pf-pagination-dot: rgba(12, 73, 143, 0.2);
+  --pf-footer-strip: #003865;
+  --pf-footer-strip-text: rgba(255, 255, 255, 0.82);
+  --pf-aurora-1: rgba(41, 127, 214, 0.12);
+  --pf-aurora-2: rgba(12, 73, 143, 0.09);
+  --pf-aurora-3: rgba(51, 102, 153, 0.08);
+  --mode-toggle-bg: var(--pf-surface);
+  --mode-toggle-border: var(--pf-border-strong);
+  --mode-toggle-color: var(--pf-brand-deep);
+  --mode-toggle-hover: var(--pf-brand-soft);
   --cursor-follower: rgba(12, 73, 143, 0.16);
 
   background: var(--pf-bg);
   color: var(--pf-text);
   font-family: var(--font-portfolio), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html[data-color-mode='dark'] .pf-body {
+  --pf-bg: #0b111a;
+  --pf-bg-soft: #101a27;
+  --pf-surface: #121d2a;
+  --pf-surface-muted: #182637;
+  --pf-ink: #f4f8fc;
+  --pf-text: #c8d4e0;
+  --pf-text-secondary: #9fb0c1;
+  --pf-brand-deep: #9ac7ff;
+  --pf-brand: #5ea7f2;
+  --pf-accent: #86bfff;
+  --pf-link: #8ec4ff;
+  --pf-success: #6bd69f;
+  --pf-success-soft: rgba(107, 214, 159, 0.12);
+  --pf-success-border: rgba(107, 214, 159, 0.34);
+  --pf-border: rgba(169, 199, 232, 0.18);
+  --pf-border-strong: rgba(94, 167, 242, 0.5);
+  --pf-brand-soft: rgba(94, 167, 242, 0.16);
+  --pf-accent-soft: rgba(134, 191, 255, 0.16);
+  --pf-overlay: rgba(4, 8, 13, 0.9);
+  --pf-shadow-card: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --pf-shadow-hover: 0 18px 46px rgba(0, 0, 0, 0.42);
+  --pf-on-brand: #07131f;
+  --pf-nav-bg: rgba(11, 17, 26, 0.92);
+  --pf-nav-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
+  --pf-modal-shadow: 0 24px 60px rgba(0, 0, 0, 0.54);
+  --pf-disabled-text: rgba(200, 212, 224, 0.4);
+  --pf-pagination-dot: rgba(134, 191, 255, 0.28);
+  --pf-footer-strip: #07131f;
+  --pf-footer-strip-text: rgba(221, 234, 247, 0.82);
+  --pf-aurora-1: rgba(94, 167, 242, 0.18);
+  --pf-aurora-2: rgba(134, 191, 255, 0.13);
+  --pf-aurora-3: rgba(67, 130, 196, 0.14);
+  --cursor-follower: rgba(134, 191, 255, 0.18);
 }
 
 .pf-body::-webkit-scrollbar-track,
@@ -123,6 +183,21 @@ body {
   line-height: 1.4;
 }
 
+/* Keep each heading and its supporting copy as one left-aligned reading unit.
+   The content below provides the next visual step without forcing an eye jump. */
+.pf-section-heading {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.pf-section-context {
+  margin: 0;
+  max-width: 42rem;
+}
+
 /* Teaching shares the portfolio's editorial system, with a route-scoped warm
    palette. Bright orange is reserved for fills and large accents; the deeper
    orange keeps text and focus indicators readable on light surfaces. */
@@ -149,15 +224,81 @@ body {
   --teach-border: rgba(65, 48, 40, 0.14);
   --teach-border-strong: rgba(var(--teach-brand-rgb), 0.32);
   --teach-overlay: rgba(47, 39, 35, 0.82);
-  --teach-shadow-card: 0 12px 34px rgba(65, 48, 40, 0.1);
+  --teach-shadow-card: 0 6px 20px rgba(65, 48, 40, 0.08);
   --teach-shadow-hover: 0 18px 46px rgba(var(--teach-brand-rgb), 0.18);
   --teach-on-brand: var(--teach-ink);
   --teach-focus: var(--teach-brand-deep);
+  --teach-nav-bg: rgba(255, 255, 255, 0.94);
+  --teach-nav-shadow: 0 8px 28px rgba(65, 48, 40, 0.06);
+  --teach-control-shadow: 0 4px 18px rgba(65, 48, 40, 0.16);
+  --teach-modal-shadow: 0 30px 70px rgba(47, 39, 35, 0.28);
+  --mode-toggle-bg: var(--teach-surface);
+  --mode-toggle-border: var(--teach-border-strong);
+  --mode-toggle-color: var(--teach-brand-deep);
+  --mode-toggle-hover: var(--teach-brand-soft);
   --cursor-follower: rgba(var(--teach-brand-rgb), 0.16);
 
   background: var(--teach-bg);
   color: var(--teach-text);
   font-family: var(--font-portfolio), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+html[data-color-mode='dark'] .teaching-body {
+  --teach-bg: #171210;
+  --teach-bg-soft: #211915;
+  --teach-surface: #211916;
+  --teach-surface-muted: #2b201a;
+  --teach-ink: #fff7f1;
+  --teach-text: #dbc9bf;
+  --teach-text-secondary: #b49e92;
+  --teach-brand-deep: #ffb16f;
+  --teach-brand-soft: rgba(var(--teach-brand-rgb), 0.16);
+  --teach-border: rgba(255, 219, 193, 0.16);
+  --teach-border-strong: rgba(var(--teach-brand-rgb), 0.5);
+  --teach-overlay: rgba(10, 7, 6, 0.9);
+  --teach-shadow-card: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --teach-shadow-hover: 0 18px 46px rgba(0, 0, 0, 0.42);
+  --teach-on-brand: #2f2723;
+  --teach-focus: #ffc08b;
+  --teach-nav-bg: rgba(23, 18, 16, 0.94);
+  --teach-nav-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  --teach-control-shadow: 0 4px 18px rgba(0, 0, 0, 0.34);
+  --teach-modal-shadow: 0 30px 70px rgba(0, 0, 0, 0.56);
+  --cursor-follower: rgba(var(--teach-brand-rgb), 0.2);
+}
+
+.theme-toggle {
+  align-items: center;
+  background: var(--mode-toggle-bg);
+  border: 1px solid var(--mode-toggle-border);
+  border-radius: 50%;
+  color: var(--mode-toggle-color);
+  cursor: pointer;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 1.15rem;
+  height: 40px;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  width: 40px;
+}
+
+.theme-toggle:hover {
+  background: var(--mode-toggle-hover);
+  transform: translateY(-2px);
+}
+
+.theme-toggle-sun {
+  display: none;
+}
+
+html[data-color-mode='dark'] .theme-toggle-moon {
+  display: none;
+}
+
+html[data-color-mode='dark'] .theme-toggle-sun {
+  display: inline-block;
 }
 
 .teaching-theme {
@@ -218,6 +359,19 @@ body {
   line-height: 1.08;
 }
 
+.teach-section-heading {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.teach-section-context {
+  margin: 0;
+  max-width: 42rem;
+}
+
 .teach-section-copy {
   color: var(--teach-text);
   font-size: 1rem;
@@ -231,6 +385,31 @@ body {
 
   .teach-section {
     padding-block: 3rem;
+  }
+
+  .teach-section-heading,
+  .pf-section-heading {
+    margin-bottom: 2rem;
+  }
+
+  .pf-filter-row,
+  .teach-course-tabs {
+    flex-wrap: nowrap !important;
+    margin-right: -1.25rem;
+    overflow-x: auto;
+    padding-bottom: 0.4rem;
+    padding-right: 1.25rem;
+    scrollbar-width: none;
+  }
+
+  .pf-filter-row::-webkit-scrollbar,
+  .teach-course-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pf-filter-row > *,
+  .teach-course-tabs > * {
+    flex: 0 0 auto;
   }
 }
 
@@ -296,12 +475,47 @@ body {
    ============================================================ */
 
 .pf-nav {
+  align-items: center;
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2.25rem);
+  grid-template-columns: auto minmax(0, 1fr) auto;
   padding: 1.2rem var(--pf-content-gutter);
 }
 
 .pf-nav-links {
   display: flex;
   gap: 1.5rem;
+  justify-content: flex-end;
+}
+
+.pf-nav-actions {
+  align-items: center;
+  display: flex;
+  gap: 0.625rem;
+  justify-self: end;
+}
+
+.pf-nav-route {
+  align-items: center;
+  border: 1px solid var(--pf-border-strong);
+  border-radius: 999px;
+  color: var(--pf-brand-deep);
+  display: inline-flex;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  gap: 0.35rem;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+
+.pf-nav-route:hover {
+  background: var(--pf-brand-soft);
+  border-color: var(--pf-brand);
+  transform: translateY(-2px);
 }
 
 .pf-nav-burger {
@@ -435,10 +649,10 @@ body {
   margin: 2.5rem auto 0;
   border-top: 0;
   border-radius: 8px;
-  background: var(--pf-brand-deep);
+  background: var(--pf-footer-strip);
   padding: 1rem 1.25rem;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--pf-footer-strip-text);
 }
 
 .pf-hero-art {
@@ -458,7 +672,15 @@ body {
 }
 
 @media (max-width: 1100px) {
+  .pf-nav {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
   .pf-nav-links {
+    display: none;
+  }
+
+  .pf-nav-route {
     display: none;
   }
 

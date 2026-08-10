@@ -28,7 +28,7 @@ const s = {
     color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     lineHeight: 1.2,
-    marginBottom: "0.75rem",
+    margin: 0,
     maxWidth: "36rem",
   },
   subtext: {
@@ -36,7 +36,7 @@ const s = {
     fontSize: 15,
     lineHeight: 1.7,
     maxWidth: "36rem",
-    marginBottom: "2rem",
+    margin: 0,
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   // Tabs lọc category
@@ -47,9 +47,9 @@ const s = {
     marginBottom: "2.5rem",
   },
   tabBtn: (active) => ({
-    background: active ? "var(--teach-brand)" : "var(--teach-surface)",
+    background: active ? "var(--teach-brand)" : "var(--teach-bg-soft)",
     color: active ? "var(--teach-on-brand)" : "var(--teach-ink)",
-    border: active ? "1px solid var(--teach-brand)" : "1px solid var(--teach-border)",
+    border: active ? "1px solid var(--teach-brand)" : "1px solid transparent",
     fontSize: 13,
     fontWeight: 600,
     padding: "0.55rem 1.25rem",
@@ -64,7 +64,7 @@ const s = {
     gap: "1.25rem",
   },
   card: (highlighted) => ({
-    background: "var(--teach-surface)",
+    background: highlighted ? "var(--teach-surface-muted)" : "var(--teach-surface)",
     border: highlighted ? "1.5px solid var(--teach-border-strong)" : "1px solid var(--teach-border)",
     borderRadius: "1.25rem",
     padding: "1.75rem",
@@ -74,7 +74,7 @@ const s = {
     position: "relative",
     overflow: "hidden",
     cursor: "pointer",
-    boxShadow: "var(--teach-shadow-card)",
+    boxShadow: highlighted ? "var(--teach-shadow-card)" : "none",
   }),
   // Là <button> thật chứ không phải <span>: card không còn role="button" nên đây
   // là đường vào modal bằng bàn phím. Reset lại style mặc định của button để giữ
@@ -143,7 +143,14 @@ const s = {
     fontSize: 13,
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
-  metaIcon: { fontSize: 13 },
+  metaLabel: {
+    color: "var(--teach-brand-deep)",
+    fontSize: 11,
+    fontWeight: 700,
+    letterSpacing: "0.04em",
+    minWidth: "4.25rem",
+    textTransform: "uppercase",
+  },
   emptyState: {
     color: "var(--teach-text)",
     fontSize: 14,
@@ -167,16 +174,17 @@ export default function CoursesSection() {
     <section className="teach-section" style={s.section} id="courses">
       {/* Header */}
       <motion.div
+        className="teach-section-heading"
         initial="hidden" whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
         variants={fadeUp}
       >
         <h2 style={s.headline}>{headline}</h2>
-        <p style={s.subtext}>{subtext}</p>
+        <p className="teach-section-context" style={s.subtext}>{subtext}</p>
       </motion.div>
 
       {/* Tabs lọc category */}
-      <div style={s.tabRow}>
+      <div className="teach-course-tabs" style={s.tabRow}>
         {CATEGORIES.map((cat) => (
           <button
             key={cat.id}
@@ -230,9 +238,9 @@ export default function CoursesSection() {
                 <p style={s.cardDesc}>{item.description}</p>
 
                 <div style={s.metaRow}>
-                  <div style={s.metaItem}><span style={s.metaIcon}>📶</span>{item.level}</div>
-                  <div style={s.metaItem}><span style={s.metaIcon}>👥</span>{item.format}</div>
-                  <div style={s.metaItem}><span style={s.metaIcon}>🗓</span>{item.duration}</div>
+                  <div style={s.metaItem}><span style={s.metaLabel}>Trình độ</span>{item.level}</div>
+                  <div style={s.metaItem}><span style={s.metaLabel}>Hình thức</span>{item.format}</div>
+                  <div style={s.metaItem}><span style={s.metaLabel}>Thời lượng</span>{item.duration}</div>
                 </div>
 
                 <button

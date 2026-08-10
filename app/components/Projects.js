@@ -127,8 +127,8 @@ function ProjectCard({ proj, index, onClick }) {
       whileHover={{ y: -8 }}
       animate={{
         boxShadow: hovered
-          ? '0 18px 46px rgba(12,73,143,0.18)'
-          : '0 12px 34px rgba(23,38,54,0.1)',
+          ? 'var(--pf-shadow-hover)'
+          : '0 0 0 rgba(23,38,54,0)',
       }}
       style={{
         position: 'relative',
@@ -160,7 +160,7 @@ function ProjectCard({ proj, index, onClick }) {
         />
         <div style={{
           position: 'absolute', top: 12, left: 12,
-          background: 'var(--pf-brand)', color: '#fff',
+          background: 'var(--pf-brand)', color: 'var(--pf-on-brand)',
           fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 999,
         }}>
           {proj.category}
@@ -211,16 +211,6 @@ function ProjectCard({ proj, index, onClick }) {
         </div>
       </div>
 
-      {/* Vạch gradient đáy — chỉ hiện khi hover.
-          Điểm dừng siết vào 30%..70% để phần sáng gọn giữa thay vì loang hết
-          chiều ngang card; hai bên tắt hẳn. */}
-      <div style={{
-        position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
-        background: 'linear-gradient(90deg, transparent 30%, var(--pf-accent) 50%, transparent 70%)',
-        opacity: hovered ? 1 : 0,
-        transition: 'opacity 0.3s ease',
-        pointerEvents: 'none',
-      }} />
     </motion.div>
     </TiltCard>
   )
@@ -274,17 +264,17 @@ export default function Projects() {
       `}</style>
 
       {/* Header */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 className="pf-section-title" style={{ fontWeight: 700, margin: '0 0 0.4rem' }}>
+      <div className="pf-section-heading">
+        <h2 className="pf-section-title" style={{ fontWeight: 700, margin: 0 }}>
           My Works
         </h2>
-        <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
+        <p className="pf-section-subtitle pf-section-context" style={{ fontWeight: 500 }}>
           What I do at 2 AM on a Saturday
         </p>
       </div>
 
       {/* Filter tabs với bộ đếm */}
-      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+      <div className="pf-filter-row" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: '2.5rem' }}>
         {categoryList.map(cat => {
           const count = countFor(cat)
           const isActive = active === cat
@@ -295,9 +285,9 @@ export default function Projects() {
               aria-pressed={isActive}
               style={{
                 padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 600,
-                cursor: 'pointer', border: '1px solid var(--pf-border-strong)',
-                background: isActive ? 'var(--pf-brand)' : 'var(--pf-surface)',
-                color: isActive ? '#fff' : 'var(--pf-brand)',
+                cursor: 'pointer', border: isActive ? '1px solid var(--pf-brand)' : '1px solid transparent',
+                background: isActive ? 'var(--pf-brand)' : 'var(--pf-bg-soft)',
+                color: isActive ? 'var(--pf-on-brand)' : 'var(--pf-brand)',
                 transition: 'all 0.2s',
                 display: 'inline-flex', alignItems: 'center', gap: 6,
               }}
@@ -305,8 +295,8 @@ export default function Projects() {
               {cat}
               <span style={{
                 fontSize: 11, fontWeight: 700,
-                background: isActive ? 'rgba(255,255,255,0.22)' : 'var(--pf-accent-soft)',
-                color: isActive ? '#fff' : 'var(--pf-brand)',
+                background: isActive ? 'rgba(255,255,255,0.22)' : 'transparent',
+                color: isActive ? 'var(--pf-on-brand)' : 'var(--pf-brand)',
                 borderRadius: 999, padding: '1px 7px',
                 minWidth: 20, textAlign: 'center',
               }}>
@@ -359,7 +349,7 @@ export default function Projects() {
                   maxWidth: 680, width: '100%',
                   margin: 'auto 0',
                   border: '1px solid var(--pf-border)',
-                  boxShadow: '0 24px 60px rgba(23,38,54,0.32)',
+                  boxShadow: 'var(--pf-modal-shadow)',
                   fontFamily: 'var(--font-portfolio)',
                 }}
               >
@@ -371,7 +361,7 @@ export default function Projects() {
               {/* Modal content */}
               <div style={{ padding: '1.5rem 2rem 2rem' }}>
                 <div style={{
-                  display: 'inline-block', background: 'var(--pf-brand)', color: '#fff',
+                  display: 'inline-block', background: 'var(--pf-brand)', color: 'var(--pf-on-brand)',
                   fontSize: 12, fontWeight: 600, padding: '4px 12px',
                   borderRadius: 999, marginBottom: '0.8rem',
                 }}>
@@ -442,7 +432,7 @@ export default function Projects() {
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: 8,
                       background: selected.link?.includes('github.com') ? 'var(--pf-brand-deep)' : 'var(--pf-brand)',
-                      color: '#fff',
+                      color: 'var(--pf-on-brand)',
                       fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
                       textDecoration: 'none',
                     }}
@@ -463,7 +453,7 @@ export default function Projects() {
                       rel="noreferrer"
                       style={{
                         display: 'inline-flex', alignItems: 'center', gap: 8,
-                        background: '#fff', color: 'var(--pf-brand-deep)',
+                        background: 'var(--pf-surface)', color: 'var(--pf-brand-deep)',
                         border: '1px solid var(--pf-border-strong)',
                         fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
                         textDecoration: 'none',

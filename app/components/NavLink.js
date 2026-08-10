@@ -18,7 +18,7 @@ export default function NavLink({ href, label }) {
       initial="initial"
       whileHover="hover"
       style={{
-        color: '#404040',
+        color: 'var(--pf-text)',
         textDecoration: 'none',
         fontSize: 14,
         fontWeight: 600,
@@ -28,8 +28,8 @@ export default function NavLink({ href, label }) {
         position: 'relative',
       }}
       variants={{
-        initial: { color: '#404040' },
-        hover: { color: '#0c498f' },
+        initial: { color: 'var(--pf-text)' },
+        hover: { color: 'var(--pf-brand)' },
       }}
       transition={{ duration: 0.2 }}
     >
@@ -45,7 +45,7 @@ export default function NavLink({ href, label }) {
           bottom: -6,
           left: 0,
           height: 2,
-          background: '#297fd6',
+          background: 'var(--pf-accent)',
           borderRadius: 2,
         }}
       />

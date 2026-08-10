@@ -1,5 +1,7 @@
 import '../globals.css'
+import Script from 'next/script'
 import { portfolioFont } from '../fonts'
+import { colorModeScript } from '@/app/theme'
 
 export const metadata = {
   title: "My Teaching Career | Tom Tran",
@@ -9,7 +11,7 @@ export const metadata = {
 
 export default function TeachingLayout({ children }) {
   return (
-    <html lang="vi">
+    <html lang="vi" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
@@ -18,6 +20,9 @@ export default function TeachingLayout({ children }) {
       </head>
       <body className={`${portfolioFont.variable} teaching-body`}>
         <div className="teaching-theme">{children}</div>
+        <Script id="color-mode-init" strategy="beforeInteractive">
+          {colorModeScript}
+        </Script>
       </body>
     </html>
   );

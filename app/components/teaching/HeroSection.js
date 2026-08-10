@@ -80,18 +80,6 @@ wrapper: {
     textDecoration: "none",
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
-  ctaArrow: {
-    background: "var(--teach-surface)",
-    color: "var(--teach-brand-deep)",
-    border: "1.5px solid var(--teach-brand-deep)",
-    width: 52, height: 52,
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    textDecoration: "none",
-  },
   socialProof: {
     alignItems: "center",
     gap: "1rem",
@@ -141,17 +129,6 @@ function StarIcon() {
   );
 }
 
-function ArrowIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.5"
-      strokeLinecap="round" strokeLinejoin="round">
-      <line x1="7" y1="17" x2="17" y2="7" />
-      <polyline points="7 7 17 7 17 17" />
-    </svg>
-  );
-}
-
 export default function HeroSection() {
   const { headline, subtext, cta, socialProof } = heroData;
 
@@ -163,7 +140,7 @@ export default function HeroSection() {
       style={s.wrapper}
     >
       <style>{`
-        .hero-cta-primary, .hero-cta-arrow {
+        .hero-cta-primary {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
         .hero-cta-primary:hover {
@@ -171,12 +148,6 @@ export default function HeroSection() {
           transform: translateY(-3px);
           box-shadow: var(--teach-shadow-hover);
         }
-        .hero-cta-arrow:hover {
-          background: var(--teach-brand-soft) !important;
-          transform: translateY(-3px) scale(1.06);
-          box-shadow: var(--teach-shadow-hover);
-        }
-
         .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 34rem) 1fr;
@@ -189,11 +160,11 @@ export default function HeroSection() {
 
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr; }
-          .hero-illustration { order: -1; max-width: 380px; margin: 0 auto 1.5rem auto; }
-          .hero-text { text-align: center !important; }
-          .hero-text .hero-cta-row { justify-content: center !important; }
-          .hero-text .hero-social-row { justify-content: center !important; }
-          .hero-text .hero-subtext { margin-left: auto !important; margin-right: auto !important; max-width: 36rem; }
+          .hero-illustration { max-width: 380px; margin: 1.5rem auto 0 auto; }
+          .hero-text { text-align: left !important; }
+          .hero-text .hero-cta-row { justify-content: flex-start !important; }
+          .hero-text .hero-social-row { justify-content: flex-start !important; }
+          .hero-text .hero-subtext { max-width: 36rem; }
         }
       `}</style>
 
@@ -221,20 +192,6 @@ export default function HeroSection() {
               }}
             >
               {cta.primary.label}
-            </Link>
-            <Link 
-              href={cta.arrow.href} 
-              aria-label="Đặt lịch ngay" 
-              className="hero-cta-arrow" 
-              style={s.ctaArrow}
-              onClick={(e) => {
-                if (cta.arrow.href.startsWith("#")) {
-                  e.preventDefault();
-                  document.getElementById(cta.arrow.href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-            >
-              <ArrowIcon />
             </Link>
           </motion.div>
 

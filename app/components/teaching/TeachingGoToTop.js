@@ -42,7 +42,7 @@ export default function TeachingGoToTop() {
             alignItems: "center",
             justifyContent: "center",
             color: "var(--teach-brand-deep)",
-            boxShadow: "0 4px 18px rgba(65, 48, 40, 0.16)",
+            boxShadow: "var(--teach-control-shadow)",
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"

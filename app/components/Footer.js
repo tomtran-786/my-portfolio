@@ -10,14 +10,11 @@
 
 import Link from 'next/link'
 
-const ACCENT = '#0c498f'
-const BORDER = 'rgba(23,38,54,0.14)'
-
 const s = {
   heading: {
     fontSize: 12,
     fontWeight: 700,
-    color: '#003865',
+    color: 'var(--pf-brand-deep)',
     textTransform: 'uppercase',
     letterSpacing: '0.12em',
     marginBottom: '1rem',
@@ -26,31 +23,31 @@ const s = {
     display: 'block',
     width: 'fit-content',
     fontSize: 14,
-    color: '#404040',
+    color: 'var(--pf-text)',
     textDecoration: 'none',
     marginBottom: '0.65rem',
     transition: 'color 0.2s ease',
   },
   body: {
     fontSize: 14,
-    color: '#404040',
+    color: 'var(--pf-text)',
     lineHeight: 1.7,
   },
   muted: {
     fontSize: 14,
-    color: '#4a4a4a',
+    color: 'var(--pf-text-secondary)',
     lineHeight: 1.7,
   },
   social: {
     width: 38,
     height: 38,
     borderRadius: '50%',
-    background: 'rgba(12,73,143,0.08)',
-    border: `1px solid ${BORDER}`,
+    background: 'var(--pf-brand-soft)',
+    border: '1px solid var(--pf-border)',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: ACCENT,
+    color: 'var(--pf-brand)',
     fontSize: 18,
     textDecoration: 'none',
     transition: 'transform 0.2s ease, background 0.2s ease',
@@ -85,7 +82,7 @@ export default function Footer() {
         <div className="pf-footer-grid">
           {/* 1. Danh tính */}
           <div>
-            <div style={{ fontFamily: 'var(--font-portfolio)', fontSize: 20, fontWeight: 700, color: ACCENT, marginBottom: '0.75rem' }}>
+            <div style={{ fontFamily: 'var(--font-portfolio)', fontSize: 20, fontWeight: 700, color: 'var(--pf-brand)', marginBottom: '0.75rem' }}>
               &lt;tomtran/&gt;
             </div>
             <p style={{ ...s.body, maxWidth: '16rem', marginBottom: '0.75rem' }}>

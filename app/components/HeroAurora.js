@@ -8,7 +8,7 @@
 
 const AURORA_BLOBS = [
   {
-    color: 'rgba(41, 127, 214, 0.12)',
+    color: 'var(--pf-aurora-1)',
     width: '45%',
     height: '50%',
     top: '5%',
@@ -17,7 +17,7 @@ const AURORA_BLOBS = [
     animationClass: 'aurora-drift-1',
   },
   {
-    color: 'rgba(12, 73, 143, 0.09)',
+    color: 'var(--pf-aurora-2)',
     width: '40%',
     height: '45%',
     top: '30%',
@@ -26,7 +26,7 @@ const AURORA_BLOBS = [
     animationClass: 'aurora-drift-2',
   },
   {
-    color: 'rgba(51, 102, 153, 0.08)',
+    color: 'var(--pf-aurora-3)',
     width: '35%',
     height: '40%',
     top: '55%',

@@ -14,6 +14,7 @@ import Certifications, { certs } from '@/app/components/Certifications'
 import CountUp from '@/app/components/CountUp'
 import Footer from '@/app/components/Footer'
 import HeroAurora from '@/app/components/HeroAurora'
+import ThemeToggle from '@/app/components/ThemeToggle'
 
 const HeroLottie = dynamic(() => import('@/app/components/HeroLottie'), { ssr: false })
 
@@ -76,41 +77,47 @@ export default function Portfolio() {
         {navVisible && (
           <motion.nav
             className="pf-nav"
+            aria-label="Primary navigation"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             style={{
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               borderBottom: '1px solid var(--pf-border)',
               position: 'fixed', top: 0, left: 0, right: 0, zIndex: 'var(--z-nav)',
-              background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(14px)',
-              boxShadow: '0 4px 24px rgba(23,38,54,0.06)'
+              background: 'var(--pf-nav-bg)', backdropFilter: 'blur(14px)',
+              boxShadow: 'var(--pf-nav-shadow)'
             }}
           >
             <span style={{ fontFamily: 'var(--font-portfolio)', fontSize: 20, fontWeight: 700, color: 'var(--pf-brand)' }}>
           &lt;tomtran/&gt;
         </span>
         <div className="pf-nav-links">
-          {NAV_LINKS.map(({ label, href }) => (
+          {NAV_LINKS.slice(0, -1).map(({ label, href }) => (
             <NavLink key={label} href={href} label={label} />
           ))}
           </div>
-        <button
-          className="pf-nav-burger"
-          type="button"
-          aria-label="Open menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(true)}
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" strokeWidth="2.2"
-            strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="17" x2="20" y2="17" />
-          </svg>
-        </button>
+        <div className="pf-nav-actions">
+          <a className="pf-nav-route" href="/teaching">
+            Teaching <span aria-hidden="true">↗</span>
+          </a>
+          <ThemeToggle />
+          <button
+            className="pf-nav-burger"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(true)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2.2"
+              strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="4" y1="7" x2="20" y2="7" />
+              <line x1="4" y1="12" x2="20" y2="12" />
+              <line x1="4" y1="17" x2="20" y2="17" />
+            </svg>
+          </button>
+        </div>
           </motion.nav>
         )}
       </AnimatePresence>
@@ -136,7 +143,7 @@ export default function Portfolio() {
         >
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
-            background: 'rgba(28,122,77,0.08)', border: '1px solid rgba(28,122,77,0.24)',
+            background: 'var(--pf-success-soft)', border: '1px solid var(--pf-success-border)',
             borderRadius: 20, padding: '4px 14px', fontSize: 16, color: 'var(--pf-success)',
             fontFamily: 'var(--font-portfolio)', marginBottom: '1.2rem'
           }}>
@@ -191,11 +198,11 @@ export default function Portfolio() {
       whileTap={{ scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       style={{
-        width: 64, height: 64, borderRadius: '50%',
-        background: '#ffffff',
-        boxShadow: '0 6px 18px rgba(23,38,54,0.12)',
+        width: 48, height: 48, borderRadius: '50%',
+        background: 'var(--pf-surface)',
+        boxShadow: 'var(--pf-shadow-card)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: 'var(--pf-brand-deep)', fontSize: 28, textDecoration: 'none',
+        color: 'var(--pf-brand-deep)', fontSize: 22, textDecoration: 'none',
         border: '1px solid var(--pf-border)',
       }}
     >
@@ -208,11 +215,11 @@ export default function Portfolio() {
             <motion.a
   href="/documents/resume-tran-vo-manh-tuan.pdf"
   download="Resume_Tran_Vo_Manh_Tuan.pdf"
-  whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(12,73,143,0.28)' }}
+  whileHover={{ scale: 1.05, boxShadow: 'var(--pf-shadow-hover)' }}
   whileTap={{ scale: 0.97 }}
   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
   style={{
-    background: 'var(--pf-brand)', color: '#fff', border: 'none',
+    background: 'var(--pf-brand)', color: 'var(--pf-on-brand)', border: 'none',
     padding: '10px 22px', borderRadius: 25, fontSize: 18,
     fontFamily: 'var(--font-portfolio)', fontWeight: 600, cursor: 'pointer',
     display: 'inline-flex', alignItems: 'center', gap: 6,
@@ -225,11 +232,11 @@ export default function Portfolio() {
   href="https://calendly.com/tomtran-workcontact"
   target="_blank"
   rel="noreferrer"
-  whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(12,73,143,0.16)' }}
+  whileHover={{ scale: 1.05, boxShadow: 'var(--pf-shadow-hover)' }}
   whileTap={{ scale: 0.97 }}
   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
   style={{
-    background: '#fff', color: 'var(--pf-brand-deep)',
+    background: 'var(--pf-surface)', color: 'var(--pf-brand-deep)',
     border: '1px solid var(--pf-border-strong)',
     padding: '10px 22px', borderRadius: 25, fontSize: 18,
     fontFamily: 'var(--font-portfolio)', fontWeight: 600, cursor: 'pointer',
@@ -258,7 +265,7 @@ export default function Portfolio() {
     position: 'absolute', top: '40%', left: '30%',
     transform: 'translate(-50%, -50%)',
     width: 400, height: 400, borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(41,127,214,0.12) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, var(--pf-aurora-1) 0%, transparent 70%)',
     pointerEvents: 'none', zIndex: 0
   }} />
   <HeroLottie />
@@ -294,14 +301,11 @@ export default function Portfolio() {
 
 {/* EDUCATION */}
 <section id="education" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
-  <div>
+  <div className="pf-section-heading">
     <h2 className="pf-section-title" style={{ fontWeight: 700, display: 'block' }}>Education</h2>
-    <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
+    <p className="pf-section-subtitle pf-section-context" style={{ fontWeight: 500 }}>
       Where I experienced my academic journey
     </p>
-  </div>
-  <div style={{ flex: 1, height: 1, background: 'var(--pf-border)', marginLeft: 16 }} />
 </div>
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -311,7 +315,7 @@ export default function Portfolio() {
     className="pf-edu-card"
     style={{
       background: 'var(--pf-surface)', border: '1px solid var(--pf-border)',
-      borderRadius: 12.5, padding: '1.5rem 1.875rem', boxShadow: 'var(--pf-shadow-card)'
+      borderRadius: 12.5, padding: '1.5rem 1.875rem'
     }}
   >
     <div>
@@ -339,14 +343,11 @@ export default function Portfolio() {
 
 {/* CONTACT */}
       <section id="contact" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
-  <div>
+  <div className="pf-section-heading">
     <h2 className="pf-section-title" style={{ fontWeight: 700, display: 'block' }}>Contact</h2>
-    <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
+    <p className="pf-section-subtitle pf-section-context" style={{ fontWeight: 500 }}>
       Where you can reach out to me
     </p>
-  </div>
-  <div style={{ flex: 1, height: 1, background: 'var(--pf-border)', marginLeft: 16 }} />
 </div>
         <div style={{
           background: 'var(--pf-surface)', border: '1px solid var(--pf-border)',
@@ -363,7 +364,7 @@ export default function Portfolio() {
     target="_blank" rel="noreferrer"
     style={{
       display: 'inline-flex', alignItems: 'center', gap: 10,
-      background: 'var(--pf-brand)', color: '#fff', textDecoration: 'none',
+      background: 'var(--pf-brand)', color: 'var(--pf-on-brand)', textDecoration: 'none',
       padding: '12.5px 25px', borderRadius: 25, fontSize: 16, fontWeight: 600,
       fontFamily: 'var(--font-portfolio)'
     }}>
@@ -372,7 +373,7 @@ export default function Portfolio() {
  <a href="tel:+84398434620"
   style={{
     display: 'inline-flex', alignItems: 'center', gap: 10,
-    background: '#fff', color: 'var(--pf-brand-deep)', textDecoration: 'none',
+    background: 'var(--pf-surface)', color: 'var(--pf-brand-deep)', textDecoration: 'none',
     border: '1px solid var(--pf-border-strong)',
     padding: '12.5px 25px', borderRadius: 25, fontSize: 16, fontWeight: 600,
     fontFamily: 'var(--font-portfolio)',

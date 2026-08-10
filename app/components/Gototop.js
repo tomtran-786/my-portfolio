@@ -21,7 +21,7 @@ export default function GoToTop() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          whileHover={{ scale: 1.1, boxShadow: '0 8px 25px rgba(12,73,143,0.32)' }}
+          whileHover={{ scale: 1.1, boxShadow: 'var(--pf-shadow-hover)' }}
           whileTap={{ scale: 0.95 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Back to top"
@@ -30,7 +30,7 @@ export default function GoToTop() {
             width: 44, height: 44, borderRadius: '50%',
             background: 'var(--pf-brand)', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontSize: 18, boxShadow: '0 4px 15px rgba(12,73,143,0.25)'
+            color: 'var(--pf-on-brand)', fontSize: 18, boxShadow: 'var(--pf-shadow-card)'
           }}
         >
           <i className="ti ti-arrow-up" />

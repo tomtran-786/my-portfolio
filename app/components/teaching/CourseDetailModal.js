@@ -33,7 +33,7 @@ const s = {
     border: "1px solid var(--teach-border)",
     borderRadius: "1.75rem",
     padding: "2.5rem",
-    boxShadow: "0 30px 70px rgba(47,39,35,0.28)",
+    boxShadow: "var(--teach-modal-shadow)",
   },
   closeBtn: {
     position: "absolute",

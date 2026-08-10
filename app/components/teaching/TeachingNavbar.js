@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import navData from "@/data/teaching/nav";
 import MobileDrawer from "@/app/components/MobileDrawer";
+import ThemeToggle from "@/app/components/ThemeToggle";
 
 const s = {
   // Wrapper fixed neo trên cùng, căn giữa ngang
@@ -16,9 +17,9 @@ const s = {
     right: 0,
     zIndex: "var(--z-nav)",
     padding: "0 var(--teach-content-gutter)",
-    background: "rgba(255,255,255,0.94)",
+    background: "var(--teach-nav-bg)",
     borderBottom: "1px solid var(--teach-border)",
-    boxShadow: "0 8px 28px rgba(65,48,40,0.06)",
+    boxShadow: "var(--teach-nav-shadow)",
     backdropFilter: "blur(12px)",
     WebkitBackdropFilter: "blur(12px)",
     pointerEvents: "none",   // bắt click xuyên qua vùng trống
@@ -26,10 +27,10 @@ const s = {
   nav: {
     maxWidth: "75rem",
     margin: "0 auto",
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "auto minmax(0, 1fr) auto",
     alignItems: "center",
-    justifyContent: "space-between",
-    gap: "1rem",
+    gap: "clamp(1.25rem, 3vw, 3rem)",
     background: "transparent",
     padding: "0.85rem 0",
     pointerEvents: "auto",   // khôi phục click cho chính navbar
@@ -86,6 +87,7 @@ const s = {
   navLinks: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     gap: "2.5rem",
   },
   navLink: {
@@ -113,6 +115,12 @@ const s = {
     cursor: "pointer",
     border: "1.5px solid var(--teach-brand-deep)",
     outline: "none",
+  },
+  navActions: {
+    alignItems: "center",
+    display: "flex",
+    gap: "0.65rem",
+    justifySelf: "end",
   },
   burgerBtn: {
     display: "none",
@@ -211,6 +219,7 @@ export default function TeachingNavbar() {
         {visible && (
           <motion.nav
             key="navbar"
+            aria-label="Điều hướng chính"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -24 }}
@@ -231,6 +240,7 @@ export default function TeachingNavbar() {
         /* Tablet hẹp không đủ chỗ cho 5 links + CTA; chuyển sang drawer trước
            khi nhãn bị ép thành nhiều dòng và làm navbar tăng chiều cao. */
         @media (max-width: 1050px) {
+          .nav-pill { grid-template-columns: minmax(0, 1fr) auto !important; }
           .nav-links { display: none !important; }
           .nav-cta { display: none !important; }
           .nav-burger { display: flex !important; }
@@ -305,28 +315,32 @@ export default function TeachingNavbar() {
         ))}
       </div>
 
-      {/* Phải: CTA (desktop) */}
-      <button className="nav-cta" style={s.ctaBtn} onClick={() => scrollTo(cta.href)}>
-        {cta.label}
-      </button>
+      <div style={s.navActions}>
+        {/* Phải: CTA (desktop) */}
+        <button className="nav-cta" style={s.ctaBtn} onClick={() => scrollTo(cta.href)}>
+          {cta.label}
+        </button>
 
-      {/* Phải: hamburger (mobile) */}
-      <button
-        className="nav-burger"
-        style={s.burgerBtn}
-        type="button"
-        aria-label="Mở menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen(true)}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" strokeWidth="2.4"
-          strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="17" x2="20" y2="17" />
-        </svg>
-      </button>
+        <ThemeToggle locale="vi" />
+
+        {/* Phải: hamburger (mobile) */}
+        <button
+          className="nav-burger"
+          style={s.burgerBtn}
+          type="button"
+          aria-label="Mở menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="2.4"
+            strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
+      </div>
           </motion.nav>
         )}
       </AnimatePresence>

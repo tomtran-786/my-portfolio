@@ -21,19 +21,22 @@ const s = {
   section: {
     margin: 0,
   },
-  header: { marginBottom: "3rem", textAlign: "center" },
+  header: {},
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
     color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
-    marginBottom: "0.75rem",
+    lineHeight: 1.15,
+    margin: 0,
+    maxWidth: "36rem",
   },
   subtext: {
     color: "var(--teach-text)",
     fontSize: 15,
     lineHeight: 1.7,
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    margin: 0,
   },
   grid: {
     display: "grid",
@@ -49,7 +52,7 @@ const s = {
     flexDirection: "column",
     gap: "1.25rem",
     cursor: "default",
-    boxShadow: "var(--teach-shadow-card)",
+    boxShadow: "none",
   },
   quoteIcon: {
     color: "var(--teach-brand-deep)",
@@ -183,13 +186,14 @@ export default function TestimonialsSection() {
     <section className="teach-section" style={s.section} id="testimonials">
       {/* Header */}
       <motion.div
+        className="teach-section-heading"
         style={s.header}
         initial="hidden" whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
         variants={fadeUp}
       >
         <h2 style={s.headline}>{headline}</h2>
-        <p style={s.subtext}>{subtext}</p>
+        <p className="teach-section-context" style={s.subtext}>{subtext}</p>
       </motion.div>
 
       {/* Cards — đổi page sẽ fade ra/vào */}
@@ -207,12 +211,6 @@ export default function TestimonialsSection() {
               key={item.id}
               variants={fadeUp}
               style={s.card}
-              whileHover={{
-                y: -10,
-                boxShadow: "var(--teach-shadow-hover)",
-                borderColor: "var(--teach-border-strong)",
-              }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
             >
               <div style={s.quoteIcon}>&ldquo;</div>
               <p style={s.quote}>{item.quote}</p>

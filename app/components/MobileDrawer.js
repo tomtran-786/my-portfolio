@@ -8,15 +8,15 @@ import useFocusTrap from '../hooks/useFocusTrap'
 // trang: portfolio "/" là tiếng Anh (<html lang="en">), /teaching là tiếng Việt.
 const themes = {
   portfolio: {
-    bg: '#ffffff',
-    border: 'rgba(23,38,54,0.14)',
-    text: '#172636',
-    accent: '#0c498f',
-    accentSolid: '#297fd6',
+    bg: 'var(--pf-surface)',
+    border: 'var(--pf-border)',
+    text: 'var(--pf-ink)',
+    accent: 'var(--pf-brand-deep)',
+    accentSolid: 'var(--pf-accent)',
     fontFamily: 'var(--font-portfolio)',
-    ctaBg: '#0c498f',
-    ctaColor: '#fff',
-    hoverBg: 'rgba(12,73,143,0.06)',
+    ctaBg: 'var(--pf-brand)',
+    ctaColor: 'var(--pf-on-brand)',
+    hoverBg: 'var(--pf-brand-soft)',
     menuLabel: 'Menu',
     closeLabel: 'Close menu',
   },
@@ -220,7 +220,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
                 fontSize: 15,
                 fontWeight: 600,
                 letterSpacing: '0.01em',
-                boxShadow: `0 8px 22px ${theme === 'teaching' ? 'rgba(var(--teach-brand-rgb), 0.28)' : 'rgba(12,73,143,0.24)'}`,
+                boxShadow: theme === 'teaching' ? 'var(--teach-shadow-hover)' : 'var(--pf-shadow-hover)',
               }}
             >
               {cta.label}

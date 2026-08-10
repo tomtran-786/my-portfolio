@@ -14,8 +14,9 @@ const s = {
     fontWeight: 800,
     color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
-    marginBottom: "2rem",
-    textAlign: "center",
+    lineHeight: 1.15,
+    margin: 0,
+    maxWidth: "36rem",
   },
   stage: {
     position: "relative",
@@ -25,21 +26,16 @@ const s = {
     overflow: "hidden",
     background: "var(--teach-surface-muted)",
     border: "1px solid var(--teach-border)",
-    boxShadow: "var(--teach-shadow-card)",
   },
   img: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   caption: {
-    position: "absolute",
-    left: "1.25rem",
-    bottom: "1.25rem",
-    background: "rgba(47, 39, 35, 0.86)",
-    backdropFilter: "blur(6px)",
-    color: "#fff",
+    borderLeft: "3px solid var(--teach-brand)",
+    color: "var(--teach-text)",
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontSize: 14,
     fontWeight: 500,
-    padding: "0.55rem 1rem",
-    borderRadius: "9999px",
+    lineHeight: 1.7,
+    paddingLeft: "1rem",
   },
   navBtn: {
     position: "absolute",
@@ -96,7 +92,14 @@ export default function ClassMomentsSection() {
         }
       `}</style>
 
-      <h2 style={s.heading}>{classMomentsHeading}</h2>
+      <div className="teach-section-heading">
+        <h2 style={s.heading}>{classMomentsHeading}</h2>
+        {current.caption && (
+          <p className="teach-section-context" style={s.caption} aria-live="polite">
+            {current.caption}
+          </p>
+        )}
+      </div>
 
       <div className="moment-stage" style={s.stage}>
         <AnimatePresence mode="wait">
@@ -120,8 +123,6 @@ export default function ClassMomentsSection() {
             />
           </motion.div>
         </AnimatePresence>
-
-        {current.caption && <span style={s.caption}>{current.caption}</span>}
 
         {hasMultiple && (
           <>

@@ -39,14 +39,6 @@ const s = {
     lineHeight: 1.25,
     marginBottom: "1.5rem",
   },
-  accentLine: {
-    display: "block",
-    width: 48,
-    height: 4,
-    background: "var(--teach-brand)",
-    borderRadius: 4,
-    margin: "0 0 1.5rem 0",
-  },
   paragraph: {
     color: "var(--teach-text)",
     fontSize: 15,
@@ -73,23 +65,22 @@ const s = {
   statsRow: {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "1rem",
+    gap: 0,
     marginTop: "0.5rem",
+    borderTop: "1px solid var(--teach-border)",
+    borderBottom: "1px solid var(--teach-border)",
   },
   statItem: {
     display: "flex",
     flexDirection: "column",
     gap: "0.35rem",
-    background: "var(--teach-surface)",
-    border: "1px solid var(--teach-border)",
-    borderRadius: "1rem",
-    padding: "1.1rem 1rem",
+    padding: "1.25rem 1rem",
   },
   statValue: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
     color: "var(--teach-brand-deep)",
-    fontSize: "1.6rem",
+    fontSize: "1.9rem",
     fontVariantNumeric: "tabular-nums",
   },
   statLabel: {
@@ -144,7 +135,7 @@ const s = {
 
 function StatItem({ value, label, start }) {
   return (
-    <div style={s.statItem}>
+    <div className="about-stat" style={s.statItem}>
       <span style={s.statValue}>
         <CountUp value={value} start={start} />
       </span>
@@ -164,10 +155,14 @@ export default function AboutSection() {
       <style>{`
         @media (max-width: 768px) {
           .about-inner { grid-template-columns: 1fr !important; }
-          .about-image { order: -1; }
+        }
+        @media (min-width: 421px) {
+          .about-stat + .about-stat { border-left: 1px solid var(--teach-border); }
         }
         @media (max-width: 420px) {
           .about-stats { grid-template-columns: 1fr !important; }
+          .about-stat { padding-inline: 0 !important; }
+          .about-stat + .about-stat { border-top: 1px solid var(--teach-border); }
         }
       `}</style>
 
@@ -179,7 +174,6 @@ export default function AboutSection() {
           variants={fadeLeft}
         >
           <h2 style={s.headline}>{headline}</h2>
-          <span style={s.accentLine} />
 
           {paragraphs.map((p, i) => (
             <p key={i} style={s.paragraph}>{p}</p>

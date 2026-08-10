@@ -15,13 +15,11 @@ const stagger = {
 
 const s = {
   section: {
-    maxWidth: "72rem",
-    margin: "6rem auto 4rem auto",
-    padding: "0 1rem",
+    margin: 0,
   },
   card: {
-    background: "linear-gradient(135deg, #3D2E5E 0%, #2A2640 100%)",
-    border: "1.5px solid rgba(242,104,74,0.3)",
+    background: "linear-gradient(135deg, var(--teach-brand-deep) 0%, var(--teach-brand) 100%)",
+    border: "1.5px solid rgba(var(--teach-brand-rgb), 0.3)",
     borderRadius: "2rem",
     padding: "4rem 3rem",
     textAlign: "center",
@@ -31,27 +29,27 @@ const s = {
   decorCircle: {
     position: "absolute", top: -80, right: -80,
     width: 280, height: 280, borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(242,104,74,0.15) 0%, transparent 70%)",
+    background: "radial-gradient(circle, rgba(var(--teach-brand-rgb), 0.15) 0%, transparent 70%)",
     pointerEvents: "none",
   },
   decorCircle2: {
     position: "absolute", bottom: -60, left: -60,
     width: 200, height: 200, borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(242,104,74,0.1) 0%, transparent 70%)",
+    background: "radial-gradient(circle, rgba(var(--teach-brand-rgb), 0.1) 0%, transparent 70%)",
     pointerEvents: "none",
   },
   emoji: { fontSize: 48, display: "block", marginBottom: "1.25rem" },
   headline: {
-    fontFamily: "Montserrat, sans-serif",
-    fontWeight: 800, color: "#fff",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontWeight: 800, color: "var(--teach-on-brand)",
     fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
     lineHeight: 1.25, marginBottom: "1rem",
     position: "relative", zIndex: 1,
   },
   subtext: {
-    color: "#E5E5E5", fontSize: 15, lineHeight: 1.8,
+    color: "rgba(255,255,255,0.9)", fontSize: 15, lineHeight: 1.8,
     maxWidth: "30rem", margin: "0 auto 2.5rem auto",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     position: "relative", zIndex: 1,
   },
   btnRow: {
@@ -60,27 +58,27 @@ const s = {
     flexWrap: "wrap", position: "relative", zIndex: 1,
   },
   btnPrimary: {
-    background: "#F2684A", color: "#fff",
+    background: "var(--teach-surface)", color: "var(--teach-brand-deep)",
     fontWeight: 700, fontSize: 15,
     padding: "1rem 2rem", borderRadius: "9999px",
     textDecoration: "none",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     display: "inline-flex", alignItems: "center", gap: "0.5rem",
     transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
   },
   btnSecondary: {
-    background: "transparent", color: "#fff",
+    background: "transparent", color: "var(--teach-on-brand)",
     fontWeight: 700, fontSize: 15,
     padding: "1rem 2rem", borderRadius: "9999px",
     textDecoration: "none",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     border: "1.5px solid rgba(255,255,255,0.25)",
     display: "inline-flex", alignItems: "center", gap: "0.5rem",
     transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease",
   },
   note: {
-    color: "#E5E5E5", fontSize: 14,
-    marginTop: "1.5rem", fontFamily: "Montserrat, sans-serif",
+    color: "rgba(255,255,255,0.82)", fontSize: 14,
+    marginTop: "1.5rem", fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     position: "relative", zIndex: 1,
   },
 };
@@ -89,12 +87,12 @@ export default function CTASection() {
   const { headline, subtext, buttons, note } = ctaData;
 
   return (
-    <section style={s.section} id="contact">
+    <section className="teach-section teach-section-soft" style={s.section} id="contact">
       <style>{`
         .cta-btn-primary:hover {
-          background: #ff7c5c;
+          background: var(--teach-surface-muted);
           transform: translateY(-3px);
-          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+          box-shadow: 0 10px 28px rgba(65, 48, 40, 0.24);
         }
         .cta-btn-secondary:hover {
           background: rgba(255, 255, 255, 0.08);

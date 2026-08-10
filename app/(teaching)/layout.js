@@ -1,4 +1,5 @@
 import '../globals.css'
+import { portfolioFont } from '../fonts'
 
 export const metadata = {
   title: "My Teaching Career | Tom Tran",
@@ -15,30 +16,8 @@ export default function TeachingLayout({ children }) {
           href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css"
         />
       </head>
-      <body>
-        <div
-          style={{
-            minHeight: "100vh",
-            background: "#2A2640",
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px)
-            `,
-            backgroundSize: "44px 44px",
-            position: "relative",
-          }}
-        >
-          <style>{`
-            html, body {
-              background-color: #2A2640 !important;
-              background-image:
-                linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px) !important;
-              background-size: 44px 44px !important;
-            }
-          `}</style>
-          {children}
-        </div>
+      <body className={`${portfolioFont.variable} teaching-body`}>
+        <div className="teaching-theme">{children}</div>
       </body>
     </html>
   );

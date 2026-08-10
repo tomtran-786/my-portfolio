@@ -18,16 +18,18 @@ export default function NavLink({ href, label }) {
       initial="initial"
       whileHover="hover"
       style={{
-        color: '#cbd5e1',
+        color: '#404040',
         textDecoration: 'none',
-        fontSize: 18,
-        fontWeight: 500,
+        fontSize: 14,
+        fontWeight: 600,
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
         cursor: 'pointer',
         position: 'relative',
       }}
       variants={{
-        initial: { color: '#cbd5e1' },
-        hover: { color: '#a78bfa' },
+        initial: { color: '#404040' },
+        hover: { color: '#0c498f' },
       }}
       transition={{ duration: 0.2 }}
     >
@@ -43,7 +45,7 @@ export default function NavLink({ href, label }) {
           bottom: -6,
           left: 0,
           height: 2,
-          background: '#a78bfa',
+          background: '#297fd6',
           borderRadius: 2,
         }}
       />

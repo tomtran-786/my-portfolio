@@ -11,25 +11,27 @@ const s = {
   // Wrapper fixed neo trên cùng, căn giữa ngang
   navWrapper: {
     position: "fixed",
-    top: "1.5rem",
+    top: 0,
     left: 0,
     right: 0,
     zIndex: "var(--z-nav)",
-    padding: "0 1rem",
+    padding: "0 var(--teach-content-gutter)",
+    background: "rgba(255,255,255,0.94)",
+    borderBottom: "1px solid var(--teach-border)",
+    boxShadow: "0 8px 28px rgba(65,48,40,0.06)",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
     pointerEvents: "none",   // bắt click xuyên qua vùng trống
   },
   nav: {
-    maxWidth: "80rem",
+    maxWidth: "75rem",
     margin: "0 auto",
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: "1rem",
-    background: "rgba(54,49,78,0.75)",
-    backdropFilter: "blur(12px)",
-    WebkitBackdropFilter: "blur(12px)",
-    borderRadius: "9999px",
-    padding: "0.75rem 1.5rem",
+    background: "transparent",
+    padding: "0.85rem 0",
     pointerEvents: "auto",   // khôi phục click cho chính navbar
   },
   left: {
@@ -41,13 +43,13 @@ const s = {
   backBtn: {
     width: 38, height: 38,
     borderRadius: "50%",
-    background: "#373254",
-    border: "none",
+    background: "var(--teach-bg-soft)",
+    border: "1px solid var(--teach-border)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
-    color: "#C9C5DC",
+    color: "var(--teach-text-secondary)",
     textDecoration: "none",
     flexShrink: 0,
   },
@@ -64,8 +66,8 @@ const s = {
   logoIcon: {
     width: 40, height: 40,
     borderRadius: "12px",
-    background: "#F2684A",
-    color: "#fff",
+    background: "var(--teach-brand)",
+    color: "var(--teach-on-brand)",
     fontWeight: 700,
     fontSize: 14,
     display: "flex",
@@ -75,12 +77,12 @@ const s = {
   },
   logoText: {
     fontWeight: 700,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: 20,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     whiteSpace: "nowrap",
   },
-  accent: { color: "#F2684A" },
+  accent: { color: "var(--teach-brand)" },
   navLinks: {
     display: "flex",
     alignItems: "center",
@@ -88,10 +90,10 @@ const s = {
   },
   navLink: {
     position: "relative",
-    color: "#E5E5E5",
+    color: "var(--teach-ink)",
     fontSize: 16,
     fontWeight: 500,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     cursor: "pointer",
     background: "none",
     border: "none",
@@ -100,13 +102,13 @@ const s = {
   },
   ctaBtn: {
     flexShrink: 0,
-    background: "#F2684A",
-    color: "#fff",
+    background: "var(--teach-brand)",
+    color: "var(--teach-on-brand)",
     fontSize: 15,
     fontWeight: 600,
     padding: "0.85rem 1.75rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     whiteSpace: "nowrap",
     cursor: "pointer",
     border: "none",
@@ -117,12 +119,12 @@ const s = {
     width: 40,
     height: 40,
     borderRadius: "50%",
-    background: "#373254",
-    border: "none",
+    background: "var(--teach-bg-soft)",
+    border: "1px solid var(--teach-border)",
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     flexShrink: 0,
     padding: 0,
   },
@@ -146,7 +148,7 @@ export default function TeachingNavbar() {
   // trong layout.js) nên spacer không có tác dụng → navbar che nội dung.
   // body.style hoạt động bất kể cấu trúc DOM, đây là cách chuẩn cho fixed navbar.
   const wrapperRef = useRef(null);
-  const lastHeightRef = useRef(88); // fallback ban đầu
+  const lastHeightRef = useRef(70); // fallback ban đầu
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -160,7 +162,7 @@ export default function TeachingNavbar() {
       if (h > lastHeightRef.current * 0.5) {
         lastHeightRef.current = h;
       }
-      document.body.style.paddingTop = `${lastHeightRef.current + 40}px`;
+      document.body.style.paddingTop = `${lastHeightRef.current}px`;
     };
 
     apply();
@@ -221,18 +223,21 @@ export default function TeachingNavbar() {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
         .nav-cta:hover {
-          background: #ff7c5c;
+          background: var(--teach-brand-deep);
           transform: translateY(-3px);
-          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+          box-shadow: var(--teach-shadow-hover);
         }
 
-        /* Mobile: ẩn nav-links và CTA khỏi thanh pill, chuyển sang hamburger drawer. */
-        @media (max-width: 768px) {
+        /* Tablet hẹp không đủ chỗ cho 5 links + CTA; chuyển sang drawer trước
+           khi nhãn bị ép thành nhiều dòng và làm navbar tăng chiều cao. */
+        @media (max-width: 1050px) {
           .nav-links { display: none !important; }
           .nav-cta { display: none !important; }
           .nav-burger { display: flex !important; }
+        }
 
-          .nav-pill { padding: 0.6rem 0.9rem !important; gap: 0.6rem !important; }
+        @media (max-width: 768px) {
+          .nav-pill { padding: 0.6rem 0 !important; gap: 0.6rem !important; }
           .nav-logo-text { font-size: 17px !important; }
         }
 
@@ -241,8 +246,8 @@ export default function TeachingNavbar() {
         }
 
         .nav-burger:hover {
-          background: #423d5f !important;
-          color: #F2684A !important;
+          background: var(--teach-brand-soft) !important;
+          color: var(--teach-brand) !important;
         }
       `}</style>
 
@@ -275,8 +280,8 @@ export default function TeachingNavbar() {
             whileHover="hover"
             style={s.navLink}
             variants={{
-              initial: { color: '#E5E5E5' },
-              hover: { color: '#F2684A' },
+              initial: { color: 'var(--teach-ink)' },
+              hover: { color: 'var(--teach-brand)' },
             }}
             transition={{ duration: 0.2 }}
           >
@@ -292,7 +297,7 @@ export default function TeachingNavbar() {
                 bottom: -2,
                 left: 0,
                 height: 2,
-                background: '#F2684A',
+                background: 'var(--teach-brand)',
                 borderRadius: 2,
               }}
             />

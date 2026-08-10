@@ -11,10 +11,8 @@ import GoToTop from '@/app/components/Gototop'
 import Timeline from '@/app/components/Timeline'
 import Projects, { projects } from '@/app/components/Projects'
 import Certifications, { certs } from '@/app/components/Certifications'
-import { inter } from '@/app/fonts'
 import CountUp from '@/app/components/CountUp'
 import Footer from '@/app/components/Footer'
-import WaveDivider from '@/app/components/WaveDivider'
 import HeroAurora from '@/app/components/HeroAurora'
 
 const HeroLottie = dynamic(() => import('@/app/components/HeroLottie'), { ssr: false })
@@ -39,7 +37,7 @@ export default function Portfolio() {
 
   // Scorecard chỉ đếm khi cuộn tới — cùng cách AboutSection của /teaching làm
   const statsRef = useRef(null)
-  const statsInView = useInView(statsRef, { once: true, margin: '-80px' })
+  const statsInView = useInView(statsRef, { once: true, amount: 0.2 })
 
   useEffect(() => {
     // Phải mồi bằng vị trí hiện tại: trình duyệt khôi phục scroll khi reload, mà
@@ -60,19 +58,12 @@ export default function Portfolio() {
   }, [menuOpen])
 
   return (
-    <main className={inter.variable} style={{ background: '#0a0e1a', minHeight: '100vh', color: '#f1f5f9', fontFamily: 'var(--font-inter)', overflowX: 'hidden' }}>
-
-      {/* Grid Background */}
-      <div style={{
-        position: 'fixed', inset: 0, zIndex: 0,
-        backgroundImage: 'linear-gradient(rgba(139,92,246,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(139,92,246,0.06) 1px, transparent 1px)',
-        backgroundSize: '40px 40px', pointerEvents: 'none'
-      }} />
+    <main className="pf-theme">
       {/* SCROLL PROGRESS BAR */}
       <motion.div
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, height: 3,
-          background: 'linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%)', zIndex: 'var(--z-progress)',
+          background: 'linear-gradient(90deg, var(--pf-brand-deep) 0%, var(--pf-accent) 100%)', zIndex: 'var(--z-progress)',
           scaleX, transformOrigin: 'left'
         }}
       />
@@ -91,12 +82,13 @@ export default function Portfolio() {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             style={{
               display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-              borderBottom: '0.5px solid rgba(139,92,246,0.2)',
+              borderBottom: '1px solid var(--pf-border)',
               position: 'fixed', top: 0, left: 0, right: 0, zIndex: 'var(--z-nav)',
-              background: 'rgba(10,14,26,0.85)', backdropFilter: 'blur(12px)'
+              background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(14px)',
+              boxShadow: '0 4px 24px rgba(23,38,54,0.06)'
             }}
           >
-            <span style={{ fontFamily: 'var(--font-inter)', fontSize: 20, fontWeight: 800, color: '#a78bfa' }}>
+            <span style={{ fontFamily: 'var(--font-portfolio)', fontSize: 20, fontWeight: 700, color: 'var(--pf-brand)' }}>
           &lt;tomtran/&gt;
         </span>
         <div className="pf-nav-links">
@@ -144,20 +136,20 @@ export default function Portfolio() {
         >
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
-            background: 'rgba(139,92,246,0.12)', border: '0.5px solid rgba(139,92,246,0.4)',
-            borderRadius: 20, padding: '4px 14px', fontSize: 16, color: '#019A02',
-            fontFamily: 'var(--font-inter)', marginBottom: '1.2rem'
+            background: 'rgba(28,122,77,0.08)', border: '1px solid rgba(28,122,77,0.24)',
+            borderRadius: 20, padding: '4px 14px', fontSize: 16, color: 'var(--pf-success)',
+            fontFamily: 'var(--font-portfolio)', marginBottom: '1.2rem'
           }}>
-            <span style={{ width: 6, height: 6, background: '#019A02', borderRadius: '50%', display: 'inline-block' }} />
+            <span style={{ width: 6, height: 6, background: 'var(--pf-success)', borderRadius: '50%', display: 'inline-block' }} />
             Open to opportunities
           </div>
 
-         <h1 className="pf-hero-title" style={{ fontWeight: 800, lineHeight: 1.1, marginBottom: '0.8rem' }}>
-  <span style={{ color: '#a78bfa' }}>Tuan (Tom)</span>{' '}Tran
+         <h1 className="pf-hero-title" style={{ fontWeight: 700, lineHeight: 1.08, marginBottom: '0.8rem', color: 'var(--pf-ink)' }}>
+  <span style={{ color: 'var(--pf-brand)' }}>Tuan (Tom)</span>{' '}Tran
 </h1>
 
-          <div style={{ fontWeight: 600, fontFamily: 'var(--font-inter)', fontSize: 25, color: '#a78bfa', marginBottom: '1.2rem', minHeight: 28 }}>
-            <span style={{ color: '#475569' }}>{'// '}</span>
+          <div style={{ fontWeight: 600, fontFamily: 'var(--font-portfolio)', fontSize: 25, color: 'var(--pf-brand)', marginBottom: '1.2rem', minHeight: 28 }}>
+            <span style={{ color: 'var(--pf-accent)' }}>{'// '}</span>
             <TypeAnimation
               sequence={[
                 'Finance & Investment Analysis',
@@ -172,11 +164,11 @@ export default function Portfolio() {
               wrapper="span"
               speed={50}
               repeat={Infinity}
-              style={{ color: '#a78bfa' }}
+              style={{ color: 'var(--pf-brand)' }}
             />
           </div>
 
-          <p style={{ fontSize: 18, fontWeight:500, color: '#E6E7EB', lineHeight: 1.8, maxWidth: 420, marginBottom: '2rem' }}>
+          <p style={{ fontSize: 18, fontWeight: 400, color: 'var(--pf-text)', lineHeight: 1.75, maxWidth: 460, marginBottom: '2rem' }}>
             A data-driven International Business student leveraging Python, SQL, and statistical modeling to optimize workflows and provide data-driven solutions.
           </p>
 
@@ -201,10 +193,10 @@ export default function Portfolio() {
       style={{
         width: 64, height: 64, borderRadius: '50%',
         background: '#ffffff',
-        boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+        boxShadow: '0 6px 18px rgba(23,38,54,0.12)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        color: '#0a0e1a', fontSize: 28, textDecoration: 'none',
-        border: 'none',
+        color: 'var(--pf-brand-deep)', fontSize: 28, textDecoration: 'none',
+        border: '1px solid var(--pf-border)',
       }}
     >
       <i className={`ti ${icon}`} />
@@ -216,13 +208,13 @@ export default function Portfolio() {
             <motion.a
   href="/documents/resume-tran-vo-manh-tuan.pdf"
   download="Resume_Tran_Vo_Manh_Tuan.pdf"
-  whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(124,58,237,0.5)' }}
+  whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(12,73,143,0.28)' }}
   whileTap={{ scale: 0.97 }}
   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
   style={{
-    background: '#7c3aed', color: '#fff', border: 'none',
+    background: 'var(--pf-brand)', color: '#fff', border: 'none',
     padding: '10px 22px', borderRadius: 25, fontSize: 18,
-    fontFamily: 'var(--font-inter)', fontWeight: 500, cursor: 'pointer',
+    fontFamily: 'var(--font-portfolio)', fontWeight: 600, cursor: 'pointer',
     display: 'inline-flex', alignItems: 'center', gap: 6,
     textDecoration: 'none'
   }}
@@ -233,14 +225,14 @@ export default function Portfolio() {
   href="https://calendly.com/tomtran-workcontact"
   target="_blank"
   rel="noreferrer"
-  whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(139,92,246,0.25)' }}
+  whileHover={{ scale: 1.05, boxShadow: '0 8px 25px rgba(12,73,143,0.16)' }}
   whileTap={{ scale: 0.97 }}
   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
   style={{
-    background: '#fff', color: '#0a0e1a',
-    border: '0.5px solid rgba(139,92,246,0.5)',
+    background: '#fff', color: 'var(--pf-brand-deep)',
+    border: '1px solid var(--pf-border-strong)',
     padding: '10px 22px', borderRadius: 25, fontSize: 18,
-    fontFamily: 'var(--font-inter)', fontWeight: 500, cursor: 'pointer',
+    fontFamily: 'var(--font-portfolio)', fontWeight: 600, cursor: 'pointer',
     display: 'inline-flex', alignItems: 'center', gap: 6,
     textDecoration: 'none'
   }}
@@ -266,7 +258,7 @@ export default function Portfolio() {
     position: 'absolute', top: '40%', left: '30%',
     transform: 'translate(-50%, -50%)',
     width: 400, height: 400, borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%)',
+    background: 'radial-gradient(circle, rgba(41,127,214,0.12) 0%, transparent 70%)',
     pointerEvents: 'none', zIndex: 0
   }} />
   <HeroLottie />
@@ -277,22 +269,19 @@ export default function Portfolio() {
       {/* margin nằm trong .pf-stats (globals.css) để co theo breakpoint cho khớp
           .pf-section — inline style không viết được @media. */}
       <div ref={statsRef} className="pf-stats" style={{
-        border: '0.5px solid rgba(139,92,246,0.2)', borderRadius: 10, overflow: 'hidden',
-        position: 'relative', zIndex: 5
+        border: '1px solid var(--pf-border)', borderRadius: 12, overflow: 'hidden',
+        position: 'relative', zIndex: 5, boxShadow: 'var(--pf-shadow-card)', background: 'var(--pf-surface)'
       }}>
         {[
           { num: String(projects.length), label: 'Projects' },
           { num: '1', label: 'GitHub Repos' },
           { num: String(certs.length), label: 'Certifications' },
-        ].map(({ num, label }, i) => (
-          <div key={label} style={{
-            background: '#0a0e1a', padding: '1rem 1.2rem', textAlign: 'center',
-            borderRight: i < 2 ? '0.5px solid rgba(139,92,246,0.2)' : 'none'
-          }}>
-            <div style={{ fontFamily: 'var(--font-inter)', fontSize: '2rem', fontWeight: 800, color: '#a78bfa', fontVariantNumeric: 'tabular-nums' }}>
+        ].map(({ num, label }) => (
+          <div key={label} className="pf-stat-cell">
+            <div className="pf-stat-number">
               <CountUp value={num} start={statsInView} />
             </div>
-            <div style={{ fontSize: 14, fontWeight:500, color: '#fff', marginTop: 2, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</div>
+            <div className="pf-stat-label">{label}</div>
           </div>
         ))}
       </div>
@@ -300,23 +289,19 @@ export default function Portfolio() {
      {/* PROJECTS */}
      <Projects />
 
-<WaveDivider />
-
     {/* EXPERIENCE */}
 <Timeline />
-
-<WaveDivider flip />
 
 {/* EDUCATION */}
 <section id="education" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
   <div>
-    <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Education</h2>
-    <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
+    <h2 className="pf-section-title" style={{ fontWeight: 700, display: 'block' }}>Education</h2>
+    <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
       Where I experienced my academic journey
     </p>
   </div>
-  <div style={{ flex: 1, height: '0.5px', background: 'rgba(139,92,246,0.2)', marginLeft: 16 }} />
+  <div style={{ flex: 1, height: 1, background: 'var(--pf-border)', marginLeft: 16 }} />
 </div>
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -325,54 +310,52 @@ export default function Portfolio() {
     transition={{ duration: 0.5, ease: 'easeOut' }}
     className="pf-edu-card"
     style={{
-      background: '#0f1629', border: '0.5px solid rgba(139,92,246,0.2)',
-      borderRadius: 12.5, padding: '1.5rem 1.875rem',
+      background: 'var(--pf-surface)', border: '1px solid var(--pf-border)',
+      borderRadius: 12.5, padding: '1.5rem 1.875rem', boxShadow: 'var(--pf-shadow-card)'
     }}
   >
     <div>
-      <div style={{ fontSize: 17.5, fontWeight: 700, color: '#e2e8f0', marginBottom: 2.5 }}>Bachelor of International Business</div>
-      <div style={{ fontFamily: 'var(--font-inter)', fontSize: 15, color: '#a78bfa', marginBottom: 10 }}>Foreign Trade University — Taiwan Joint Transfer Program</div>
+      <div style={{ fontSize: 17.5, fontWeight: 700, color: 'var(--pf-ink)', marginBottom: 2.5 }}>Bachelor of International Business</div>
+      <div style={{ fontFamily: 'var(--font-portfolio)', fontSize: 15, color: 'var(--pf-link)', marginBottom: 10 }}>Foreign Trade University — Taiwan Joint Transfer Program</div>
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 10 }}>
         {['GPA: 4.0/4.0', 'IELTS 7.5', 'TOEIC 980'].map(badge => (
           <span key={badge} style={{
-            fontFamily: 'var(--font-inter)', fontSize: 12.5,
-            background: 'rgba(139,92,246,0.12)', color: '#a78bfa',
-            border: '0.5px solid rgba(139,92,246,0.25)', borderRadius: 5, padding: '2.5px 10px'
+            fontFamily: 'var(--font-portfolio)', fontSize: 12.5,
+            background: 'var(--pf-brand-soft)', color: 'var(--pf-brand)',
+            border: '1px solid var(--pf-border-strong)', borderRadius: 5, padding: '2.5px 10px'
           }}>{badge}</span>
         ))}
       </div>
-      <p style={{ fontSize: 16.25, color: '#fff', lineHeight: 1.7 }}>
+      <p style={{ fontSize: 16.25, color: 'var(--pf-text)', lineHeight: 1.7 }}>
         Data Analytics · Statistics for Business · International Economics · Macroeconomics · Corporate Finance · Accounting Principles
       </p>
     </div>
-    <div style={{ fontWeight: 600, fontFamily: 'var(--font-inter)', fontSize: 16, color: '#A29BFE', whiteSpace: 'nowrap', marginLeft: 20 }}>Expected 2028</div>
+    <div style={{ fontWeight: 600, fontFamily: 'var(--font-portfolio)', fontSize: 16, color: 'var(--pf-brand)', whiteSpace: 'nowrap', marginLeft: 20 }}>Expected 2028</div>
   </motion.div>
 </section>
-<WaveDivider />
 
 {/* CERTIFICATIONS */}
 <Certifications />
-
-<WaveDivider flip />
 
 {/* CONTACT */}
       <section id="contact" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
   <div>
-    <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Contact</h2>
-    <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
+    <h2 className="pf-section-title" style={{ fontWeight: 700, display: 'block' }}>Contact</h2>
+    <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
       Where you can reach out to me
     </p>
   </div>
-  <div style={{ flex: 1, height: '0.6px', background: 'rgba(139,92,246,0.2)', marginLeft: 16 }} />
+  <div style={{ flex: 1, height: 1, background: 'var(--pf-border)', marginLeft: 16 }} />
 </div>
         <div style={{
-          background: '#0f1629', border: '0.5px solid rgba(139,92,246,0.2)',
-          borderRadius: 15, padding: '3.1rem', textAlign: 'center', maxWidth: 625, margin: '0 auto'
+          background: 'var(--pf-surface)', border: '1px solid var(--pf-border)',
+          borderRadius: 15, padding: '3.1rem', textAlign: 'center', maxWidth: 625, margin: '0 auto',
+          boxShadow: 'var(--pf-shadow-card)'
         }}>
           <div style={{ fontSize: '2.5rem', marginBottom: '1.25rem' }}>👋</div>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem' }}>Let&apos;s work together</h2>
-          <p style={{ fontSize: 17.5, color: '#fff', lineHeight: 1.8, marginBottom: '1.9rem' }}>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--pf-ink)', marginBottom: '1rem' }}>Let&apos;s work together</h2>
+          <p style={{ fontSize: 17.5, color: 'var(--pf-text)', lineHeight: 1.8, marginBottom: '1.9rem' }}>
             Open to internships, graduate roles, and freelance projects in finance, data analysis, and business strategy.
           </p>
          <div className="pf-contact-btns">
@@ -380,23 +363,23 @@ export default function Portfolio() {
     target="_blank" rel="noreferrer"
     style={{
       display: 'inline-flex', alignItems: 'center', gap: 10,
-      background: '#7c3aed', color: '#fff', textDecoration: 'none',
-      padding: '12.5px 25px', borderRadius: 25, fontSize: 16, fontWeight: 500,
-      fontFamily: 'var(--font-inter)'
+      background: 'var(--pf-brand)', color: '#fff', textDecoration: 'none',
+      padding: '12.5px 25px', borderRadius: 25, fontSize: 16, fontWeight: 600,
+      fontFamily: 'var(--font-portfolio)'
     }}>
     <i className="ti ti-mail" style={{ fontSize: 20 }} /> tomtran.workcontact@gmail.com
   </a>
  <a href="tel:+84398434620"
   style={{
     display: 'inline-flex', alignItems: 'center', gap: 10,
-    background: '#fff', color: '#0a0e1a', textDecoration: 'none',
-    border: '0.5px solid rgba(139,92,246,0.5)',
-    padding: '12.5px 25px', borderRadius: 25, fontSize: 16, fontWeight: 500,
-    fontFamily: 'var(--font-inter)',
+    background: '#fff', color: 'var(--pf-brand-deep)', textDecoration: 'none',
+    border: '1px solid var(--pf-border-strong)',
+    padding: '12.5px 25px', borderRadius: 25, fontSize: 16, fontWeight: 600,
+    fontFamily: 'var(--font-portfolio)',
     whiteSpace: 'nowrap'
   }}>
-  <i className="ti ti-phone" style={{ fontSize: 20, fontFamily: 'tabler-icons', color: '#0a0e1a' }} />
-  <span style={{ fontFamily: 'var(--font-inter)', color: '#0a0e1a' }}>(+84) 398 434 620</span>
+  <i className="ti ti-phone" style={{ fontSize: 20, fontFamily: 'tabler-icons', color: 'var(--pf-brand-deep)' }} />
+  <span style={{ fontFamily: 'var(--font-portfolio)', color: 'var(--pf-brand-deep)' }}>(+84) 398 434 620</span>
 </a>
 </div>
         </div>

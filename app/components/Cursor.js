@@ -113,7 +113,7 @@ export default function Cursor() {
           width: FOLLOWER_SIZE,
           height: FOLLOWER_SIZE,
           borderRadius: '100%',
-          background: 'rgba(255,255,255,0.2)',
+          background: 'var(--cursor-follower, rgba(255,255,255,0.2))',
           pointerEvents: 'none',
           userSelect: 'none',
           willChange: 'transform',

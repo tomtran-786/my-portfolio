@@ -15,7 +15,7 @@ const s = {
   backdrop: {
     position: "fixed",
     inset: 0,
-    background: "rgba(15,13,26,0.75)",
+    background: "var(--teach-overlay)",
     backdropFilter: "blur(6px)",
     WebkitBackdropFilter: "blur(6px)",
     zIndex: "var(--z-modal)",
@@ -29,11 +29,11 @@ const s = {
     position: "relative",
     width: "100%",
     maxWidth: "64rem",
-    background: "#2A2640",
-    border: "1px solid rgba(255,255,255,0.08)",
+    background: "var(--teach-surface)",
+    border: "1px solid var(--teach-border)",
     borderRadius: "1.75rem",
     padding: "2.5rem",
-    boxShadow: "0 30px 60px rgba(0,0,0,0.45)",
+    boxShadow: "0 30px 70px rgba(47,39,35,0.28)",
   },
   closeBtn: {
     position: "absolute",
@@ -42,9 +42,9 @@ const s = {
     width: 38,
     height: 38,
     borderRadius: "50%",
-    background: "#373254",
-    border: "none",
-    color: "#C9C5DC",
+    background: "var(--teach-surface-muted)",
+    border: "1px solid var(--teach-border)",
+    color: "var(--teach-text-secondary)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -69,27 +69,27 @@ const s = {
     borderRadius: "1.25rem",
     overflow: "hidden",
     aspectRatio: "4 / 3",
-    background: "#373254",
+    background: "var(--teach-surface-muted)",
   },
   image: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   ctaHeadline: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: "1.2rem",
     lineHeight: 1.35,
   },
 ctaRow: { display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "0.9rem" },
 ctaPrimary: {
-  background: "#F2684A",
-  color: "#fff",
+  background: "var(--teach-brand)",
+  color: "var(--teach-on-brand)",
   fontWeight: 700,
   fontSize: 14,
   padding: "0.85rem 1.5rem",
   borderRadius: "9999px",
   border: "none",
   cursor: "pointer",
-  fontFamily: "Montserrat, sans-serif",
+  fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
 },
 syllabusLink: {
@@ -98,11 +98,11 @@ syllabusLink: {
   gap: "0.5rem",
   fontSize: 13,
   fontWeight: 600,
-  color: "#F2684A",
+  color: "var(--teach-brand)",
   textDecoration: "none",
-  fontFamily: "Montserrat, sans-serif",
-  background: "rgba(242,104,74,0.08)",
-  border: "1px solid rgba(242,104,74,0.22)",
+  fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+  background: "rgba(var(--teach-brand-rgb), 0.08)",
+  border: "1px solid rgba(var(--teach-brand-rgb), 0.22)",
   borderRadius: "9999px",
   padding: "0.6rem 1rem",
   transition: "all 0.25s ease",
@@ -110,47 +110,47 @@ syllabusLink: {
 },
   introRight: { display: "flex", flexDirection: "column" },
   tag: {
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: 12,
     fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.07em",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   title: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: "1.85rem",
     margin: "0.2rem 0 0.4rem 0",
   },
   metaLine: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     marginBottom: "1.25rem",
   },
   h3: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 700,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: "1.1rem",
     margin: "1.5rem 0 0.6rem 0",
   },
   paragraph: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 14.5,
     lineHeight: 1.8,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   checklist: { listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" },
   checklistItem: {
     display: "flex",
     alignItems: "flex-start",
     gap: "0.6rem",
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 14.5,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     lineHeight: 1.6,
   },
   checkIconWrap: { marginTop: 2, flexShrink: 0 },
@@ -159,34 +159,34 @@ syllabusLink: {
   pricingSection: {
     textAlign: "center",
     padding: "2.5rem 0",
-    borderTop: "1px solid rgba(255,255,255,0.07)",
+    borderTop: "1px solid var(--teach-border)",
   },
   sectionLabel: {
     display: "inline-flex",
     alignItems: "center",
     gap: "0.4rem",
-    background: "#373254",
-    color: "#F2684A",
+    background: "var(--teach-surface-muted)",
+    color: "var(--teach-brand)",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.35rem 0.9rem",
     borderRadius: "9999px",
     marginBottom: "1rem",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   sectionHeadline: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: "1.6rem",
     marginBottom: "0.6rem",
   },
   sectionSubtext: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 14,
     maxWidth: "32rem",
     margin: "0 auto 1.5rem auto",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     lineHeight: 1.7,
   },
   billingToggleRow: {
@@ -195,7 +195,7 @@ syllabusLink: {
     justifyContent: "center",
     gap: "0.75rem",
     marginBottom: "1.25rem",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontSize: 14,
   },
   studentCheckRow: {
@@ -204,28 +204,28 @@ syllabusLink: {
     justifyContent: "center",
     gap: "0.5rem",
     marginBottom: "2rem",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontSize: 13.5,
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     cursor: "pointer",
   },
   studentCheckbox: {
     width: 16,
     height: 16,
-    accentColor: "#F2684A",
+    accentColor: "var(--teach-brand)",
     cursor: "pointer",
   },
   priceOriginal: {
     fontSize: "1.05rem",
-    color: "#7A7494",
+    color: "var(--teach-text-secondary)",
     textDecoration: "line-through",
     fontWeight: 600,
     marginRight: "0.5rem",
   },
   fromLabel: {
     display: "inline-block",
-    background: "rgba(242,104,74,0.15)",
-    color: "#F2684A",
+    background: "rgba(var(--teach-brand-rgb), 0.15)",
+    color: "var(--teach-brand)",
     fontSize: 11,
     fontWeight: 700,
     textTransform: "uppercase",
@@ -233,13 +233,13 @@ syllabusLink: {
     padding: "0.2rem 0.55rem",
     borderRadius: "9999px",
     marginBottom: "0.5rem",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   toggleTrack: {
     width: 46,
     height: 26,
     borderRadius: "9999px",
-    background: "#373254",
+    background: "var(--teach-surface-muted)",
     border: "none",
     cursor: "pointer",
     padding: 2,
@@ -251,16 +251,16 @@ syllabusLink: {
     width: 22,
     height: 22,
     borderRadius: "50%",
-    background: "#F2684A",
+    background: "var(--teach-brand)",
   },
   savePill: {
-    background: "rgba(242,104,74,0.15)",
-    color: "#F2684A",
+    background: "rgba(var(--teach-brand-rgb), 0.15)",
+    color: "var(--teach-brand)",
     fontSize: 12,
     fontWeight: 700,
     padding: "0.25rem 0.7rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   plansGrid: {
     display: "grid",
@@ -269,8 +269,8 @@ syllabusLink: {
     textAlign: "left",
   },
   planCard: (popular) => ({
-    background: popular ? "#3D2E5E" : "#231f38",
-    border: popular ? "1.5px solid #F2684A" : "1px solid rgba(255,255,255,0.08)",
+    background: popular ? "var(--teach-brand-soft)" : "var(--teach-bg-soft)",
+    border: popular ? "1.5px solid var(--teach-brand)" : "1px solid var(--teach-border)",
     borderRadius: "1.25rem",
     padding: "1.5rem",
     position: "relative",
@@ -279,45 +279,45 @@ syllabusLink: {
     position: "absolute",
     top: "1.25rem",
     right: "1.25rem",
-    background: "#fff",
-    color: "#F2684A",
+    background: "var(--teach-surface)",
+    color: "var(--teach-brand)",
     fontSize: 10.5,
     fontWeight: 700,
     padding: "0.2rem 0.6rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   planName: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 700,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: 15,
     marginBottom: "0.6rem",
   },
   planPrice: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: "1.9rem",
     marginBottom: "0.5rem",
   },
-  planPriceUnit: { fontSize: 12.5, fontWeight: 500, color: "#E5E5E5" },
+  planPriceUnit: { fontSize: 12.5, fontWeight: 500, color: "var(--teach-text)" },
   planDesc: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13,
     lineHeight: 1.6,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
 
   // FAQ
-  faqSection: { padding: "2rem 0", borderTop: "1px solid rgba(255,255,255,0.07)" },
-  faqItem: { borderBottom: "1px solid rgba(255,255,255,0.07)" },
+  faqSection: { padding: "2rem 0", borderTop: "1px solid var(--teach-border)" },
+  faqItem: { borderBottom: "1px solid var(--teach-border)" },
   faqQuestion: {
     width: "100%",
     background: "none",
     border: "none",
-    color: "#fff",
-    fontFamily: "Montserrat, sans-serif",
+    color: "var(--teach-ink)",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 600,
     fontSize: 14.5,
     padding: "1rem 0",
@@ -328,7 +328,7 @@ syllabusLink: {
     textAlign: "left",
   },
   faqChevron: {
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: 18,
     transition: "transform 0.2s ease",
     flexShrink: 0,
@@ -336,16 +336,16 @@ syllabusLink: {
     display: "inline-block",
   },
   faqAnswer: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13.5,
     lineHeight: 1.7,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     paddingBottom: "1rem",
     margin: 0,
   },
 
   // Students say (testimonials)
-  studentsSection: { padding: "2rem 0 0.5rem 0", borderTop: "1px solid rgba(255,255,255,0.07)" },
+  studentsSection: { padding: "2rem 0 0.5rem 0", borderTop: "1px solid var(--teach-border)" },
   studentsGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
@@ -353,8 +353,8 @@ syllabusLink: {
     marginTop: "1.25rem",
   },
   studentCard: {
-    background: "#231f38",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "var(--teach-bg-soft)",
+    border: "1px solid var(--teach-border)",
     borderRadius: "1.1rem",
     padding: "1.25rem",
     textAlign: "left",
@@ -363,35 +363,35 @@ syllabusLink: {
     gap: "0.9rem",
   },
   studentQuoteIcon: {
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: 28,
     lineHeight: 1,
     fontFamily: "Georgia, serif",
     marginBottom: "-0.4rem",
   },
   studentComment: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13.5,
     lineHeight: 1.7,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontStyle: "italic",
   },
   studentResultBadge: {
     display: "inline-block",
-    background: "rgba(242,104,74,0.15)",
-    color: "#F2684A",
+    background: "rgba(var(--teach-brand-rgb), 0.15)",
+    color: "var(--teach-brand)",
     fontSize: 11.5,
     fontWeight: 700,
     padding: "0.25rem 0.65rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     alignSelf: "flex-start",
   },
   studentFooter: {
     display: "flex",
     alignItems: "center",
     gap: "0.65rem",
-    borderTop: "1px solid rgba(255,255,255,0.07)",
+    borderTop: "1px solid var(--teach-border)",
     paddingTop: "0.9rem",
   },
   studentAvatar: {
@@ -399,24 +399,24 @@ syllabusLink: {
     height: 38,
     borderRadius: "50%",
     objectFit: "cover",
-    border: "2px solid #F2684A",
+    border: "2px solid var(--teach-brand)",
     flexShrink: 0,
   },
   studentName: {
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontWeight: 700,
     fontSize: 13,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   studentRole: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 11.5,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   studentStars: {
     display: "flex",
     gap: 1,
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     marginLeft: "auto",
     flexShrink: 0,
   },
@@ -429,8 +429,8 @@ syllabusLink: {
     marginTop: "1.25rem",
   },
   studentCardSingle: {
-    background: "#231f38",
-    border: "1px solid rgba(255,255,255,0.07)",
+    background: "var(--teach-bg-soft)",
+    border: "1px solid var(--teach-border)",
     borderRadius: "1.1rem",
     padding: "1.75rem",
     textAlign: "left",
@@ -451,9 +451,9 @@ syllabusLink: {
     width: 38,
     height: 38,
     borderRadius: "50%",
-    background: "#373254",
+    background: "var(--teach-surface-muted)",
     border: "none",
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -469,7 +469,7 @@ syllabusLink: {
     width: active ? 18 : 7,
     height: 7,
     borderRadius: "9999px",
-    background: active ? "#F2684A" : "rgba(255,255,255,0.18)",
+    background: active ? "var(--teach-brand)" : "var(--teach-border-strong)",
     border: "none",
     cursor: "pointer",
     padding: 0,
@@ -477,20 +477,20 @@ syllabusLink: {
   }),
 };
 
-// Render text với **keyword** → <strong> bold, màu trắng sáng hơn để nổi bật
+// Render text với **keyword** → <strong> để từ khóa nổi bật.
 function renderBold(text) {
   if (!text) return null;
   const parts = text.split(/\*\*(.*?)\*\*/g);
   return parts.map((part, i) =>
     i % 2 === 1
-      ? <strong key={i} style={{ color: "#fff", fontWeight: 700 }}>{part}</strong>
+      ? <strong key={i} style={{ color: "var(--teach-ink)", fontWeight: 700 }}>{part}</strong>
       : part
   );
 }
 
 function CheckIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F2684A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teach-brand)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -672,28 +672,33 @@ function openSyllabus() {
       onClick={onClose}
     >
       <style>{`
+        .course-modal-panel:focus {
+          outline: 2px solid var(--teach-accent);
+          outline-offset: -2px;
+        }
         .course-modal-cta-primary:hover {
-          background: #ff7c5c;
+          background: var(--teach-brand-deep);
           transform: translateY(-3px);
-          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+          box-shadow: var(--teach-shadow-hover);
         }
         .course-modal-syllabus-link:hover {
-          background: rgba(242,104,74,0.15);
-          border-color: rgba(242,104,74,0.45);
+          background: rgba(var(--teach-brand-rgb), 0.15);
+          border-color: rgba(var(--teach-brand-rgb), 0.45);
           transform: translateY(-2px);
-          box-shadow: 0 4px 16px rgba(242,104,74,0.18);
-          color: #ff7c5c;
+          box-shadow: 0 4px 16px rgba(var(--teach-brand-rgb), 0.18);
+          color: var(--teach-accent);
         }
         .course-modal-close:hover {
-          background: #F2684A;
-          color: #fff;
+          background: var(--teach-brand);
+          color: var(--teach-on-brand);
         }
         .course-modal-student-nav:hover {
-          background: #F2684A;
-          color: #fff;
+          background: var(--teach-brand);
+          color: var(--teach-on-brand);
         }
         @media (max-width: 700px) {
           .course-modal-intro { grid-template-columns: 1fr !important; }
+          .course-modal-panel { padding: 3.5rem 1.25rem 1.5rem !important; border-radius: 1.25rem !important; }
         }
       `}</style>
 
@@ -702,6 +707,7 @@ function openSyllabus() {
         role="dialog"
         aria-modal="true"
         aria-label={course.title}
+        className="course-modal-panel"
         style={s.panel}
         initial={{ opacity: 0, y: 40, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -769,7 +775,7 @@ function openSyllabus() {
           <p style={s.sectionSubtext}>{detail.pricing.subtext}</p>
 
           <div style={s.billingToggleRow}>
-            <span style={{ color: billing === "monthly" ? "#fff" : "#ADA8C4" }}>Theo tháng</span>
+            <span style={{ color: billing === "monthly" ? "var(--teach-ink)" : "var(--teach-text-secondary)" }}>Theo tháng</span>
             <button
               style={s.toggleTrack}
               onClick={() => setBilling(billing === "monthly" ? "annual" : "monthly")}
@@ -783,7 +789,7 @@ function openSyllabus() {
                 transition={{ duration: 0.2, ease: "easeOut" }}
               />
             </button>
-            <span style={{ color: billing === "annual" ? "#fff" : "#ADA8C4" }}>Trọn khóa</span>
+            <span style={{ color: billing === "annual" ? "var(--teach-ink)" : "var(--teach-text-secondary)" }}>Trọn khóa</span>
             <span style={s.savePill}>Đóng 1 lần</span>
           </div>
 

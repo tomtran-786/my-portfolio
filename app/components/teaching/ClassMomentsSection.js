@@ -7,16 +7,13 @@ import classMoments, { classMomentsHeading } from "@/data/teaching/classMoments"
 
 const s = {
   wrapper: {
-    maxWidth: "75rem",
-    margin: "0 auto",
-    padding: "0 1.5rem",
-    paddingBottom: "clamp(3rem, 6vw, 5rem)",
+    margin: 0,
   },
   heading: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
-    fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
+    color: "var(--teach-brand)",
+    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     marginBottom: "2rem",
     textAlign: "center",
   },
@@ -26,17 +23,19 @@ const s = {
     aspectRatio: "16 / 8.2",
     borderRadius: "1.5rem",
     overflow: "hidden",
-    background: "#373254",
+    background: "var(--teach-surface-muted)",
+    border: "1px solid var(--teach-border)",
+    boxShadow: "var(--teach-shadow-card)",
   },
   img: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   caption: {
     position: "absolute",
     left: "1.25rem",
     bottom: "1.25rem",
-    background: "rgba(42, 38, 64, 0.85)",
+    background: "rgba(47, 39, 35, 0.86)",
     backdropFilter: "blur(6px)",
     color: "#fff",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontSize: 14,
     fontWeight: 500,
     padding: "0.55rem 1rem",
@@ -48,7 +47,7 @@ const s = {
     transform: "translateY(-50%)",
     width: 44, height: 44,
     borderRadius: "50%",
-    background: "rgba(20, 18, 34, 0.55)",
+    background: "rgba(47, 39, 35, 0.62)",
     color: "#fff",
     display: "flex",
     alignItems: "center",
@@ -87,16 +86,19 @@ export default function ClassMomentsSection() {
   };
 
   return (
-    <section style={s.wrapper} id="class-moments">
+    <section className="teach-section teach-section-soft" style={s.wrapper} id="class-moments">
       <style>{`
         .moment-nav-btn { transition: background 0.2s ease, transform 0.2s ease; }
-        .moment-nav-btn:hover { background: rgba(242, 104, 74, 0.85); transform: translateY(-50%) scale(1.06); }
+        .moment-nav-btn:hover { background: rgba(var(--teach-brand-rgb), 0.85); transform: translateY(-50%) scale(1.06); }
         .moment-dot { transition: background 0.2s ease, width 0.2s ease; }
+        @media (max-width: 600px) {
+          .moment-stage { aspect-ratio: 4 / 3 !important; border-radius: 1rem !important; }
+        }
       `}</style>
 
       <h2 style={s.heading}>{classMomentsHeading}</h2>
 
-      <div style={s.stage}>
+      <div className="moment-stage" style={s.stage}>
         <AnimatePresence mode="wait">
           {/* Bọc motion.div quanh next/image: <Image fill> tự set position/inset
               nên không nhận được style animate trực tiếp như motion.img trước đây. */}
@@ -143,7 +145,7 @@ export default function ClassMomentsSection() {
               aria-label={`Xem ảnh ${i + 1}`}
               aria-current={i === index ? "true" : undefined}
               className="moment-dot"
-              style={{ ...s.dot, width: i === index ? 22 : 8, background: i === index ? "#F2684A" : "#534b78" }}
+              style={{ ...s.dot, width: i === index ? 22 : 8, background: i === index ? "var(--teach-brand)" : "var(--teach-border-strong)" }}
               onClick={() => goTo(i)}
             />
           ))}

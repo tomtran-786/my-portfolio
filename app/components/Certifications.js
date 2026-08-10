@@ -173,10 +173,10 @@ export default function Certifications() {
    <section id="certifications" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
       {/* Header */}
       <div style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', margin: '0 0 0.4rem', lineHeight: 1.1 }}>
+        <h2 className="pf-section-title" style={{ fontWeight: 700, margin: '0 0 0.4rem' }}>
           My Certifications
         </h2>
-        <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
+        <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
           Professional certifications that validate my expertise
         </p>
       </div>
@@ -209,21 +209,22 @@ export default function Certifications() {
               <Card
                 variants={cardVariants}
                 {...linkProps}
-                whileHover={hasLink ? { y: -6, scale: 1.02, boxShadow: '0 12px 40px rgba(124,58,237,0.25)' } : undefined}
+                whileHover={hasLink ? { y: -6, scale: 1.02, boxShadow: '0 18px 46px rgba(12,73,143,0.18)' } : undefined}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 style={{
-                  background: '#0f1629',
-                  border: '0.5px solid rgba(139,92,246,0.2)',
+                  background: 'var(--pf-surface)',
+                  border: '1px solid var(--pf-border)',
                   borderRadius: 16, overflow: 'hidden',
                   textDecoration: 'none',
                   display: 'block',
                   cursor: hasLink ? 'pointer' : 'default',
+                  boxShadow: 'var(--pf-shadow-card)',
                 }}
               >
                 {/* Image */}
                 <div style={{
                   position: 'relative', width: '100%', aspectRatio: '4/3',
-                  background: '#1e293b', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  background: 'var(--pf-bg-soft)', display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                   <Image
                     src={cert.image}
@@ -237,22 +238,22 @@ export default function Certifications() {
                 </div>
 
                 {/* Info */}
-                <div style={{ padding: '1rem 1.2rem 1.2rem', borderTop: '0.5px solid rgba(139,92,246,0.15)' }}>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: '#fff', marginBottom: 4 }}>
+                <div style={{ padding: '1rem 1.2rem 1.2rem', borderTop: '1px solid var(--pf-border)' }}>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--pf-ink)', marginBottom: 4 }}>
                     {cert.name}
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{
                       fontSize: 12, fontWeight: 500,
-                      background: 'rgba(139,92,246,0.12)', color: '#a78bfa',
-                      border: '0.5px solid rgba(139,92,246,0.3)',
+                      background: 'var(--pf-brand-soft)', color: 'var(--pf-brand)',
+                      border: '1px solid var(--pf-border-strong)',
                       borderRadius: 6, padding: '2px 10px',
                     }}>
                       {cert.issuer}
                     </span>
                     <span style={{
-                      fontFamily: 'var(--font-inter)',
-                      fontSize: 11, color: '#475569',
+                      fontFamily: 'var(--font-portfolio)',
+                      fontSize: 11, color: 'var(--pf-text-secondary)',
                     }}>
                       {cert.date}
                     </span>
@@ -276,9 +277,9 @@ export default function Certifications() {
           whileTap={page > 0 ? { scale: 0.95 } : {}}
           style={{
             width: 44, height: 44, borderRadius: '50%',
-            border: '0.5px solid rgba(139,92,246,0.4)',
-            background: page === 0 ? 'rgba(139,92,246,0.05)' : 'rgba(139,92,246,0.12)',
-            color: page === 0 ? '#2d3748' : '#a78bfa',
+            border: '1px solid var(--pf-border-strong)',
+            background: page === 0 ? 'var(--pf-bg-soft)' : 'var(--pf-brand-soft)',
+            color: page === 0 ? 'rgba(23,38,54,0.36)' : 'var(--pf-brand)',
             fontSize: 20, cursor: page === 0 ? 'not-allowed' : 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
@@ -299,7 +300,7 @@ export default function Certifications() {
               style={{
                 width: i === page ? 24 : 8, height: 8,
                 borderRadius: 999,
-                background: i === page ? '#7c3aed' : 'rgba(139,92,246,0.25)',
+                background: i === page ? 'var(--pf-brand)' : 'rgba(12,73,143,0.2)',
                 border: 'none', cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 padding: 0,
@@ -316,9 +317,9 @@ export default function Certifications() {
           whileTap={page < totalPages - 1 ? { scale: 0.95 } : {}}
           style={{
             width: 44, height: 44, borderRadius: '50%',
-            border: '0.5px solid rgba(139,92,246,0.4)',
-            background: page === totalPages - 1 ? 'rgba(139,92,246,0.05)' : 'rgba(139,92,246,0.12)',
-            color: page === totalPages - 1 ? '#2d3748' : '#a78bfa',
+            border: '1px solid var(--pf-border-strong)',
+            background: page === totalPages - 1 ? 'var(--pf-bg-soft)' : 'var(--pf-brand-soft)',
+            color: page === totalPages - 1 ? 'rgba(23,38,54,0.36)' : 'var(--pf-brand)',
             fontSize: 20, cursor: page === totalPages - 1 ? 'not-allowed' : 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
@@ -330,8 +331,8 @@ export default function Certifications() {
       {/* Page counter */}
       <div style={{
         textAlign: 'center', marginTop: '0.75rem',
-        fontFamily: 'var(--font-inter)',
-        color: '#fff', fontWeight: 500, fontSize: 12
+        fontFamily: 'var(--font-portfolio)',
+        color: 'var(--pf-text-secondary)', fontWeight: 500, fontSize: 12
       }}>
         {page + 1} / {totalPages}
       </div>

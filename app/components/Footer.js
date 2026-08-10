@@ -1,7 +1,7 @@
 'use client'
 
 // Bố cục phỏng theo footer của "folio" (Ayush Singh) qua bản fork
-// MarkPhamm/portfolio_website: dải cong -> lưới 4 cột -> thanh bản quyền.
+// MarkPhamm/portfolio_website: lưới 4 cột -> thanh bản quyền.
 // Nguồn: https://github.com/ayush013/folio (MIT)
 // Copyright (c) 2020-2022 Ayush Singh. Licensed under the MIT License.
 //
@@ -10,14 +10,14 @@
 
 import Link from 'next/link'
 
-const ACCENT = '#a78bfa'
-const BORDER = 'rgba(139,92,246,0.2)'
+const ACCENT = '#0c498f'
+const BORDER = 'rgba(23,38,54,0.14)'
 
 const s = {
   heading: {
     fontSize: 12,
     fontWeight: 700,
-    color: 'rgba(255,255,255,0.8)',
+    color: '#003865',
     textTransform: 'uppercase',
     letterSpacing: '0.12em',
     marginBottom: '1rem',
@@ -26,27 +26,27 @@ const s = {
     display: 'block',
     width: 'fit-content',
     fontSize: 14,
-    color: 'rgba(255,255,255,0.9)',
+    color: '#404040',
     textDecoration: 'none',
     marginBottom: '0.65rem',
     transition: 'color 0.2s ease',
   },
   body: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.9)',
+    color: '#404040',
     lineHeight: 1.7,
   },
   muted: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.65)',
+    color: '#4a4a4a',
     lineHeight: 1.7,
   },
   social: {
     width: 38,
     height: 38,
     borderRadius: '50%',
-    background: 'rgba(139,92,246,0.12)',
-    border: `0.5px solid ${BORDER}`,
+    background: 'rgba(12,73,143,0.08)',
+    border: `1px solid ${BORDER}`,
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -80,23 +80,12 @@ function scrollToId(e, href) {
 
 export default function Footer() {
   return (
-    <footer id="footer" style={{ position: 'relative', zIndex: 5, marginTop: '2rem' }}>
-      {/* Dải cong chuyển tiếp — tự vẽ, fill trùng nền footer.
-          preserveAspectRatio none để giãn đúng ở mọi bề rộng. */}
-      <svg
-        viewBox="0 0 1440 120"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        style={{ display: 'block', width: '100%', height: 90 }}
-      >
-        <path d="M0,120 C360,20 1080,20 1440,120 L1440,120 L0,120 Z" fill="#0f1629" />
-      </svg>
-
-      <div style={{ background: '#0f1629', padding: '1rem 2.5rem 2.5rem' }}>
+    <footer id="footer" style={{ position: 'relative', zIndex: 5 }}>
+      <div className="pf-footer-shell">
         <div className="pf-footer-grid">
           {/* 1. Danh tính */}
           <div>
-            <div style={{ fontFamily: 'var(--font-inter)', fontSize: 20, fontWeight: 800, color: ACCENT, marginBottom: '0.75rem' }}>
+            <div style={{ fontFamily: 'var(--font-portfolio)', fontSize: 20, fontWeight: 700, color: ACCENT, marginBottom: '0.75rem' }}>
               &lt;tomtran/&gt;
             </div>
             <p style={{ ...s.body, maxWidth: '16rem', marginBottom: '0.75rem' }}>
@@ -131,7 +120,7 @@ export default function Footer() {
               Teaching
             </Link>
             <a
-              href="https://chemistery-lat.vercel.app/courses"
+              href="https://chemisteryacademy.com/courses"
               target="_blank"
               rel="noreferrer"
               style={s.link}

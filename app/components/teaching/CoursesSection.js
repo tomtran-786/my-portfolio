@@ -21,26 +21,24 @@ const stagger = {
 
 const s = {
   section: {
-    maxWidth: "72rem",
-    margin: "6rem auto",
-    padding: "0 1rem",
+    margin: 0,
   },
   headline: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
-    fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+    color: "var(--teach-brand)",
+    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     lineHeight: 1.2,
     marginBottom: "0.75rem",
     maxWidth: "36rem",
   },
   subtext: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 15,
     lineHeight: 1.7,
     maxWidth: "36rem",
     marginBottom: "2rem",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   // Tabs lọc category
   tabRow: {
@@ -50,14 +48,14 @@ const s = {
     marginBottom: "2.5rem",
   },
   tabBtn: (active) => ({
-    background: active ? "#F2684A" : "#373254",
-    color: active ? "#fff" : "#D8D4EA",
-    border: "none",
+    background: active ? "var(--teach-brand)" : "var(--teach-surface)",
+    color: active ? "var(--teach-on-brand)" : "var(--teach-ink)",
+    border: active ? "1px solid var(--teach-brand)" : "1px solid var(--teach-border)",
     fontSize: 13,
     fontWeight: 600,
     padding: "0.55rem 1.25rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     cursor: "pointer",
     transition: "background 0.2s, color 0.2s",
   }),
@@ -67,8 +65,8 @@ const s = {
     gap: "1.25rem",
   },
   card: (highlighted) => ({
-    background: highlighted ? "#3D2E5E" : "#2F2B47",
-    border: highlighted ? "1.5px solid #F2684A" : "1.5px solid rgba(255,255,255,0.07)",
+    background: highlighted ? "var(--teach-brand-soft)" : "var(--teach-surface)",
+    border: highlighted ? "1.5px solid var(--teach-brand)" : "1px solid var(--teach-border)",
     borderRadius: "1.25rem",
     padding: "1.75rem",
     display: "flex",
@@ -77,15 +75,16 @@ const s = {
     position: "relative",
     overflow: "hidden",
     cursor: "pointer",
+    boxShadow: "var(--teach-shadow-card)",
   }),
   // Là <button> thật chứ không phải <span>: card không còn role="button" nên đây
   // là đường vào modal bằng bàn phím. Reset lại style mặc định của button để giữ
   // nguyên hình dáng cũ.
   viewDetailHint: {
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: 12.5,
     fontWeight: 600,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     background: "none",
     border: "none",
     padding: 0,
@@ -97,42 +96,42 @@ const s = {
     position: "absolute",
     top: "1.25rem",
     right: "1.25rem",
-    background: "#F2684A",
-    color: "#fff",
+    background: "var(--teach-brand)",
+    color: "var(--teach-on-brand)",
     fontSize: 11,
     fontWeight: 700,
     padding: "0.2rem 0.65rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   cardIcon: { fontSize: 32, lineHeight: 1 },
   cardTag: {
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: 11,
     fontWeight: 700,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     textTransform: "uppercase",
     letterSpacing: "0.07em",
   },
   cardTitle: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: "1.1rem",
     margin: "0.1rem 0",
   },
   cardDesc: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13.5,
     lineHeight: 1.7,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     flexGrow: 1,
   },
   metaRow: {
     display: "flex",
     flexDirection: "column",
     gap: "0.3rem",
-    borderTop: "1px solid rgba(255,255,255,0.07)",
+    borderTop: "1px solid var(--teach-border)",
     paddingTop: "0.9rem",
     marginTop: "0.25rem",
   },
@@ -140,29 +139,29 @@ const s = {
     display: "flex",
     alignItems: "center",
     gap: "0.45rem",
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   metaIcon: { fontSize: 13 },
   cardCta: (highlighted) => ({
     marginTop: "1rem",
     display: "block",
     textAlign: "center",
-    background: highlighted ? "#F2684A" : "transparent",
-    color: highlighted ? "#fff" : "#F2684A",
-    border: highlighted ? "none" : "1.5px solid #F2684A",
+    background: highlighted ? "var(--teach-brand)" : "transparent",
+    color: highlighted ? "var(--teach-on-brand)" : "var(--teach-brand)",
+    border: highlighted ? "none" : "1.5px solid var(--teach-brand)",
     fontSize: 13,
     fontWeight: 700,
     padding: "0.7rem",
     borderRadius: "9999px",
     textDecoration: "none",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   }),
   emptyState: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 14,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     textAlign: "center",
     padding: "3rem 0",
   },
@@ -179,7 +178,7 @@ export default function CoursesSection() {
       : items.filter((item) => item.category === activeCategory);
 
   return (
-    <section style={s.section} id="courses">
+    <section className="teach-section" style={s.section} id="courses">
       {/* Header */}
       <motion.div
         initial="hidden" whileInView="visible"
@@ -224,8 +223,8 @@ export default function CoursesSection() {
                 style={s.card(item.highlighted)}
                 whileHover={{
                   y: -10,
-                  boxShadow: "0 16px 32px rgba(0,0,0,0.35)",
-                  borderColor: "rgba(242,104,74,0.4)",
+                  boxShadow: "var(--teach-shadow-hover)",
+                  borderColor: "var(--teach-border-strong)",
                 }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
                 // Card không còn là role="button" nữa. Nó bọc một <Link> thật, nên

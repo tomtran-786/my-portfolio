@@ -21,10 +21,10 @@ const fadeUp = {
 
 const s = {
 wrapper: {
-  maxWidth: "75rem",
-  margin: "0 auto",
-  paddingLeft: "1.5rem",
-  paddingRight: "1.5rem",
+  maxWidth: "none",
+  margin: 0,
+  paddingLeft: "var(--teach-content-gutter)",
+  paddingRight: "var(--teach-content-gutter)",
   paddingTop: "clamp(2.5rem, 6vw, 5rem)",
   paddingBottom: "clamp(2rem, 5vw, 4rem)",
 },  textCol: {
@@ -34,35 +34,35 @@ wrapper: {
     display: "inline-flex",
     alignItems: "center",
     gap: "0.5rem",
-    background: "#373254",
-    color: "#D8D4EA",
+    background: "var(--teach-surface-muted)",
+    color: "var(--teach-text)",
     fontSize: 13,
     fontWeight: 500,
     padding: "0.4rem 1rem",
     borderRadius: "9999px",
     marginBottom: "2rem",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   badgeDot: {
     width: 8, height: 8,
     borderRadius: "50%",
-    background: "#F2684A",
+    background: "var(--teach-brand)",
     flexShrink: 0,
   },
   headline: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
+    color: "var(--teach-brand-deep)",
     fontSize: "clamp(2rem, 4.5vw, 3.25rem)",
     lineHeight: 1.15,
     marginBottom: "1.5rem",
   },
   subtext: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: "clamp(0.9rem, 1.6vw, 1.1rem)",
     margin: "0 0 2.5rem 0",
     lineHeight: 1.7,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   ctaRow: {
     alignItems: "center",
@@ -71,18 +71,18 @@ wrapper: {
     flexWrap: "wrap",
   },
   ctaPrimary: {
-    background: "#F2684A",
-    color: "#fff",
+    background: "var(--teach-brand)",
+    color: "var(--teach-on-brand)",
     fontWeight: 600,
     fontSize: "clamp(0.85rem, 2vw, 1rem)",
     padding: "1rem 2rem",
     borderRadius: "9999px",
     textDecoration: "none",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   ctaArrow: {
-    background: "#F2684A",
-    color: "#fff",
+    background: "var(--teach-brand)",
+    color: "var(--teach-on-brand)",
     width: 52, height: 52,
     borderRadius: "50%",
     display: "flex",
@@ -100,14 +100,14 @@ wrapper: {
   avatar: {
     width: 48, height: 48,
     borderRadius: "50%",
-    border: "2px solid #2A2640",
+    border: "2px solid var(--teach-bg)",
     objectFit: "cover",
     marginLeft: -10,
   },
   avatarFirst: {
     width: 48, height: 48,
     borderRadius: "50%",
-    border: "2px solid #2A2640",
+    border: "2px solid var(--teach-bg)",
     objectFit: "cover",
     marginLeft: 0,
   },
@@ -116,19 +116,19 @@ wrapper: {
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    color: "#F2684A",
+    color: "var(--teach-brand)",
   },
   ratingText: {
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontWeight: 600,
     fontSize: 15,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   ratingCount: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 13,
     marginTop: 2,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
 };
 
@@ -166,20 +166,20 @@ export default function HeroSection() {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
         .hero-cta-primary:hover {
-          background: #ff7c5c;
+          background: var(--teach-brand-deep);
           transform: translateY(-3px);
-          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+          box-shadow: var(--teach-shadow-hover);
         }
         .hero-cta-arrow:hover {
-          background: #ff7c5c;
+          background: var(--teach-brand-deep);
           transform: translateY(-3px) scale(1.06);
-          box-shadow: 0 10px 24px rgba(242, 104, 74, 0.4);
+          box-shadow: var(--teach-shadow-hover);
         }
 
         .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 34rem) 1fr;
-  gap: 2rem;
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
 }
         .hero-text { text-align: left; }

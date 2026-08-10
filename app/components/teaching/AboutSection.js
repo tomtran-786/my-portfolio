@@ -23,9 +23,7 @@ const fadeRight = {
 
 const s = {
   section: {
-    maxWidth: "72rem",
-    margin: "6rem auto",
-    padding: "0 1rem",
+    margin: 0,
   },
   inner: {
     display: "grid",
@@ -34,10 +32,10 @@ const s = {
     alignItems: "center",
   },
   headline: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
-    fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
+    color: "var(--teach-brand)",
+    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     lineHeight: 1.25,
     marginBottom: "1.5rem",
   },
@@ -45,15 +43,15 @@ const s = {
     display: "block",
     width: 48,
     height: 4,
-    background: "#F2684A",
+    background: "var(--teach-brand)",
     borderRadius: 4,
     margin: "0 0 1.5rem 0",
   },
   paragraph: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 15,
     lineHeight: 1.8,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     marginBottom: "1rem",
   },
   credentials: {
@@ -64,13 +62,13 @@ const s = {
     marginBottom: "2rem",
   },
   credentialTag: {
-    background: "#373254",
-    color: "#E5E5E5",
+    background: "var(--teach-brand-soft)",
+    color: "var(--teach-brand-deep)",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.3rem 0.75rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   statsRow: {
     display: "grid",
@@ -82,22 +80,22 @@ const s = {
     display: "flex",
     flexDirection: "column",
     gap: "0.35rem",
-    background: "rgba(255,255,255,0.03)",
-    border: "1px solid rgba(255,255,255,0.12)",
+    background: "var(--teach-surface)",
+    border: "1px solid var(--teach-border)",
     borderRadius: "1rem",
     padding: "1.1rem 1rem",
   },
   statValue: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: "1.6rem",
     fontVariantNumeric: "tabular-nums",
   },
   statLabel: {
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: 13,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     lineHeight: 1.4,
   },
   imageWrap: {
@@ -115,14 +113,14 @@ const s = {
   imageOverlay: {
     position: "absolute",
     inset: 0,
-    background: "linear-gradient(to top, rgba(42,38,64,0.6) 0%, transparent 50%)",
+    background: "linear-gradient(to top, rgba(47,39,35,0.62) 0%, transparent 50%)",
   },
   imageBadge: {
     position: "absolute",
     bottom: "1.5rem",
     left: "1.5rem",
     right: "1.5rem",
-    background: "rgba(54,49,78,0.9)",
+    background: "rgba(47,39,35,0.9)",
     backdropFilter: "blur(8px)",
     borderRadius: "1rem",
     padding: "1rem 1.25rem",
@@ -132,15 +130,15 @@ const s = {
   },
   badgeIcon: { fontSize: 28 },
   badgeText: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     color: "#fff",
     fontWeight: 700,
     fontSize: 14,
   },
   badgeSubtext: {
-    color: "#ADA8C4",
+    color: "rgba(255,255,255,0.74)",
     fontSize: 12,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
 };
 
@@ -159,10 +157,10 @@ export default function AboutSection() {
   const { headline, paragraphs, image, stats, credentials } = aboutData;
 
   const statsRef = useRef(null);
-  const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
+  const statsInView = useInView(statsRef, { once: true, amount: 0.2 });
 
   return (
-    <section style={s.section} id="about">
+    <section className="teach-section teach-section-soft" style={s.section} id="about">
       <style>{`
         @media (max-width: 768px) {
           .about-inner { grid-template-columns: 1fr !important; }

@@ -1,4 +1,5 @@
 import '../globals.css'
+import { portfolioFont } from '@/app/fonts'
 
 export const metadata = {
   title: 'Tom Tran - Portfolio',
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
           href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body className={`${portfolioFont.variable} pf-body`}>{children}</body>
     </html>
   )
 }

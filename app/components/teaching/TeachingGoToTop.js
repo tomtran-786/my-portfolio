@@ -35,14 +35,14 @@ export default function TeachingGoToTop() {
             width: 48,
             height: 48,
             borderRadius: "50%",
-            background: "#F2684A",
+            background: "var(--teach-brand)",
             border: "none",
             cursor: "pointer",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: "#fff",
-            boxShadow: "0 4px 20px rgba(242,104,74,0.4)",
+            color: "var(--teach-on-brand)",
+            boxShadow: "0 4px 20px rgba(var(--teach-brand-rgb), 0.32)",
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"

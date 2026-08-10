@@ -1,54 +1,48 @@
 "use client";
 
-// Cùng bố cục với app/components/Footer.js (dải cong -> 4 cột -> thanh bản quyền),
-// phỏng theo footer của "folio" (Ayush Singh) — https://github.com/ayush013/folio (MIT).
-// Copyright (c) 2020-2022 Ayush Singh. Licensed under the MIT License.
-// Ở đây đổi sang tone cam #F2684A và tiếng Việt cho trang /teaching.
-
 import Link from "next/link";
 import navData from "@/data/teaching/nav";
 import ctaData from "@/data/teaching/cta";
 import heroData from "@/data/teaching/hero";
 
-const ACCENT = "#F2684A";
-const PANEL = "#262238";
-
 const s = {
+  footer: {
+    background: "var(--teach-bg)",
+    borderTop: "1px solid var(--teach-border)",
+    padding: "3rem var(--teach-content-gutter) 2.5rem",
+  },
   heading: {
+    color: "var(--teach-text-secondary)",
     fontSize: 12,
     fontWeight: 700,
-    color: "rgba(255,255,255,0.8)",
-    textTransform: "uppercase",
     letterSpacing: "0.12em",
     marginBottom: "1rem",
-    fontFamily: "Montserrat, sans-serif",
+    textTransform: "uppercase",
   },
   link: {
-    display: "block",
-    width: "fit-content",
-    fontSize: 14,
-    color: "rgba(255,255,255,0.9)",
-    textDecoration: "none",
-    marginBottom: "0.65rem",
-    fontFamily: "Montserrat, sans-serif",
     background: "none",
-    border: "none",
-    padding: 0,
+    border: 0,
+    color: "var(--teach-ink)",
     cursor: "pointer",
+    display: "block",
+    fontFamily: "inherit",
+    fontSize: 14,
+    marginBottom: "0.65rem",
+    padding: 0,
     textAlign: "left",
+    textDecoration: "none",
     transition: "color 0.2s ease",
+    width: "fit-content",
   },
   body: {
+    color: "var(--teach-text)",
     fontSize: 14,
-    color: "rgba(255,255,255,0.9)",
     lineHeight: 1.7,
-    fontFamily: "Montserrat, sans-serif",
   },
   brand: {
-    fontFamily: "Montserrat, sans-serif",
-    fontWeight: 700,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: 20,
+    fontWeight: 700,
     marginBottom: "0.75rem",
   },
 };
@@ -65,29 +59,28 @@ export default function TeachingFooter() {
   const { brand, links, backLink } = navData;
 
   return (
-    // margin âm để tràn hết bề ngang: <main> của trang teaching có padding 0 1rem,
-    // không bù lại thì footer bị thụt hai bên và dải cong hụt mép.
-    <footer id="footer" style={{ position: "relative", margin: "0 -1rem" }}>
+    <footer id="footer" style={s.footer}>
       <style>{`
         .tf-grid {
           display: grid;
           grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
           gap: 2.5rem;
-          max-width: 72rem;
+          max-width: 75rem;
           margin: 0 auto;
         }
-        .tf-grid a:hover, .tf-grid button:hover { color: ${ACCENT}; }
+        .tf-grid a:hover, .tf-grid button:hover { color: var(--teach-brand); }
         .tf-bottom {
+          align-items: center;
+          background: var(--teach-brand-deep);
+          border-radius: 8px;
+          color: rgba(255,255,255,0.82);
           display: flex;
-          justify-content: space-between;
-          gap: 0.5rem;
-          max-width: 72rem;
-          margin: 2.5rem auto 0;
-          padding-top: 1.5rem;
-          border-top: 1px solid rgba(255,255,255,0.12);
           font-size: 12px;
-          color: rgba(255,255,255,0.65);
-          font-family: Montserrat, sans-serif;
+          gap: 0.5rem;
+          justify-content: space-between;
+          margin: 2.5rem auto 0;
+          max-width: 75rem;
+          padding: 1rem 1.25rem;
         }
         @media (max-width: 768px) {
           .tf-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1.5rem; }
@@ -98,74 +91,52 @@ export default function TeachingFooter() {
         }
       `}</style>
 
-      <svg
-        viewBox="0 0 1440 120"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        style={{ display: "block", width: "100%", height: 90 }}
-      >
-        <path d="M0,120 C360,20 1080,20 1440,120 L1440,120 L0,120 Z" fill={PANEL} />
-      </svg>
-
-      <div style={{ background: PANEL, padding: "1rem 1.5rem 2.5rem" }}>
-        <div className="tf-grid">
-          {/* 1. Danh tính */}
-          <div>
-            <div style={s.brand}>
-              {brand.name} {brand.accent}
-              <span style={{ color: ACCENT }}>.</span>
-            </div>
-            <p style={{ ...s.body, maxWidth: "18rem" }}>{heroData.subtext}</p>
+      <div className="tf-grid">
+        <div>
+          <div style={s.brand}>
+            {brand.name} {brand.accent}<span style={{ color: "var(--teach-brand)" }}>.</span>
           </div>
-
-          {/* 2. Khám phá */}
-          <div>
-            <p style={s.heading}>Khám phá</p>
-            {links.map((l) => (
-              <button key={l.href} style={s.link} onClick={() => scrollTo(l.href)}>
-                {l.label}
-              </button>
-            ))}
-          </div>
-
-          {/* 3. Khóa học */}
-          <div>
-            <p style={s.heading}>Bắt đầu</p>
-            <button style={s.link} onClick={() => scrollTo("#courses")}>
-              Xem khóa học
-            </button>
-            <button style={s.link} onClick={() => scrollTo("#contact")}>
-              Học thử miễn phí
-            </button>
-            <Link href={backLink.href} style={s.link}>
-              {backLink.label} ↗
-            </Link>
-          </div>
-
-          {/* 4. Liên hệ */}
-          <div>
-            <p style={s.heading}>Liên hệ</p>
-            {ctaData.buttons.map((btn) => (
-              <a
-                key={btn.label}
-                href={btn.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={s.link}
-              >
-                {btn.primary ? "📧" : "💬"} {btn.label}
-              </a>
-            ))}
-            <p style={{ ...s.body, color: "rgba(255,255,255,0.65)", marginTop: "0.5rem" }}>
-              ⏱ {ctaData.note}
-            </p>
-          </div>
+          <p style={{ ...s.body, maxWidth: "18rem" }}>{heroData.subtext}</p>
         </div>
 
-        <div className="tf-bottom">
-          <span>© 2026 Tuan (Tom) Tran</span>
-          <span>Built with Next.js &amp; framer-motion</span>
+        <div>
+          <p style={s.heading}>Khám phá</p>
+          {links.map((link) => (
+            <button key={link.href} style={s.link} onClick={() => scrollTo(link.href)}>
+              {link.label}
+            </button>
+          ))}
         </div>
+
+        <div>
+          <p style={s.heading}>Bắt đầu</p>
+          <button style={s.link} onClick={() => scrollTo("#courses")}>Xem khóa học</button>
+          <button style={s.link} onClick={() => scrollTo("#contact")}>Học thử miễn phí</button>
+          <Link href={backLink.href} style={s.link}>{backLink.label} ↗</Link>
+        </div>
+
+        <div>
+          <p style={s.heading}>Liên hệ</p>
+          {ctaData.buttons.map((button) => (
+            <a
+              key={button.label}
+              href={button.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={s.link}
+            >
+              {button.primary ? "📧" : "💬"} {button.label}
+            </a>
+          ))}
+          <p style={{ ...s.body, color: "var(--teach-text-secondary)", marginTop: "0.5rem" }}>
+            ⏱ {ctaData.note}
+          </p>
+        </div>
+      </div>
+
+      <div className="tf-bottom">
+        <span>© 2026 Tuan (Tom) Tran</span>
+        <span>Built with Next.js &amp; framer-motion</span>
       </div>
     </footer>
   );

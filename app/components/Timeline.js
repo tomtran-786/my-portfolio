@@ -13,19 +13,14 @@ export default function Timeline() {
     >
       {/* Header */}
       <div style={{ marginBottom: '3.5rem' }}>
-        <h2 style={{
-          fontSize: 52,
+        <h2 className="pf-section-title" style={{
           fontWeight: 700,
-          color: '#9B51E0',
           margin: '0 0 0.4rem',
-          lineHeight: 1.1, fontFamily: 'var(--font-inter)'
         }}>
           Timeline
         </h2>
-        <p style={{
-          fontSize: 22,
+        <p className="pf-section-subtitle" style={{
           fontWeight: 500,
-          color: '#FFFFFF',
           margin: 0,
         }}>
           A quick recap of proud moments
@@ -38,7 +33,7 @@ export default function Timeline() {
         {/* Vertical Center Line */}
         <div className="pf-timeline-line" style={{
           position: 'absolute', left: '50%', top: 0, bottom: 0,
-          width: 1, background: 'rgba(124,58,237,0.25)',
+          width: 1, background: 'var(--pf-border-strong)',
           transform: 'translateX(-50%)'
         }} />
 
@@ -59,35 +54,48 @@ export default function Timeline() {
                 gap: 0,
               }}
             >
-              {/* Left slot */}
-              <div style={{ paddingRight: '2rem', display: 'flex', justifyContent: 'flex-end' }}>
-                {isEven ? (
-                  <TextBlock exp={exp} align="right" />
-                ) : (
-                  <ImageBlock exp={exp} />
-                )}
+              {/* Copy luôn đứng trước media trong DOM để mobile và screen reader
+                  đọc đúng ngữ cảnh. Desktop chỉ đổi cột bằng CSS grid. */}
+              <div
+                className="pf-timeline-copy-slot"
+                style={{
+                  gridColumn: isEven ? 1 : 3,
+                  gridRow: 1,
+                  paddingRight: isEven ? '2rem' : 0,
+                  paddingLeft: isEven ? 0 : '2rem',
+                  display: 'flex',
+                  justifyContent: isEven ? 'flex-end' : 'flex-start',
+                }}
+              >
+                <TextBlock exp={exp} align={isEven ? 'right' : 'left'} />
               </div>
 
               {/* Center Node */}
-              <div className="pf-timeline-node" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <div className="pf-timeline-node" style={{ gridColumn: 2, gridRow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div style={{
                   width: 18, height: 18,
                   borderRadius: '50%',
-                  border: '3px solid #7c3aed',
-                  background: '#0a0e1a',
-                  boxShadow: '0 0 12px rgba(124,58,237,0.6)',
+                  border: '3px solid var(--pf-accent)',
+                  background: 'var(--pf-surface)',
+                  boxShadow: '0 0 0 5px var(--pf-accent-soft)',
                   flexShrink: 0,
                   zIndex: 2
                 }} />
               </div>
 
-              {/* Right slot */}
-              <div style={{ paddingLeft: '2rem' }}>
-                {isEven ? (
-                  <ImageBlock exp={exp} />
-                ) : (
-                  <TextBlock exp={exp} align="left" />
-                )}
+              {/* Media slot */}
+              <div
+                className="pf-timeline-media-slot"
+                style={{
+                  gridColumn: isEven ? 3 : 1,
+                  gridRow: 1,
+                  paddingLeft: isEven ? '2rem' : 0,
+                  paddingRight: isEven ? 0 : '2rem',
+                  display: 'flex',
+                  justifyContent: isEven ? 'flex-start' : 'flex-end',
+                }}
+              >
+                <ImageBlock exp={exp} />
               </div>
             </motion.div>
           )
@@ -107,22 +115,22 @@ function TextBlock({ exp, align }) {
       textAlign: isRight ? 'right' : 'left',
       maxWidth: 460,
     }}>
-      {/* Date — 15px Bold #A29BFE */}
+      {/* Date */}
       <span style={{
         fontSize: 18,
-        fontWeight: 800,
-        color: '#A29BFE',
+        fontWeight: 700,
+        color: 'var(--pf-brand)',
         marginBottom: '0.6rem',
         letterSpacing: '0.02em',
       }}>
         {exp.date}
       </span>
 
-      {/* Title + Company — 24px Semi-Bold #FFFFFF */}
+      {/* Title + Company */}
       <h3 style={{
         fontSize: 24,
         fontWeight: 700,
-        color: '#FFFFFF',
+        color: 'var(--pf-ink)',
         margin: '0 0 0.6rem',
         lineHeight: 1.4,
         letterSpacing: '-0.01em',
@@ -130,7 +138,7 @@ function TextBlock({ exp, align }) {
         {exp.title}{' - '}
         <span style={{
           textDecoration: 'underline',
-          textDecorationColor: '#9B51E0',
+          textDecorationColor: 'var(--pf-accent)',
           textUnderlineOffset: 5,
           textDecorationThickness: 2,
         }}>
@@ -138,11 +146,11 @@ function TextBlock({ exp, align }) {
         </span>
       </h3>
 
-      {/* Description — 15px Regular #B2BEC3 */}
+      {/* Description */}
       <p style={{
         fontSize: 15,
-        fontWeight: 700,
-        color: '#E6E7EB',
+        fontWeight: 400,
+        color: 'var(--pf-text)',
         lineHeight: 1.75,
         marginBottom: '0.75rem',
         maxWidth: 400,
@@ -153,30 +161,30 @@ function TextBlock({ exp, align }) {
       {/* Tools */}
       {exp.tools && (
         <p style={{
-          fontFamily: 'var(--font-inter)',
+          fontFamily: 'var(--font-portfolio)',
           fontSize: 12,
           fontWeight: 400,
-          color: '#B2BEC3',
+          color: 'var(--pf-text-secondary)',
           marginBottom: '1.25rem',
         }}>
-          <span style={{ color: '#9B51E0', fontWeight: 600 }}>Tools: </span>{exp.tools}
+          <span style={{ color: 'var(--pf-brand)', fontWeight: 600 }}>Tools: </span>{exp.tools}
         </p>
       )}
 
-      {/* Location Badge — 13px Medium #FFFFFF */}
+      {/* Location Badge */}
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '6px 14px', borderRadius: 999,
-        border: '0.5px solid rgba(155,81,224,0.4)',
-        background: 'rgba(155,81,224,0.12)',
+        border: '1px solid var(--pf-border-strong)',
+        background: 'var(--pf-brand-soft)',
       }}>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="#9B51E0">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--pf-brand)">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
         </svg>
         <span style={{
           fontSize: 13,
           fontWeight: 500,
-          color: '#FFFFFF',
+          color: 'var(--pf-brand-deep)',
         }}>
           {exp.location}
         </span>
@@ -191,8 +199,8 @@ function ImageBlock({ exp }) {
       position: 'relative', width: '100%', maxWidth: 440,
       aspectRatio: '16/9',
       borderRadius: 12, overflow: 'hidden',
-      border: '0.5px solid rgba(139,92,246,0.2)',
-      boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+      border: '1px solid var(--pf-border)',
+      boxShadow: 'var(--pf-shadow-card)',
     }}>
       <Image
         src={exp.image}

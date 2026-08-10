@@ -8,26 +8,28 @@ import useFocusTrap from '../hooks/useFocusTrap'
 // trang: portfolio "/" là tiếng Anh (<html lang="en">), /teaching là tiếng Việt.
 const themes = {
   portfolio: {
-    bg: '#0f1629',
-    border: 'rgba(139,92,246,0.25)',
-    text: '#f1f5f9',
-    accent: '#a78bfa',
-    accentSolid: '#7c3aed',
-    fontFamily: 'var(--font-inter)',
-    ctaBg: '#7c3aed',
+    bg: '#ffffff',
+    border: 'rgba(23,38,54,0.14)',
+    text: '#172636',
+    accent: '#0c498f',
+    accentSolid: '#297fd6',
+    fontFamily: 'var(--font-portfolio)',
+    ctaBg: '#0c498f',
     ctaColor: '#fff',
+    hoverBg: 'rgba(12,73,143,0.06)',
     menuLabel: 'Menu',
     closeLabel: 'Close menu',
   },
   teaching: {
-    bg: '#36314E',
-    border: 'rgba(255,255,255,0.08)',
-    text: '#E5E5E5',
-    accent: '#F2684A',
-    accentSolid: '#F2684A',
-    fontFamily: 'Montserrat, sans-serif',
-    ctaBg: '#F2684A',
+    bg: 'var(--teach-surface)',
+    border: 'var(--teach-border)',
+    text: 'var(--teach-ink)',
+    accent: 'var(--teach-brand)',
+    accentSolid: 'var(--teach-brand)',
+    fontFamily: 'var(--font-portfolio)',
+    ctaBg: 'var(--teach-brand)',
     ctaColor: '#fff',
+    hoverBg: 'var(--teach-brand-soft)',
     menuLabel: 'Menu',
     closeLabel: 'Đóng menu',
   },
@@ -187,7 +189,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
                 transition: 'background 0.2s, color 0.2s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+                e.currentTarget.style.background = t.hoverBg
                 e.currentTarget.style.color = t.accent
               }}
               onMouseLeave={(e) => {
@@ -218,7 +220,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
                 fontSize: 15,
                 fontWeight: 600,
                 letterSpacing: '0.01em',
-                boxShadow: `0 8px 22px ${theme === 'teaching' ? 'rgba(242,104,74,0.35)' : 'rgba(124,58,237,0.35)'}`,
+                boxShadow: `0 8px 22px ${theme === 'teaching' ? 'rgba(var(--teach-brand-rgb), 0.28)' : 'rgba(12,73,143,0.24)'}`,
               }}
             >
               {cta.label}

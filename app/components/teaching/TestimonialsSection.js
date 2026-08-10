@@ -19,23 +19,21 @@ const fadeUp = {
 
 const s = {
   section: {
-    maxWidth: "72rem",
-    margin: "6rem auto",
-    padding: "0 1rem",
+    margin: 0,
   },
   header: { marginBottom: "3rem", textAlign: "center" },
   headline: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "#fff",
-    fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+    color: "var(--teach-brand)",
+    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     marginBottom: "0.75rem",
   },
   subtext: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 15,
     lineHeight: 1.7,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   grid: {
     display: "grid",
@@ -43,45 +41,46 @@ const s = {
     gap: "1.25rem",
   },
   card: {
-    background: "#2F2B47",
-    border: "1.5px solid rgba(255,255,255,0.07)",
+    background: "var(--teach-surface)",
+    border: "1px solid var(--teach-border)",
     borderRadius: "1.25rem",
     padding: "1.75rem",
     display: "flex",
     flexDirection: "column",
     gap: "1.25rem",
     cursor: "default",
+    boxShadow: "var(--teach-shadow-card)",
   },
   quoteIcon: {
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     fontSize: 36,
     lineHeight: 1,
     fontFamily: "Georgia, serif",
     marginBottom: "-0.5rem",
   },
   quote: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 14,
     lineHeight: 1.8,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     flexGrow: 1,
     fontStyle: "italic",
   },
   resultBadge: {
     display: "inline-block",
-    background: "rgba(242,104,74,0.15)",
-    color: "#F2684A",
+    background: "rgba(var(--teach-brand-rgb), 0.15)",
+    color: "var(--teach-brand)",
     fontSize: 12,
     fontWeight: 700,
     padding: "0.3rem 0.75rem",
     borderRadius: "9999px",
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   footer: {
     display: "flex",
     alignItems: "center",
     gap: "0.75rem",
-    borderTop: "1px solid rgba(255,255,255,0.07)",
+    borderTop: "1px solid var(--teach-border)",
     paddingTop: "1.25rem",
   },
   avatar: {
@@ -89,24 +88,24 @@ const s = {
     height: 44,
     borderRadius: "50%",
     objectFit: "cover",
-    border: "2px solid #F2684A",
+    border: "2px solid var(--teach-brand)",
     flexShrink: 0,
   },
   name: {
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 700,
-    color: "#fff",
+    color: "var(--teach-ink)",
     fontSize: 14,
   },
   role: {
-    color: "#E5E5E5",
+    color: "var(--teach-text)",
     fontSize: 12,
-    fontFamily: "Montserrat, sans-serif",
+    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   stars: {
     display: "flex",
     gap: 2,
-    color: "#F2684A",
+    color: "var(--teach-brand)",
     marginLeft: "auto",
   },
   // Pagination controls
@@ -121,9 +120,9 @@ const s = {
     width: 40,
     height: 40,
     borderRadius: "50%",
-    background: disabled ? "rgba(255,255,255,0.05)" : "#373254",
-    border: "none",
-    color: disabled ? "#5C5878" : "#D8D4EA",
+    background: disabled ? "var(--teach-bg-soft)" : "var(--teach-surface-muted)",
+    border: "1px solid var(--teach-border)",
+    color: disabled ? "var(--teach-text-secondary)" : "var(--teach-text)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -139,7 +138,7 @@ const s = {
     width: active ? 22 : 8,
     height: 8,
     borderRadius: "9999px",
-    background: active ? "#F2684A" : "rgba(255,255,255,0.15)",
+    background: active ? "var(--teach-brand)" : "var(--teach-border-strong)",
     border: "none",
     cursor: "pointer",
     padding: 0,
@@ -181,7 +180,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section style={s.section} id="testimonials">
+    <section className="teach-section" style={s.section} id="testimonials">
       {/* Header */}
       <motion.div
         style={s.header}
@@ -210,8 +209,8 @@ export default function TestimonialsSection() {
               style={s.card}
               whileHover={{
                 y: -10,
-                boxShadow: "0 16px 32px rgba(0,0,0,0.35)",
-                borderColor: "rgba(242,104,74,0.4)",
+                boxShadow: "var(--teach-shadow-hover)",
+                borderColor: "var(--teach-border-strong)",
               }}
               transition={{ duration: 0.25, ease: "easeOut" }}
             >

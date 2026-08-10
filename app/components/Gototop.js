@@ -21,16 +21,16 @@ export default function GoToTop() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          whileHover={{ scale: 1.1, boxShadow: '0 8px 25px rgba(124,58,237,0.5)' }}
+          whileHover={{ scale: 1.1, boxShadow: '0 8px 25px rgba(12,73,143,0.32)' }}
           whileTap={{ scale: 0.95 }}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Back to top"
           style={{
             position: 'fixed', bottom: 32, right: 32, zIndex: 'var(--z-gototop)',
             width: 44, height: 44, borderRadius: '50%',
-            background: '#7c3aed', border: 'none', cursor: 'pointer',
+            background: 'var(--pf-brand)', border: 'none', cursor: 'pointer',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: '#fff', fontSize: 18, boxShadow: '0 4px 15px rgba(124,58,237,0.4)'
+            color: '#fff', fontSize: 18, boxShadow: '0 4px 15px rgba(12,73,143,0.25)'
           }}
         >
           <i className="ti ti-arrow-up" />

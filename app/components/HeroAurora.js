@@ -4,11 +4,11 @@
 // Copyright (c) 2020-2022 Ayush Singh. Licensed under the MIT License.
 //
 // Giữ nguyên kích thước, vị trí, blur và thông số chuyển động; chỉ đổi màu sang
-// palette của portfolio này.
+// hệ xanh editorial của portfolio.
 
 const AURORA_BLOBS = [
   {
-    color: 'rgba(124, 58, 237, 0.18)', // #7c3aed
+    color: 'rgba(41, 127, 214, 0.12)',
     width: '45%',
     height: '50%',
     top: '5%',
@@ -17,7 +17,7 @@ const AURORA_BLOBS = [
     animationClass: 'aurora-drift-1',
   },
   {
-    color: 'rgba(167, 139, 250, 0.14)', // #a78bfa
+    color: 'rgba(12, 73, 143, 0.09)',
     width: '40%',
     height: '45%',
     top: '30%',
@@ -26,7 +26,7 @@ const AURORA_BLOBS = [
     animationClass: 'aurora-drift-2',
   },
   {
-    color: 'rgba(6, 182, 212, 0.10)', // cyan như bản gốc, để aurora không một tông
+    color: 'rgba(51, 102, 153, 0.08)',
     width: '35%',
     height: '40%',
     top: '55%',

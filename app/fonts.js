@@ -1,9 +1,10 @@
-import { Inter } from 'next/font/google'
+import { Source_Sans_3 } from 'next/font/google'
 
-// Chỉ dùng cho portfolio ở "/". Trang /teaching giữ Montserrat (xem globals.css),
-// nên Inter cố ý KHÔNG đặt ở root layout — tránh /teaching preload font nó không dùng.
-export const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
+// Source Sans 3 giữ chất editorial gần Proxima Nova của Storytelling with Data,
+// nhưng là font nguồn mở, có Vietnamese subset và được Next.js self-host.
+// Cả portfolio và /teaching dùng chung font để giữ một ngôn ngữ thiết kế.
+export const portfolioFont = Source_Sans_3({
+  subsets: ['latin', 'vietnamese'],
+  variable: '--font-portfolio',
   display: 'swap',
 })

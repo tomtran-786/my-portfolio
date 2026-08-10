@@ -26,7 +26,7 @@ const toolStyle = {
   'Prisma':          { color: '#2D3748', bg: '#e8eaed', logo: '/logos/prisma.svg' },
   'Supabase':        { color: '#1c7a4d', bg: '#e3f7ed', logo: '/logos/supabase.svg' },
 }
-const getToolStyle = (tag) => toolStyle[tag] || { color: '#7c3aed', bg: 'rgba(139,92,246,0.12)' }
+const getToolStyle = (tag) => toolStyle[tag] || { color: 'var(--pf-brand)', bg: 'var(--pf-brand-soft)' }
 
 export const projects = [
   {
@@ -88,7 +88,7 @@ export const projects = [
     image: '/projects/chemistery.png',
     highlights: ['Database design', 'Payment & checkout', 'Course catalog', 'Order management'],
     tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase', 'Looker Studio'],
-    link: 'https://github.com/trungkt2006/portfolio-app',
+    link: 'https://chemisteryacademy.com/courses',
     dashboardLink: 'https://datastudio.google.com/reporting/91c25284-8111-4a8b-8106-698dfe304239',
   }
 ]
@@ -101,7 +101,7 @@ function ProjectCard({ proj, index, onClick }) {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <TiltCard>
+    <TiltCard style={{ height: '100%' }}>
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -127,21 +127,24 @@ function ProjectCard({ proj, index, onClick }) {
       whileHover={{ y: -8 }}
       animate={{
         boxShadow: hovered
-          ? '0 16px 40px rgba(124,58,237,0.3)'
-          : '0 4px 20px rgba(0,0,0,0.3)',
+          ? '0 18px 46px rgba(12,73,143,0.18)'
+          : '0 12px 34px rgba(23,38,54,0.1)',
       }}
       style={{
         position: 'relative',
-        background: '#0f1629',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        background: 'var(--pf-surface)',
         border: hovered
-          ? '0.5px solid rgba(139,92,246,0.6)'
-          : '0.5px solid rgba(139,92,246,0.2)',
+          ? '1px solid var(--pf-border-strong)'
+          : '1px solid var(--pf-border)',
         borderRadius: 14, overflow: 'hidden', cursor: 'pointer',
         transition: 'border 0.2s',
       }}
     >
       {/* Cover image */}
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b', overflow: 'hidden' }}>
+      <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: 'var(--pf-surface-muted)', overflow: 'hidden' }}>
         <Image
           src={proj.image}
           alt={proj.title}
@@ -157,7 +160,7 @@ function ProjectCard({ proj, index, onClick }) {
         />
         <div style={{
           position: 'absolute', top: 12, left: 12,
-          background: '#7c3aed', color: '#fff',
+          background: 'var(--pf-brand)', color: '#fff',
           fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 999,
         }}>
           {proj.category}
@@ -165,11 +168,11 @@ function ProjectCard({ proj, index, onClick }) {
       </div>
 
       {/* Content */}
-      <div style={{ padding: '1rem 1.2rem 1.2rem' }}>
+      <div style={{ padding: '1rem 1.2rem 1.2rem', display: 'flex', flex: 1, flexDirection: 'column' }}>
         {/* Title đổi màu tím khi hover */}
         <h3 style={{
           fontSize: 17, fontWeight: 700,
-          color: hovered ? '#a78bfa' : '#fff',
+          color: hovered ? 'var(--pf-brand)' : 'var(--pf-ink)',
           marginBottom: '0.5rem',
           lineHeight: 1.4,
           transition: 'color 0.2s ease',
@@ -177,12 +180,12 @@ function ProjectCard({ proj, index, onClick }) {
           {proj.title}
         </h3>
 
-        <p style={{ fontSize: 13, color: '#B2BEC3', lineHeight: 1.7, marginBottom: '0.8rem' }}>
+        <p style={{ fontSize: 13, color: 'var(--pf-text-secondary)', lineHeight: 1.7, marginBottom: '0.8rem' }}>
           {proj.desc}
         </p>
 
         {/* Tags với màu riêng */}
-        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 'auto' }}>
           {proj.tags.map(tag => {
   const { color, bg, logo } = getToolStyle(tag)
   return (
@@ -213,7 +216,7 @@ function ProjectCard({ proj, index, onClick }) {
           chiều ngang card; hai bên tắt hẳn. */}
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: 2,
-        background: 'linear-gradient(90deg, transparent 30%, #7c3aed 50%, transparent 70%)',
+        background: 'linear-gradient(90deg, transparent 30%, var(--pf-accent) 50%, transparent 70%)',
         opacity: hovered ? 1 : 0,
         transition: 'opacity 0.3s ease',
         pointerEvents: 'none',
@@ -265,17 +268,17 @@ export default function Projects() {
     <section id="projects" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
       <style>{`
         .pf-project-card:focus-visible {
-          outline: 3px solid #a78bfa;
+          outline: 3px solid #297fd6;
           outline-offset: 4px;
         }
       `}</style>
 
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: 52, fontWeight: 700, color: '#9B51E0', margin: '0 0 0.4rem', lineHeight: 1.1 }}>
+        <h2 className="pf-section-title" style={{ fontWeight: 700, margin: '0 0 0.4rem' }}>
           My Works
         </h2>
-        <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
+        <p className="pf-section-subtitle" style={{ fontWeight: 500, margin: 0 }}>
           What I do at 2 AM on a Saturday
         </p>
       </div>
@@ -292,9 +295,9 @@ export default function Projects() {
               aria-pressed={isActive}
               style={{
                 padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 600,
-                cursor: 'pointer', border: '0.5px solid rgba(139,92,246,0.4)',
-                background: isActive ? '#7c3aed' : 'rgba(139,92,246,0.08)',
-                color: isActive ? '#fff' : '#a78bfa',
+                cursor: 'pointer', border: '1px solid var(--pf-border-strong)',
+                background: isActive ? 'var(--pf-brand)' : 'var(--pf-surface)',
+                color: isActive ? '#fff' : 'var(--pf-brand)',
                 transition: 'all 0.2s',
                 display: 'inline-flex', alignItems: 'center', gap: 6,
               }}
@@ -302,8 +305,8 @@ export default function Projects() {
               {cat}
               <span style={{
                 fontSize: 11, fontWeight: 700,
-                background: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(139,92,246,0.2)',
-                color: isActive ? '#fff' : '#a78bfa',
+                background: isActive ? 'rgba(255,255,255,0.22)' : 'var(--pf-accent-soft)',
+                color: isActive ? '#fff' : 'var(--pf-brand)',
                 borderRadius: 999, padding: '1px 7px',
                 minWidth: 20, textAlign: 'center',
               }}>
@@ -336,7 +339,7 @@ export default function Projects() {
               exit={{ opacity: 0 }}
               onClick={() => setSelected(null)}
               style={{
-                position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
+                position: 'fixed', inset: 0, background: 'var(--pf-overlay)',
                 display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
                 zIndex: 'var(--z-modal)', padding: '2rem', overflowY: 'auto',
               }}
@@ -352,46 +355,47 @@ export default function Projects() {
                 transition={{ duration: 0.25 }}
                 onClick={e => e.stopPropagation()}
                 style={{
-                  background: '#0f1629', borderRadius: 18, overflow: 'hidden',
+                  background: 'var(--pf-surface)', borderRadius: 18, overflow: 'hidden',
                   maxWidth: 680, width: '100%',
                   margin: 'auto 0',
-                  border: '0.5px solid rgba(139,92,246,0.3)',
-                  boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+                  border: '1px solid var(--pf-border)',
+                  boxShadow: '0 24px 60px rgba(23,38,54,0.32)',
+                  fontFamily: 'var(--font-portfolio)',
                 }}
               >
               {/* Modal image */}
-              <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b' }}>
+              <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: 'var(--pf-surface-muted)' }}>
                 <Image src={selected.image} alt={selected.title} fill sizes="680px" style={{ objectFit: 'cover' }} />
               </div>
 
               {/* Modal content */}
               <div style={{ padding: '1.5rem 2rem 2rem' }}>
                 <div style={{
-                  display: 'inline-block', background: '#7c3aed', color: '#fff',
+                  display: 'inline-block', background: 'var(--pf-brand)', color: '#fff',
                   fontSize: 12, fontWeight: 600, padding: '4px 12px',
                   borderRadius: 999, marginBottom: '0.8rem',
                 }}>
                   {selected.category}
                 </div>
 
-                <h3 style={{ fontSize: 24, fontWeight: 700, color: '#fff', marginBottom: '0.6rem', lineHeight: 1.4 }}>
+                <h3 style={{ fontSize: 24, fontWeight: 700, color: 'var(--pf-ink)', marginBottom: '0.6rem', lineHeight: 1.4 }}>
                   {selected.title}
                 </h3>
-                <p style={{ fontSize: 15, color: '#B2BEC3', lineHeight: 1.75, marginBottom: '1.2rem' }}>
+                <p style={{ fontSize: 15, color: 'var(--pf-text-secondary)', lineHeight: 1.75, marginBottom: '1.2rem' }}>
                   {selected.desc}
                 </p>
 
                 {/* Key highlights */}
                 <div style={{ marginBottom: '1.2rem' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--pf-brand)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
                     Key Highlights
                   </div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {selected.highlights.map(h => (
                       <span key={h} style={{
-                        fontSize: 13, fontWeight: 600, color: '#fff',
-                        background: 'rgba(255,255,255,0.06)',
-                        border: '0.5px solid rgba(255,255,255,0.1)',
+                        fontSize: 13, fontWeight: 600, color: 'var(--pf-ink)',
+                        background: 'var(--pf-bg-soft)',
+                        border: '1px solid var(--pf-border)',
                         borderRadius: 8, padding: '6px 14px',
                       }}>{h}</span>
                     ))}
@@ -400,7 +404,7 @@ export default function Projects() {
 
                 {/* Tech stack với màu */}
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: '#475569', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--pf-brand)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
                     Tech Stack
                   </div>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -437,7 +441,7 @@ export default function Projects() {
                     rel="noreferrer"
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: 8,
-                      background: selected.link?.includes('github.com') ? '#7C3AEC' : '#7c3aed',
+                      background: selected.link?.includes('github.com') ? 'var(--pf-brand-deep)' : 'var(--pf-brand)',
                       color: '#fff',
                       fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
                       textDecoration: 'none',
@@ -459,8 +463,8 @@ export default function Projects() {
                       rel="noreferrer"
                       style={{
                         display: 'inline-flex', alignItems: 'center', gap: 8,
-                        background: '#fff', color: '#0a0e1a',
-                        border: '0.5px solid rgba(139,92,246,0.5)',
+                        background: '#fff', color: 'var(--pf-brand-deep)',
+                        border: '1px solid var(--pf-border-strong)',
                         fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
                         textDecoration: 'none',
                       }}
@@ -471,8 +475,8 @@ export default function Projects() {
                   <button
                     onClick={() => setSelected(null)}
                     style={{
-                      background: 'transparent', border: '0.5px solid rgba(139,92,246,0.3)',
-                      color: '#a78bfa', fontSize: 14, fontWeight: 500,
+                      background: 'transparent', border: '1px solid var(--pf-border-strong)',
+                      color: 'var(--pf-brand)', fontSize: 14, fontWeight: 600,
                       padding: '12px 20px', borderRadius: 999, cursor: 'pointer',
                     }}
                   >

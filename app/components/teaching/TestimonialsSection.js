@@ -252,6 +252,7 @@ export default function TestimonialsSection() {
                 style={s.pageDot(i === page)}
                 onClick={() => goToPage(i)}
                 aria-label={`Trang ${i + 1}`}
+                aria-current={i === page ? "page" : undefined}
               />
             ))}
           </div>

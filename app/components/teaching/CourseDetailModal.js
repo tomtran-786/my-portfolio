@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useId, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import coursesData from "@/data/teaching/courses";
@@ -561,14 +561,28 @@ function PricingCard({ plan, billing, discountPercent, isStudent }) {
   );
 }
 
-function FaqItem({ faq, isOpen, onToggle }) {
+function FaqItem({ faq, isOpen, onToggle, buttonId, panelId }) {
   return (
     <div style={s.faqItem}>
-      <button style={s.faqQuestion} onClick={onToggle}>
+      <button
+        id={buttonId}
+        style={s.faqQuestion}
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+      >
         <span>{faq.question}</span>
         <span style={{ ...s.faqChevron, transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}>⌄</span>
       </button>
-      {isOpen && <p style={s.faqAnswer}>{faq.answer}</p>}
+      <p
+        id={panelId}
+        role="region"
+        aria-labelledby={buttonId}
+        hidden={!isOpen}
+        style={s.faqAnswer}
+      >
+        {faq.answer}
+      </p>
     </div>
   );
 }
@@ -579,6 +593,7 @@ export default function CourseDetailModal({ course, faqs, testimonials, onClose 
   const [openFaq, setOpenFaq] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [testimonialDirection, setTestimonialDirection] = useState(1);
+  const faqIdPrefix = useId();
 
   const testimonialList = testimonials || [];
   const activeTestimonial = testimonialList[testimonialIndex];
@@ -759,6 +774,8 @@ function openSyllabus() {
               style={s.toggleTrack}
               onClick={() => setBilling(billing === "monthly" ? "annual" : "monthly")}
               aria-label="Chuyển đổi chu kỳ thanh toán"
+              role="switch"
+              aria-checked={billing === "annual"}
             >
               <motion.span
                 style={s.toggleThumb}
@@ -797,7 +814,14 @@ function openSyllabus() {
         <div style={s.faqSection}>
           <h3 style={s.sectionHeadline}>Câu hỏi thường gặp</h3>
           {(faqs || []).map((faq, i) => (
-            <FaqItem key={i} faq={faq} isOpen={openFaq === i} onToggle={() => setOpenFaq(openFaq === i ? null : i)} />
+            <FaqItem
+              key={i}
+              faq={faq}
+              isOpen={openFaq === i}
+              onToggle={() => setOpenFaq(openFaq === i ? null : i)}
+              buttonId={`${faqIdPrefix}-faq-button-${i}`}
+              panelId={`${faqIdPrefix}-faq-panel-${i}`}
+            />
           ))}
         </div>
 
@@ -851,6 +875,7 @@ function openSyllabus() {
                         style={s.studentDot(i === testimonialIndex)}
                         onClick={() => goToTestimonial(i)}
                         aria-label={`Xem testimonial ${i + 1}`}
+                        aria-current={i === testimonialIndex ? "true" : undefined}
                       />
                     ))}
                   </div>

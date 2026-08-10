@@ -262,16 +262,6 @@ export default function Certifications() {
               </TiltCard>
               )
             })}
-
-            {/* Placeholder cards nếu trang cuối có ít hơn 3 */}
-            {visible.length < PER_PAGE && Array.from({ length: PER_PAGE - visible.length }).map((_, i) => (
-              <div key={`placeholder-${i}`} style={{
-                background: 'rgba(15,22,41,0.3)',
-                border: '0.5px dashed rgba(139,92,246,0.1)',
-                borderRadius: 16,
-                aspectRatio: '4/3',
-              }} />
-            ))}
           </motion.div>
         </AnimatePresence>
       </div>

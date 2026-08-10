@@ -141,6 +141,7 @@ export default function ClassMomentsSection() {
             <button
               key={i}
               aria-label={`Xem ảnh ${i + 1}`}
+              aria-current={i === index ? "true" : undefined}
               className="moment-dot"
               style={{ ...s.dot, width: i === index ? 22 : 8, background: i === index ? "#F2684A" : "#534b78" }}
               onClick={() => goTo(i)}

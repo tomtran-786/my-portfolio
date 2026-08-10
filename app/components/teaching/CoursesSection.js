@@ -197,6 +197,7 @@ export default function CoursesSection() {
             key={cat.id}
             style={s.tabBtn(activeCategory === cat.id)}
             onClick={() => setActiveCategory(cat.id)}
+            aria-pressed={activeCategory === cat.id}
           >
             {cat.label}
           </button>

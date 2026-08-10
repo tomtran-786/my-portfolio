@@ -4,20 +4,20 @@ import { motion, useScroll, useSpring, AnimatePresence, useInView } from 'framer
 import { useState, useEffect, useRef } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import dynamic from 'next/dynamic'
-import Cursor from './components/Cursor'
-import NavLink from './components/NavLink'
-import MobileDrawer from './components/MobileDrawer'
-import GoToTop from './components/Gototop'
-import Timeline from './components/Timeline'
-import Projects, { projects } from './components/Projects'
-import Certifications, { certs } from './components/Certifications'
-import { inter } from './fonts'
-import CountUp from './components/CountUp'
-import Footer from './components/Footer'
-import WaveDivider from './components/WaveDivider'
-import HeroAurora from './components/HeroAurora'
+import Cursor from '@/app/components/Cursor'
+import NavLink from '@/app/components/NavLink'
+import MobileDrawer from '@/app/components/MobileDrawer'
+import GoToTop from '@/app/components/Gototop'
+import Timeline from '@/app/components/Timeline'
+import Projects, { projects } from '@/app/components/Projects'
+import Certifications, { certs } from '@/app/components/Certifications'
+import { inter } from '@/app/fonts'
+import CountUp from '@/app/components/CountUp'
+import Footer from '@/app/components/Footer'
+import WaveDivider from '@/app/components/WaveDivider'
+import HeroAurora from '@/app/components/HeroAurora'
 
-const HeroLottie = dynamic(() => import('./components/HeroLottie'), { ssr: false })
+const HeroLottie = dynamic(() => import('@/app/components/HeroLottie'), { ssr: false })
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
@@ -311,7 +311,7 @@ export default function Portfolio() {
 <section id="education" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
   <div>
-    <span style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Education</span>
+    <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Education</h2>
     <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
       Where I experienced my academic journey
     </p>
@@ -359,7 +359,7 @@ export default function Portfolio() {
       <section id="contact" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '0 0 1.5rem' }}>
   <div>
-    <span style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Contact</span>
+    <h2 style={{ fontFamily: 'var(--font-inter)', fontSize: 52, fontWeight: 700, color: '#9B51E0', display: 'block' }}>Contact</h2>
     <p style={{ fontSize: 22, fontWeight: 500, color: '#FFFFFF', margin: 0 }}>
       Where you can reach out to me
     </p>

@@ -107,6 +107,17 @@ function ProjectCard({ proj, index, onClick }) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1, ease: BACK_EASE }}
       onClick={onClick}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          onClick()
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-haspopup="dialog"
+      aria-label={`View details for ${proj.title}`}
+      className="pf-project-card"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       // `y` phải nằm ở whileHover chứ không phải animate: whileInView ở trên đã
@@ -243,6 +254,12 @@ export default function Projects() {
 
   return (
     <section id="projects" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
+      <style>{`
+        .pf-project-card:focus-visible {
+          outline: 3px solid #a78bfa;
+          outline-offset: 4px;
+        }
+      `}</style>
 
       {/* Header */}
       <div style={{ marginBottom: '2rem' }}>
@@ -263,6 +280,7 @@ export default function Projects() {
             <button
               key={cat}
               onClick={() => setActive(cat)}
+              aria-pressed={isActive}
               style={{
                 padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 600,
                 cursor: 'pointer', border: '0.5px solid rgba(139,92,246,0.4)',
@@ -309,7 +327,7 @@ export default function Projects() {
             onClick={() => setSelected(null)}
             style={{
               position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
               zIndex: 'var(--z-modal)', padding: '2rem', overflowY: 'auto',
             }}
           >
@@ -326,6 +344,7 @@ export default function Projects() {
               style={{
                 background: '#0f1629', borderRadius: 18, overflow: 'hidden',
                 maxWidth: 680, width: '100%',
+                margin: 'auto 0',
                 border: '0.5px solid rgba(139,92,246,0.3)',
                 boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
               }}

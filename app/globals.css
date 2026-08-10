@@ -124,28 +124,35 @@ body {
 }
 
 /* Teaching shares the portfolio's editorial system, with a route-scoped warm
-   palette. --teach-brand is intentionally the single swappable main-colour
-   token while the final muted-orange choice is being reviewed. */
+   palette. Bright orange is reserved for fills and large accents; the deeper
+   orange keeps text and focus indicators readable on light surfaces. */
 .teaching-body {
   --teach-content-gutter: max(2.5rem, calc((100vw - 1200px) / 2));
+  --teach-orange-500: #f79747;
+  --teach-orange-400: #fba866;
+  --teach-orange-300: #feb984;
+  --teach-orange-200: #ffcaa2;
+  --teach-orange-100: #ffdbc1;
   --teach-bg: #ffffff;
   --teach-bg-soft: #f8f6f4;
   --teach-surface: #ffffff;
-  --teach-surface-muted: #f7ece7;
+  --teach-surface-muted: #fff8f3;
   --teach-ink: #2f2723;
   --teach-text: #4a403b;
   --teach-text-secondary: #665c57;
-  --teach-brand: #a85f3d;
-  --teach-brand-rgb: 168, 95, 61;
-  --teach-brand-deep: #6f3b26;
-  --teach-accent: #d59778;
-  --teach-brand-soft: rgba(var(--teach-brand-rgb), 0.09);
+  --teach-brand: var(--teach-orange-500);
+  --teach-brand-rgb: 247, 151, 71;
+  --teach-brand-hover: var(--teach-orange-400);
+  --teach-brand-deep: #8f4100;
+  --teach-accent: var(--teach-orange-300);
+  --teach-brand-soft: rgba(var(--teach-brand-rgb), 0.1);
   --teach-border: rgba(65, 48, 40, 0.14);
-  --teach-border-strong: rgba(var(--teach-brand-rgb), 0.34);
+  --teach-border-strong: rgba(var(--teach-brand-rgb), 0.32);
   --teach-overlay: rgba(47, 39, 35, 0.82);
   --teach-shadow-card: 0 12px 34px rgba(65, 48, 40, 0.1);
   --teach-shadow-hover: 0 18px 46px rgba(var(--teach-brand-rgb), 0.18);
-  --teach-on-brand: #ffffff;
+  --teach-on-brand: var(--teach-ink);
+  --teach-focus: var(--teach-brand-deep);
   --cursor-follower: rgba(var(--teach-brand-rgb), 0.16);
 
   background: var(--teach-bg);
@@ -167,8 +174,8 @@ body {
 }
 
 .teaching-body :where(a, button):focus-visible {
-  outline: 3px solid var(--teach-accent);
-  outline-offset: 3px;
+  outline: 3px solid var(--teach-focus) !important;
+  outline-offset: 3px !important;
 }
 
 .teaching-body::-webkit-scrollbar-track,
@@ -183,7 +190,7 @@ body {
 
 .teaching-body::-webkit-scrollbar-thumb:hover,
 .teaching-body *::-webkit-scrollbar-thumb:hover {
-  background: var(--teach-brand-deep);
+  background: var(--teach-brand-hover);
 }
 
 .teach-section {
@@ -203,7 +210,7 @@ body {
 }
 
 .teach-section-title {
-  color: var(--teach-brand);
+  color: var(--teach-brand-deep);
   font-family: var(--font-portfolio), 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: clamp(2.25rem, 5vw, 3.25rem);
   font-weight: 700;

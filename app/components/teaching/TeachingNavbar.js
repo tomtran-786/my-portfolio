@@ -82,7 +82,7 @@ const s = {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     whiteSpace: "nowrap",
   },
-  accent: { color: "var(--teach-brand)" },
+  accent: { color: "var(--teach-brand-deep)" },
   navLinks: {
     display: "flex",
     alignItems: "center",
@@ -102,8 +102,8 @@ const s = {
   },
   ctaBtn: {
     flexShrink: 0,
-    background: "var(--teach-brand)",
-    color: "var(--teach-on-brand)",
+    background: "var(--teach-surface)",
+    color: "var(--teach-brand-deep)",
     fontSize: 15,
     fontWeight: 600,
     padding: "0.85rem 1.75rem",
@@ -111,7 +111,7 @@ const s = {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     whiteSpace: "nowrap",
     cursor: "pointer",
-    border: "none",
+    border: "1.5px solid var(--teach-brand-deep)",
     outline: "none",
   },
   burgerBtn: {
@@ -223,7 +223,7 @@ export default function TeachingNavbar() {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
         .nav-cta:hover {
-          background: var(--teach-brand-deep);
+          background: var(--teach-brand-soft) !important;
           transform: translateY(-3px);
           box-shadow: var(--teach-shadow-hover);
         }
@@ -247,7 +247,7 @@ export default function TeachingNavbar() {
 
         .nav-burger:hover {
           background: var(--teach-brand-soft) !important;
-          color: var(--teach-brand) !important;
+          color: var(--teach-brand-deep) !important;
         }
       `}</style>
 
@@ -281,7 +281,7 @@ export default function TeachingNavbar() {
             style={s.navLink}
             variants={{
               initial: { color: 'var(--teach-ink)' },
-              hover: { color: 'var(--teach-brand)' },
+              hover: { color: 'var(--teach-brand-deep)' },
             }}
             transition={{ duration: 0.2 }}
           >

@@ -68,12 +68,13 @@ export default function TeachingFooter() {
           max-width: 75rem;
           margin: 0 auto;
         }
-        .tf-grid a:hover, .tf-grid button:hover { color: var(--teach-brand); }
+        .tf-grid a:hover, .tf-grid button:hover { color: var(--teach-brand-deep) !important; }
         .tf-bottom {
           align-items: center;
-          background: var(--teach-brand-deep);
+          background: var(--teach-surface-muted);
+          border: 1px solid var(--teach-border);
           border-radius: 8px;
-          color: rgba(255,255,255,0.82);
+          color: var(--teach-text-secondary);
           display: flex;
           font-size: 12px;
           gap: 0.5rem;
@@ -94,7 +95,7 @@ export default function TeachingFooter() {
       <div className="tf-grid">
         <div>
           <div style={s.brand}>
-            {brand.name} {brand.accent}<span style={{ color: "var(--teach-brand)" }}>.</span>
+            {brand.name} {brand.accent}<span style={{ color: "var(--teach-brand-deep)" }}>.</span>
           </div>
           <p style={{ ...s.body, maxWidth: "18rem" }}>{heroData.subtext}</p>
         </div>

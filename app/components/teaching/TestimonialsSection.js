@@ -25,7 +25,7 @@ const s = {
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     marginBottom: "0.75rem",
   },
@@ -52,7 +52,7 @@ const s = {
     boxShadow: "var(--teach-shadow-card)",
   },
   quoteIcon: {
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 36,
     lineHeight: 1,
     fontFamily: "Georgia, serif",
@@ -69,7 +69,7 @@ const s = {
   resultBadge: {
     display: "inline-block",
     background: "rgba(var(--teach-brand-rgb), 0.15)",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 12,
     fontWeight: 700,
     padding: "0.3rem 0.75rem",
@@ -105,7 +105,7 @@ const s = {
   stars: {
     display: "flex",
     gap: 2,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     marginLeft: "auto",
   },
   // Pagination controls

@@ -52,7 +52,7 @@ wrapper: {
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "var(--teach-brand-deep)",
+    color: "var(--teach-ink)",
     fontSize: "clamp(2rem, 4.5vw, 3.25rem)",
     lineHeight: 1.15,
     marginBottom: "1.5rem",
@@ -81,8 +81,9 @@ wrapper: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   ctaArrow: {
-    background: "var(--teach-brand)",
-    color: "var(--teach-on-brand)",
+    background: "var(--teach-surface)",
+    color: "var(--teach-brand-deep)",
+    border: "1.5px solid var(--teach-brand-deep)",
     width: 52, height: 52,
     borderRadius: "50%",
     display: "flex",
@@ -116,7 +117,7 @@ wrapper: {
     display: "flex",
     alignItems: "center",
     gap: "0.35rem",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
   },
   ratingText: {
     color: "var(--teach-ink)",
@@ -166,12 +167,12 @@ export default function HeroSection() {
           transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
         .hero-cta-primary:hover {
-          background: var(--teach-brand-deep);
+          background: var(--teach-brand-hover) !important;
           transform: translateY(-3px);
           box-shadow: var(--teach-shadow-hover);
         }
         .hero-cta-arrow:hover {
-          background: var(--teach-brand-deep);
+          background: var(--teach-brand-soft) !important;
           transform: translateY(-3px) scale(1.06);
           box-shadow: var(--teach-shadow-hover);
         }

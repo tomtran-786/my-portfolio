@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import coursesData from "@/data/teaching/courses";
 import testimonialsData from "@/data/teaching/testimonials";
@@ -26,7 +25,7 @@ const s = {
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     lineHeight: 1.2,
     marginBottom: "0.75rem",
@@ -65,8 +64,8 @@ const s = {
     gap: "1.25rem",
   },
   card: (highlighted) => ({
-    background: highlighted ? "var(--teach-brand-soft)" : "var(--teach-surface)",
-    border: highlighted ? "1.5px solid var(--teach-brand)" : "1px solid var(--teach-border)",
+    background: "var(--teach-surface)",
+    border: highlighted ? "1.5px solid var(--teach-border-strong)" : "1px solid var(--teach-border)",
     borderRadius: "1.25rem",
     padding: "1.75rem",
     display: "flex",
@@ -81,7 +80,7 @@ const s = {
   // là đường vào modal bằng bàn phím. Reset lại style mặc định của button để giữ
   // nguyên hình dáng cũ.
   viewDetailHint: {
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 12.5,
     fontWeight: 600,
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
@@ -96,8 +95,9 @@ const s = {
     position: "absolute",
     top: "1.25rem",
     right: "1.25rem",
-    background: "var(--teach-brand)",
-    color: "var(--teach-on-brand)",
+    background: "var(--teach-brand-soft)",
+    color: "var(--teach-brand-deep)",
+    border: "1px solid var(--teach-border-strong)",
     fontSize: 11,
     fontWeight: 700,
     padding: "0.2rem 0.65rem",
@@ -106,7 +106,7 @@ const s = {
   },
   cardIcon: { fontSize: 32, lineHeight: 1 },
   cardTag: {
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 11,
     fontWeight: 700,
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
@@ -144,20 +144,6 @@ const s = {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   metaIcon: { fontSize: 13 },
-  cardCta: (highlighted) => ({
-    marginTop: "1rem",
-    display: "block",
-    textAlign: "center",
-    background: highlighted ? "var(--teach-brand)" : "transparent",
-    color: highlighted ? "var(--teach-on-brand)" : "var(--teach-brand)",
-    border: highlighted ? "none" : "1.5px solid var(--teach-brand)",
-    fontSize: 13,
-    fontWeight: 700,
-    padding: "0.7rem",
-    borderRadius: "9999px",
-    textDecoration: "none",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-  }),
   emptyState: {
     color: "var(--teach-text)",
     fontSize: 14,
@@ -168,7 +154,7 @@ const s = {
 };
 
 export default function CoursesSection() {
-  const { headline, subtext, items, cta, ctaHref, faqs } = coursesData;
+  const { headline, subtext, items, faqs } = coursesData;
   const [activeCategory, setActiveCategory] = useState("all");
   const [selectedCourse, setSelectedCourse] = useState(null);
 
@@ -261,19 +247,6 @@ export default function CoursesSection() {
                   Xem chi tiết khóa học →
                 </button>
 
-                <Link
-                  href={ctaHref}
-                  style={s.cardCta(item.highlighted)}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (ctaHref.startsWith("#")) {
-                      e.preventDefault();
-                      document.getElementById(ctaHref.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
-                    }
-                  }}
-                >
-                  {cta}
-                </Link>
               </motion.div>
             ))
           )}

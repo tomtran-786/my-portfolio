@@ -98,7 +98,7 @@ syllabusLink: {
   gap: "0.5rem",
   fontSize: 13,
   fontWeight: 600,
-  color: "var(--teach-brand)",
+  color: "var(--teach-brand-deep)",
   textDecoration: "none",
   fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   background: "rgba(var(--teach-brand-rgb), 0.08)",
@@ -110,7 +110,7 @@ syllabusLink: {
 },
   introRight: { display: "flex", flexDirection: "column" },
   tag: {
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 12,
     fontWeight: 700,
     textTransform: "uppercase",
@@ -166,7 +166,7 @@ syllabusLink: {
     alignItems: "center",
     gap: "0.4rem",
     background: "var(--teach-surface-muted)",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 12,
     fontWeight: 600,
     padding: "0.35rem 0.9rem",
@@ -212,7 +212,7 @@ syllabusLink: {
   studentCheckbox: {
     width: 16,
     height: 16,
-    accentColor: "var(--teach-brand)",
+    accentColor: "var(--teach-brand-deep)",
     cursor: "pointer",
   },
   priceOriginal: {
@@ -225,7 +225,7 @@ syllabusLink: {
   fromLabel: {
     display: "inline-block",
     background: "rgba(var(--teach-brand-rgb), 0.15)",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 11,
     fontWeight: 700,
     textTransform: "uppercase",
@@ -255,7 +255,7 @@ syllabusLink: {
   },
   savePill: {
     background: "rgba(var(--teach-brand-rgb), 0.15)",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 12,
     fontWeight: 700,
     padding: "0.25rem 0.7rem",
@@ -270,7 +270,7 @@ syllabusLink: {
   },
   planCard: (popular) => ({
     background: popular ? "var(--teach-brand-soft)" : "var(--teach-bg-soft)",
-    border: popular ? "1.5px solid var(--teach-brand)" : "1px solid var(--teach-border)",
+    border: popular ? "1.5px solid var(--teach-brand-deep)" : "1px solid var(--teach-border)",
     borderRadius: "1.25rem",
     padding: "1.5rem",
     position: "relative",
@@ -280,7 +280,7 @@ syllabusLink: {
     top: "1.25rem",
     right: "1.25rem",
     background: "var(--teach-surface)",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 10.5,
     fontWeight: 700,
     padding: "0.2rem 0.6rem",
@@ -328,7 +328,7 @@ syllabusLink: {
     textAlign: "left",
   },
   faqChevron: {
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 18,
     transition: "transform 0.2s ease",
     flexShrink: 0,
@@ -363,7 +363,7 @@ syllabusLink: {
     gap: "0.9rem",
   },
   studentQuoteIcon: {
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 28,
     lineHeight: 1,
     fontFamily: "Georgia, serif",
@@ -379,7 +379,7 @@ syllabusLink: {
   studentResultBadge: {
     display: "inline-block",
     background: "rgba(var(--teach-brand-rgb), 0.15)",
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: 11.5,
     fontWeight: 700,
     padding: "0.25rem 0.65rem",
@@ -399,7 +399,7 @@ syllabusLink: {
     height: 38,
     borderRadius: "50%",
     objectFit: "cover",
-    border: "2px solid var(--teach-brand)",
+    border: "2px solid var(--teach-brand-deep)",
     flexShrink: 0,
   },
   studentName: {
@@ -416,7 +416,7 @@ syllabusLink: {
   studentStars: {
     display: "flex",
     gap: 1,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     marginLeft: "auto",
     flexShrink: 0,
   },
@@ -490,7 +490,7 @@ function renderBold(text) {
 
 function CheckIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teach-brand)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teach-brand-deep)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <polyline points="20 6 9 17 4 12" />
     </svg>
   );
@@ -673,28 +673,28 @@ function openSyllabus() {
     >
       <style>{`
         .course-modal-panel:focus {
-          outline: 2px solid var(--teach-accent);
+          outline: 2px solid var(--teach-focus);
           outline-offset: -2px;
         }
         .course-modal-cta-primary:hover {
-          background: var(--teach-brand-deep);
+          background: var(--teach-brand-hover) !important;
           transform: translateY(-3px);
           box-shadow: var(--teach-shadow-hover);
         }
         .course-modal-syllabus-link:hover {
-          background: rgba(var(--teach-brand-rgb), 0.15);
-          border-color: rgba(var(--teach-brand-rgb), 0.45);
+          background: rgba(var(--teach-brand-rgb), 0.15) !important;
+          border-color: rgba(var(--teach-brand-rgb), 0.45) !important;
           transform: translateY(-2px);
           box-shadow: 0 4px 16px rgba(var(--teach-brand-rgb), 0.18);
-          color: var(--teach-accent);
+          color: var(--teach-brand-deep) !important;
         }
         .course-modal-close:hover {
-          background: var(--teach-brand);
-          color: var(--teach-on-brand);
+          background: var(--teach-brand) !important;
+          color: var(--teach-on-brand) !important;
         }
         .course-modal-student-nav:hover {
-          background: var(--teach-brand);
-          color: var(--teach-on-brand);
+          background: var(--teach-brand) !important;
+          color: var(--teach-on-brand) !important;
         }
         @media (max-width: 700px) {
           .course-modal-intro { grid-template-columns: 1fr !important; }

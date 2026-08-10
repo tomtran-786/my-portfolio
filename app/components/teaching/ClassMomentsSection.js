@@ -12,7 +12,7 @@ const s = {
   heading: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     marginBottom: "2rem",
     textAlign: "center",
@@ -89,7 +89,7 @@ export default function ClassMomentsSection() {
     <section className="teach-section teach-section-soft" style={s.wrapper} id="class-moments">
       <style>{`
         .moment-nav-btn { transition: background 0.2s ease, transform 0.2s ease; }
-        .moment-nav-btn:hover { background: rgba(var(--teach-brand-rgb), 0.85); transform: translateY(-50%) scale(1.06); }
+        .moment-nav-btn:hover { background: rgba(var(--teach-brand-rgb), 0.92) !important; color: var(--teach-on-brand) !important; transform: translateY(-50%) scale(1.06); }
         .moment-dot { transition: background 0.2s ease, width 0.2s ease; }
         @media (max-width: 600px) {
           .moment-stage { aspect-ratio: 4 / 3 !important; border-radius: 1rem !important; }

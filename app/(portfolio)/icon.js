@@ -19,7 +19,7 @@ export default function PortfolioIcon() {
           justifyContent: 'center',
           background: '#0c498f',
           border: '5px solid #003865',
-          borderRadius: 16,
+          borderRadius: 25,
           color: '#ffffff',
           fontFamily: 'Arial, sans-serif',
           fontSize: 25,

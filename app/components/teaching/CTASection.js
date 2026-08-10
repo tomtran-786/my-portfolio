@@ -18,36 +18,37 @@ const s = {
     margin: 0,
   },
   card: {
-    background: "linear-gradient(135deg, var(--teach-brand-deep) 0%, var(--teach-brand) 100%)",
-    border: "1.5px solid rgba(var(--teach-brand-rgb), 0.3)",
+    background: "var(--teach-surface)",
+    border: "1px solid var(--teach-border)",
     borderRadius: "2rem",
     padding: "4rem 3rem",
     textAlign: "center",
     position: "relative",
     overflow: "hidden",
+    boxShadow: "var(--teach-shadow-card)",
   },
   decorCircle: {
     position: "absolute", top: -80, right: -80,
     width: 280, height: 280, borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(var(--teach-brand-rgb), 0.15) 0%, transparent 70%)",
+    background: "radial-gradient(circle, var(--teach-brand-soft) 0%, transparent 70%)",
     pointerEvents: "none",
   },
   decorCircle2: {
     position: "absolute", bottom: -60, left: -60,
     width: 200, height: 200, borderRadius: "50%",
-    background: "radial-gradient(circle, rgba(var(--teach-brand-rgb), 0.1) 0%, transparent 70%)",
+    background: "radial-gradient(circle, var(--teach-brand-soft) 0%, transparent 70%)",
     pointerEvents: "none",
   },
   emoji: { fontSize: 48, display: "block", marginBottom: "1.25rem" },
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800, color: "var(--teach-on-brand)",
+    fontWeight: 800, color: "var(--teach-ink)",
     fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
     lineHeight: 1.25, marginBottom: "1rem",
     position: "relative", zIndex: 1,
   },
   subtext: {
-    color: "rgba(255,255,255,0.9)", fontSize: 15, lineHeight: 1.8,
+    color: "var(--teach-text)", fontSize: 15, lineHeight: 1.8,
     maxWidth: "30rem", margin: "0 auto 2.5rem auto",
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     position: "relative", zIndex: 1,
@@ -58,7 +59,7 @@ const s = {
     flexWrap: "wrap", position: "relative", zIndex: 1,
   },
   btnPrimary: {
-    background: "var(--teach-surface)", color: "var(--teach-brand-deep)",
+    background: "var(--teach-brand)", color: "var(--teach-on-brand)",
     fontWeight: 700, fontSize: 15,
     padding: "1rem 2rem", borderRadius: "9999px",
     textDecoration: "none",
@@ -67,17 +68,17 @@ const s = {
     transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
   },
   btnSecondary: {
-    background: "transparent", color: "var(--teach-on-brand)",
+    background: "var(--teach-surface)", color: "var(--teach-brand-deep)",
     fontWeight: 700, fontSize: 15,
     padding: "1rem 2rem", borderRadius: "9999px",
     textDecoration: "none",
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    border: "1.5px solid rgba(255,255,255,0.25)",
+    border: "1.5px solid var(--teach-brand-deep)",
     display: "inline-flex", alignItems: "center", gap: "0.5rem",
     transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease",
   },
   note: {
-    color: "rgba(255,255,255,0.82)", fontSize: 14,
+    color: "var(--teach-text-secondary)", fontSize: 14,
     marginTop: "1.5rem", fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     position: "relative", zIndex: 1,
   },
@@ -90,13 +91,13 @@ export default function CTASection() {
     <section className="teach-section teach-section-soft" style={s.section} id="contact">
       <style>{`
         .cta-btn-primary:hover {
-          background: var(--teach-surface-muted);
+          background: var(--teach-brand-hover) !important;
           transform: translateY(-3px);
           box-shadow: 0 10px 28px rgba(65, 48, 40, 0.24);
         }
         .cta-btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(255, 255, 255, 0.5);
+          background: var(--teach-brand-soft) !important;
+          border-color: var(--teach-brand-deep) !important;
           transform: translateY(-3px);
         }
       `}</style>

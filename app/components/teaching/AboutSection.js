@@ -34,7 +34,7 @@ const s = {
   headline: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
     lineHeight: 1.25,
     marginBottom: "1.5rem",
@@ -88,7 +88,7 @@ const s = {
   statValue: {
     fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 800,
-    color: "var(--teach-brand)",
+    color: "var(--teach-brand-deep)",
     fontSize: "1.6rem",
     fontVariantNumeric: "tabular-nums",
   },

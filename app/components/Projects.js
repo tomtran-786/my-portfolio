@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import TiltCard from './TiltCard'
@@ -225,6 +226,14 @@ function ProjectCard({ proj, index, onClick }) {
 export default function Projects() {
   const [active, setActive] = useState(ALL)
   const [selected, setSelected] = useState(null)
+  const [portalTarget, setPortalTarget] = useState(null)
+
+  // Chỉ lấy document.body sau khi hydrate. Modal được portal ra ngoài
+  // section#projects để --z-modal không bị kẹt trong stacking context z-index: 5.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setPortalTarget(document.body))
+    return () => cancelAnimationFrame(frame)
+  }, [])
 
   useScrollLock(Boolean(selected))
   const modalRef = useFocusTrap(Boolean(selected))
@@ -317,38 +326,39 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
-            style={{
-              position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
-              display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
-              zIndex: 'var(--z-modal)', padding: '2rem', overflowY: 'auto',
-            }}
-          >
+      {/* Portal giữ AnimatePresence mounted để exit animation vẫn chạy khi đóng. */}
+      {portalTarget && createPortal(
+        <AnimatePresence>
+          {selected && (
             <motion.div
-              ref={modalRef}
-              role="dialog"
-              aria-modal="true"
-              aria-label={selected.title}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.25 }}
-              onClick={e => e.stopPropagation()}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelected(null)}
               style={{
-                background: '#0f1629', borderRadius: 18, overflow: 'hidden',
-                maxWidth: 680, width: '100%',
-                margin: 'auto 0',
-                border: '0.5px solid rgba(139,92,246,0.3)',
-                boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+                position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)',
+                display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+                zIndex: 'var(--z-modal)', padding: '2rem', overflowY: 'auto',
               }}
             >
+              <motion.div
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label={selected.title}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.25 }}
+                onClick={e => e.stopPropagation()}
+                style={{
+                  background: '#0f1629', borderRadius: 18, overflow: 'hidden',
+                  maxWidth: 680, width: '100%',
+                  margin: 'auto 0',
+                  border: '0.5px solid rgba(139,92,246,0.3)',
+                  boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
+                }}
+              >
               {/* Modal image */}
               <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#1e293b' }}>
                 <Image src={selected.image} alt={selected.title} fill sizes="680px" style={{ objectFit: 'cover' }} />
@@ -470,10 +480,12 @@ export default function Projects() {
                   </button>
                 </div>
               </div>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        portalTarget
+      )}
     </section>
   )
 }

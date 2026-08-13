@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 17,
+    name: 'Pandas for Data Analysis',
+    issuer: 'Xóm Data Academy',
+    date: '2026',
+    image: '/certifications/pandas-for-data-analysis.svg',
+    link: 'https://xomdata.com/certificates/XA-RYEWES',
+  },
+  {
     id: 16,
     name: 'Data Visualization with Matplotlib',
     issuer: 'Xóm Data Academy',

@@ -26,6 +26,14 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 18,
+    name: 'Productivity Hub',
+    issuer: 'Google',
+    date: '2026',
+    image: '/certifications/productivity-hub.png',
+    link: '',
+  },
+  {
     id: 17,
     name: 'Pandas for Data Analysis',
     issuer: 'Xóm Data Academy',

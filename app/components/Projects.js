@@ -90,11 +90,21 @@ export const projects = [
     tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase', 'Looker Studio'],
     link: 'https://chemisteryacademy.com/courses',
     dashboardLink: 'https://datastudio.google.com/reporting/91c25284-8111-4a8b-8106-698dfe304239',
+  },
+  {
+    id: 7,
+    category: 'Learning',
+    title: 'Xom Data Practice Portfolio',
+    desc: 'A version-controlled collection of SQL and Python solutions, organized by language and difficulty to document consistent problem-solving practice.',
+    image: '/projects/xomdata-practice.svg',
+    highlights: ['SQL problem solving', 'Python practice', 'Difficulty-based structure', 'Documented learning progress'],
+    tags: ['Python', 'SQL', 'GitHub'],
+    link: 'https://github.com/tomtran-786/xomdata-practice',
   }
 ]
 
 const ALL = 'All'
-const categoryList = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case', 'Product Management']
+const categoryList = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case', 'Product Management', 'Learning']
 
 // Card với hover state nội bộ
 function ProjectCard({ proj, index, onClick }) {

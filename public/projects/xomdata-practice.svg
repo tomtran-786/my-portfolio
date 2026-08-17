@@ -1,0 +1,44 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="background" x1="96" y1="40" x2="1482" y2="868" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071C33"/>
+      <stop offset="1" stop-color="#0C498F"/>
+    </linearGradient>
+    <linearGradient id="line" x1="304" y1="294" x2="1278" y2="672" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#86BFFF"/>
+      <stop offset="1" stop-color="#6BD69F"/>
+    </linearGradient>
+    <filter id="shadow" x="116" y="92" width="1368" height="716" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="28" stdDeviation="34" flood-color="#020B15" flood-opacity="0.44"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" rx="48" fill="url(#background)"/>
+  <circle cx="1376" cy="116" r="232" fill="#297FD6" fill-opacity="0.14"/>
+  <circle cx="172" cy="824" r="282" fill="#6BD69F" fill-opacity="0.09"/>
+  <g filter="url(#shadow)">
+    <rect x="150" y="126" width="1300" height="648" rx="30" fill="#0C1724" stroke="#86BFFF" stroke-opacity="0.24" stroke-width="2"/>
+    <rect x="150" y="126" width="1300" height="76" rx="30" fill="#12263B"/>
+    <rect x="150" y="174" width="1300" height="28" fill="#12263B"/>
+    <circle cx="202" cy="164" r="10" fill="#FF6B6B"/>
+    <circle cx="238" cy="164" r="10" fill="#FFD166"/>
+    <circle cx="274" cy="164" r="10" fill="#6BD69F"/>
+    <text x="800" y="174" fill="#9FB0C1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" text-anchor="middle">github.com/tomtran-786/xomdata-practice</text>
+  </g>
+  <text x="226" y="286" fill="#86BFFF" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="4">XOM DATA PRACTICE</text>
+  <text x="226" y="370" fill="#F4F8FC" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">Practice. Solve. Improve.</text>
+  <text x="226" y="422" fill="#B9C9D8" font-family="Arial, Helvetica, sans-serif" font-size="28">A growing collection of SQL &amp; Python solutions</text>
+  <g>
+    <rect x="226" y="488" width="516" height="166" rx="22" fill="#152638" stroke="#86BFFF" stroke-opacity="0.18"/>
+    <circle cx="286" cy="548" r="15" fill="#3572A5"/>
+    <text x="318" y="559" fill="#F4F8FC" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Python</text>
+    <text x="286" y="622" fill="#86BFFF" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">Problem solving</text>
+  </g>
+  <g>
+    <rect x="772" y="488" width="516" height="166" rx="22" fill="#152638" stroke="#86BFFF" stroke-opacity="0.18"/>
+    <circle cx="832" cy="548" r="15" fill="#E38C00"/>
+    <text x="864" y="559" fill="#F4F8FC" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">SQL</text>
+    <text x="832" y="622" fill="#86BFFF" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700">Query practice</text>
+  </g>
+  <path d="M1160 286H1290" stroke="url(#line)" stroke-width="8" stroke-linecap="round"/>
+  <path d="M1252 248L1290 286L1252 324" stroke="#6BD69F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

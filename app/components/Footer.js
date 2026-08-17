@@ -57,6 +57,7 @@ const s = {
 const EXPLORE = [
   { label: 'Home', href: '#home' },
   { label: 'My Works', href: '#projects' },
+  { label: 'My Activity', href: '#activity' },
   { label: 'Timeline', href: '#experience' },
   { label: 'Education', href: '#education' },
   { label: 'My Certifications', href: '#certifications' },

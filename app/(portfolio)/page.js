@@ -10,6 +10,7 @@ import MobileDrawer from '@/app/components/MobileDrawer'
 import GoToTop from '@/app/components/Gototop'
 import Timeline from '@/app/components/Timeline'
 import Projects, { projects } from '@/app/components/Projects'
+import Activity from '@/app/components/Activity'
 import Certifications, { certs } from '@/app/components/Certifications'
 import CountUp from '@/app/components/CountUp'
 import Footer from '@/app/components/Footer'
@@ -21,6 +22,7 @@ const HeroLottie = dynamic(() => import('@/app/components/HeroLottie'), { ssr: f
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
   { label: 'My Works', href: '#projects' },
+  { label: 'My Activity', href: '#activity' },
   { label: 'Timeline', href: '#experience' },
   { label: 'Education', href: '#education' },
   { label: 'My Certifications', href: '#certifications' },
@@ -281,7 +283,7 @@ export default function Portfolio() {
       }}>
         {[
           { num: String(projects.length), label: 'Projects' },
-          { num: '1', label: 'GitHub Repos' },
+          { num: String(projects.filter(project => project.link?.includes('github.com')).length), label: 'GitHub Projects' },
           { num: String(certs.length), label: 'Certifications' },
         ].map(({ num, label }) => (
           <div key={label} className="pf-stat-cell">
@@ -295,6 +297,9 @@ export default function Portfolio() {
 
      {/* PROJECTS */}
      <Projects />
+
+    {/* ACTIVITY */}
+    <Activity />
 
     {/* EXPERIENCE */}
 <Timeline />

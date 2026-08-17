@@ -100,6 +100,16 @@ export const projects = [
     highlights: ['SQL problem solving', 'Python practice', 'Difficulty-based structure', 'Documented learning progress'],
     tags: ['Python', 'SQL', 'GitHub'],
     link: 'https://github.com/tomtran-786/xomdata-practice',
+  },
+  {
+    id: 8,
+    category: 'Consulting Case',
+    title: 'UniSweet FY2024 Performance Review',
+    desc: 'An end-to-end Finance Business Partner case that turns raw market, sales, and P&L data into an executive performance review and action plan.',
+    image: '/projects/unisweet-performance-review.png',
+    highlights: ['Sales & P&L analysis', 'Market diagnostics', 'Financial storytelling', 'Leadership action plan'],
+    tags: ['Python', 'Excel', 'Powerpoint'],
+    link: 'https://github.com/tomtran-786/Unisweet---Sales-and-Financial-Analysis',
   }
 ]
 

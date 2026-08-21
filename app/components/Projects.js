@@ -89,7 +89,7 @@ export const projects = [
     highlights: ['Database design', 'Payment & checkout', 'Course catalog', 'Order management'],
     tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase', 'Looker Studio'],
     link: 'https://chemisteryacademy.com/courses',
-    dashboardLink: 'https://github.com/trungkt2006/portfolio-app/tree/codex/public-data-solution',
+    githubLink: 'https://github.com/trungkt2006/portfolio-app/tree/codex/public-data-solution',
   },
   {
     id: 9,

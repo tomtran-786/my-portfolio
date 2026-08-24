@@ -96,10 +96,10 @@ export const projects = [
     category: 'Product Management',
     title: 'HDI Research Center',
     desc: 'A research training and publication platform built end to end for Dr. Cong Tam Trinh. I designed and set up the database, built the site, and delivered the consultation and course enrollment flow.',
-    image: '/projects/hdi-research.jpg',
+    image: '/projects/hdi-research-center.png',
     highlights: ['Database design', 'Payment & checkout', 'Course catalog', 'Order management'],
     tags: ['Next.js', 'React', 'Tailwind', 'Prisma', 'Supabase', 'Looker Studio'],
-    link: 'https://hdi-research-congtamtrinh.vercel.app/',
+    link: 'https://hdiresearchcenter.com/',
     githubLink: 'https://github.com/tomtran-786/HDI-web',
   },
   {

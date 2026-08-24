@@ -26,6 +26,15 @@ const cardVariants = {
 
 export const certs = [
   {
+    id: 19,
+    name: 'Claude 101',
+    issuer: 'Claude Academy',
+    date: '2026',
+    image: '/certifications/claude-101.jpg',
+    verificationCode: '9fd29ae4b12999cc0301964bfe3a5770',
+    link: 'https://academy.claude.com/verify/9fd29ae4b12999cc0301964bfe3a5770',
+  },
+  {
     id: 18,
     name: 'Productivity Hub',
     issuer: 'Google',

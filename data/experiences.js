@@ -1,6 +1,15 @@
 export const experiences = [
   {
     id: 1,
+    date: "Aug 2026",
+    title: "Admin & Data Analyst",
+    company: "HDI Research Center",
+    description: "Data modelling, operations, and turning data into decisions",
+    location: "Remote",
+    image: "/experience/hdi-logo.png"
+  },
+  {
+    id: 2,
     date: "Jan 2026",
     title: "Research Team Leader & Data Analyst",
     company: "Scientific Research Competition (SVNCKH)",
@@ -9,7 +18,7 @@ export const experiences = [
     image: "/projects/research.png"
   },
   {
-    id: 2,
+    id: 3,
     date: "Jan 2026",
     title: "Market Researcher",
     company: "Mindflow (APEC Innovation)",
@@ -18,7 +27,7 @@ export const experiences = [
     image: "/experience/mindflow-apec.jpg"
   },
   {
-    id: 3,
+    id: 4,
     date: "Jan 2026",
     title: "Marketing Data Consultant",
     company: "Phun Xam Vic",

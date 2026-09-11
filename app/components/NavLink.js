@@ -1,15 +1,21 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 
 export default function NavLink({ href, label }) {
+  const pathname = usePathname()
   const isAnchor = href.startsWith('#')
+  // Anchors only resolve to an element on the homepage. Elsewhere (e.g. /blog),
+  // rewrite to "/#section" so the link still navigates home instead of no-op'ing.
+  const isHome = pathname === '/'
+  const resolvedHref = isAnchor && !isHome ? `/${href}` : href
 
   return (
     <motion.a
-      href={href}
+      href={resolvedHref}
       onClick={(e) => {
-        if (isAnchor) {
+        if (isAnchor && isHome) {
           e.preventDefault()
           const id = href.replace('#', '')
           document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })

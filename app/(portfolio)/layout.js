@@ -2,6 +2,7 @@ import '../globals.css'
 import Script from 'next/script'
 import { portfolioFont } from '@/app/fonts'
 import { colorModeScript } from '@/app/theme'
+import SiteChrome from '@/app/components/SiteChrome'
 
 export const metadata = {
   title: 'Tom Tran - Portfolio',
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={`${portfolioFont.variable} pf-body`}>
+        <SiteChrome />
         {children}
         <Script id="color-mode-init" strategy="beforeInteractive">
           {colorModeScript}

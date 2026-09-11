@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
 import useScrollLock from '../hooks/useScrollLock'
 import useFocusTrap from '../hooks/useFocusTrap'
 
@@ -38,6 +39,13 @@ const themes = {
 export default function MobileDrawer({ open, onClose, links, cta, theme = 'portfolio' }) {
   const t = themes[theme]
   const closeBtnRef = useRef(null)
+  const pathname = usePathname()
+  // Anchors are relative to whichever page they were designed for: "/" for the
+  // portfolio nav, "/teaching" for the teaching nav. Off that page, rewrite
+  // "#section" to "<basePath>#section" so the link navigates there instead of
+  // silently no-op'ing (or, for portfolio, jumping to the wrong page).
+  const basePath = theme === 'teaching' ? '/teaching' : '/'
+  const isHome = pathname === basePath
 
   // onClose là arrow tạo mới mỗi lần parent render. Trước đây nó nằm trong dep
   // array của effect khoá cuộn: parent re-render khi drawer đang mở -> effect
@@ -60,13 +68,15 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
 
+  const resolveHref = (href) => (href?.startsWith('#') && !isHome ? `${basePath}${href}` : href)
+
   const handleLinkClick = (link) => (e) => {
     if (link.onClick) {
       link.onClick(e)
       onClose?.()
       return
     }
-    if (link.href?.startsWith('#')) {
+    if (link.href?.startsWith('#') && isHome) {
       e.preventDefault()
       const id = link.href.replace('#', '')
       onClose?.()
@@ -173,7 +183,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
           {links.map((link) => (
             <a
               key={link.href + link.label}
-              href={link.href}
+              href={resolveHref(link.href)}
               onClick={handleLinkClick(link)}
               tabIndex={open ? 0 : -1}
               style={{
@@ -205,7 +215,7 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
         {cta && (
           <div style={{ padding: '1rem 1.25rem 1.5rem', borderTop: `0.5px solid ${t.border}` }}>
             <a
-              href={cta.href}
+              href={resolveHref(cta.href)}
               onClick={handleLinkClick(cta)}
               tabIndex={open ? 0 : -1}
               style={{

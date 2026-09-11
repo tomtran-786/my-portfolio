@@ -1057,9 +1057,25 @@ html[data-color-mode='dark'] .pf-contribution-image {
   border-top: 1px solid var(--pf-border);
 }
 
-.pf-edu-card {
+.pf-edu-stack {
   display: grid;
-  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+}
+
+.pf-edu-card {
+  align-items: start;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: auto 1fr auto;
+}
+
+.pf-edu-logo {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: 56px;
+  justify-content: center;
+  width: 56px;
 }
 
 /* max-width như footer /teaching: vừa đồng bộ hai trang, vừa để thanh bản quyền
@@ -1319,5 +1335,180 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
   .pf-footer-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Blog: a standalone page (not a single-page-scroll section), so it needs its
+   own top padding to clear the fixed nav — mirrors .pf-hero's top padding. */
+.pf-blog-page {
+  margin: 0 auto;
+  max-width: 52rem;
+  padding: 6rem var(--pf-content-gutter) 4rem;
+  position: relative;
+  z-index: 5;
+}
+
+.pf-blog-list {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.pf-blog-card {
+  background: var(--pf-surface);
+  border: 1px solid var(--pf-border);
+  border-radius: 12.5px;
+  color: inherit;
+  display: block;
+  padding: 1.5rem 1.875rem;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.pf-blog-card:hover {
+  border-color: var(--pf-border-strong);
+  box-shadow: var(--pf-shadow-card);
+  transform: translateY(-3px);
+}
+
+.pf-blog-card-date {
+  color: var(--pf-text-secondary);
+  font-family: var(--font-portfolio);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+.pf-blog-card-title {
+  color: var(--pf-ink);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.pf-blog-card-excerpt {
+  color: var(--pf-text);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.pf-blog-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.pf-blog-tag {
+  background: var(--pf-brand-soft);
+  border: 1px solid var(--pf-border-strong);
+  border-radius: 5px;
+  color: var(--pf-brand);
+  font-family: var(--font-portfolio);
+  font-size: 0.78rem;
+  padding: 0.15rem 0.6rem;
+}
+
+.pf-blog-back {
+  color: var(--pf-link);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-portfolio);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+.pf-blog-back:hover {
+  color: var(--pf-brand);
+}
+
+.pf-blog-post-header {
+  border-bottom: 1px solid var(--pf-border);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.pf-blog-post-header .pf-blog-card-tags {
+  margin-top: 0.75rem;
+}
+
+.pf-blog-prose {
+  color: var(--pf-text);
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+
+.pf-blog-prose h1,
+.pf-blog-prose h2,
+.pf-blog-prose h3 {
+  color: var(--pf-ink);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 2rem 0 1rem;
+}
+
+.pf-blog-prose h1 { font-size: 1.75rem; }
+.pf-blog-prose h2 { font-size: 1.4rem; }
+.pf-blog-prose h3 { font-size: 1.15rem; }
+
+.pf-blog-prose p {
+  margin-bottom: 1.25rem;
+}
+
+.pf-blog-prose ul,
+.pf-blog-prose ol {
+  margin: 0 0 1.25rem 1.25rem;
+}
+
+.pf-blog-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.pf-blog-prose a {
+  color: var(--pf-link);
+}
+
+.pf-blog-prose img {
+  border-radius: 0.8rem;
+  height: auto;
+  margin: 1.5rem 0;
+  max-width: 100%;
+}
+
+.pf-blog-prose blockquote {
+  border-left: 3px solid var(--pf-border-strong);
+  color: var(--pf-text-secondary);
+  font-style: italic;
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+}
+
+.pf-blog-prose code {
+  background: var(--pf-surface-muted);
+  border-radius: 4px;
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+}
+
+.pf-blog-prose pre {
+  background: var(--pf-surface-muted);
+  border-radius: 0.6rem;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  padding: 1rem 1.25rem;
+}
+
+.pf-blog-prose pre code {
+  background: none;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .pf-blog-page {
+    padding: 5.5rem 1.25rem 2.5rem;
   }
 }

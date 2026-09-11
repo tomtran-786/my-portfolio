@@ -9,6 +9,7 @@
 // thay bộ /social/*.svg, và bỏ toàn bộ lời gọi analytics (Clarity) của bản gốc.
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const s = {
   heading: {
@@ -70,13 +71,17 @@ const SOCIALS = [
   { icon: 'ti-mail', href: 'https://mail.google.com/mail/?view=cm&to=tomtran.workcontact@gmail.com', label: 'Email' },
 ]
 
-function scrollToId(e, href) {
-  if (!href.startsWith('#')) return
+function scrollToId(e, href, isHome) {
+  if (!href.startsWith('#') || !isHome) return
   e.preventDefault()
   document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth' })
 }
 
 export default function Footer() {
+  const pathname = usePathname()
+  const isHome = pathname === '/'
+  const resolveHref = (href) => (href.startsWith('#') && !isHome ? `/${href}` : href)
+
   return (
     <footer id="footer" style={{ position: 'relative', zIndex: 5 }}>
       <div className="pf-footer-shell">
@@ -102,9 +107,9 @@ export default function Footer() {
             {EXPLORE.map((item) => (
               <a
                 key={item.label}
-                href={item.href}
+                href={resolveHref(item.href)}
                 style={s.link}
-                onClick={(e) => scrollToId(e, item.href)}
+                onClick={(e) => scrollToId(e, item.href, isHome)}
               >
                 {item.label}
               </a>

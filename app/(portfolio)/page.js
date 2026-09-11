@@ -18,16 +18,6 @@ const HeroLottie = dynamic(() => import('@/app/components/HeroLottie'), { ssr: f
 
 const EDUCATION_ENTRIES = [
   {
-    id: 'ftu',
-    logo: '/education/ftu.svg',
-    degree: 'Bachelor of International Business',
-    institution: 'Foreign Trade University (FTU) · Ho Chi Minh City',
-    badges: ['GPA: 4.0/4.0', 'IELTS 7.5', 'TOEIC 980'],
-    courses:
-      'Data Analytics · Statistics for Business · International Economics · Macroeconomics · Corporate Finance · Accounting Principles',
-    dateLabel: 'Years 1–2',
-  },
-  {
     id: 'mcu',
     logo: '/education/ming-chuan.svg',
     degree: 'Bachelor of International Business · Minor in International Finance',
@@ -35,6 +25,16 @@ const EDUCATION_ENTRIES = [
     badges: ['Minor: International Finance'],
     courses: '',
     dateLabel: 'Expected 2028',
+  },
+  {
+    id: 'ftu',
+    logo: '/education/ftu.svg',
+    degree: 'Bachelor of International Business',
+    institution: 'Foreign Trade University (FTU) · Ho Chi Minh City',
+    badges: ['GPA: 4.0/4.0', 'IELTS 7.5', 'TOEIC 980'],
+    courses:
+      'Data Analytics · Statistics for Business · International Economics · Macroeconomics · Corporate Finance · Accounting Principles',
+    dateLabel: '2024 – 2026',
   },
 ]
 

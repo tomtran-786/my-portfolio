@@ -957,6 +957,50 @@ html[data-color-mode='dark'] .pf-contribution-image {
   transform: translateY(-2px);
 }
 
+.pf-cn-heatmap-wrap {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pf-cn-heatmap-weekdays {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.pf-cn-heatmap-weekdays span {
+  color: var(--pf-text-secondary);
+  font-size: 0.68rem;
+  height: 0.75rem;
+  line-height: 0.75rem;
+}
+
+.pf-cn-heatmap-weekdays .pf-cn-heatmap-weekday-spacer {
+  height: 0.95rem;
+}
+
+.pf-cn-heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.pf-cn-heatmap-months {
+  display: grid;
+  gap: 0.2rem;
+  grid-auto-columns: 0.75rem;
+  grid-auto-flow: column;
+  height: 0.85rem;
+}
+
+.pf-cn-heatmap-months span {
+  color: var(--pf-text-secondary);
+  font-size: 0.68rem;
+  overflow: visible;
+  white-space: nowrap;
+}
+
 .pf-cn-heatmap-grid {
   display: grid;
   gap: 0.2rem;

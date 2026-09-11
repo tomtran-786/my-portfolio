@@ -62,6 +62,9 @@ const CHINESE_STAT_META = [
   { key: 'totalDays', icon: 'ti-calendar-stats', label: 'Study days' },
 ]
 
+const WEEKDAY_LABELS = ['', 'Mon', '', 'Wed', '', 'Fri', '']
+const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
 function toDateKey(date) {
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -77,7 +80,9 @@ function getHeatLevel(count) {
   return 4
 }
 
-function buildHeatmapCells(dailyCounts) {
+// Builds a GitHub-style grid: an array of weeks (columns), each a 7-cell
+// Sun-Sat column, padded with nulls so every week is a full column.
+function buildHeatmapWeeks(dailyCounts) {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
 
@@ -90,7 +95,28 @@ function buildHeatmapCells(dailyCounts) {
   }
 
   const leadingBlanks = Array.from({ length: days[0].date.getDay() }, () => null)
-  return [...leadingBlanks, ...days]
+  const cells = [...leadingBlanks, ...days]
+  const trailingBlanks = Array.from({ length: (7 - (cells.length % 7)) % 7 }, () => null)
+  const allCells = [...cells, ...trailingBlanks]
+
+  const weeks = []
+  for (let i = 0; i < allCells.length; i += 7) {
+    weeks.push(allCells.slice(i, i + 7))
+  }
+  return weeks
+}
+
+// One label per week column: the month name where it first appears, blank otherwise.
+function getWeekMonthLabels(weeks) {
+  let lastMonth = null
+  return weeks.map((week) => {
+    const firstCell = week.find((cell) => cell !== null)
+    if (!firstCell) return ''
+    const month = firstCell.date.getMonth()
+    if (month === lastMonth) return ''
+    lastMonth = month
+    return MONTH_LABELS[month]
+  })
 }
 
 function formatSyncDate(isoString) {
@@ -345,7 +371,8 @@ function PracticePanel() {
 
 function ChineseLearningPanel() {
   const { dailyCounts, stats, lastUpdated } = chineseProgress
-  const heatmapCells = useMemo(() => buildHeatmapCells(dailyCounts), [dailyCounts])
+  const heatmapWeeks = useMemo(() => buildHeatmapWeeks(dailyCounts), [dailyCounts])
+  const monthLabels = useMemo(() => getWeekMonthLabels(heatmapWeeks), [heatmapWeeks])
 
   return (
     <motion.article className="pf-activity-panel" {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.16 }}>
@@ -376,20 +403,37 @@ function ChineseLearningPanel() {
         <div className="pf-subpanel-heading">
           <h3>Review heatmap</h3>
         </div>
-        <div className="pf-contribution-scroll">
-          <div className="pf-cn-heatmap-grid">
-            {heatmapCells.map((cell, index) =>
-              cell ? (
-                <div
-                  key={toDateKey(cell.date)}
-                  className="pf-cn-heatmap-cell"
-                  data-level={cell.level}
-                  title={`${cell.count} review${cell.count === 1 ? '' : 's'} on ${cell.date.toLocaleDateString()}`}
-                />
-              ) : (
-                <div key={`blank-${index}`} className="pf-cn-heatmap-cell" />
-              ),
-            )}
+        <div className="pf-cn-heatmap-wrap">
+          <div className="pf-cn-heatmap-weekdays" aria-hidden="true">
+            <span className="pf-cn-heatmap-weekday-spacer" />
+            {WEEKDAY_LABELS.map((label, index) => (
+              <span key={index}>{label}</span>
+            ))}
+          </div>
+          <div className="pf-contribution-scroll">
+            <div className="pf-cn-heatmap-col">
+              <div className="pf-cn-heatmap-months" aria-hidden="true">
+                {monthLabels.map((label, index) => (
+                  <span key={index}>{label}</span>
+                ))}
+              </div>
+              <div className="pf-cn-heatmap-grid">
+                {heatmapWeeks.map((week, weekIndex) =>
+                  week.map((cell, dayIndex) =>
+                    cell ? (
+                      <div
+                        key={`${weekIndex}-${dayIndex}`}
+                        className="pf-cn-heatmap-cell"
+                        data-level={cell.level}
+                        title={`${cell.count} review${cell.count === 1 ? '' : 's'} on ${cell.date.toLocaleDateString()}`}
+                      />
+                    ) : (
+                      <div key={`${weekIndex}-${dayIndex}`} className="pf-cn-heatmap-cell" />
+                    ),
+                  ),
+                )}
+              </div>
+            </div>
           </div>
         </div>
         <div className="pf-cn-heatmap-legend">

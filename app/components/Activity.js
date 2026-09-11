@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
+import chineseProgress from '../../data/chinese-progress.json'
 
 const GITHUB_USERNAME = 'tomtran-786'
 const GITHUB_URL = `https://github.com/${GITHUB_USERNAME}`
@@ -52,6 +53,52 @@ function parsePracticeStats(readme) {
     medium: Number(python[2]) + Number(sql[2]),
     updatedAt: updatedAt || FALLBACK_PRACTICE_STATS.updatedAt,
   }
+}
+
+const CHINESE_STAT_META = [
+  { key: 'currentStreak', icon: 'ti-flame', label: 'Current streak' },
+  { key: 'longestStreak', icon: 'ti-trophy', label: 'Longest streak' },
+  { key: 'totalReviews', icon: 'ti-repeat', label: 'Total reviews' },
+  { key: 'totalDays', icon: 'ti-calendar-stats', label: 'Study days' },
+]
+
+function toDateKey(date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+function getHeatLevel(count) {
+  if (!count) return 0
+  if (count < 5) return 1
+  if (count < 10) return 2
+  if (count < 20) return 3
+  return 4
+}
+
+function buildHeatmapCells(dailyCounts) {
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const days = []
+  for (let i = 364; i >= 0; i--) {
+    const date = new Date(today)
+    date.setDate(date.getDate() - i)
+    const count = dailyCounts[toDateKey(date)] || 0
+    days.push({ date, count, level: getHeatLevel(count) })
+  }
+
+  const leadingBlanks = Array.from({ length: days[0].date.getDay() }, () => null)
+  return [...leadingBlanks, ...days]
+}
+
+function formatSyncDate(isoString) {
+  return new Date(isoString).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
 }
 
 function StatCard({ icon, label, value, loading }) {
@@ -296,6 +343,67 @@ function PracticePanel() {
   )
 }
 
+function ChineseLearningPanel() {
+  const { dailyCounts, stats, lastUpdated } = chineseProgress
+  const heatmapCells = useMemo(() => buildHeatmapCells(dailyCounts), [dailyCounts])
+
+  return (
+    <motion.article className="pf-activity-panel" {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.16 }}>
+      <div className="pf-activity-panel-header">
+        <div className="pf-activity-identity">
+          <i className="ti ti-cards" aria-hidden="true" />
+          <span>
+            <strong>Chinese Learning</strong>
+            <small>Anki flashcard progress</small>
+          </span>
+        </div>
+        <span className="pf-live-badge">
+          <span aria-hidden="true" /> Synced {formatSyncDate(lastUpdated)}
+        </span>
+      </div>
+
+      <div className="pf-activity-stat-grid">
+        {CHINESE_STAT_META.map((item) => (
+          <div className="pf-activity-stat" key={item.key}>
+            <i className={`ti ${item.icon}`} aria-hidden="true" />
+            <strong>{stats[item.key].toLocaleString()}</strong>
+            <span>{item.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="pf-activity-subpanel">
+        <div className="pf-subpanel-heading">
+          <h3>Review heatmap</h3>
+        </div>
+        <div className="pf-contribution-scroll">
+          <div className="pf-cn-heatmap-grid">
+            {heatmapCells.map((cell, index) =>
+              cell ? (
+                <div
+                  key={toDateKey(cell.date)}
+                  className="pf-cn-heatmap-cell"
+                  data-level={cell.level}
+                  title={`${cell.count} review${cell.count === 1 ? '' : 's'} on ${cell.date.toLocaleDateString()}`}
+                />
+              ) : (
+                <div key={`blank-${index}`} className="pf-cn-heatmap-cell" />
+              ),
+            )}
+          </div>
+        </div>
+        <div className="pf-cn-heatmap-legend">
+          Less
+          {[0, 1, 2, 3, 4].map((level) => (
+            <span key={level} className="pf-cn-heatmap-legend-swatch" data-level={level} />
+          ))}
+          More
+        </div>
+      </div>
+    </motion.article>
+  )
+}
+
 export default function Activity() {
   return (
     <section id="activity" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
@@ -304,13 +412,14 @@ export default function Activity() {
           My activity
         </h2>
         <p className="pf-section-subtitle pf-section-context" style={{ fontWeight: 500 }}>
-          Coding stats and contributions
+          Coding stats, contributions, and daily learning streaks
         </p>
       </div>
 
       <div className="pf-activity-stack">
         <GitHubPanel />
         <PracticePanel />
+        <ChineseLearningPanel />
       </div>
     </section>
   )

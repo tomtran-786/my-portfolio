@@ -39,7 +39,12 @@ export default async function BlogPostPage({ params }) {
         </Link>
 
         <header className="pf-blog-post-header">
-          <div className="pf-blog-card-date">{formatPostDate(metadata.date)}</div>
+          <div className="pf-blog-post-meta">
+            {metadata.category && (
+              <span className="pf-blog-category-pill" data-category={metadata.category}>{metadata.category}</span>
+            )}
+            <span className="pf-blog-card-date" style={{ marginBottom: 0 }}>{formatPostDate(metadata.date)}</span>
+          </div>
           <h1 className="pf-section-title" style={{ fontWeight: 700, display: 'block' }}>{metadata.title}</h1>
           {metadata.tags?.length > 0 && (
             <div className="pf-blog-card-tags">

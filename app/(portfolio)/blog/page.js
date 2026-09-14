@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { getAllPosts, formatPostDate } from '@/lib/blog'
+import { getAllPosts } from '@/lib/blog'
+import BlogList from '@/app/components/BlogList'
 import Footer from '@/app/components/Footer'
 import GoToTop from '@/app/components/Gototop'
 
@@ -21,26 +21,7 @@ export default async function BlogIndexPage() {
           </p>
         </div>
 
-        {posts.length === 0 ? (
-          <p style={{ color: 'var(--pf-text-secondary)' }}>No posts yet — check back soon.</p>
-        ) : (
-          <div className="pf-blog-list">
-            {posts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="pf-blog-card">
-                <div className="pf-blog-card-date">{formatPostDate(post.date)}</div>
-                <h2 className="pf-blog-card-title">{post.title}</h2>
-                {post.excerpt && <p className="pf-blog-card-excerpt">{post.excerpt}</p>}
-                {post.tags?.length > 0 && (
-                  <div className="pf-blog-card-tags">
-                    {post.tags.map((tag) => (
-                      <span key={tag} className="pf-blog-tag">{tag}</span>
-                    ))}
-                  </div>
-                )}
-              </Link>
-            ))}
-          </div>
-        )}
+        <BlogList posts={posts} />
       </div>
       <Footer />
       <GoToTop />

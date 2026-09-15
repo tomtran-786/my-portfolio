@@ -27,7 +27,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ANKI_CONNECT_URL = 'http://localhost:8765'
-const DECK_NAMES = ['Modern Chinese']
+const DECK_NAMES = ['Modern Chinese', 'Intermediate Mandarin 1']
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'chinese-progress.json')

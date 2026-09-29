@@ -83,17 +83,19 @@ function toDateKey(date) {
 }
 
 function computeStreaks(dailyCounts) {
-  const sortedDays = Object.keys(dailyCounts).sort()
+  // dailyCounts only has keys for days with reviews, so gaps must be detected
+  // by checking that each day directly follows the previous one.
+  const sortedDays = Object.keys(dailyCounts).filter((day) => dailyCounts[day] > 0).sort()
 
   let longestStreak = 0
   let run = 0
+  let expectedNext = null
   for (const day of sortedDays) {
-    if (dailyCounts[day] > 0) {
-      run += 1
-      longestStreak = Math.max(longestStreak, run)
-    } else {
-      run = 0
-    }
+    run = day === expectedNext ? run + 1 : 1
+    longestStreak = Math.max(longestStreak, run)
+    const next = new Date(`${day}T00:00:00`)
+    next.setDate(next.getDate() + 1)
+    expectedNext = toDateKey(next)
   }
 
   // Anchor to today, but fall back to yesterday if today has no reviews yet

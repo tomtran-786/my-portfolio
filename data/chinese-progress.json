@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-29T04:00:29.394Z",
+  "lastUpdated": "2026-10-01T04:00:28.914Z",
   "dailyCounts": {
     "2025-06-25": 79,
     "2025-06-28": 61,
@@ -131,7 +131,7 @@
     "2026-09-19": 7
   },
   "stats": {
-    "currentStreak": 1,
+    "currentStreak": 0,
     "longestStreak": 18,
     "totalReviews": 12185,
     "totalDays": 128,

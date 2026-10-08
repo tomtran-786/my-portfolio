@@ -121,6 +121,16 @@ export const projects = [
     highlights: ['Sales & P&L analysis', 'Market diagnostics', 'Financial storytelling', 'Leadership action plan'],
     tags: ['Python', 'Excel', 'Powerpoint'],
     link: 'https://github.com/tomtran-786/Unisweet---Sales-and-Financial-Analysis',
+  },
+  {
+    id: 10,
+    category: 'Investment Analysis',
+    title: 'Intel vs AMD: A Walk-through for the Long-Term Investor',
+    desc: 'A head-to-head comparison of AMD and Intel from SEC filings (FY2020-25) across growth, margins, efficiency, leverage, returns and valuation, ending in a verdict. Educational analysis, not investment advice.',
+    image: '/projects/intel-vs-amd.png',
+    highlights: ['SEC EDGAR filings', 'FY2020-25 head-to-head', 'Peer median of 10 chip companies', 'Valuation multiples'],
+    tags: ['Python', 'Excel', 'Powerpoint'],
+    link: 'https://drive.google.com/file/d/1oJ-6JVCPWTQVFYLBZZeWLjTWCW-VyjAV/view?usp=drive_link',
   }
 ]
 

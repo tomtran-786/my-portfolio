@@ -27,28 +27,47 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ANKI_CONNECT_URL = 'http://localhost:8765'
-const DECK_NAMES = ['Modern Chinese', 'Intermediate Mandarin 1', 'Tiếng Trung buổi tối']
+// Keep the biggest deck LAST. AnkiConnect (rewritten release, Oct 2026) pages
+// results 100 at a time and keeps every page cursor alive for 10 minutes, with
+// a hard cap of 100 live cursors. Reading ~12k reviews from "Modern Chinese"
+// uses up the cap, and any new query started before the cursors expire fails
+// with "Search snapshot capacity exceeded.".
+const DECK_NAMES = ['Intermediate Mandarin 1', 'Tiếng Trung buổi tối', 'Modern Chinese']
+
+const CAPACITY_ERROR = 'Search snapshot capacity exceeded'
+const CURSOR_TTL_MS = 10 * 60 * 1000
+const CAPACITY_RETRY_MS = 30 * 1000
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'chinese-progress.json')
 
 async function ankiConnect(action, params = {}) {
-  let response
-  try {
-    response = await fetch(ANKI_CONNECT_URL, {
-      method: 'POST',
-      body: JSON.stringify({ action, version: 6, params }),
-    })
-  } catch (err) {
-    throw new Error(
-      `Could not reach AnkiConnect at ${ANKI_CONNECT_URL}. Make sure Anki desktop is open and the ` +
-        'AnkiConnect add-on (code 2055492159) is installed, then rerun this script.',
-    )
-  }
+  // If a previous run (or deck) left AnkiConnect at its cursor cap, wait for the
+  // stale cursors to expire instead of failing.
+  const deadline = Date.now() + CURSOR_TTL_MS + CAPACITY_RETRY_MS
+  for (;;) {
+    let response
+    try {
+      response = await fetch(ANKI_CONNECT_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action, version: 6, params }),
+      })
+    } catch (err) {
+      throw new Error(
+        `Could not reach AnkiConnect at ${ANKI_CONNECT_URL}. Make sure Anki desktop is open and the ` +
+          'AnkiConnect add-on (code 2055492159) is installed, then rerun this script.',
+      )
+    }
 
-  const body = await response.json()
-  if (body.error) throw new Error(`AnkiConnect error for "${action}": ${body.error}`)
-  return body.result
+    const body = await response.json()
+    if (body.error && String(body.error).includes(CAPACITY_ERROR) && Date.now() < deadline) {
+      console.warn(`AnkiConnect is at its cursor cap on "${action}"; retrying in ${CAPACITY_RETRY_MS / 1000}s...`)
+      await new Promise((resolve) => setTimeout(resolve, CAPACITY_RETRY_MS))
+      continue
+    }
+    if (body.error) throw new Error(`AnkiConnect error for "${action}": ${body.error}`)
+    return body.result
+  }
 }
 
 async function getReviewRowsForDeck(deckName) {
@@ -143,7 +162,8 @@ async function main() {
 
   const output = {
     lastUpdated: new Date().toISOString(),
-    dailyCounts,
+    // Chronological keys keep the committed file's diffs small and stable.
+    dailyCounts: Object.fromEntries(sortedDays.map((day) => [day, dailyCounts[day]])),
     stats: {
       currentStreak,
       longestStreak,

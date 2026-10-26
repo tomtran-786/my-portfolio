@@ -130,7 +130,7 @@ export const projects = [
     image: '/projects/intel-vs-amd.png',
     highlights: ['SEC EDGAR filings', 'FY2020-25 head-to-head', 'Peer median of 10 chip companies', 'Valuation multiples'],
     tags: ['Python', 'Excel', 'Powerpoint'],
-    link: 'https://drive.google.com/file/d/1oJ-6JVCPWTQVFYLBZZeWLjTWCW-VyjAV/view?usp=drive_link',
+    link: 'https://drive.google.com/file/d/1EQGRDa7ie2LYfg0n_LP1x2-EdStgvHET/view?usp=drive_link',
   }
 ]
 

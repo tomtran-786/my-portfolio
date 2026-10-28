@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-10-27T04:00:31.278Z",
+  "lastUpdated": "2026-10-28T04:00:23.171Z",
   "dailyCounts": {
     "2025-06-25": 79,
     "2025-06-26": 307,
@@ -153,15 +153,16 @@
     "2026-10-24": 71,
     "2026-10-25": 85,
     "2026-10-26": 71,
-    "2026-10-27": 74
+    "2026-10-27": 74,
+    "2026-10-28": 78
   },
   "stats": {
-    "currentStreak": 20,
-    "longestStreak": 20,
-    "totalReviews": 13552,
-    "totalDays": 153,
-    "totalCardsStudied": 2017,
+    "currentStreak": 21,
+    "longestStreak": 21,
+    "totalReviews": 13630,
+    "totalDays": 154,
+    "totalCardsStudied": 2037,
     "firstStudyDate": "2025-06-25",
-    "lastStudyDate": "2026-10-27"
+    "lastStudyDate": "2026-10-28"
   }
 }

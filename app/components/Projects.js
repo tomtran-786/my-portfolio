@@ -131,6 +131,16 @@ export const projects = [
     highlights: ['SEC EDGAR filings', 'FY2020-25 head-to-head', 'Peer median of 10 chip companies', 'Valuation multiples'],
     tags: ['Python', 'Excel', 'Powerpoint'],
     link: 'https://drive.google.com/file/d/1EQGRDa7ie2LYfg0n_LP1x2-EdStgvHET/view?usp=drive_link',
+  },
+  {
+    id: 11,
+    category: 'Investment Analysis',
+    title: 'A Balanced Global Portfolio for a Taiwanese Investor',
+    desc: 'A USD 1,000,000, 3-year, moderate-risk mandate built from 7 securities across 4 markets (Global, US, Taiwan, Vietnam). Covers margin trading, ETF vs stock analysis, risk and return, correlation, CAPM and a multifactor check, ending in a final recommendation.',
+    image: '/projects/global-portfolio-taiwan.png',
+    highlights: ['7 securities, 4 markets', 'CAPM expected return 9.79%', 'Margin-call example', 'Multifactor analysis'],
+    tags: ['Python', 'Excel', 'Powerpoint'],
+    link: 'https://drive.google.com/file/d/15WtTTL_V16KmT11sF6SFg_27idrxrqQQ/view?usp=drivesdk',
   }
 ]
 

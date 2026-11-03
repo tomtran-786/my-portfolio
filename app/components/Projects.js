@@ -25,6 +25,8 @@ const toolStyle = {
   'Tailwind':        { color: '#0e7490', bg: '#e0f5fa', logo: '/logos/tailwind.svg' },
   'Prisma':          { color: '#2D3748', bg: '#e8eaed', logo: '/logos/prisma.svg' },
   'Supabase':        { color: '#1c7a4d', bg: '#e3f7ed', logo: '/logos/supabase.svg' },
+  'TypeScript':      { color: '#3178C6', bg: '#e3eefa', logo: '/logos/typescript.svg' },
+  'Tavily':          { color: '#0b6e99', bg: '#e1f1f8' },
 }
 const getToolStyle = (tag) => toolStyle[tag] || { color: 'var(--pf-brand)', bg: 'var(--pf-brand-soft)' }
 
@@ -149,7 +151,7 @@ export const projects = [
     desc: 'A pricing chatbot for the moment before an item is listed. It asks about a used item from photos and short questions, finds comparable listings, and shows the market median first. The seller then commits to their own price, and the assistant sets it against the market with a suggested price and where to sell.',
     image: '/projects/bias-chatbot.svg',
     highlights: ['Loss aversion (Novemsky & Kahneman, 2005)', 'Live market lookup with verified listings', 'Commit-then-compare price flow', 'Free-tier Gemini model fallback chain'],
-    tags: ['Next.js', 'React', 'Tailwind', 'Gemini'],
+    tags: ['Next.js', 'TypeScript', 'React', 'Tailwind', 'Gemini', 'Tavily'],
     link: 'https://bias-chatbot.vercel.app/',
     githubLink: 'https://github.com/tomtran-786/bias-chatbot',
   }

@@ -158,7 +158,8 @@ export const projects = [
     image: '/projects/esg-taiwan-food-industry.jpg',
     highlights: ['TWSE food firms, 2016-2025', 'Hadlock-Pierce SA index', 'Fixed vs random effects (Hausman, Mundlak)', 'TEJ panel data'],
     tags: ['Python', 'Excel', 'Powerpoint'],
-    link: 'https://github.com/tomtran-786/ESG-and-TW-Food-Industry',
+    link: 'https://drive.google.com/file/d/1glo_uIeAfsk9tESWXjkAVQbHQJD7kkFT/view?usp=drive_link',
+    githubLink: 'https://github.com/tomtran-786/ESG-and-TW-Food-Industry',
   },
   {
     id: 12,

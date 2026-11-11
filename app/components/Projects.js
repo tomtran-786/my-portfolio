@@ -34,6 +34,7 @@ export const projects = [
   {
     id: 1,
     category: 'Investment Analysis',
+    featured: true,
     title: 'Unpacking the "Black Box": The Multidimensional Impact of Institutional Quality on Bilateral Services Trade',
     desc: 'This paper examines the impact of institutional quality and cultural distance on global services trade within a gravity model framework.',
     image: "/projects/research.png",
@@ -54,6 +55,7 @@ export const projects = [
   {
     id: 3,
     category: 'Data Analysis',
+    featured: true,
     title: 'Phun Xam Vic',
     desc: 'Automated ETL pipeline pulling live market data into structured dashboards.',
     image: '/projects/phun-xam-vic.png',
@@ -117,6 +119,7 @@ export const projects = [
   {
     id: 8,
     category: 'Consulting Case',
+    featured: true,
     title: 'UniSweet FY2024 Performance Review',
     desc: 'An end-to-end Finance Business Partner case that turns raw market, sales, and P&L data into an executive performance review and action plan.',
     image: '/projects/unisweet-performance-review.png',
@@ -127,6 +130,7 @@ export const projects = [
   {
     id: 10,
     category: 'Investment Analysis',
+    featured: true,
     title: 'Intel vs AMD: A Walk-through for the Long-Term Investor',
     desc: 'A head-to-head comparison of AMD and Intel from SEC filings (FY2020-25) across growth, margins, efficiency, leverage, returns and valuation, ending in a verdict. Educational analysis, not investment advice.',
     image: '/projects/intel-vs-amd.png',
@@ -137,12 +141,24 @@ export const projects = [
   {
     id: 11,
     category: 'Investment Analysis',
+    featured: true,
     title: 'A Balanced Global Portfolio for a Taiwanese Investor',
     desc: 'A USD 1,000,000, 3-year, moderate-risk mandate built from 7 securities across 4 markets (Global, US, Taiwan, Vietnam). Covers margin trading, ETF vs stock analysis, risk and return, correlation, CAPM and a multifactor check, ending in a final recommendation.',
     image: '/projects/global-portfolio-taiwan.png',
     highlights: ['7 securities, 4 markets', 'CAPM expected return 9.79%', 'Margin-call example', 'Multifactor analysis'],
     tags: ['Python', 'Excel', 'Powerpoint'],
     link: 'https://drive.google.com/file/d/15WtTTL_V16KmT11sF6SFg_27idrxrqQQ/view?usp=drivesdk',
+  },
+  {
+    id: 13,
+    category: 'Investment Analysis',
+    featured: true,
+    title: "Financial Constraints and ESG Performance in Taiwan's Food Industry",
+    desc: 'A research project testing whether financial constraints affect the ESG scores of food firms listed on the TWSE over 2016-2025. It builds a firm-year panel from TEJ data, measures constraints with the Hadlock-Pierce SA index, and compares fixed and random effects with robustness checks.',
+    image: '/projects/esg-taiwan-food-industry.jpg',
+    highlights: ['TWSE food firms, 2016-2025', 'Hadlock-Pierce SA index', 'Fixed vs random effects (Hausman, Mundlak)', 'TEJ panel data'],
+    tags: ['Python', 'Excel', 'Powerpoint'],
+    link: 'https://github.com/tomtran-786/ESG-and-TW-Food-Industry',
   },
   {
     id: 12,
@@ -157,8 +173,9 @@ export const projects = [
   }
 ]
 
-const ALL = 'All'
-const categoryList = [ALL, 'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case', 'Product Management', 'Learning']
+// Featured là cờ chọn tay (project.featured), không phải category.
+const FEATURED = 'Featured'
+const categoryList = [FEATURED,'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case', 'Product Management', 'Learning']
 
 // Card với hover state nội bộ
 function ProjectCard({ proj, index, onClick }) {
@@ -281,7 +298,7 @@ function ProjectCard({ proj, index, onClick }) {
 }
 
 export default function Projects() {
-  const [active, setActive] = useState(ALL)
+  const [active, setActive] = useState(FEATURED)
   const [selected, setSelected] = useState(null)
   const [portalTarget, setPortalTarget] = useState(null)
 
@@ -311,12 +328,11 @@ export default function Projects() {
     }
   }, [selected])
 
-  const filtered = active === ALL ? projects : projects.filter(p => p.category === active)
+  const matches = (cat) => (p) => cat === FEATURED ? Boolean(p.featured) : p.category === cat
+  const filtered = projects.filter(matches(active))
 
-  // Đếm số project theo category
-  const countFor = (cat) => cat === ALL
-    ? projects.length
-    : projects.filter(p => p.category === cat).length
+  // Đếm số project theo tab
+  const countFor = (cat) => projects.filter(matches(cat)).length
 
   return (
     <section id="projects" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>

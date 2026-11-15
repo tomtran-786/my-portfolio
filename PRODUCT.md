@@ -14,7 +14,7 @@ Two pages, one person, one visual grammar.
 
 - **Who reads it:** Vietnamese students (high school, university, working adults) and parents choosing an English tutor for IELTS, TOEIC, or speaking.
 - **Job of the page:** show that Tom teaches real classes with real results, explain each course clearly (level, format, price), and get a free trial booked.
-- **Primary action:** book a free trial lesson (email or Zalo).
+- **Primary action:** message Tom on Zalo to book the free 30-minute trial lesson. **Secondary:** email.
 - **Tone:** warm, direct, personal. First person ("tôi"). No hype.
 - **Language:** Vietnamese.
 

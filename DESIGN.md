@@ -58,6 +58,9 @@ Cards use one edge treatment: a 1px border at rest, shadow only on hover. No car
 - `.btn` + `.btn--primary` / `.btn--secondary`: min height 44px, pill radius. One primary per block.
 - `.tag`: static label, `--r-sm`, 14px. Not a button.
 - `.card`: surface + 1px border + `--r-md`.
+- `.level-bar` (`/teaching` course cards): 8px track, grey segment for the current band, brand segment for the target band. Decorative (`aria-hidden`); the "Trình độ" text beside it carries the meaning.
+- `.teach-stories` / `.teach-story`: testimonials in CSS columns (`column-width: 20rem`), each card kept whole. Used instead of a grid so seven cards do not leave an orphan row.
+- Sticky Zalo bar (`StickyZaloBar.js`): mobile only (max 768px), 48px button, shown after the hero, hidden at the contact section and footer. The go-to-top button sits above it.
 
 Touch targets: at least 44px for buttons and icon links, at least 32px for carousel and pagination dots (the visible dot stays small inside a larger hit area).
 

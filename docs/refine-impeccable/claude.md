@@ -112,12 +112,24 @@ document.querySelectorAll('body *').forEach(el=>{
 - `html` has `scroll-behavior: smooth`. Use `window.scrollTo({ top, behavior: 'instant' })` in scripts that need the position to change right away.
 - `text-wrap: balance` can split Vietnamese compound words across lines in short headings. Prefer shorter copy or explicit line parts (see `.hero-headline-part` in `HeroSection.js`).
 
-## Open roadmap
+## Roadmap status
 
 Owner's choices after the `/teaching` critique: direction **English Quest**, first priority **Zalo CTA and mobile**, audience **students and working adults**. Keep the **course modal content** and the **hero illustration** as they are.
 
-1. `/impeccable clarify` + `/impeccable adapt`: Zalo becomes the primary CTA ("Nhắn Zalo cho tôi"), email becomes a `mailto:` secondary, labels say what happens, add a short "what the 30-minute trial covers" list and a sticky Zalo bar on mobile.
-2. `/impeccable shape`: define English Quest. Each course is a character class using the existing pixel-RPG course art, a level bar from entry band to target band, and a two-question path picker. Type stays plain, and prices and credentials stay explicit.
-3. `/impeccable layout`: course cards with the RPG art, "from …/month" price and level bar; testimonials as result-first "player stories" showing all 7.
-4. `/impeccable clarify`: factual hero headline (keep the SVG) plus a proof line (TOEIC 980, IELTS 7.5, Chuyên Anh).
-5. `/impeccable polish`: mobile brand and toggle collision, wrapped billing labels, orange hover shadow in the dark modal (`CourseDetailModal.js`, `.course-modal-syllabus-link:hover`), English `<title>` on the Vietnamese page, "Built with Next.js" in the teaching footer.
+Done (second pass, see [detail.md](detail.md)):
+
+1. Zalo is the primary CTA, email is a `mailto:` secondary, sticky Zalo bar on mobile. The "what the trial covers" list was dropped on purpose (owner's call, no invented facts).
+2. + 3. English Quest, lean version: RPG art on course cards, level bar, starting price from the pricing data, a level question after choosing IELTS or TOEIC, one recommended card, all 7 testimonials result-first. The `shape` interview was skipped because the owner had already chosen the direction; the brief is in detail.md.
+4. Hero headline names the subjects, proof line added, unsourced 4.9/5 removed from the hero.
+5. Polish: brand text hidden under 380px, billing labels, dark-mode hover shadow, Vietnamese `<title>`, footer line removed.
+
+Still open:
+
+- **About stat "4.9★ Đánh giá trung bình"** in `data/teaching/about.js` has no source either. Remove it or add a source. The stats grid is hard-coded to 3 columns, so removing it means changing `statsRow` too.
+- **Both "Phổ biến nhất" badges:** only IELTS Intermediate keeps it now (`highlighted` was set to false on TOEIC Intermediate). Owner to confirm.
+- **Duplicate result text:** testimonials 4 and 5 have the same `result` ("Nâng điểm số Tiếng Anh trên lớp từ 7 lên 9."). Ask the owner whether that is right.
+- Testimonial typos ("đuọc", "nhìều"): ask before fixing, they are the students' words.
+- Class photo shows Meet chrome: needs a cropped asset.
+- IELTS modal shows a TOEIC review (owner chose to keep modal content).
+- `PRODUCT.md` still needs `/impeccable init` to match the current schema.
+- Reduced-motion behaviour (sticky bar, hover lifts, cursor) was written but never exercised with reduced motion emulated.

@@ -6,7 +6,7 @@ import { colorModeScript } from '@/app/theme'
 export const metadata = {
   title: "My Teaching Career | Tom Tran",
   description:
-    "Hành trình giảng dạy Tiếng Anh — lộ trình cá nhân hóa từ giao tiếp tự tin đến luyện thi học thuật.",
+    "Hành trình giảng dạy tiếng Anh: lộ trình cá nhân hóa từ giao tiếp tự tin đến luyện thi học thuật.",
 };
 
 export default function TeachingLayout({ children }) {

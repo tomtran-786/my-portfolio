@@ -5,7 +5,7 @@ const heroData = {
   },
 
   subtext:
-    "Lộ trình tiếng Anh cá nhân hóa — từ giao tiếp tự tin đến luyện thi học thuật, phù hợp với mục tiêu của riêng bạn.",
+    "Lộ trình tiếng Anh cá nhân hóa, từ giao tiếp tự tin đến luyện thi IELTS và TOEIC, xây theo mục tiêu của riêng bạn.",
 
   cta: {
     primary: {

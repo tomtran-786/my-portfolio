@@ -23,19 +23,17 @@ const s = {
   },
   header: {},
   headline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-brand-deep)",
-    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
+    fontSize: "var(--fs-h2)",
     lineHeight: 1.15,
     margin: 0,
     maxWidth: "36rem",
   },
   subtext: {
     color: "var(--teach-text)",
-    fontSize: 15,
+    fontSize: "var(--fs-body)",
     lineHeight: 1.7,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     margin: 0,
   },
   grid: {
@@ -46,7 +44,7 @@ const s = {
   card: {
     background: "var(--teach-surface)",
     border: "1px solid var(--teach-border)",
-    borderRadius: "1.25rem",
+    borderRadius: "var(--r-md)",
     padding: "1.75rem",
     display: "flex",
     flexDirection: "column",
@@ -54,30 +52,12 @@ const s = {
     cursor: "default",
     boxShadow: "none",
   },
-  quoteIcon: {
-    color: "var(--teach-brand-deep)",
-    fontSize: 36,
-    lineHeight: 1,
-    fontFamily: "Georgia, serif",
-    marginBottom: "-0.5rem",
-  },
   quote: {
     color: "var(--teach-text)",
-    fontSize: 14,
-    lineHeight: 1.8,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "1rem",
+    lineHeight: 1.65,
     flexGrow: 1,
-    fontStyle: "italic",
-  },
-  resultBadge: {
-    display: "inline-block",
-    background: "rgba(var(--teach-brand-rgb), 0.15)",
-    color: "var(--teach-brand-deep)",
-    fontSize: 12,
-    fontWeight: 700,
-    padding: "0.3rem 0.75rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    margin: 0,
   },
   footer: {
     display: "flex",
@@ -95,15 +75,13 @@ const s = {
     flexShrink: 0,
   },
   name: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 700,
     color: "var(--teach-ink)",
-    fontSize: 14,
+    fontSize: "var(--fs-small)",
   },
   role: {
     color: "var(--teach-text)",
-    fontSize: 12,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-label)",
   },
   stars: {
     display: "flex",
@@ -120,8 +98,8 @@ const s = {
     marginTop: "2.5rem",
   },
   pageBtn: (disabled) => ({
-    width: 40,
-    height: 40,
+    width: 44,
+    height: 44,
     borderRadius: "50%",
     background: disabled ? "var(--teach-bg-soft)" : "var(--teach-surface-muted)",
     border: "1px solid var(--teach-border)",
@@ -135,17 +113,26 @@ const s = {
   pageDots: {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
   },
-  pageDot: (active) => ({
-    width: active ? 22 : 8,
-    height: 8,
-    borderRadius: "9999px",
-    background: active ? "var(--teach-brand)" : "var(--teach-border-strong)",
+  // Vùng bấm 32px, chấm nhìn thấy vẫn nhỏ.
+  pageDot: {
+    minWidth: 32,
+    height: 32,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    background: "transparent",
     border: "none",
     cursor: "pointer",
     padding: 0,
-    transition: "width 0.25s ease, background 0.25s ease",
+  },
+  pageDotMark: (active) => ({
+    display: "block",
+    width: active ? 22 : 8,
+    height: 8,
+    borderRadius: "var(--r-pill)",
+    background: active ? "var(--teach-brand)" : "var(--teach-border-strong)",
+    transition: "width 0.25s ease, background-color 0.25s ease",
   }),
 };
 
@@ -212,16 +199,15 @@ export default function TestimonialsSection() {
               variants={fadeUp}
               style={s.card}
             >
-              <div style={s.quoteIcon}>&ldquo;</div>
-              <p style={s.quote}>{item.quote}</p>
-              <span style={s.resultBadge}>🎉 {item.result}</span>
+              <blockquote style={s.quote}>{item.quote}</blockquote>
+              <span className="tag" style={{ alignSelf: "flex-start", whiteSpace: "normal" }}>{item.result}</span>
               <div style={s.footer}>
                 <Image src={item.avatar} alt={item.name} width={44} height={44} style={s.avatar} />
                 <div>
                   <p style={s.name}>{item.name}</p>
                   <p style={s.role}>{item.role}</p>
                 </div>
-                <div style={s.stars}>
+                <div style={s.stars} role="img" aria-label={`${item.rating} trên 5 sao`}>
                   {Array.from({ length: item.rating }).map((_, i) => <StarIcon key={i} />)}
                 </div>
               </div>
@@ -246,11 +232,13 @@ export default function TestimonialsSection() {
             {Array.from({ length: totalPages }).map((_, i) => (
               <button
                 key={i}
-                style={s.pageDot(i === page)}
+                style={s.pageDot}
                 onClick={() => goToPage(i)}
                 aria-label={`Trang ${i + 1}`}
                 aria-current={i === page ? "page" : undefined}
-              />
+              >
+                <span aria-hidden="true" style={s.pageDotMark(i === page)} />
+              </button>
             ))}
           </div>
 

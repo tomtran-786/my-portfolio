@@ -9,7 +9,7 @@ const coursesData = {
     { id: "all", label: "Tất cả" },
     { id: "ielts", label: "IELTS" },
     { id: "toeic", label: "TOEIC" },
-    { id: "giao-tiep", label: "Giao Tiếp" },
+    { id: "giao-tiep", label: "Giao tiếp" },
   ],
 
   items: [

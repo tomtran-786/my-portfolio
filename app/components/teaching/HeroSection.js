@@ -28,57 +28,27 @@ wrapper: {
   paddingTop: "clamp(2.5rem, 6vw, 5rem)",
   paddingBottom: "clamp(2rem, 5vw, 4rem)",
 },  textCol: {
-    maxWidth: "34rem",
-  },
-  badge: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    background: "var(--teach-surface-muted)",
-    color: "var(--teach-text)",
-    fontSize: 13,
-    fontWeight: 500,
-    padding: "0.4rem 1rem",
-    borderRadius: "9999px",
-    marginBottom: "2rem",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-  },
-  badgeDot: {
-    width: 8, height: 8,
-    borderRadius: "50%",
-    background: "var(--teach-brand)",
-    flexShrink: 0,
+    maxWidth: "36rem",
   },
   headline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "clamp(2rem, 4.5vw, 3.25rem)",
     lineHeight: 1.15,
     marginBottom: "1.5rem",
+    textWrap: "pretty",
   },
   subtext: {
     color: "var(--teach-text)",
-    fontSize: "clamp(0.9rem, 1.6vw, 1.1rem)",
+    fontSize: "var(--fs-lead)",
     margin: "0 0 2.5rem 0",
     lineHeight: 1.7,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   ctaRow: {
     alignItems: "center",
     gap: "0.75rem",
     marginBottom: "3.5rem",
     flexWrap: "wrap",
-  },
-  ctaPrimary: {
-    background: "var(--teach-brand)",
-    color: "var(--teach-on-brand)",
-    fontWeight: 600,
-    fontSize: "clamp(0.85rem, 2vw, 1rem)",
-    padding: "1rem 2rem",
-    borderRadius: "9999px",
-    textDecoration: "none",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   socialProof: {
     alignItems: "center",
@@ -111,19 +81,17 @@ wrapper: {
     color: "var(--teach-ink)",
     fontWeight: 600,
     fontSize: 15,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   ratingCount: {
     color: "var(--teach-text)",
-    fontSize: 13,
+    fontSize: "var(--fs-label)",
     marginTop: 2,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
 };
 
 function StarIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor">
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
       <path d="M10 1l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L10 15.3 4.4 18.2l1.1-6.2L1 7.6l6.2-.9z" />
     </svg>
   );
@@ -141,16 +109,18 @@ export default function HeroSection() {
     >
       <style>{`
         .hero-cta-primary {
-          transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+          transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
         }
         .hero-cta-primary:hover {
-          background: var(--teach-brand-hover) !important;
           transform: translateY(-3px);
           box-shadow: var(--teach-shadow-hover);
         }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-cta-primary:hover { transform: none; }
+        }
         .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 34rem) 1fr;
+  grid-template-columns: minmax(0, 36rem) 1fr;
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
 }
@@ -172,7 +142,9 @@ export default function HeroSection() {
         <div className="hero-text" style={s.textCol}>
 
           <motion.h1 variants={fadeUp} style={s.headline}>
-            {headline.before}{" "}{headline.after}
+            {/* Ngắt dòng đúng chỗ data đã tách, để không cắt đôi cụm từ. */}
+            <span style={{ display: "block" }}>{headline.before}</span>
+            <span style={{ display: "block" }}>{headline.after}</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} className="hero-subtext" style={s.subtext}>
@@ -182,8 +154,8 @@ export default function HeroSection() {
           <motion.div variants={fadeUp} className="hero-cta-row" style={s.ctaRow}>
             <Link 
               href={cta.primary.href} 
-              className="hero-cta-primary" 
-              style={s.ctaPrimary}
+              className="btn btn--primary hero-cta-primary"
+              style={{ minHeight: 52, padding: "0.9rem 1.75rem", fontSize: "1.0625rem" }}
               onClick={(e) => {
                 if (cta.primary.href.startsWith("#")) {
                   e.preventDefault();

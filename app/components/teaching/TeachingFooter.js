@@ -12,12 +12,10 @@ const s = {
     padding: "3rem var(--teach-content-gutter) 2.5rem",
   },
   heading: {
-    color: "var(--teach-text-secondary)",
-    fontSize: 12,
+    color: "var(--teach-ink)",
+    fontSize: "var(--fs-label)",
     fontWeight: 700,
-    letterSpacing: "0.12em",
-    marginBottom: "1rem",
-    textTransform: "uppercase",
+    marginBottom: "0.75rem",
   },
   link: {
     background: "none",
@@ -26,7 +24,7 @@ const s = {
     cursor: "pointer",
     display: "block",
     fontFamily: "inherit",
-    fontSize: 14,
+    fontSize: "var(--fs-small)",
     marginBottom: "0.65rem",
     padding: 0,
     textAlign: "left",
@@ -36,7 +34,7 @@ const s = {
   },
   body: {
     color: "var(--teach-text)",
-    fontSize: 14,
+    fontSize: "var(--fs-small)",
     lineHeight: 1.7,
   },
   brand: {
@@ -126,11 +124,12 @@ export default function TeachingFooter() {
               rel="noopener noreferrer"
               style={s.link}
             >
-              {button.primary ? "📧" : "💬"} {button.label}
+              <i className={`ti ${button.primary ? "ti-mail" : "ti-message-circle"}`} aria-hidden="true" style={{ marginRight: "0.4rem" }} />
+              {button.label}
             </a>
           ))}
           <p style={{ ...s.body, color: "var(--teach-text-secondary)", marginTop: "0.5rem" }}>
-            ⏱ {ctaData.note}
+            {ctaData.note}
           </p>
         </div>
       </div>

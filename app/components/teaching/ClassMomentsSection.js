@@ -10,10 +10,9 @@ const s = {
     margin: 0,
   },
   heading: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-brand-deep)",
-    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
+    fontSize: "var(--fs-h2)",
     lineHeight: 1.15,
     margin: 0,
     maxWidth: "36rem",
@@ -22,20 +21,16 @@ const s = {
     position: "relative",
     width: "100%",
     aspectRatio: "16 / 8.2",
-    borderRadius: "1.5rem",
+    borderRadius: "var(--r-lg)",
     overflow: "hidden",
     background: "var(--teach-surface-muted)",
     border: "1px solid var(--teach-border)",
   },
   img: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   caption: {
-    borderLeft: "3px solid var(--teach-brand)",
     color: "var(--teach-text)",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontSize: 14,
-    fontWeight: 500,
-    lineHeight: 1.7,
-    paddingLeft: "1rem",
+    fontSize: "var(--fs-body)",
+    lineHeight: 1.6,
   },
   navBtn: {
     position: "absolute",
@@ -51,14 +46,20 @@ const s = {
     border: "none",
     cursor: "pointer",
   },
-  dots: { display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "1.25rem" },
-  dot: { height: 8, borderRadius: "9999px", border: "none", cursor: "pointer", padding: 0 },
+  dots: { display: "flex", justifyContent: "center", marginTop: "0.75rem" },
+  // Vùng bấm 32px, chấm nhìn thấy vẫn nhỏ.
+  dot: {
+    minWidth: 32, height: 32, padding: 0,
+    display: "inline-flex", alignItems: "center", justifyContent: "center",
+    background: "transparent", border: "none", cursor: "pointer",
+  },
+  dotMark: { display: "block", height: 8, borderRadius: "var(--r-pill)" },
 };
 
 function ArrowIcon({ direction }) {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
+      stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"
       style={{ transform: direction === "prev" ? "rotate(180deg)" : "none" }}>
       <line x1="5" y1="12" x2="19" y2="12" />
       <polyline points="12 5 19 12 12 19" />
@@ -84,11 +85,11 @@ export default function ClassMomentsSection() {
   return (
     <section className="teach-section teach-section-soft" style={s.wrapper} id="class-moments">
       <style>{`
-        .moment-nav-btn { transition: background 0.2s ease, transform 0.2s ease; }
+        .moment-nav-btn { transition: background-color 0.2s ease, transform 0.2s ease; }
         .moment-nav-btn:hover { background: rgba(var(--teach-brand-rgb), 0.92) !important; color: var(--teach-on-brand) !important; transform: translateY(-50%) scale(1.06); }
-        .moment-dot { transition: background 0.2s ease, width 0.2s ease; }
+        .moment-dot-mark { transition: background-color 0.2s ease, width 0.2s ease; }
         @media (max-width: 600px) {
-          .moment-stage { aspect-ratio: 4 / 3 !important; border-radius: 1rem !important; }
+          .moment-stage { aspect-ratio: 4 / 3 !important; border-radius: var(--r-md) !important; }
         }
       `}</style>
 
@@ -145,10 +146,15 @@ export default function ClassMomentsSection() {
               key={i}
               aria-label={`Xem ảnh ${i + 1}`}
               aria-current={i === index ? "true" : undefined}
-              className="moment-dot"
-              style={{ ...s.dot, width: i === index ? 22 : 8, background: i === index ? "var(--teach-brand)" : "var(--teach-border-strong)" }}
+              style={s.dot}
               onClick={() => goTo(i)}
-            />
+            >
+              <span
+                aria-hidden="true"
+                className="moment-dot-mark"
+                style={{ ...s.dotMark, width: i === index ? 22 : 8, background: i === index ? "var(--teach-brand)" : "var(--teach-border-strong)" }}
+              />
+            </button>
           ))}
         </div>
       )}

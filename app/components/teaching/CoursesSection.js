@@ -7,6 +7,7 @@ import testimonialsData from "@/data/teaching/testimonials";
 import CourseDetailModal from "./CourseDetailModal";
 
 const CATEGORIES = coursesData.categories;
+const categoryLabel = (id) => CATEGORIES.find((cat) => cat.id === id)?.label ?? id;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -23,21 +24,19 @@ const s = {
     margin: 0,
   },
   headline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-brand-deep)",
-    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
+    fontSize: "var(--fs-h2)",
     lineHeight: 1.2,
     margin: 0,
     maxWidth: "36rem",
   },
   subtext: {
     color: "var(--teach-text)",
-    fontSize: 15,
+    fontSize: "var(--fs-body)",
     lineHeight: 1.7,
     maxWidth: "36rem",
     margin: 0,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   // Tabs lọc category
   tabRow: {
@@ -50,13 +49,13 @@ const s = {
     background: active ? "var(--teach-brand)" : "var(--teach-bg-soft)",
     color: active ? "var(--teach-on-brand)" : "var(--teach-ink)",
     border: active ? "1px solid var(--teach-brand)" : "1px solid transparent",
-    fontSize: 13,
+    fontSize: "var(--fs-label)",
     fontWeight: 600,
-    padding: "0.55rem 1.25rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    minHeight: 40,
+    padding: "0 1.25rem",
+    borderRadius: "var(--r-pill)",
     cursor: "pointer",
-    transition: "background 0.2s, color 0.2s",
+    transition: "background-color 0.2s, color 0.2s",
   }),
   grid: {
     display: "grid",
@@ -65,28 +64,25 @@ const s = {
   },
   card: (highlighted) => ({
     background: highlighted ? "var(--teach-surface-muted)" : "var(--teach-surface)",
-    border: highlighted ? "1.5px solid var(--teach-border-strong)" : "1px solid var(--teach-border)",
-    borderRadius: "1.25rem",
-    padding: "1.75rem",
+    border: highlighted ? "1px solid var(--teach-border-strong)" : "1px solid var(--teach-border)",
+    borderRadius: "var(--r-md)",
+    padding: "1.5rem",
     display: "flex",
     flexDirection: "column",
     gap: "0.75rem",
     position: "relative",
     overflow: "hidden",
     cursor: "pointer",
-    boxShadow: highlighted ? "var(--teach-shadow-card)" : "none",
   }),
   // Là <button> thật chứ không phải <span>: card không còn role="button" nên đây
-  // là đường vào modal bằng bàn phím. Reset lại style mặc định của button để giữ
-  // nguyên hình dáng cũ.
+  // là đường vào modal bằng bàn phím. Reset lại style mặc định của button.
   viewDetailHint: {
     color: "var(--teach-brand-deep)",
-    fontSize: 12.5,
+    fontSize: "var(--fs-label)",
     fontWeight: 600,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     background: "none",
     border: "none",
-    padding: 0,
+    padding: "0.6rem 0",
     cursor: "pointer",
     textAlign: "left",
     alignSelf: "flex-start",
@@ -95,36 +91,33 @@ const s = {
     position: "absolute",
     top: "1.25rem",
     right: "1.25rem",
-    background: "var(--teach-brand-soft)",
-    color: "var(--teach-brand-deep)",
-    border: "1px solid var(--teach-border-strong)",
-    fontSize: 11,
-    fontWeight: 700,
-    padding: "0.2rem 0.65rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    background: "var(--teach-brand)",
+    color: "var(--teach-on-brand)",
+    fontWeight: 600,
   },
-  cardIcon: { fontSize: 32, lineHeight: 1 },
+  cardTop: {
+    display: "flex",
+    alignItems: "center",
+    gap: "0.5rem",
+    paddingRight: "7.5rem",
+  },
+  cardIcon: { fontSize: "1.125rem", lineHeight: 1 },
   cardTag: {
     color: "var(--teach-brand-deep)",
-    fontSize: 11,
-    fontWeight: 700,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    textTransform: "uppercase",
-    letterSpacing: "0.07em",
+    fontSize: "var(--fs-label)",
+    fontWeight: 600,
   },
   cardTitle: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-ink)",
-    fontSize: "1.1rem",
-    margin: "0.1rem 0",
+    fontSize: "var(--fs-h3)",
+    lineHeight: 1.3,
+    margin: 0,
   },
   cardDesc: {
     color: "var(--teach-text)",
-    fontSize: 13.5,
-    lineHeight: 1.7,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-small)",
+    lineHeight: 1.6,
     flexGrow: 1,
   },
   metaRow: {
@@ -140,21 +133,16 @@ const s = {
     alignItems: "center",
     gap: "0.45rem",
     color: "var(--teach-text)",
-    fontSize: 13,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-label)",
   },
   metaLabel: {
-    color: "var(--teach-brand-deep)",
-    fontSize: 11,
-    fontWeight: 700,
-    letterSpacing: "0.04em",
-    minWidth: "4.25rem",
-    textTransform: "uppercase",
+    color: "var(--teach-text-secondary)",
+    fontWeight: 600,
+    minWidth: "5.75rem",
   },
   emptyState: {
     color: "var(--teach-text)",
-    fontSize: 14,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-small)",
     textAlign: "center",
     padding: "3rem 0",
   },
@@ -216,7 +204,7 @@ export default function CoursesSection() {
                 variants={fadeUp}
                 style={s.card(item.highlighted)}
                 whileHover={{
-                  y: -10,
+                  y: -6,
                   boxShadow: "var(--teach-shadow-hover)",
                   borderColor: "var(--teach-border-strong)",
                 }}
@@ -229,11 +217,15 @@ export default function CoursesSection() {
                 onClick={() => setSelectedCourse(item)}
               >
                 {item.highlighted && (
-                  <span style={s.popularBadge}>⭐ {item.tag}</span>
+                  <span className="tag" style={s.popularBadge}>{item.tag}</span>
                 )}
 
-                <span style={s.cardIcon}>{item.icon}</span>
-                {!item.highlighted && <span style={s.cardTag}>{item.tag}</span>}
+                {/* Icon nằm cùng hàng với nhãn khoá, không xếp thành ô riêng
+                    phía trên tiêu đề (Impeccable: icon tile above heading). */}
+                <div style={s.cardTop}>
+                  <span aria-hidden="true" style={s.cardIcon}>{item.icon}</span>
+                  <span style={s.cardTag}>{categoryLabel(item.category)}</span>
+                </div>
                 <h3 style={s.cardTitle}>{item.title}</h3>
                 <p style={s.cardDesc}>{item.description}</p>
 

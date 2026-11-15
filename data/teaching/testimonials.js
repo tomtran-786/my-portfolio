@@ -1,6 +1,6 @@
 const testimonialsData = {
   headline: "Kết quả thật từ học viên thật",
-  subtext: "Không phải lời hứa — đây là những gì học viên đã đạt được.",
+  subtext: "Kết quả học viên đạt được sau khi học cùng tôi.",
 
   items: [
     {

@@ -1,5 +1,5 @@
 const ctaData = {
-  headline: "Bắt đầu với một buổi học thử — hoàn toàn miễn phí",
+  headline: "Bắt đầu với một buổi học thử miễn phí",
   subtext:
     "30 phút để tôi hiểu mục tiêu của bạn và đề xuất lộ trình phù hợp nhất. Không ràng buộc, không áp lực.",
   buttons: [

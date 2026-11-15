@@ -17,58 +17,32 @@ const s = {
   section: {
     margin: 0,
   },
-  card: {
-    background: "var(--teach-surface)",
-    border: "1px solid var(--teach-border)",
-    borderRadius: "2rem",
-    padding: "4rem 3rem",
+  // Không còn khung card + bóng lồng trong section: nội dung đứng thẳng trên
+  // nền trang, căn giữa trong một cột hẹp.
+  inner: {
+    maxWidth: "40rem",
+    margin: "0 auto",
     textAlign: "center",
-    position: "relative",
-    overflow: "hidden",
-    boxShadow: "var(--teach-shadow-card)",
   },
-  emoji: { fontSize: 48, display: "block", marginBottom: "1.25rem" },
   headline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800, color: "var(--teach-ink)",
-    fontSize: "clamp(1.5rem, 4vw, 2.25rem)",
-    lineHeight: 1.25, marginBottom: "1rem",
-    position: "relative", zIndex: 1,
+    fontWeight: 700, color: "var(--teach-brand-deep)",
+    fontSize: "var(--fs-h2)",
+    lineHeight: 1.2, marginBottom: "1rem",
   },
   subtext: {
-    color: "var(--teach-text)", fontSize: 15, lineHeight: 1.8,
-    maxWidth: "30rem", margin: "0 auto 2.5rem auto",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    position: "relative", zIndex: 1,
+    color: "var(--teach-text)", fontSize: "var(--fs-body)", lineHeight: 1.7,
+    maxWidth: "34rem", margin: "0 auto 2rem auto",
   },
   btnRow: {
     display: "flex", alignItems: "center",
     justifyContent: "center", gap: "0.75rem",
-    flexWrap: "wrap", position: "relative", zIndex: 1,
-  },
-  btnPrimary: {
-    background: "var(--teach-brand)", color: "var(--teach-on-brand)",
-    fontWeight: 700, fontSize: 15,
-    padding: "1rem 2rem", borderRadius: "9999px",
-    textDecoration: "none",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    display: "inline-flex", alignItems: "center", gap: "0.5rem",
-    transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
-  },
-  btnSecondary: {
-    background: "var(--teach-surface)", color: "var(--teach-brand-deep)",
-    fontWeight: 700, fontSize: 15,
-    padding: "1rem 2rem", borderRadius: "9999px",
-    textDecoration: "none",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    border: "1.5px solid var(--teach-brand-deep)",
-    display: "inline-flex", alignItems: "center", gap: "0.5rem",
-    transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease",
+    flexWrap: "wrap",
   },
   note: {
-    color: "var(--teach-text-secondary)", fontSize: 14,
-    marginTop: "1.5rem", fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    position: "relative", zIndex: 1,
+    alignItems: "center",
+    color: "var(--teach-text-secondary)", fontSize: "var(--fs-label)",
+    display: "inline-flex", gap: "0.4rem",
+    marginTop: "1.25rem",
   },
 };
 
@@ -78,25 +52,19 @@ export default function CTASection() {
   return (
     <section className="teach-section teach-section-soft" style={s.section} id="contact">
       <style>{`
-        .cta-btn-primary:hover {
-          background: var(--teach-brand-hover) !important;
-          transform: translateY(-3px);
-          box-shadow: var(--teach-shadow-hover);
-        }
-        .cta-btn-secondary:hover {
-          background: var(--teach-brand-soft) !important;
-          border-color: var(--teach-brand-deep) !important;
-          transform: translateY(-3px);
+        .cta-btn { transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease; }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: var(--teach-shadow-hover); }
+        @media (prefers-reduced-motion: reduce) {
+          .cta-btn:hover { transform: none; }
         }
       `}</style>
 
       <motion.div
-        style={s.card}
+        style={s.inner}
         initial="hidden" whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
         variants={stagger}
       >
-        <motion.span variants={fadeUp} style={s.emoji}>✉️</motion.span>
         <motion.h2 variants={fadeUp} style={s.headline}>{headline}</motion.h2>
         <motion.p variants={fadeUp} style={s.subtext}>{subtext}</motion.p>
 
@@ -111,15 +79,18 @@ export default function CTASection() {
               href={btn.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={btn.primary ? "cta-btn-primary" : "cta-btn-secondary"}
-              style={btn.primary ? s.btnPrimary : s.btnSecondary}
+              className={`btn cta-btn ${btn.primary ? "btn--primary" : "btn--secondary"}`}
+              style={{ minHeight: 52, padding: "0.9rem 1.75rem" }}
             >
-              {btn.primary ? "📧" : "💬"} {btn.label}
+              <i className={`ti ${btn.primary ? "ti-mail" : "ti-message-circle"}`} aria-hidden="true" />
+              {btn.label}
             </a>
           ))}
         </motion.div>
 
-        <motion.p variants={fadeUp} style={s.note}>⏱ {note}</motion.p>
+        <motion.p variants={fadeUp} style={s.note}>
+          <i className="ti ti-clock" aria-hidden="true" /> {note}
+        </motion.p>
       </motion.div>
     </section>
   );

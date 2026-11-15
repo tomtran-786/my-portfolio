@@ -32,18 +32,17 @@ const s = {
     alignItems: "center",
   },
   headline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-brand-deep)",
-    fontSize: "clamp(2.25rem, 5vw, 3.25rem)",
+    fontSize: "var(--fs-h2)",
     lineHeight: 1.25,
     marginBottom: "1.5rem",
   },
   paragraph: {
     color: "var(--teach-text)",
-    fontSize: 15,
-    lineHeight: 1.8,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-body)",
+    lineHeight: 1.7,
+    maxWidth: "68ch",
     marginBottom: "1rem",
   },
   credentials: {
@@ -52,15 +51,6 @@ const s = {
     gap: "0.5rem",
     marginTop: "1.5rem",
     marginBottom: "2rem",
-  },
-  credentialTag: {
-    background: "var(--teach-brand-soft)",
-    color: "var(--teach-brand-deep)",
-    fontSize: 12,
-    fontWeight: 600,
-    padding: "0.3rem 0.75rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   statsRow: {
     display: "grid",
@@ -77,21 +67,28 @@ const s = {
     padding: "1.25rem 1rem",
   },
   statValue: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-brand-deep)",
     fontSize: "1.9rem",
     fontVariantNumeric: "tabular-nums",
   },
   statLabel: {
     color: "var(--teach-ink)",
-    fontSize: 13,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-label)",
     lineHeight: 1.4,
+  },
+  figure: {
+    margin: 0,
+  },
+  caption: {
+    color: "var(--teach-text-secondary)",
+    fontSize: "var(--fs-label)",
+    lineHeight: 1.5,
+    marginTop: "var(--sp-3)",
   },
   imageWrap: {
     position: "relative",
-    borderRadius: "1.5rem",
+    borderRadius: "var(--r-lg)",
     overflow: "hidden",
     aspectRatio: "4/5",
   },
@@ -100,36 +97,6 @@ const s = {
     height: "100%",
     objectFit: "cover",
     display: "block",
-  },
-  imageOverlay: {
-    position: "absolute",
-    inset: 0,
-    background: "linear-gradient(to top, rgba(47,39,35,0.62) 0%, transparent 50%)",
-  },
-  imageBadge: {
-    position: "absolute",
-    bottom: "1.5rem",
-    left: "1.5rem",
-    right: "1.5rem",
-    background: "rgba(47,39,35,0.9)",
-    backdropFilter: "blur(8px)",
-    borderRadius: "1rem",
-    padding: "1rem 1.25rem",
-    display: "flex",
-    alignItems: "center",
-    gap: "0.75rem",
-  },
-  badgeIcon: { fontSize: 28 },
-  badgeText: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    color: "#fff",
-    fontWeight: 700,
-    fontSize: 14,
-  },
-  badgeSubtext: {
-    color: "rgba(255,255,255,0.74)",
-    fontSize: 12,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
 };
 
@@ -181,7 +148,7 @@ export default function AboutSection() {
 
           <div style={s.credentials}>
             {credentials.map((c) => (
-              <span key={c} style={s.credentialTag}>{c}</span>
+              <span key={c} className="tag">{c}</span>
             ))}
           </div>
 
@@ -197,24 +164,20 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        {/* Image side */}
-        <motion.div
+        {/* Image side: ảnh để nguyên, chú thích nằm dưới thay vì lớp phủ
+            gradient + thẻ kính mờ đè lên ảnh. */}
+        <motion.figure
           className="about-image"
           initial="hidden" whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
           variants={fadeRight}
-          style={s.imageWrap}
+          style={s.figure}
         >
-          <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 45vw" style={s.img} />
-          <div style={s.imageOverlay} />
-          <div style={s.imageBadge}>
-            <span style={s.badgeIcon}>{image.badge.icon}</span>
-            <div>
-              <p style={s.badgeText}>{image.badge.text}</p>
-              <p style={s.badgeSubtext}>{image.badge.subtext}</p>
-            </div>
+          <div style={s.imageWrap}>
+            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 45vw" style={s.img} />
           </div>
-        </motion.div>
+          <figcaption style={s.caption}>{image.caption}</figcaption>
+        </motion.figure>
       </div>
     </section>
   );

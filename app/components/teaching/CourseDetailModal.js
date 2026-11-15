@@ -31,7 +31,7 @@ const s = {
     maxWidth: "64rem",
     background: "var(--teach-surface)",
     border: "1px solid var(--teach-border)",
-    borderRadius: "1.75rem",
+    borderRadius: "var(--r-lg)",
     padding: "2.5rem",
     boxShadow: "var(--teach-modal-shadow)",
   },
@@ -66,15 +66,14 @@ const s = {
   },
   imageWrap: {
     position: "relative",   // bắt buộc: <Image fill> neo theo parent positioned gần nhất
-    borderRadius: "1.25rem",
+    borderRadius: "var(--r-md)",
     overflow: "hidden",
     aspectRatio: "4 / 3",
     background: "var(--teach-surface-muted)",
   },
   image: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   ctaHeadline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "1.2rem",
     lineHeight: 1.35,
@@ -84,54 +83,46 @@ ctaPrimary: {
   background: "var(--teach-brand)",
   color: "var(--teach-on-brand)",
   fontWeight: 700,
-  fontSize: 14,
+  fontSize: "var(--fs-small)",
   padding: "0.85rem 1.5rem",
   borderRadius: "9999px",
   border: "none",
   cursor: "pointer",
-  fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   transition: "transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease",
 },
 syllabusLink: {
   display: "inline-flex",
   alignItems: "center",
   gap: "0.5rem",
-  fontSize: 13,
+  fontSize: "var(--fs-label)",
   fontWeight: 600,
   color: "var(--teach-brand-deep)",
   textDecoration: "none",
-  fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   background: "rgba(var(--teach-brand-rgb), 0.08)",
   border: "1px solid rgba(var(--teach-brand-rgb), 0.22)",
   borderRadius: "9999px",
   padding: "0.6rem 1rem",
-  transition: "all 0.25s ease",
+  transition: "background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease",
   cursor: "pointer",
 },
   introRight: { display: "flex", flexDirection: "column" },
   tag: {
     color: "var(--teach-brand-deep)",
-    fontSize: 12,
+    fontSize: "var(--fs-label)",
     fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.07em",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   title: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "1.85rem",
     margin: "0.2rem 0 0.4rem 0",
   },
   metaLine: {
     color: "var(--teach-text)",
-    fontSize: 13,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-label)",
     marginBottom: "1.25rem",
   },
   h3: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "1.1rem",
@@ -139,9 +130,8 @@ syllabusLink: {
   },
   paragraph: {
     color: "var(--teach-text)",
-    fontSize: 14.5,
+    fontSize: "var(--fs-body)",
     lineHeight: 1.8,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   checklist: { listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.6rem" },
   checklistItem: {
@@ -149,8 +139,7 @@ syllabusLink: {
     alignItems: "flex-start",
     gap: "0.6rem",
     color: "var(--teach-text)",
-    fontSize: 14.5,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-body)",
     lineHeight: 1.6,
   },
   checkIconWrap: { marginTop: 2, flexShrink: 0 },
@@ -161,32 +150,17 @@ syllabusLink: {
     padding: "2.5rem 0",
     borderTop: "1px solid var(--teach-border)",
   },
-  sectionLabel: {
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.4rem",
-    background: "var(--teach-surface-muted)",
-    color: "var(--teach-brand-deep)",
-    fontSize: 12,
-    fontWeight: 600,
-    padding: "0.35rem 0.9rem",
-    borderRadius: "9999px",
-    marginBottom: "1rem",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-  },
   sectionHeadline: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "1.6rem",
     marginBottom: "0.6rem",
   },
   sectionSubtext: {
     color: "var(--teach-text)",
-    fontSize: 14,
+    fontSize: "var(--fs-small)",
     maxWidth: "32rem",
     margin: "0 auto 1.5rem auto",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     lineHeight: 1.7,
   },
   billingToggleRow: {
@@ -195,8 +169,7 @@ syllabusLink: {
     justifyContent: "center",
     gap: "0.75rem",
     marginBottom: "1.25rem",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontSize: 14,
+    fontSize: "var(--fs-small)",
   },
   studentCheckRow: {
     display: "flex",
@@ -204,8 +177,7 @@ syllabusLink: {
     justifyContent: "center",
     gap: "0.5rem",
     marginBottom: "2rem",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontSize: 13.5,
+    fontSize: "var(--fs-small)",
     color: "var(--teach-text)",
     cursor: "pointer",
   },
@@ -226,14 +198,11 @@ syllabusLink: {
     display: "inline-block",
     background: "rgba(var(--teach-brand-rgb), 0.15)",
     color: "var(--teach-brand-deep)",
-    fontSize: 11,
+    fontSize: "var(--fs-label)",
     fontWeight: 700,
-    textTransform: "uppercase",
-    letterSpacing: "0.04em",
     padding: "0.2rem 0.55rem",
     borderRadius: "9999px",
     marginBottom: "0.5rem",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
   toggleTrack: {
     width: 46,
@@ -256,11 +225,10 @@ syllabusLink: {
   savePill: {
     background: "rgba(var(--teach-brand-rgb), 0.15)",
     color: "var(--teach-brand-deep)",
-    fontSize: 12,
+    fontSize: "var(--fs-label)",
     fontWeight: 700,
     padding: "0.25rem 0.7rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    borderRadius: "var(--r-sm)",
   },
   plansGrid: {
     display: "grid",
@@ -271,7 +239,7 @@ syllabusLink: {
   planCard: (popular) => ({
     background: popular ? "var(--teach-brand-soft)" : "var(--teach-bg-soft)",
     border: popular ? "1.5px solid var(--teach-brand-deep)" : "1px solid var(--teach-border)",
-    borderRadius: "1.25rem",
+    borderRadius: "var(--r-md)",
     padding: "1.5rem",
     position: "relative",
   }),
@@ -281,32 +249,28 @@ syllabusLink: {
     right: "1.25rem",
     background: "var(--teach-surface)",
     color: "var(--teach-brand-deep)",
-    fontSize: 10.5,
+    fontSize: "var(--fs-label)",
     fontWeight: 700,
     padding: "0.2rem 0.6rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    borderRadius: "var(--r-sm)",
   },
   planName: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 700,
     color: "var(--teach-ink)",
-    fontSize: 15,
+    fontSize: "1rem",
     marginBottom: "0.6rem",
   },
   planPrice: {
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
-    fontWeight: 800,
+    fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "1.9rem",
     marginBottom: "0.5rem",
   },
-  planPriceUnit: { fontSize: 12.5, fontWeight: 500, color: "var(--teach-text)" },
+  planPriceUnit: { fontSize: "var(--fs-label)", fontWeight: 500, color: "var(--teach-text)" },
   planDesc: {
     color: "var(--teach-text)",
-    fontSize: 13,
+    fontSize: "var(--fs-label)",
     lineHeight: 1.6,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
   },
 
   // FAQ
@@ -317,9 +281,8 @@ syllabusLink: {
     background: "none",
     border: "none",
     color: "var(--teach-ink)",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontWeight: 600,
-    fontSize: 14.5,
+    fontSize: "var(--fs-body)",
     padding: "1rem 0",
     display: "flex",
     alignItems: "center",
@@ -337,9 +300,8 @@ syllabusLink: {
   },
   faqAnswer: {
     color: "var(--teach-text)",
-    fontSize: 13.5,
+    fontSize: "var(--fs-small)",
     lineHeight: 1.7,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     paddingBottom: "1rem",
     margin: 0,
   },
@@ -355,36 +317,27 @@ syllabusLink: {
   studentCard: {
     background: "var(--teach-bg-soft)",
     border: "1px solid var(--teach-border)",
-    borderRadius: "1.1rem",
+    borderRadius: "var(--r-md)",
     padding: "1.25rem",
     textAlign: "left",
     display: "flex",
     flexDirection: "column",
     gap: "0.9rem",
   },
-  studentQuoteIcon: {
-    color: "var(--teach-brand-deep)",
-    fontSize: 28,
-    lineHeight: 1,
-    fontFamily: "Georgia, serif",
-    marginBottom: "-0.4rem",
-  },
   studentComment: {
     color: "var(--teach-text)",
-    fontSize: 13.5,
+    fontSize: "var(--fs-small)",
     lineHeight: 1.7,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
     fontStyle: "italic",
   },
   studentResultBadge: {
     display: "inline-block",
     background: "rgba(var(--teach-brand-rgb), 0.15)",
     color: "var(--teach-brand-deep)",
-    fontSize: 11.5,
+    fontSize: "var(--fs-label)",
     fontWeight: 700,
     padding: "0.25rem 0.65rem",
-    borderRadius: "9999px",
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    borderRadius: "var(--r-sm)",
     alignSelf: "flex-start",
   },
   studentFooter: {
@@ -405,13 +358,11 @@ syllabusLink: {
   studentName: {
     color: "var(--teach-ink)",
     fontWeight: 700,
-    fontSize: 13,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-label)",
   },
   studentRole: {
     color: "var(--teach-text)",
-    fontSize: 11.5,
-    fontFamily: "var(--font-portfolio), Helvetica Neue, Helvetica, Arial, sans-serif",
+    fontSize: "var(--fs-label)",
   },
   studentStars: {
     display: "flex",
@@ -431,7 +382,7 @@ syllabusLink: {
   studentCardSingle: {
     background: "var(--teach-bg-soft)",
     border: "1px solid var(--teach-border)",
-    borderRadius: "1.1rem",
+    borderRadius: "var(--r-md)",
     padding: "1.75rem",
     textAlign: "left",
     display: "flex",
@@ -473,7 +424,7 @@ syllabusLink: {
     border: "none",
     cursor: "pointer",
     padding: 0,
-    transition: "all 0.25s ease",
+    transition: "background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease",
   }),
 };
 
@@ -770,8 +721,7 @@ function openSyllabus() {
 
         {/* Pricing */}
         <div style={s.pricingSection}>
-          <span style={s.sectionLabel}>✷ Pricing</span>
-          <h3 style={s.sectionHeadline}>Bảng Giá Khóa Học</h3>
+          <h3 style={s.sectionHeadline}>Bảng giá khóa học</h3>
           <p style={s.sectionSubtext}>{detail.pricing.subtext}</p>
 
           <div style={s.billingToggleRow}>
@@ -848,9 +798,8 @@ function openSyllabus() {
                     exit={(dir) => ({ opacity: 0, x: dir > 0 ? -24 : 24 })}
                     transition={{ duration: 0.25, ease: "easeOut" }}
                   >
-                    <span style={s.studentQuoteIcon}>&ldquo;</span>
                     <p style={s.studentComment}>{activeTestimonial.quote}</p>
-                    <span style={s.studentResultBadge}>🎉 {activeTestimonial.result}</span>
+                    <span style={s.studentResultBadge}>{activeTestimonial.result}</span>
                     <div style={s.studentFooter}>
                       <Image src={activeTestimonial.avatar} alt={activeTestimonial.name} width={44} height={44} style={s.studentAvatar} />
                       <div>

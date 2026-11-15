@@ -21,7 +21,8 @@ export default function StickyZaloBar() {
   }, []);
 
   useEffect(() => {
-    const targets = [document.getElementById("contact"), document.querySelector("footer")].filter(Boolean);
+    // Dùng id, không dùng querySelector("footer"): thẻ học viên cũng có <footer>.
+    const targets = [document.getElementById("contact"), document.getElementById("footer")].filter(Boolean);
     if (targets.length === 0) return;
     const inView = new Set();
     const observer = new IntersectionObserver((entries) => {

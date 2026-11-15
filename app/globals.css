@@ -1926,6 +1926,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
   cursor: pointer;
   font-size: var(--fs-label);
   font-weight: 600;
+  min-height: 44px;
   padding: var(--sp-2) 0;
   text-align: left;
 }
@@ -1963,6 +1964,10 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 @media (max-width: 560px) {
   .course-grid { grid-template-columns: 1fr; }
+  /* Ảnh thấp hơn để mỗi thẻ không chiếm cả màn hình điện thoại. */
+  .course-card img { aspect-ratio: 2 / 1; }
+  .course-card--feature img { aspect-ratio: 16 / 9; min-height: 0; }
+  .course-card--feature .course-price { font-size: 1.125rem; }
 }
 
 /* Lời học viên /teaching: một câu chuyện nổi bật (giấy đào) và sáu câu chuyện gọn.
@@ -2144,7 +2149,8 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .tf-badge b { display: block; font-size: 1.75rem; line-height: 1.1; margin-bottom: var(--sp-2); }
 .tf-badge p { color: #25305e; font-size: var(--fs-small); line-height: 1.6; margin: 0 0 var(--sp-3); }
-.tf-badge li { margin-bottom: var(--sp-2); }
+.tf-badge li { margin-bottom: var(--sp-1); }
+.tf-badge li a { align-items: center; display: inline-flex; min-height: 44px; }
 .tf-badge .tf-mono { font-family: var(--teach-mono); }
 .tf-badge a { color: #0e1733; text-decoration: none; transition: color 0.2s; }
 .tf-badge a:hover { color: #9c4700; }
@@ -2169,8 +2175,11 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .tf-link:hover { color: var(--teach-brand-deep); }
 .tf-end { color: var(--teach-text-secondary); font-size: var(--fs-label); grid-column: 1 / -1; margin: 0; }
 
+/* Email dài trong chữ đơn cách không có chỗ ngắt: cho phép ngắt ở bất kỳ đâu thay vì tràn ngang. */
+.tf-mono, .cta-slip__tear p { overflow-wrap: anywhere; }
+
 @media (max-width: 800px) {
-  .tf { grid-template-columns: 1fr; }
+  .tf { grid-template-columns: minmax(0, 1fr); }
   .tf-badge { max-width: 22rem; transform: none; }
   .tf-lists { grid-template-columns: 1fr; }
 }

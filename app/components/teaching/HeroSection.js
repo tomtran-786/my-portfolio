@@ -161,7 +161,7 @@ export default function HeroSection() {
             <Image src="/teaching/me.jpeg" alt="Thầy Tom" width={56} height={66} />
             <div>
               <b>Tuấn (Tom) Tran</b>
-              <small>{creds.slice(0, 2).join(" · ")}</small>
+              <small>{creds.slice(0, 2).map((c) => c.replace(/ /g, "\u00a0")).join(" · ")}</small>
             </div>
           </div>
           <h2 className="hero-h">Các khóa đang dạy</h2>

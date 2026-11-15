@@ -42,7 +42,7 @@ const s = {
     flexShrink: 0,
   },
   backBtn: {
-    width: 38, height: 38,
+    width: 44, height: 44,
     borderRadius: "50%",
     background: "var(--teach-bg-soft)",
     border: "1px solid var(--teach-border)",
@@ -121,8 +121,8 @@ const s = {
   },
   burgerBtn: {
     display: "none",
-    width: 40,
-    height: 40,
+    width: 44,
+    height: 44,
     borderRadius: "50%",
     background: "var(--teach-bg-soft)",
     border: "1px solid var(--teach-border)",

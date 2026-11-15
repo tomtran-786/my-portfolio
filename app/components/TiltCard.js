@@ -30,6 +30,9 @@ export default function TiltCard({ children, style }) {
     // Bản gốc tắt tilt trên thiết bị cảm ứng; hỏi pointer: fine chuẩn hơn đo
     // bề rộng, vì tablet màn rộng vẫn dùng ngón tay. Cùng cách Cursor.js dùng.
     if (!window.matchMedia('(pointer: fine)').matches) return
+    // Hiệu ứng giữ lại có chủ đích (DESIGN.md), nhưng tắt khi người dùng bật
+    // giảm chuyển động.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let cancelled = false
     // import động: vanilla-tilt đụng vào window ngay khi nạp -> không để nó
@@ -46,7 +49,7 @@ export default function TiltCard({ children, style }) {
   }, [])
 
   return (
-    <div ref={ref} style={{ transformStyle: 'preserve-3d', ...style }}>
+    <div ref={ref} data-impeccable-ignore="glassmorphism" style={{ transformStyle: 'preserve-3d', ...style }}>
       {children}
     </div>
   )

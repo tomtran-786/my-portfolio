@@ -5,15 +5,38 @@
 }
 
 :root {
-  --purple: #7c3aed;
-  --purple-light: #a78bfa;
-  --purple-dim: rgba(139, 92, 246, 0.15);
-  --navy: #0a0e1a;
-  --navy-card: #0f1629;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #475569;
-  --border: rgba(139, 92, 246, 0.2);
+  /* Thang dùng chung cho cả "/" và "/teaching" (xem DESIGN.md).
+     Không đặt cỡ chữ, radius hay khoảng cách bằng số lẻ trong component nữa:
+     lấy từ đây, thiếu bậc nào thì thêm bậc vào đây trước. */
+
+  /* Cỡ chữ. 14px là mức sàn cho mọi chữ người dùng phải đọc (nhãn, meta,
+     nav, tag); dưới mức đó chỉ dành cho chú thích trục biểu đồ. */
+  --fs-caption: 0.75rem;   /* 12px: chỉ cho nhãn trục heatmap/biểu đồ */
+  --fs-label: 0.875rem;    /* 14px: tag, meta, nav */
+  --fs-small: 0.9375rem;   /* 15px: chữ phụ trong card */
+  --fs-body: 1.0625rem;    /* 17px: đoạn văn */
+  --fs-lead: clamp(1.0625rem, 1.6vw, 1.25rem);
+  --fs-h3: 1.25rem;
+  --fs-h2: clamp(2rem, 4.5vw, 3rem);
+  --fs-display: clamp(2.25rem, 6vw, 3.75rem);
+
+  /* Radius: card/panel dùng md, ảnh lớn và modal dùng lg, pill chỉ cho nút. */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-pill: 999px;
+
+  /* Khoảng cách 4/8/12/16/24/32/48/72 */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4.5rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   /* Thang z-index dùng chung cho cả hai trang.
      Trước đây mỗi component tự chọn số nên modal /teaching (100) thua navbar
@@ -47,10 +70,17 @@ html[data-color-mode='dark'] {
 }
 
 body {
-  background: var(--navy);
-  color: var(--text-primary);
-  font-family: Arial, sans-serif;
   overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Quy tắc đọc chung (Impeccable: stub last line, orphan word). */
+:where(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+
+:where(p, li, blockquote) {
+  text-wrap: pretty;
 }
 
 /* Storytelling with Data-inspired design system, scoped to the portfolio body.
@@ -182,15 +212,15 @@ html[data-color-mode='dark'] .pf-body {
 .pf-section-title {
   color: var(--pf-brand);
   font-family: var(--font-portfolio), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .pf-section-subtitle {
-  color: var(--pf-ink);
-  font-size: clamp(1.05rem, 2vw, 1.375rem);
-  line-height: 1.4;
+  color: var(--pf-text);
+  font-size: var(--fs-lead);
+  line-height: 1.45;
 }
 
 /* Keep each heading and its supporting copy as one left-aligned reading unit.
@@ -275,6 +305,117 @@ html[data-color-mode='dark'] .teaching-body {
   --teach-control-shadow: 0 4px 18px rgba(0, 0, 0, 0.34);
   --teach-modal-shadow: 0 30px 70px rgba(0, 0, 0, 0.56);
   --cursor-follower: rgba(var(--teach-brand-rgb), 0.2);
+}
+
+/* ============================================================
+   Vai trò màu dùng chung: mỗi trang map bảng màu riêng (--pf-* hoặc
+   --teach-*) về cùng một bộ tên --c-*, để primitive bên dưới (.btn, .tag,
+   .card) dùng được ở cả hai trang mà không phải viết hai lần.
+   Khai báo trên cùng phần tử với bảng màu nên tự đổi theo dark mode.
+   ============================================================ */
+.pf-body {
+  --c-ink: var(--pf-ink);
+  --c-text: var(--pf-text);
+  --c-text-2: var(--pf-text-secondary);
+  --c-brand: var(--pf-brand);
+  --c-brand-hover: var(--pf-brand-deep);
+  --c-brand-deep: var(--pf-brand-deep);
+  --c-brand-soft: var(--pf-brand-soft);
+  --c-on-brand: var(--pf-on-brand);
+  --c-surface: var(--pf-surface);
+  --c-surface-muted: var(--pf-surface-muted);
+  --c-border: var(--pf-border);
+  --c-border-strong: var(--pf-border-strong);
+  --c-shadow-hover: var(--pf-shadow-hover);
+}
+
+.teaching-body {
+  --c-ink: var(--teach-ink);
+  --c-text: var(--teach-text);
+  --c-text-2: var(--teach-text-secondary);
+  --c-brand: var(--teach-brand);
+  --c-brand-hover: var(--teach-brand-hover);
+  --c-brand-deep: var(--teach-brand-deep);
+  --c-brand-soft: var(--teach-brand-soft);
+  --c-on-brand: var(--teach-on-brand);
+  --c-surface: var(--teach-surface);
+  --c-surface-muted: var(--teach-surface-muted);
+  --c-border: var(--teach-border);
+  --c-border-strong: var(--teach-border-strong);
+  --c-shadow-hover: var(--teach-shadow-hover);
+}
+
+/* Nút: một nút primary cho mỗi khối, secondary viền mảnh. Cao tối thiểu 44px
+   cho vùng chạm. Hiệu ứng scale khi hover (framer-motion) vẫn gắn ở component. */
+.btn {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  gap: var(--sp-2);
+  justify-content: center;
+  line-height: 1.2;
+  min-height: 44px;
+  padding: 0.7rem 1.4rem;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--c-brand);
+  color: var(--c-on-brand);
+}
+
+.btn--primary:hover {
+  background: var(--c-brand-hover);
+}
+
+.btn--secondary {
+  background: var(--c-surface);
+  border-color: var(--c-border-strong);
+  color: var(--c-brand-deep);
+}
+
+.btn--secondary:hover {
+  background: var(--c-brand-soft);
+  border-color: var(--c-brand-deep);
+}
+
+.btn i {
+  font-size: 1.15em;
+}
+
+/* Tag: nhãn tĩnh, không phải nút. Bo nhỏ để không lẫn với nút pill. */
+.tag {
+  align-items: center;
+  background: var(--c-brand-soft);
+  border-radius: var(--r-sm);
+  color: var(--c-brand-deep);
+  display: inline-flex;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  gap: var(--sp-1);
+  line-height: 1.35;
+  padding: 0.15rem 0.55rem;
+  white-space: nowrap;
+}
+
+/* Card: một cách tạo cạnh duy nhất (viền), bóng chỉ xuất hiện khi hover. */
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+}
+
+.meta-label {
+  color: var(--c-text-2);
+  font-size: var(--fs-label);
+  font-weight: 600;
 }
 
 .theme-toggle {
@@ -363,10 +504,10 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 .teach-section-title {
   color: var(--teach-brand-deep);
   font-family: var(--font-portfolio), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-size: var(--fs-h2);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.08;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .teach-section-heading {
@@ -384,8 +525,8 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 
 .teach-section-copy {
   color: var(--teach-text);
-  font-size: 1rem;
-  line-height: 1.75;
+  font-size: var(--fs-body);
+  line-height: 1.7;
 }
 
 @media (max-width: 768px) {
@@ -427,17 +568,8 @@ html[data-color-mode='dark'] .theme-toggle-sun {
   width: 6px;
 }
 
-::-webkit-scrollbar-track {
-  background: #0a0e1a;
-}
-
 ::-webkit-scrollbar-thumb {
-  background: #7c3aed;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a78bfa;
+  border-radius: var(--r-pill);
 }
 
 .aurora-blob {
@@ -508,24 +640,22 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 .pf-nav-route {
   align-items: center;
   border: 1px solid var(--pf-border-strong);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   color: var(--pf-brand-deep);
   display: inline-flex;
-  font-size: 0.8125rem;
-  font-weight: 700;
+  font-size: var(--fs-label);
+  font-weight: 600;
   gap: 0.35rem;
-  letter-spacing: 0.06em;
-  padding: 0.65rem 1rem;
+  min-height: 40px;
+  padding: 0 0.95rem;
   text-decoration: none;
-  text-transform: uppercase;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
   white-space: nowrap;
 }
 
 .pf-nav-route:hover {
   background: var(--pf-brand-soft);
   border-color: var(--pf-brand);
-  transform: translateY(-2px);
 }
 
 .pf-nav-burger {
@@ -535,7 +665,7 @@ html[data-color-mode='dark'] .theme-toggle-sun {
   color: var(--pf-brand);
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -549,34 +679,126 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 }
 
 .pf-hero {
+  align-items: center;
   display: grid;
+  gap: var(--sp-6);
   grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+  overflow: hidden;
   padding: 6rem var(--pf-content-gutter) 0;
+  position: relative;
+  z-index: var(--z-content);
 }
 
-/* clamp: co từ 4rem xuống 2rem, không cần nowrap nên tên tự xuống dòng được */
+.pf-hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+/* clamp: co từ 4rem xuống 2.5rem, không cần nowrap nên tên tự xuống dòng được */
 .pf-hero-title {
-  font-size: clamp(2rem, 7vw, 4rem);
+  color: var(--pf-ink);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin-bottom: var(--sp-3);
+}
+
+.pf-hero-role {
+  color: var(--pf-brand);
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  margin-bottom: var(--sp-4);
+  min-height: 1.6em;
+}
+
+.pf-hero-lead {
+  color: var(--pf-text);
+  font-size: var(--fs-lead);
+  line-height: 1.65;
+  margin-bottom: var(--sp-6);
+  max-width: 34rem;
+}
+
+.pf-hero-meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4) var(--sp-5);
+  margin-top: var(--sp-5);
+}
+
+.pf-hero-status {
+  align-items: center;
+  color: var(--pf-text-secondary);
+  display: inline-flex;
+  font-size: var(--fs-small);
+  gap: var(--sp-2);
+}
+
+/* Chấm tĩnh: trạng thái không đổi thì không nhấp nháy. */
+.pf-hero-status-dot {
+  background: var(--pf-success);
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+}
+
+.pf-hero-social {
+  display: flex;
+  gap: var(--sp-1);
+}
+
+.pf-hero-social a {
+  align-items: center;
+  border-radius: 50%;
+  color: var(--pf-brand-deep);
+  display: inline-flex;
+  font-size: 1.375rem;
+  height: 44px;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  width: 44px;
+}
+
+.pf-hero-social a:hover {
+  background: var(--pf-brand-soft);
+}
+
+.pf-hero-halo {
+  background: radial-gradient(circle, var(--pf-aurora-1) 0%, transparent 70%);
+  border-radius: 50%;
+  height: 400px;
+  left: 30%;
+  pointer-events: none;
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  z-index: 0;
 }
 
 /* margin phải nằm ở đây chứ không phải inline: nó cần khớp padding ngang của
    .pf-section ở từng breakpoint, mà inline style thì không viết được @media. */
 .pf-stats {
+  border-block: 1px solid var(--pf-border);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  min-height: 150px;
-  margin: 0 var(--pf-content-gutter) 3rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0 var(--pf-content-gutter) var(--sp-7);
 }
 
 .pf-stat-cell {
-  min-height: 148px;
-  padding: 1.75rem 1.5rem;
-  background: var(--pf-surface);
-  text-align: center;
+  padding: var(--sp-5) var(--sp-5) var(--sp-5) 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+}
+
+.pf-stat-cell + .pf-stat-cell {
+  padding-left: var(--sp-5);
 }
 
 .pf-stat-cell:not(:last-child) {
@@ -586,7 +808,7 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 .pf-stat-number {
   color: var(--pf-brand);
   font-family: var(--font-portfolio);
-  font-size: clamp(2.75rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
@@ -594,12 +816,15 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 
 .pf-stat-label {
   color: var(--pf-text-secondary);
-  font-size: 0.9375rem;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: var(--sp-2);
+}
+
+.pf-stat-label strong {
+  color: var(--pf-ink);
   font-weight: 600;
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  margin-top: 0.65rem;
-  text-transform: uppercase;
 }
 
 .pf-card-grid {
@@ -618,8 +843,7 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 .pf-activity-panel {
   background: var(--pf-surface);
   border: 1px solid var(--pf-border);
-  border-radius: 1rem;
-  box-shadow: var(--pf-shadow-card);
+  border-radius: var(--r-md);
   min-width: 0;
   padding: clamp(1.25rem, 3vw, 2rem);
 }
@@ -662,19 +886,19 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 
 .pf-activity-identity small {
   color: var(--pf-text-secondary);
-  font-size: 0.82rem;
+  font-size: var(--fs-label);
 }
 
 .pf-live-badge {
   align-items: center;
   background: var(--pf-success-soft);
   border: 1px solid var(--pf-success-border);
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   color: var(--pf-success);
   display: inline-flex;
   flex: 0 0 auto;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: var(--fs-label);
+  font-weight: 600;
   gap: 0.45rem;
   padding: 0.4rem 0.7rem;
 }
@@ -686,59 +910,60 @@ html[data-color-mode='dark'] .theme-toggle-sun {
   width: 0.42rem;
 }
 
+/* Hàng số liệu phẳng: không còn ô nền + viền lồng trong panel (nested card),
+   chỉ ngăn bằng đường kẻ. Icon nằm cạnh nhãn thay vì xếp trên con số. */
 .pf-activity-stat-grid {
+  border-block: 1px solid var(--pf-border);
   display: grid;
-  gap: 0.9rem;
   grid-template-columns: repeat(4, 1fr);
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--sp-5);
 }
 
 .pf-activity-stat {
-  align-items: center;
-  background: var(--pf-bg-soft);
-  border: 1px solid var(--pf-border);
-  border-radius: 0.8rem;
   color: var(--pf-text-secondary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 8rem;
-  padding: 1rem;
   text-decoration: none;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  transition: color 0.2s;
+  display: grid;
+  gap: var(--sp-2);
+  grid-template-areas: "value" "label";
+  padding: var(--sp-4) var(--sp-4) var(--sp-4) 0;
 }
 
-.pf-activity-stat:hover {
-  border-color: var(--pf-border-strong);
-  box-shadow: var(--pf-shadow-card);
-  transform: translateY(-3px);
+a.pf-activity-stat:hover {
+  color: var(--pf-brand);
+}
+
+.pf-activity-stat + .pf-activity-stat {
+  border-left: 1px solid var(--pf-border);
+  padding-left: var(--sp-4);
 }
 
 .pf-activity-stat i {
   color: var(--pf-brand);
-  font-size: 1.35rem;
-  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  grid-area: label;
 }
 
 .pf-activity-stat strong {
   color: var(--pf-ink);
   font-size: 1.75rem;
   font-variant-numeric: tabular-nums;
+  grid-area: value;
   line-height: 1;
 }
 
 .pf-activity-stat > span {
-  font-size: 0.78rem;
-  font-weight: 600;
-  margin-top: 0.45rem;
-  text-align: center;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  grid-area: label;
+  padding-left: 1.4rem;
 }
 
 .pf-activity-note {
   background: var(--pf-brand-soft);
-  border-radius: 0.6rem;
+  border-radius: var(--r-sm);
   color: var(--pf-text-secondary);
-  font-size: 0.82rem;
+  font-size: var(--fs-label);
   line-height: 1.55;
   margin: -0.5rem 0 1.5rem;
   padding: 0.7rem 0.9rem;
@@ -746,23 +971,19 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 
 .pf-activity-detail-grid {
   display: grid;
-  gap: 1rem;
+  gap: var(--sp-6);
   grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.6fr);
 }
 
 .pf-activity-subpanel {
-  background: var(--pf-bg-soft);
-  border: 1px solid var(--pf-border);
-  border-radius: 0.8rem;
   min-width: 0;
-  padding: 1.2rem;
 }
 
 .pf-activity-subpanel h3 {
   color: var(--pf-ink);
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--sp-4);
 }
 
 .pf-language-list {
@@ -772,7 +993,7 @@ html[data-color-mode='dark'] .theme-toggle-sun {
 
 .pf-language-label {
   color: var(--pf-text);
-  font-size: 0.76rem;
+  font-size: var(--fs-label);
   gap: 0.45rem;
   margin-bottom: 0.35rem;
 }
@@ -849,25 +1070,11 @@ html[data-color-mode='dark'] .pf-contribution-image {
   filter: invert(1) hue-rotate(180deg) brightness(1.7) contrast(0.86);
 }
 
-.pf-practice-panel {
-  background:
-    linear-gradient(120deg, var(--pf-brand-soft), transparent 42%),
-    var(--pf-surface);
-}
-
 .pf-practice-layout {
-  align-items: stretch;
+  align-items: center;
   display: grid;
-  gap: 1rem;
+  gap: var(--sp-6);
   grid-template-columns: minmax(12rem, 0.7fr) minmax(18rem, 1.3fr) auto;
-}
-
-.pf-practice-total,
-.pf-practice-breakdown {
-  background: var(--pf-bg-soft);
-  border: 1px solid var(--pf-border);
-  border-radius: 0.8rem;
-  padding: 1.2rem;
 }
 
 .pf-practice-total {
@@ -876,12 +1083,17 @@ html[data-color-mode='dark'] .pf-contribution-image {
   justify-content: center;
 }
 
+.pf-practice-breakdown {
+  border-left: 1px solid var(--pf-border);
+  padding-left: var(--sp-6);
+}
+
 .pf-practice-number {
   color: var(--pf-brand);
-  font-size: clamp(2.75rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 4.5vw, 3.25rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .pf-practice-total > strong {
@@ -892,7 +1104,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-practice-total > small {
   color: var(--pf-text-secondary);
-  font-size: 0.72rem;
+  font-size: var(--fs-label);
   margin-top: 0.3rem;
 }
 
@@ -903,7 +1115,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-practice-language {
   color: var(--pf-text-secondary);
-  font-size: 0.84rem;
+  font-size: var(--fs-label);
   justify-content: space-between;
 }
 
@@ -928,7 +1140,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-practice-levels span {
   color: var(--pf-text-secondary);
-  font-size: 0.76rem;
+  font-size: var(--fs-label);
 }
 
 .pf-practice-levels strong {
@@ -937,24 +1149,24 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-activity-cta {
   align-items: center;
-  align-self: stretch;
+  align-self: center;
   background: var(--pf-brand);
-  border-radius: 0.8rem;
+  border-radius: var(--r-pill);
   color: var(--pf-on-brand);
   display: inline-flex;
-  font-size: 0.88rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   gap: 0.5rem;
   justify-content: center;
-  min-width: 11.5rem;
-  padding: 1rem 1.25rem;
+  min-height: 44px;
+  padding: 0.7rem 1.4rem;
   text-decoration: none;
-  transition: background 0.2s, transform 0.2s;
+  transition: background-color 0.2s;
+  white-space: nowrap;
 }
 
 .pf-activity-cta:hover {
   background: var(--pf-brand-deep);
-  transform: translateY(-2px);
 }
 
 .pf-cn-heatmap-wrap {
@@ -971,7 +1183,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-cn-heatmap-weekdays span {
   color: var(--pf-text-secondary);
-  font-size: 0.68rem;
+  font-size: var(--fs-caption);
   height: 0.75rem;
   line-height: 0.75rem;
 }
@@ -996,7 +1208,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-cn-heatmap-months span {
   color: var(--pf-text-secondary);
-  font-size: 0.68rem;
+  font-size: var(--fs-caption);
   overflow: visible;
   white-space: nowrap;
 }
@@ -1025,7 +1237,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
   align-items: center;
   color: var(--pf-text-secondary);
   display: flex;
-  font-size: 0.72rem;
+  font-size: var(--fs-caption);
   gap: 0.35rem;
   justify-content: flex-end;
   margin-top: 0.75rem;
@@ -1051,6 +1263,8 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-section {
   padding: 4rem var(--pf-content-gutter);
+  position: relative;
+  z-index: var(--z-content);
 }
 
 .pf-section + .pf-section {
@@ -1067,6 +1281,45 @@ html[data-color-mode='dark'] .pf-contribution-image {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: auto 1fr auto;
+}
+
+.pf-edu-card {
+  padding: var(--sp-5) var(--sp-6);
+}
+
+.pf-edu-degree {
+  color: var(--pf-ink);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: var(--sp-1);
+}
+
+.pf-edu-institution {
+  color: var(--pf-link);
+  font-size: var(--fs-small);
+}
+
+.pf-edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.pf-edu-courses {
+  color: var(--pf-text);
+  font-size: var(--fs-small);
+  line-height: 1.65;
+  margin-top: var(--sp-3);
+  max-width: 68ch;
+}
+
+.pf-edu-date {
+  color: var(--pf-brand);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .pf-edu-logo {
@@ -1110,15 +1363,19 @@ html[data-color-mode='dark'] .pf-contribution-image {
   max-width: 1200px;
   margin: 2.5rem auto 0;
   border-top: 0;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   background: var(--pf-footer-strip);
   padding: 1rem 1.25rem;
-  font-size: 12px;
+  font-size: var(--fs-label);
   color: var(--pf-footer-strip-text);
 }
 
 .pf-hero-art {
+  align-items: flex-end;
+  display: flex;
+  justify-content: flex-end;
   margin: 0;
+  position: relative;
 }
 
 /* Hai nút này có nowrap; ở màn hẹp phải cho xuống hàng thay vì tràn ngang */
@@ -1129,8 +1386,8 @@ html[data-color-mode='dark'] .pf-contribution-image {
 }
 
 .pf-contact-btns {
-  justify-content: center;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
 }
 
 @media (max-width: 1100px) {
@@ -1199,7 +1456,6 @@ html[data-color-mode='dark'] .pf-contribution-image {
     text-align: left;
   }
 
-  .pf-stats,
   .pf-card-grid,
   .pf-timeline-row {
     grid-template-columns: 1fr;
@@ -1208,27 +1464,11 @@ html[data-color-mode='dark'] .pf-contribution-image {
   /* Khớp padding ngang 1.25rem của .pf-section, nếu không stats thụt vào sâu
      hơn mọi section khác 20px và tạo bậc thang thấy rõ trên điện thoại. */
   .pf-stats {
-    min-height: 0;
-    margin-bottom: 2rem;
+    margin-bottom: var(--sp-6);
   }
 
   .pf-stat-cell {
-    min-height: 100px;
-    padding: 1rem 1.2rem;
-  }
-
-  .pf-stat-cell:not(:last-child) {
-    border-right: 0;
-    border-bottom: 1px solid var(--pf-border);
-  }
-
-  .pf-stat-number {
-    font-size: 2rem;
-  }
-
-  .pf-stat-label {
-    font-size: 0.875rem;
-    margin-top: 0.125rem;
+    padding-block: var(--sp-4);
   }
 
   .pf-section {
@@ -1237,6 +1477,22 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
   .pf-activity-stat-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pf-activity-stat:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .pf-activity-stat:nth-child(n + 3) {
+    border-top: 1px solid var(--pf-border);
+  }
+
+  .pf-practice-breakdown {
+    border-left: 0;
+    border-top: 1px solid var(--pf-border);
+    padding-left: 0;
+    padding-top: var(--sp-5);
   }
 
   .pf-cn-heatmap-grid {
@@ -1318,15 +1574,6 @@ html[data-color-mode='dark'] .pf-contribution-image {
     flex-direction: column;
   }
 
-  .pf-activity-stat-grid {
-    gap: 0.65rem;
-  }
-
-  .pf-activity-stat {
-    min-height: 6.75rem;
-    padding: 0.75rem;
-  }
-
   .pf-practice-language {
     align-items: flex-start;
     flex-direction: column;
@@ -1356,7 +1603,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .pf-blog-card {
   background: var(--pf-surface);
   border: 1px solid var(--pf-border);
-  border-radius: 12.5px;
+  border-radius: var(--r-md);
   color: inherit;
   display: block;
   overflow: hidden;
@@ -1388,16 +1635,13 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-blog-card-category {
   background: var(--pf-brand);
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   color: var(--pf-on-brand);
-  font-family: var(--font-portfolio);
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: var(--fs-label);
+  font-weight: 600;
   left: 0.9rem;
-  letter-spacing: 0.04em;
-  padding: 0.25rem 0.75rem;
+  padding: 0.15rem 0.6rem;
   position: absolute;
-  text-transform: uppercase;
   top: 0.9rem;
 }
 
@@ -1407,14 +1651,11 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-blog-category-pill {
   background: var(--pf-brand);
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   color: var(--pf-on-brand);
-  font-family: var(--font-portfolio);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  padding: 0.25rem 0.75rem;
-  text-transform: uppercase;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  padding: 0.15rem 0.6rem;
 }
 
 .pf-blog-category-pill[data-category='Lifestyle'] {
@@ -1434,12 +1675,9 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-blog-card-date {
   color: var(--pf-text-secondary);
-  font-family: var(--font-portfolio);
-  font-size: 0.82rem;
+  font-size: var(--fs-label);
   font-weight: 600;
-  letter-spacing: 0.04em;
   margin-bottom: 0.4rem;
-  text-transform: uppercase;
 }
 
 .pf-blog-card-title {
@@ -1464,12 +1702,10 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-blog-tag {
   background: var(--pf-brand-soft);
-  border: 1px solid var(--pf-border-strong);
-  border-radius: 5px;
-  color: var(--pf-brand);
-  font-family: var(--font-portfolio);
-  font-size: 0.78rem;
-  padding: 0.15rem 0.6rem;
+  border-radius: var(--r-sm);
+  color: var(--pf-brand-deep);
+  font-size: var(--fs-label);
+  padding: 0.15rem 0.55rem;
 }
 
 .pf-blog-back {
@@ -1477,8 +1713,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: var(--font-portfolio);
-  font-size: 0.9rem;
+  font-size: var(--fs-small);
   font-weight: 600;
   margin-bottom: 2rem;
   text-decoration: none;
@@ -1535,7 +1770,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 }
 
 .pf-blog-prose img {
-  border-radius: 0.8rem;
+  border-radius: var(--r-md);
   height: auto;
   margin: 1.5rem 0;
   max-width: 100%;
@@ -1558,7 +1793,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .pf-blog-prose pre {
   background: var(--pf-surface-muted);
-  border-radius: 0.6rem;
+  border-radius: var(--r-sm);
   margin-bottom: 1.25rem;
   overflow-x: auto;
   padding: 1rem 1.25rem;

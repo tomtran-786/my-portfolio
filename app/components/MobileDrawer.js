@@ -195,8 +195,8 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
                 textDecoration: 'none',
                 fontSize: 17,
                 fontWeight: 500,
-                borderRadius: 10,
-                transition: 'background 0.2s, color 0.2s',
+                borderRadius: 'var(--r-md)',
+                transition: 'background-color 0.2s, color 0.2s',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = t.hoverBg
@@ -227,9 +227,8 @@ export default function MobileDrawer({ open, onClose, links, cta, theme = 'portf
                 textDecoration: 'none',
                 padding: '0.9rem 1.25rem',
                 borderRadius: 9999,
-                fontSize: 15,
+                fontSize: '1rem',
                 fontWeight: 600,
-                letterSpacing: '0.01em',
                 boxShadow: theme === 'teaching' ? 'var(--teach-shadow-hover)' : 'var(--pf-shadow-hover)',
               }}
             >

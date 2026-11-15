@@ -38,11 +38,18 @@ export default function Cursor() {
   const followerY = useSpring(y, FOLLOWER_SPRING)
 
   useEffect(() => {
+    // Hiệu ứng giữ lại có chủ đích (DESIGN.md); tắt khi người dùng bật giảm
+    // chuyển động, vì vòng đuổi theo chuột là chuyển động liên tục.
     const mq = window.matchMedia('(pointer: fine)')
-    const apply = () => setEnabled(mq.matches)
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = () => setEnabled(mq.matches && !reduce.matches)
     apply()
     mq.addEventListener('change', apply)
-    return () => mq.removeEventListener('change', apply)
+    reduce.addEventListener('change', apply)
+    return () => {
+      mq.removeEventListener('change', apply)
+      reduce.removeEventListener('change', apply)
+    }
   }, [])
 
   useEffect(() => {

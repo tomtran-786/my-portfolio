@@ -13,55 +13,52 @@ import { usePathname } from 'next/navigation'
 
 const s = {
   heading: {
-    fontSize: 12,
+    fontSize: 'var(--fs-label)',
     fontWeight: 700,
-    color: 'var(--pf-brand-deep)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.12em',
-    marginBottom: '1rem',
+    color: 'var(--pf-ink)',
+    marginBottom: '0.75rem',
   },
   link: {
     display: 'block',
     width: 'fit-content',
-    fontSize: 14,
+    fontSize: 'var(--fs-small)',
     color: 'var(--pf-text)',
     textDecoration: 'none',
-    marginBottom: '0.65rem',
+    padding: '0.3rem 0',
     transition: 'color 0.2s ease',
   },
   body: {
-    fontSize: 14,
+    fontSize: 'var(--fs-small)',
     color: 'var(--pf-text)',
     lineHeight: 1.7,
   },
   muted: {
-    fontSize: 14,
+    fontSize: 'var(--fs-label)',
     color: 'var(--pf-text-secondary)',
     lineHeight: 1.7,
   },
   social: {
-    width: 38,
-    height: 38,
+    width: 44,
+    height: 44,
     borderRadius: '50%',
     background: 'var(--pf-brand-soft)',
-    border: '1px solid var(--pf-border)',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
     color: 'var(--pf-brand)',
     fontSize: 18,
     textDecoration: 'none',
-    transition: 'transform 0.2s ease, background 0.2s ease',
+    transition: 'transform 0.2s ease, background-color 0.2s ease',
   },
 }
 
 const EXPLORE = [
   { label: 'Home', href: '#home' },
-  { label: 'My Works', href: '#projects' },
-  { label: 'My Activity', href: '#activity' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Activity', href: '#activity' },
   { label: 'Timeline', href: '#experience' },
   { label: 'Education', href: '#education' },
-  { label: 'My Certifications', href: '#certifications' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -149,7 +146,7 @@ export default function Footer() {
             <a
               href="/documents/resume-tran-vo-manh-tuan.pdf"
               download="Resume_Tran_Vo_Manh_Tuan.pdf"
-              style={{ ...s.link, marginBottom: '1.1rem' }}
+              style={{ ...s.link, marginBottom: '0.75rem' }}
             >
               Download resume ↓
             </a>
@@ -164,7 +161,7 @@ export default function Footer() {
                   className="pf-footer-social"
                   style={s.social}
                 >
-                  <i className={`ti ${so.icon}`} />
+                  <i className={`ti ${so.icon}`} aria-hidden="true" />
                 </a>
               ))}
             </div>

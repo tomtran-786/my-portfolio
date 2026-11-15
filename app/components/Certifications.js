@@ -199,10 +199,10 @@ export default function Certifications() {
       {/* Header */}
       <div className="pf-section-heading">
         <h2 className="pf-section-title" style={{ fontWeight: 700, margin: 0 }}>
-          My Certifications
+          Certifications
         </h2>
-        <p className="pf-section-subtitle pf-section-context" style={{ fontWeight: 500 }}>
-          Professional certifications that validate my expertise
+        <p className="pf-section-subtitle pf-section-context">
+          Courses and credentials from Google, DataCamp, Xóm Data Academy, and Claude Academy
         </p>
       </div>
 
@@ -239,11 +239,10 @@ export default function Certifications() {
                 style={{
                   background: 'var(--pf-surface)',
                   border: '1px solid var(--pf-border)',
-                  borderRadius: 16, overflow: 'hidden',
+                  borderRadius: 'var(--r-md)', overflow: 'hidden',
                   textDecoration: 'none',
                   display: 'block',
                   cursor: hasLink ? 'pointer' : 'default',
-                  boxShadow: hasLink ? 'var(--pf-shadow-card)' : 'none',
                 }}
               >
                 {/* Image */}
@@ -264,25 +263,12 @@ export default function Certifications() {
 
                 {/* Info */}
                 <div style={{ padding: '1rem 1.2rem 1.2rem', borderTop: '1px solid var(--pf-border)' }}>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--pf-ink)', marginBottom: 4 }}>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--pf-ink)', lineHeight: 1.4, marginBottom: 'var(--sp-2)' }}>
                     {cert.name}
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{
-                      fontSize: 12, fontWeight: 500,
-                      background: 'var(--pf-brand-soft)', color: 'var(--pf-brand)',
-                      border: '1px solid var(--pf-border-strong)',
-                      borderRadius: 6, padding: '2px 10px',
-                    }}>
-                      {cert.issuer}
-                    </span>
-                    <span style={{
-                      fontFamily: 'var(--font-portfolio)',
-                      fontSize: 11, color: 'var(--pf-text-secondary)',
-                    }}>
-                      {cert.date}
-                    </span>
-                  </div>
+                  </h3>
+                  <p style={{ fontSize: 'var(--fs-label)', color: 'var(--pf-text-secondary)' }}>
+                    {cert.issuer} · {cert.date}
+                  </p>
                 </div>
               </Card>
               </TiltCard>
@@ -309,11 +295,11 @@ export default function Certifications() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
-          <i className="ti ti-chevron-left" />
+          <i className="ti ti-chevron-left" aria-hidden="true" />
         </motion.button>
 
         {/* Dots */}
-        <div style={{ display: 'flex', gap: 8 }}>
+        <div style={{ display: 'flex', gap: 0 }}>
           {Array.from({ length: totalPages }).map((_, i) => (
             <button
               key={i}
@@ -322,15 +308,21 @@ export default function Certifications() {
               // đọc màn hình chỉ nghe thấy 5 nút vô danh.
               aria-label={`Go to page ${i + 1}`}
               aria-current={i === page ? 'true' : undefined}
+              // Vùng bấm 32px, chấm nhìn thấy vẫn nhỏ (Impeccable: tiny target).
               style={{
-                width: i === page ? 24 : 8, height: 8,
-                borderRadius: 999,
-                background: i === page ? 'var(--pf-brand)' : 'var(--pf-pagination-dot)',
-                border: 'none', cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                padding: 0,
+                minWidth: 32, height: 32, padding: 0,
+                display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                background: 'transparent', border: 'none', cursor: 'pointer',
               }}
-            />
+            >
+              <span aria-hidden="true" style={{
+                display: 'block',
+                width: i === page ? 24 : 8, height: 8,
+                borderRadius: 'var(--r-pill)',
+                background: i === page ? 'var(--pf-brand)' : 'var(--pf-pagination-dot)',
+                transition: 'width 0.3s ease, background-color 0.3s ease',
+              }} />
+            </button>
           ))}
         </div>
 
@@ -349,15 +341,15 @@ export default function Certifications() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
-          <i className="ti ti-chevron-right" />
+          <i className="ti ti-chevron-right" aria-hidden="true" />
         </motion.button>
       </div>
 
       {/* Page counter */}
       <div style={{
         textAlign: 'center', marginTop: '0.75rem',
-        fontFamily: 'var(--font-portfolio)',
-        color: 'var(--pf-text-secondary)', fontWeight: 500, fontSize: 12
+        color: 'var(--pf-text-secondary)', fontWeight: 500, fontSize: 'var(--fs-label)',
+        fontVariantNumeric: 'tabular-nums',
       }}>
         {page + 1} / {totalPages}
       </div>

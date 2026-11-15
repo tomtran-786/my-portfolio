@@ -26,10 +26,8 @@ export default function NavLink({ href, label }) {
       style={{
         color: 'var(--pf-text)',
         textDecoration: 'none',
-        fontSize: 14,
+        fontSize: 'var(--fs-small)',
         fontWeight: 600,
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase',
         cursor: 'pointer',
         position: 'relative',
       }}

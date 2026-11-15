@@ -8,8 +8,10 @@ import TiltCard from './TiltCard'
 import useScrollLock from '../hooks/useScrollLock'
 import useFocusTrap from '../hooks/useFocusTrap'
 
-// Easing nảy của bản gốc: cubic-bezier(0.34, 1.56, 0.64, 1)
-const BACK_EASE = [0.34, 1.56, 0.64, 1]
+// Ease-out không vọt quá đích. Bản gốc dùng easing nảy (0.34, 1.56, 0.64, 1),
+// Impeccable xếp vào "bounce/elastic easing" nên đã thay.
+const ENTER_EASE = [0.22, 1, 0.36, 1]
+const MAX_CARD_TAGS = 3
 
 // Map tool → màu + icon
 const toolStyle = {
@@ -178,6 +180,17 @@ export const projects = [
 const FEATURED = 'Featured'
 const categoryList = [FEATURED,'Investment Analysis', 'Market Research', 'Data Analysis', 'Consulting Case', 'Product Management', 'Learning']
 
+// Tag công cụ: màu riêng theo hãng, dùng chung cho card và modal.
+function ToolTag({ tag }) {
+  const { color, bg, logo } = getToolStyle(tag)
+  return (
+    <span className="tag" style={{ background: bg, color }}>
+      {logo && <Image src={logo} alt="" width={14} height={14} style={{ objectFit: 'contain' }} />}
+      {tag}
+    </span>
+  )
+}
+
 // Card với hover state nội bộ
 function ProjectCard({ proj, index, onClick }) {
   const [hovered, setHovered] = useState(false)
@@ -188,7 +201,7 @@ function ProjectCard({ proj, index, onClick }) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: BACK_EASE }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: ENTER_EASE }}
       onClick={onClick}
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') {
@@ -221,8 +234,8 @@ function ProjectCard({ proj, index, onClick }) {
         border: hovered
           ? '1px solid var(--pf-border-strong)'
           : '1px solid var(--pf-border)',
-        borderRadius: 14, overflow: 'hidden', cursor: 'pointer',
-        transition: 'border 0.2s',
+        borderRadius: 'var(--r-md)', overflow: 'hidden', cursor: 'pointer',
+        transition: 'border-color 0.2s',
       }}
     >
       {/* Cover image */}
@@ -243,7 +256,7 @@ function ProjectCard({ proj, index, onClick }) {
         <div style={{
           position: 'absolute', top: 12, left: 12,
           background: 'var(--pf-brand)', color: 'var(--pf-on-brand)',
-          fontSize: 12, fontWeight: 600, padding: '4px 12px', borderRadius: 999,
+          fontSize: 'var(--fs-label)', fontWeight: 600, padding: '2px 10px', borderRadius: 'var(--r-sm)',
         }}>
           {proj.category}
         </div>
@@ -253,7 +266,7 @@ function ProjectCard({ proj, index, onClick }) {
       <div style={{ padding: '1rem 1.2rem 1.2rem', display: 'flex', flex: 1, flexDirection: 'column' }}>
         {/* Title đổi màu tím khi hover */}
         <h3 style={{
-          fontSize: 17, fontWeight: 700,
+          fontSize: '1.125rem', fontWeight: 700,
           color: hovered ? 'var(--pf-brand)' : 'var(--pf-ink)',
           marginBottom: '0.5rem',
           lineHeight: 1.4,
@@ -262,34 +275,18 @@ function ProjectCard({ proj, index, onClick }) {
           {proj.title}
         </h3>
 
-        <p style={{ fontSize: 13, color: 'var(--pf-text-secondary)', lineHeight: 1.7, marginBottom: '0.8rem' }}>
+        <p style={{ fontSize: 'var(--fs-small)', color: 'var(--pf-text-secondary)', lineHeight: 1.6, marginBottom: '1rem' }}>
           {proj.desc}
         </p>
 
         {/* Tags với màu riêng */}
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 'auto' }}>
-          {proj.tags.map(tag => {
-  const { color, bg, logo } = getToolStyle(tag)
-  return (
-    <span key={tag} style={{
-      fontSize: 11, fontWeight: 600,
-      background: bg, color: color,
-      borderRadius: 25, padding: '3px 10px',
-      display: 'inline-flex', alignItems: 'center', gap: 5,
-    }}>
-      {logo && (
-        <Image
-          src={logo}
-          alt={tag}
-          width={14}
-          height={14}
-          style={{ objectFit: 'contain' }}
-        />
-      )}
-      {tag}
-    </span>
-  )
-})}
+          {proj.tags.slice(0, MAX_CARD_TAGS).map(tag => <ToolTag key={tag} tag={tag} />)}
+          {proj.tags.length > MAX_CARD_TAGS && (
+            <span className="tag" style={{ background: 'var(--pf-bg-soft)', color: 'var(--pf-text-secondary)' }}>
+              +{proj.tags.length - MAX_CARD_TAGS}
+            </span>
+          )}
         </div>
       </div>
 
@@ -339,7 +336,7 @@ export default function Projects() {
     <section id="projects" className="pf-section" style={{ position: 'relative', zIndex: 5 }}>
       <style>{`
         .pf-project-card:focus-visible {
-          outline: 3px solid #297fd6;
+          outline: 3px solid var(--pf-accent);
           outline-offset: 4px;
         }
       `}</style>
@@ -365,22 +362,16 @@ export default function Projects() {
               onClick={() => setActive(cat)}
               aria-pressed={isActive}
               style={{
-                padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 600,
+                minHeight: 40, padding: '0 16px', borderRadius: 'var(--r-pill)', fontSize: 'var(--fs-label)', fontWeight: 600,
                 cursor: 'pointer', border: isActive ? '1px solid var(--pf-brand)' : '1px solid transparent',
                 background: isActive ? 'var(--pf-brand)' : 'var(--pf-bg-soft)',
                 color: isActive ? 'var(--pf-on-brand)' : 'var(--pf-brand)',
-                transition: 'all 0.2s',
+                transition: 'background-color 0.2s, color 0.2s, border-color 0.2s',
                 display: 'inline-flex', alignItems: 'center', gap: 6,
               }}
             >
               {cat}
-              <span style={{
-                fontSize: 11, fontWeight: 700,
-                background: isActive ? 'rgba(255,255,255,0.22)' : 'transparent',
-                color: isActive ? 'var(--pf-on-brand)' : 'var(--pf-brand)',
-                borderRadius: 999, padding: '1px 7px',
-                minWidth: 20, textAlign: 'center',
-              }}>
+              <span style={{ fontWeight: 500, opacity: 0.75, fontVariantNumeric: 'tabular-nums' }}>
                 {count}
               </span>
             </button>
@@ -426,7 +417,7 @@ export default function Projects() {
                 transition={{ duration: 0.25 }}
                 onClick={e => e.stopPropagation()}
                 style={{
-                  background: 'var(--pf-surface)', borderRadius: 18, overflow: 'hidden',
+                  background: 'var(--pf-surface)', borderRadius: 'var(--r-lg)', overflow: 'hidden',
                   maxWidth: 680, width: '100%',
                   margin: 'auto 0',
                   border: '1px solid var(--pf-border)',
@@ -443,8 +434,8 @@ export default function Projects() {
               <div style={{ padding: '1.5rem 2rem 2rem' }}>
                 <div style={{
                   display: 'inline-block', background: 'var(--pf-brand)', color: 'var(--pf-on-brand)',
-                  fontSize: 12, fontWeight: 600, padding: '4px 12px',
-                  borderRadius: 999, marginBottom: '0.8rem',
+                  fontSize: 'var(--fs-label)', fontWeight: 600, padding: '2px 10px',
+                  borderRadius: 'var(--r-sm)', marginBottom: '0.8rem',
                 }}>
                   {selected.category}
                 </div>
@@ -452,22 +443,21 @@ export default function Projects() {
                 <h3 style={{ fontSize: 24, fontWeight: 700, color: 'var(--pf-ink)', marginBottom: '0.6rem', lineHeight: 1.4 }}>
                   {selected.title}
                 </h3>
-                <p style={{ fontSize: 15, color: 'var(--pf-text-secondary)', lineHeight: 1.75, marginBottom: '1.2rem' }}>
+                <p style={{ fontSize: 'var(--fs-body)', color: 'var(--pf-text)', lineHeight: 1.65, marginBottom: '1.5rem' }}>
                   {selected.desc}
                 </p>
 
                 {/* Key highlights */}
                 <div style={{ marginBottom: '1.2rem' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--pf-brand)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
-                    Key Highlights
-                  </div>
+                  <h4 style={{ fontSize: 'var(--fs-label)', fontWeight: 700, color: 'var(--pf-ink)', marginBottom: '0.6rem' }}>
+                    Key highlights
+                  </h4>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     {selected.highlights.map(h => (
                       <span key={h} style={{
-                        fontSize: 13, fontWeight: 600, color: 'var(--pf-ink)',
+                        fontSize: 'var(--fs-label)', fontWeight: 600, color: 'var(--pf-ink)',
                         background: 'var(--pf-bg-soft)',
-                        border: '1px solid var(--pf-border)',
-                        borderRadius: 8, padding: '6px 14px',
+                        borderRadius: 'var(--r-sm)', padding: '4px 10px',
                       }}>{h}</span>
                     ))}
                   </div>
@@ -475,32 +465,11 @@ export default function Projects() {
 
                 {/* Tech stack với màu */}
                 <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--pf-brand)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
-                    Tech Stack
-                  </div>
+                  <h4 style={{ fontSize: 'var(--fs-label)', fontWeight: 700, color: 'var(--pf-ink)', marginBottom: '0.6rem' }}>
+                    Tech stack
+                  </h4>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {selected.tags.map(tag => {
-  const { color, bg, logo } = getToolStyle(tag)
-  return (
-    <span key={tag} style={{
-      fontSize: 11, fontWeight: 600,
-      background: bg, color: color,
-      borderRadius: 25, padding: '3px 10px',
-      display: 'inline-flex', alignItems: 'center', gap: 5,
-    }}>
-      {logo && (
-        <Image
-          src={logo}
-          alt={tag}
-          width={14}
-          height={14}
-          style={{ objectFit: 'contain' }}
-        />
-      )}
-      {tag}
-    </span>
-  )
-})}
+                    {selected.tags.map(tag => <ToolTag key={tag} tag={tag} />)}
                   </div>
                 </div>
 
@@ -510,13 +479,7 @@ export default function Projects() {
                     href={selected.link}
                     target="_blank"
                     rel="noreferrer"
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 8,
-                      background: selected.link?.includes('github.com') ? 'var(--pf-brand-deep)' : 'var(--pf-brand)',
-                      color: 'var(--pf-on-brand)',
-                      fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
-                      textDecoration: 'none',
-                    }}
+                    className="btn btn--primary"
                   >
                     {selected.link?.includes('github.com') ? (
                       <>
@@ -524,7 +487,7 @@ export default function Projects() {
                         View on GitHub
                       </>
                     ) : (
-                      <>View Project <i className="ti ti-external-link" /></>
+                      <>View project <i className="ti ti-external-link" aria-hidden="true" /></>
                     )}
                   </a>
                   {selected.dashboardLink && (
@@ -532,15 +495,9 @@ export default function Projects() {
                       href={selected.dashboardLink}
                       target="_blank"
                       rel="noreferrer"
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 8,
-                        background: 'var(--pf-surface)', color: 'var(--pf-brand-deep)',
-                        border: '1px solid var(--pf-border-strong)',
-                        fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
-                        textDecoration: 'none',
-                      }}
+                      className="btn btn--secondary"
                     >
-                      View Dashboard <i className="ti ti-chart-bar" />
+                      View dashboard <i className="ti ti-chart-bar" aria-hidden="true" />
                     </a>
                   )}
                   {selected.githubLink && (
@@ -548,13 +505,7 @@ export default function Projects() {
                       href={selected.githubLink}
                       target="_blank"
                       rel="noreferrer"
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 8,
-                        background: 'var(--pf-surface)', color: 'var(--pf-brand-deep)',
-                        border: '1px solid var(--pf-border-strong)',
-                        fontSize: 15, fontWeight: 600, padding: '12px 24px', borderRadius: 999,
-                        textDecoration: 'none',
-                      }}
+                      className="btn btn--secondary"
                     >
                       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
                       View on GitHub
@@ -562,11 +513,8 @@ export default function Projects() {
                   )}
                   <button
                     onClick={() => setSelected(null)}
-                    style={{
-                      background: 'transparent', border: '1px solid var(--pf-border-strong)',
-                      color: 'var(--pf-brand)', fontSize: 14, fontWeight: 600,
-                      padding: '12px 20px', borderRadius: 999, cursor: 'pointer',
-                    }}
+                    className="btn"
+                    style={{ background: 'transparent', color: 'var(--pf-text-secondary)', marginLeft: 'auto' }}
                   >
                     Close
                   </button>

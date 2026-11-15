@@ -22,7 +22,7 @@ export default function Timeline() {
         <p className="pf-section-subtitle pf-section-context" style={{
           fontWeight: 500,
         }}>
-          A quick recap of proud moments
+          Recent roles in data analysis, research, and marketing
         </p>
       </div>
 
@@ -119,20 +119,18 @@ function TextBlock({ exp, align }) {
         fontSize: 18,
         fontWeight: 700,
         color: 'var(--pf-brand)',
-        marginBottom: '0.6rem',
-        letterSpacing: '0.02em',
+        marginBottom: '0.5rem',
       }}>
         {exp.date}
       </span>
 
       {/* Title + Company */}
       <h3 style={{
-        fontSize: 24,
+        fontSize: '1.375rem',
         fontWeight: 700,
         color: 'var(--pf-ink)',
-        margin: '0 0 0.6rem',
-        lineHeight: 1.4,
-        letterSpacing: '-0.01em',
+        margin: '0 0 0.75rem',
+        lineHeight: 1.35,
       }}>
         {exp.title}{' - '}
         <span style={{
@@ -147,12 +145,12 @@ function TextBlock({ exp, align }) {
 
       {/* Description */}
       <p style={{
-        fontSize: 15,
+        fontSize: 'var(--fs-small)',
         fontWeight: 400,
         color: 'var(--pf-text)',
-        lineHeight: 1.75,
+        lineHeight: 1.65,
         marginBottom: '0.75rem',
-        maxWidth: 400,
+        maxWidth: 420,
       }}>
         {exp.description}
       </p>
@@ -160,11 +158,10 @@ function TextBlock({ exp, align }) {
       {/* Tools */}
       {exp.tools && (
         <p style={{
-          fontFamily: 'var(--font-portfolio)',
-          fontSize: 12,
+          fontSize: 'var(--fs-label)',
           fontWeight: 400,
           color: 'var(--pf-text-secondary)',
-          marginBottom: '1.25rem',
+          marginBottom: '0.75rem',
         }}>
           <span style={{ color: 'var(--pf-brand)', fontWeight: 600 }}>Tools: </span>{exp.tools}
         </p>
@@ -173,17 +170,14 @@ function TextBlock({ exp, align }) {
       {/* Location Badge */}
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
-        padding: '6px 14px', borderRadius: 999,
-        border: '1px solid var(--pf-border-strong)',
-        background: 'var(--pf-brand-soft)',
       }}>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--pf-brand)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--pf-brand)" aria-hidden="true">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
         </svg>
         <span style={{
-          fontSize: 13,
+          fontSize: 'var(--fs-label)',
           fontWeight: 500,
-          color: 'var(--pf-brand-deep)',
+          color: 'var(--pf-text-secondary)',
         }}>
           {exp.location}
         </span>
@@ -197,9 +191,8 @@ function ImageBlock({ exp }) {
     <div style={{
       position: 'relative', width: '100%', maxWidth: 440,
       aspectRatio: '16/9',
-      borderRadius: 12, overflow: 'hidden',
+      borderRadius: 'var(--r-md)', overflow: 'hidden',
       border: '1px solid var(--pf-border)',
-      boxShadow: 'var(--pf-shadow-card)',
     }}>
       <Image
         src={exp.image}

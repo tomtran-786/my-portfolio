@@ -10,11 +10,11 @@ import ThemeToggle from '@/app/components/ThemeToggle'
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
-  { label: 'My Works', href: '#projects' },
-  { label: 'My Activity', href: '#activity' },
+  { label: 'Work', href: '#projects' },
+  { label: 'Activity', href: '#activity' },
   { label: 'Timeline', href: '#experience' },
   { label: 'Education', href: '#education' },
-  { label: 'My Certifications', href: '#certifications' },
+  { label: 'Certifications', href: '#certifications' },
   { label: 'Contact', href: '#contact' },
   { label: 'Blog', href: '/blog' },
   { label: 'Teaching', href: '/teaching' },
@@ -54,7 +54,7 @@ export default function SiteChrome() {
       <motion.div
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, height: 3,
-          background: 'linear-gradient(90deg, var(--pf-brand-deep) 0%, var(--pf-accent) 100%)', zIndex: 'var(--z-progress)',
+          background: 'var(--pf-accent)', zIndex: 'var(--z-progress)',
           scaleX, transformOrigin: 'left'
         }}
       />

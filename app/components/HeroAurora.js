@@ -45,6 +45,7 @@ export default function HeroAurora() {
   return (
     <div
       aria-hidden="true"
+      data-impeccable-ignore="radial-gradient-halo soft-spotlight glassmorphism"
       style={{
         position: 'absolute',
         inset: 0,

@@ -30,22 +30,16 @@ export default function BlogList({ posts }) {
               onClick={() => setActive(cat)}
               aria-pressed={isActive}
               style={{
-                padding: '8px 16px', borderRadius: 999, fontSize: 14, fontWeight: 600,
+                minHeight: 40, padding: '0 16px', borderRadius: 'var(--r-pill)', fontSize: 'var(--fs-label)', fontWeight: 600,
                 cursor: 'pointer', border: isActive ? '1px solid var(--pf-brand)' : '1px solid transparent',
                 background: isActive ? 'var(--pf-brand)' : 'var(--pf-bg-soft)',
                 color: isActive ? 'var(--pf-on-brand)' : 'var(--pf-brand)',
-                transition: 'all 0.2s',
+                transition: 'background-color 0.2s, color 0.2s, border-color 0.2s',
                 display: 'inline-flex', alignItems: 'center', gap: 6,
               }}
             >
               {cat}
-              <span style={{
-                fontSize: 11, fontWeight: 700,
-                background: isActive ? 'rgba(255,255,255,0.22)' : 'transparent',
-                color: isActive ? 'var(--pf-on-brand)' : 'var(--pf-brand)',
-                borderRadius: 999, padding: '1px 7px',
-                minWidth: 20, textAlign: 'center',
-              }}>
+              <span style={{ fontWeight: 500, opacity: 0.75, fontVariantNumeric: 'tabular-nums' }}>
                 {count}
               </span>
             </button>

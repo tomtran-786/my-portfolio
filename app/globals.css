@@ -74,6 +74,12 @@ body {
   line-height: 1.6;
 }
 
+/* Trình duyệt không cho <button>/<input> kế thừa font: thiếu dòng này thì mọi
+   nút không dùng .btn (nav, tab lọc, FAQ...) rơi về Arial. */
+:where(button, input, select, textarea) {
+  font: inherit;
+}
+
 /* Quy tắc đọc chung (Impeccable: stub last line, orphan word). */
 :where(h1, h2, h3, h4) {
   text-wrap: balance;

@@ -2046,3 +2046,62 @@ html[data-color-mode='dark'] .pf-contribution-image {
   .about-photo { max-width: 20rem; }
   .about-stats { grid-template-columns: 1fr; }
 }
+
+/* CTA /teaching: phiếu giấy đào ghim trên bảng. Chốt từ live mode (biến thể 1).
+   Token màu được đặt lại cho nền giấy; riêng nút phụ phải đặt lại cả nền, vì
+   .btn--secondary lấy --c-surface (xanh đen của bảng) làm nền. */
+.cta-slip {
+  --c-ink: #0e1733;
+  --c-text: #25305e;
+  --c-brand-deep: #0e1733;
+  --c-brand-soft: rgba(249, 134, 3, 0.2);
+  background: var(--teach-paper);
+  border-radius: var(--r-md);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35);
+  color: #0e1733;
+  margin: 0 auto;
+  max-width: 46rem;
+  padding: var(--sp-6);
+  position: relative;
+  text-align: center;
+  transform: rotate(-1deg);
+}
+
+.cta-slip::before {
+  background: var(--teach-brand);
+  border-radius: 50%;
+  content: "";
+  height: 18px;
+  left: 50%;
+  position: absolute;
+  top: -8px;
+  width: 18px;
+}
+
+.cta-slip h2 { color: #0e1733; font-size: var(--fs-h2); line-height: 1.2; margin: 0 0 var(--sp-3); }
+.cta-slip__sub { color: #25305e; font-size: var(--fs-body); line-height: 1.7; margin: 0 auto var(--sp-5); max-width: 34rem; }
+.cta-slip__row { display: flex; flex-wrap: wrap; gap: var(--sp-3); justify-content: center; }
+.cta-slip .btn { min-height: 52px; padding: 0.9rem 1.75rem; }
+
+.cta-slip .btn--secondary {
+  background: transparent;
+  border-color: rgba(14, 23, 51, 0.55);
+  color: #0e1733;
+}
+
+.cta-slip .btn--secondary:hover {
+  background: rgba(14, 23, 51, 0.08);
+  border-color: #0e1733;
+}
+
+.cta-btn { transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease; }
+.cta-btn:hover { box-shadow: 0 6px 0 rgba(14, 23, 51, 0.25); transform: translateY(-3px); }
+
+.cta-slip__tear { border-top: 2px dashed rgba(14, 23, 51, 0.35); margin-top: var(--sp-5); padding-top: var(--sp-4); }
+.cta-slip__tear p { color: #25305e; font-family: var(--teach-mono); font-size: var(--fs-small); margin: 0 0 var(--sp-2); }
+.cta-slip__note { align-items: center; display: inline-flex; gap: var(--sp-2); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-btn:hover { transform: none; }
+  .cta-slip { transform: none; }
+}

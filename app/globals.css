@@ -1840,20 +1840,6 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .level-bar__seg--now { background: var(--c-border-strong); }
 .level-bar__seg--goal { background: var(--c-brand); }
 
-/* Lời học viên /teaching: xếp cột, thẻ không bị cắt giữa chừng. */
-.teach-stories {
-  column-gap: var(--sp-4);
-  column-width: 20rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.teach-story {
-  break-inside: avoid;
-  margin-bottom: var(--sp-4);
-}
-
 /* Trang vở: modal chi tiết khóa học ghi đè token sang giấy kẻ ô (palette 3:
    trắng #f4f6fc, xanh đen #0e1733, cam #f98603, đào #ffe4ca). Phải khai báo lại
    cả --c-* vì chúng đã được tính ở .teaching-body. */
@@ -1977,4 +1963,41 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 @media (max-width: 560px) {
   .course-grid { grid-template-columns: 1fr; }
+}
+
+/* Lời học viên /teaching: một câu chuyện nổi bật (giấy đào) và sáu câu chuyện gọn.
+   Chốt từ live mode (biến thể 3). */
+.story-feature {
+  --c-border: rgba(14, 23, 51, 0.18);
+  background: var(--teach-paper);
+  border-radius: var(--r-md);
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35);
+  color: var(--teach-board);
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: minmax(0, 1fr) 16rem;
+  margin-bottom: var(--sp-5);
+  padding: var(--sp-6);
+  transform: rotate(-0.6deg);
+}
+
+.story-feature h3 { color: var(--teach-board); font-size: clamp(1.75rem, 3.2vw, 2.75rem); letter-spacing: -0.02em; line-height: 1.12; margin: 0 0 var(--sp-3); }
+.story-feature blockquote { font-size: var(--fs-body); line-height: 1.65; margin: 0; max-width: 40rem; }
+.story-feature aside { align-self: end; text-align: center; }
+.story-feature aside img { border: 4px solid #fff; border-radius: var(--r-sm); box-shadow: 0 3px 8px rgba(14, 23, 51, 0.3); height: auto; margin: 0 auto var(--sp-2); object-fit: cover; transform: rotate(2deg); width: 8rem; }
+.story-feature aside b { display: block; }
+.story-feature aside small { color: #4a557f; font-size: var(--fs-label); }
+
+.story-grid { display: grid; gap: var(--sp-4); grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+.story-card { background: var(--teach-surface); border: 1px solid var(--teach-border); border-radius: var(--r-md); display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-4); }
+.story-card h3 { color: var(--teach-brand-deep); font-size: var(--fs-lead); line-height: 1.3; margin: 0; }
+.story-card blockquote { color: var(--teach-text); flex-grow: 1; font-size: var(--fs-small); line-height: 1.6; margin: 0; }
+.story-card footer { align-items: center; border-top: 1px solid var(--teach-border); display: flex; gap: var(--sp-3); padding-top: var(--sp-3); }
+.story-card footer img { border-radius: 50%; object-fit: cover; }
+.story-card b { color: var(--teach-ink); display: block; font-size: var(--fs-small); }
+.story-card small { color: var(--teach-text-secondary); font-size: var(--fs-label); }
+
+@media (max-width: 900px) {
+  .story-feature { grid-template-columns: 1fr; transform: none; }
+  .story-grid { grid-template-columns: 1fr; }
 }

@@ -2170,7 +2170,6 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .tf-badge p { color: #25305e; font-size: var(--fs-small); line-height: 1.6; margin: 0 0 var(--sp-3); }
 .tf-badge li { margin-bottom: var(--sp-1); }
 .tf-badge li a { align-items: center; display: inline-flex; min-height: 44px; }
-.tf-badge .tf-mono { font-family: var(--teach-mono); }
 .tf-badge a { color: #0e1733; text-decoration: none; transition: color 0.2s; }
 .tf-badge a:hover { color: #9c4700; }
 
@@ -2198,7 +2197,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .tf-end { color: var(--teach-text-secondary); font-size: var(--fs-label); grid-column: 1 / -1; margin: 0; }
 
 /* Email dài trong chữ đơn cách không có chỗ ngắt: cho phép ngắt ở bất kỳ đâu thay vì tràn ngang. */
-.tf-mono, .cta-slip__tear p { overflow-wrap: anywhere; }
+.cta-slip__tear p { overflow-wrap: anywhere; }
 
 @media (max-width: 800px) {
   .tf { grid-template-columns: minmax(0, 1fr); }

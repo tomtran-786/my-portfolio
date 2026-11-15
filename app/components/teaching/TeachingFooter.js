@@ -35,8 +35,6 @@ export default function TeachingFooter() {
             </li>
           ))}
         </ul>
-        <p className="tf-mono">{ctaData.contactLine}</p>
-        <p className="tf-mono">{ctaData.note}</p>
       </div>
 
       <div className="tf-lists">

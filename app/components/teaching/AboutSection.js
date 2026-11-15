@@ -11,102 +11,18 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const fadeLeft = {
-  hidden: { opacity: 0, x: -32 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
-};
-
-const fadeRight = {
-  hidden: { opacity: 0, x: 32 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
-};
-
-const s = {
-  section: {
-    margin: 0,
-  },
-  inner: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "4rem",
-    alignItems: "center",
-  },
-  headline: {
-    fontWeight: 700,
-    color: "var(--teach-brand-deep)",
-    fontSize: "var(--fs-h2)",
-    lineHeight: 1.25,
-    marginBottom: "1.5rem",
-  },
-  paragraph: {
-    color: "var(--teach-text)",
-    fontSize: "var(--fs-body)",
-    lineHeight: 1.7,
-    maxWidth: "68ch",
-    marginBottom: "1rem",
-  },
-  credentials: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.5rem",
-    marginTop: "1.5rem",
-    marginBottom: "2rem",
-  },
-  statsRow: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: 0,
-    marginTop: "0.5rem",
-    borderTop: "1px solid var(--teach-border)",
-    borderBottom: "1px solid var(--teach-border)",
-  },
-  statItem: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.35rem",
-    padding: "1.25rem 1rem",
-  },
-  statValue: {
-    fontWeight: 700,
-    color: "var(--teach-brand-deep)",
-    fontSize: "1.9rem",
-    fontVariantNumeric: "tabular-nums",
-  },
-  statLabel: {
-    color: "var(--teach-ink)",
-    fontSize: "var(--fs-label)",
-    lineHeight: 1.4,
-  },
-  figure: {
-    margin: 0,
-  },
-  caption: {
-    color: "var(--teach-text-secondary)",
-    fontSize: "var(--fs-label)",
-    lineHeight: 1.5,
-    marginTop: "var(--sp-3)",
-  },
-  imageWrap: {
-    position: "relative",
-    borderRadius: "var(--r-lg)",
-    overflow: "hidden",
-    aspectRatio: "4/5",
-  },
-  img: {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    display: "block",
-  },
-};
-
-function StatItem({ value, label, start }) {
+// Dải số liệu kiểu bảng đo; CountUp chạy khi dải hiện ra.
+function Stats({ stats }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
   return (
-    <div className="about-stat" style={s.statItem}>
-      <span style={s.statValue}>
-        <CountUp value={value} start={start} />
-      </span>
-      <span style={s.statLabel}>{label}</span>
+    <div ref={ref} className="about-stats">
+      {stats.map((stat) => (
+        <div key={stat.label} className="about-stat">
+          <span className="about-stat__value"><CountUp value={stat.value} start={inView} /></span>
+          <span className="about-stat__label">{stat.label}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -114,71 +30,33 @@ function StatItem({ value, label, start }) {
 export default function AboutSection() {
   const { headline, paragraphs, image, stats, credentials } = aboutData;
 
-  const statsRef = useRef(null);
-  const statsInView = useInView(statsRef, { once: true, amount: 0.2 });
-
   return (
-    <section className="teach-section teach-section-soft" style={s.section} id="about">
-      <style>{`
-        @media (max-width: 768px) {
-          .about-inner { grid-template-columns: 1fr !important; }
-        }
-        @media (min-width: 421px) {
-          .about-stat + .about-stat { border-left: 1px solid var(--teach-border); }
-        }
-        @media (max-width: 420px) {
-          .about-stats { grid-template-columns: 1fr !important; }
-          .about-stat { padding-inline: 0 !important; }
-          .about-stat + .about-stat { border-top: 1px solid var(--teach-border); }
-        }
-      `}</style>
-
-      <div className="about-inner" style={s.inner}>
-        {/* Text side */}
-        <motion.div
-          initial="hidden" whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={fadeLeft}
-        >
-          <h2 style={s.headline}>{headline}</h2>
-
+    <section className="teach-section teach-section-soft" id="about">
+      <motion.div
+        className="about-profile"
+        initial="hidden" whileInView="visible"
+        viewport={{ once: true, margin: "-80px" }}
+        variants={fadeUp}
+      >
+        <div>
+          <h2 className="about-title">{headline}</h2>
           {paragraphs.map((p, i) => (
-            <p key={i} style={s.paragraph}>{p}</p>
+            <p key={i} className="about-text">{p}</p>
           ))}
-
-          <div style={s.credentials}>
+          <div className="about-creds">
             {credentials.map((c) => (
               <span key={c} className="tag">{c}</span>
             ))}
           </div>
+          <Stats stats={stats} />
+        </div>
 
-          <div ref={statsRef} className="about-stats" style={s.statsRow}>
-            {stats.map((stat) => (
-              <StatItem
-                key={stat.label}
-                value={stat.value}
-                label={stat.label}
-                start={statsInView}
-              />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Image side: ảnh để nguyên, chú thích nằm dưới thay vì lớp phủ
-            gradient + thẻ kính mờ đè lên ảnh. */}
-        <motion.figure
-          className="about-image"
-          initial="hidden" whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={fadeRight}
-          style={s.figure}
-        >
-          <div style={s.imageWrap}>
-            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 768px) 100vw, 45vw" style={s.img} />
-          </div>
-          <figcaption style={s.caption}>{image.caption}</figcaption>
-        </motion.figure>
-      </div>
+        {/* Ảnh kiểu polaroid; chú thích nằm dưới ảnh, không đè lên ảnh. */}
+        <figure className="about-photo">
+          <Image src={image.src} alt={image.alt} width={600} height={750} sizes="(max-width: 800px) 80vw, 22rem" />
+          <figcaption>{image.caption}</figcaption>
+        </figure>
+      </motion.div>
     </section>
   );
 }

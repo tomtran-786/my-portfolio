@@ -8,6 +8,7 @@ import TestimonialsSection from "@/app/components/teaching/TestimonialsSection";
 import CTASection from "@/app/components/teaching/CTASection";
 import TeachingFooter from "@/app/components/teaching/TeachingFooter";
 import TeachingGoToTop from "@/app/components/teaching/TeachingGoToTop";
+import StickyZaloBar from "@/app/components/teaching/StickyZaloBar";
 
 export default function TeachingPage() {
   return (
@@ -21,6 +22,7 @@ export default function TeachingPage() {
       <TestimonialsSection />
       <CTASection />
       <TeachingFooter />
+      <StickyZaloBar />
       <TeachingGoToTop />
     </main>
   );

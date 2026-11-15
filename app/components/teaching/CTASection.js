@@ -38,16 +38,20 @@ const s = {
     justifyContent: "center", gap: "0.75rem",
     flexWrap: "wrap",
   },
+  contactLine: {
+    color: "var(--teach-text)", fontSize: "var(--fs-small)",
+    margin: "1.25rem 0 0 0",
+  },
   note: {
     alignItems: "center",
     color: "var(--teach-text-secondary)", fontSize: "var(--fs-label)",
     display: "inline-flex", gap: "0.4rem",
-    marginTop: "1.25rem",
+    marginTop: "0.4rem",
   },
 };
 
 export default function CTASection() {
-  const { headline, subtext, buttons, note } = ctaData;
+  const { headline, subtext, buttons, contactLine, note } = ctaData;
 
   return (
     <section className="teach-section teach-section-soft" style={s.section} id="contact">
@@ -71,23 +75,23 @@ export default function CTASection() {
         <motion.div variants={fadeUp} style={s.btnRow}>
           {buttons.map((btn) => (
             /*
-             * Dùng <a> thay vì <Link> vì cả hai href đều trỏ ra ngoài
-             * (Gmail compose và profile Zalo) và cần mở ở tab mới.
+             * Dùng <a> thay vì <Link> vì href trỏ ra ngoài: Zalo mở tab mới,
+             * mailto: mở ứng dụng mail nên không cần target.
              */
             <a
               key={btn.label}
               href={btn.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className={`btn cta-btn ${btn.primary ? "btn--primary" : "btn--secondary"}`}
               style={{ minHeight: 52, padding: "0.9rem 1.75rem" }}
             >
-              <i className={`ti ${btn.primary ? "ti-mail" : "ti-message-circle"}`} aria-hidden="true" />
+              <i className={`ti ${btn.icon}`} aria-hidden="true" />
               {btn.label}
             </a>
           ))}
         </motion.div>
 
+        <motion.p variants={fadeUp} style={s.contactLine}>{contactLine}</motion.p>
         <motion.p variants={fadeUp} style={s.note}>
           <i className="ti ti-clock" aria-hidden="true" /> {note}
         </motion.p>

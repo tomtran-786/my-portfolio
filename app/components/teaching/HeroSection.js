@@ -129,7 +129,7 @@ export default function HeroSection() {
         @media (max-width: 600px) {
           .hero-headline-part { display: inline; }
         }
-        .hero-cta-row { display: flex; justify-content: flex-start; }
+        .hero-cta-row { display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 0.75rem; }
         .hero-social-row { display: flex; justify-content: flex-start; }
 
         @media (max-width: 900px) {
@@ -156,18 +156,26 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="hero-cta-row" style={s.ctaRow}>
-            <Link 
-              href={cta.primary.href} 
+            <a
+              href={cta.primary.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn--primary hero-cta-primary"
               style={{ minHeight: 52, padding: "0.9rem 1.75rem", fontSize: "1.0625rem" }}
+            >
+              <i className="ti ti-message-circle" aria-hidden="true" />
+              {cta.primary.label}
+            </a>
+            <Link
+              href={cta.secondary.href}
+              className="btn btn--secondary"
+              style={{ minHeight: 52, padding: "0.9rem 1.5rem", fontSize: "1.0625rem" }}
               onClick={(e) => {
-                if (cta.primary.href.startsWith("#")) {
-                  e.preventDefault();
-                  document.getElementById(cta.primary.href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
-                }
+                e.preventDefault();
+                document.getElementById(cta.secondary.href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              {cta.primary.label}
+              {cta.secondary.label}
             </Link>
           </motion.div>
 

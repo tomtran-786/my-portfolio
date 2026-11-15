@@ -27,9 +27,10 @@ export default function TeachingGoToTop() {
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
           title="Về đầu trang"
+          aria-label="Về đầu trang"
+          className="teach-gototop"
           style={{
             position: "fixed",
-            bottom: "2rem",
             right: "2rem",
             zIndex: "var(--z-gototop)",
             width: 48,
@@ -45,9 +46,16 @@ export default function TeachingGoToTop() {
             boxShadow: "var(--teach-control-shadow)",
           }}
         >
+          <style>{`
+            .teach-gototop { bottom: 2rem; }
+            /* Trên mobile, nâng nút lên trên thanh Zalo cố định (cao khoảng 72px). */
+            @media (max-width: 768px) {
+              .teach-gototop { bottom: calc(5.5rem + env(safe-area-inset-bottom)); right: 1rem !important; }
+            }
+          `}</style>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2.5"
-            strokeLinecap="round" strokeLinejoin="round">
+            strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <polyline points="18 15 12 9 6 15" />
           </svg>
         </motion.button>

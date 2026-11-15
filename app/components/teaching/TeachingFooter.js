@@ -120,14 +120,14 @@ export default function TeachingFooter() {
             <a
               key={button.label}
               href={button.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(button.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               style={s.link}
             >
-              <i className={`ti ${button.primary ? "ti-mail" : "ti-message-circle"}`} aria-hidden="true" style={{ marginRight: "0.4rem" }} />
+              <i className={`ti ${button.icon}`} aria-hidden="true" style={{ marginRight: "0.4rem" }} />
               {button.label}
             </a>
           ))}
+          <p style={{ ...s.body, marginTop: "0.5rem" }}>{ctaData.contactLine}</p>
           <p style={{ ...s.body, color: "var(--teach-text-secondary)", marginTop: "0.5rem" }}>
             {ctaData.note}
           </p>
@@ -136,7 +136,6 @@ export default function TeachingFooter() {
 
       <div className="tf-bottom">
         <span>© 2026 Tuan (Tom) Tran</span>
-        <span>Built with Next.js &amp; framer-motion</span>
       </div>
     </footer>
   );

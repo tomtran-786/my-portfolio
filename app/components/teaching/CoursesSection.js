@@ -9,7 +9,6 @@ import CourseDetailModal from "./CourseDetailModal";
 import { formatVnd, startingPrice, GOAL_EVENT } from "./courseUtils";
 
 const CATEGORIES = coursesData.categories;
-const categoryLabel = (id) => CATEGORIES.find((cat) => cat.id === id)?.label ?? id;
 
 // Gợi ý khóa theo mục tiêu + trình độ hiện tại. Giao tiếp chỉ có một khóa nên không cần hỏi.
 const PATHS = {
@@ -46,10 +45,6 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
 
 const s = {
   section: {
@@ -89,11 +84,6 @@ const s = {
     cursor: "pointer",
     transition: "background-color 0.2s, color 0.2s",
   }),
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-    gap: "1.25rem",
-  },
   levelRow: {
     alignItems: "center",
     display: "flex",
@@ -112,114 +102,8 @@ const s = {
     fontSize: "var(--fs-small)",
     margin: "0 0 1.5rem 0",
   },
-  card: (highlighted, recommended) => ({
-    background: highlighted ? "var(--teach-surface-muted)" : "var(--teach-surface)",
-    border: recommended
-      ? "1px solid var(--teach-brand-deep)"
-      : highlighted ? "1px solid var(--teach-border-strong)" : "1px solid var(--teach-border)",
-    borderRadius: "var(--r-md)",
-    padding: 0,
-    display: "flex",
-    flexDirection: "column",
-    position: "relative",
-    overflow: "hidden",
-    cursor: "pointer",
-  }),
-  cardImage: {
-    aspectRatio: "4 / 3",
-    display: "block",
-    height: "auto",
-    objectFit: "cover",
-    width: "100%",
-  },
-  cardBody: {
-    display: "flex",
-    flexDirection: "column",
-    flexGrow: 1,
-    gap: "0.75rem",
-    padding: "1.25rem 1.5rem 1.5rem",
-  },
   // Là <button> thật chứ không phải <span>: card không còn role="button" nên đây
   // là đường vào modal bằng bàn phím. Reset lại style mặc định của button.
-  viewDetailHint: {
-    color: "var(--teach-brand-deep)",
-    fontSize: "var(--fs-label)",
-    fontWeight: 600,
-    background: "none",
-    border: "none",
-    padding: "0.6rem 0",
-    cursor: "pointer",
-    textAlign: "left",
-    alignSelf: "flex-start",
-  },
-  popularBadge: {
-    position: "absolute",
-    top: "0.75rem",
-    right: "0.75rem",
-    background: "var(--teach-brand)",
-    color: "var(--teach-on-brand)",
-    fontWeight: 600,
-  },
-  cardTop: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "0.5rem",
-  },
-  cardTag: {
-    color: "var(--teach-brand-deep)",
-    fontSize: "var(--fs-label)",
-    fontWeight: 600,
-  },
-  cardTitle: {
-    fontWeight: 700,
-    color: "var(--teach-ink)",
-    fontSize: "var(--fs-h3)",
-    lineHeight: 1.3,
-    margin: 0,
-  },
-  cardDesc: {
-    color: "var(--teach-text)",
-    fontSize: "var(--fs-small)",
-    lineHeight: 1.6,
-    flexGrow: 1,
-  },
-  metaRow: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.5rem",
-    borderTop: "1px solid var(--teach-border)",
-    paddingTop: "0.9rem",
-    marginTop: "0.25rem",
-  },
-  metaItem: {
-    display: "flex",
-    alignItems: "baseline",
-    gap: "0.45rem",
-    color: "var(--teach-text)",
-    fontSize: "var(--fs-label)",
-  },
-  metaLabel: {
-    color: "var(--teach-text-secondary)",
-    fontWeight: 600,
-    flexShrink: 0,
-    minWidth: "5.25rem",
-  },
-  levelBlock: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.4rem",
-  },
-  price: {
-    color: "var(--teach-ink)",
-    fontWeight: 700,
-  },
-  emptyState: {
-    color: "var(--teach-text)",
-    fontSize: "var(--fs-small)",
-    textAlign: "center",
-    padding: "3rem 0",
-  },
 };
 
 export default function CoursesSection() {
@@ -251,6 +135,9 @@ export default function CoursesSection() {
     activeCategory === "all"
       ? items
       : items.filter((item) => item.category === activeCategory);
+
+  const lead = filteredItems.find((item) => item.highlighted) ?? filteredItems[0];
+  const orderedItems = lead ? [lead, ...filteredItems.filter((item) => item !== lead)] : [];
 
   return (
     <section className="teach-section" style={s.section} id="courses">
@@ -303,90 +190,51 @@ export default function CoursesSection() {
       )}
 
       {/* Cards — fade khi đổi tab + hover lift */}
+      {/* Khóa nổi bật (đang "Phổ biến nhất") thành thẻ giấy lớn, các khóa khác là thẻ gọn. */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeCategory}
-          style={s.grid}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={stagger}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
           {filteredItems.length === 0 ? (
-            <p style={s.emptyState}>Chưa có khóa học trong mục này.</p>
+            <p className="course-empty">Chưa có khóa học trong mục này.</p>
           ) : (
-            filteredItems.map((item) => (
-              <motion.div
-                key={item.id}
-                variants={fadeUp}
-                style={s.card(item.highlighted, item.id === recommendedId)}
-                whileHover={{
-                  y: -6,
-                  boxShadow: "var(--teach-shadow-hover)",
-                  borderColor: "var(--teach-border-strong)",
-                }}
-                transition={{ duration: 0.25, ease: "easeOut" }}
-                // Card không còn là role="button" nữa. Nó bọc một <Link> thật, nên
-                // nested-interactive: onKeyDown của card gọi preventDefault() và
-                // nuốt luôn Enter bấm trên nút CTA bên trong -> modal mở thay vì
-                // link chạy. Giờ click chuột trên card vẫn tiện như cũ, còn đường
-                // vào bằng bàn phím là nút "Xem chi tiết khóa học" bên dưới.
-                onClick={() => setSelectedCourse(item)}
-              >
-                <Image
-                  src={item.detail.image.src}
-                  alt=""
-                  width={1000}
-                  height={750}
-                  sizes="(max-width: 600px) 100vw, 320px"
-                  style={s.cardImage}
-                />
-                {item.highlighted && (
-                  <span className="tag" style={s.popularBadge}>{item.tag}</span>
-                )}
-
-                <div style={s.cardBody}>
-                  <div style={s.cardTop}>
-                    <span style={s.cardTag}>{categoryLabel(item.category)}</span>
-                    {item.id === recommendedId && <span className="tag">Hợp với bạn</span>}
-                  </div>
-                  <h3 style={s.cardTitle}>{item.title}</h3>
-                  <p style={s.cardDesc}>{item.description}</p>
-
-                  <div style={s.metaRow}>
-                    <div style={s.metaItem}>
-                      <span style={s.metaLabel}>Trình độ</span>
-                      <span style={s.levelBlock}>
-                        {item.level}
-                        {item.levelBar && <LevelBar bar={item.levelBar} />}
-                      </span>
-                    </div>
-                    <div style={s.metaItem}><span style={s.metaLabel}>Hình thức</span>{item.format}</div>
+            <div className="course-grid">
+              {orderedItems.map((item, idx) => (
+                <div
+                  key={item.id}
+                  className={`course-card${idx === 0 && filteredItems.length > 1 ? " course-card--feature" : ""}`}
+                  // Click chuột trên cả thẻ mở modal; đường vào bằng bàn phím là nút "Xem chi tiết" bên dưới.
+                  onClick={() => setSelectedCourse(item)}
+                >
+                  <Image src={item.detail.image.src} alt="" width={1000} height={750} sizes="(max-width: 600px) 100vw, 320px" />
+                  <div className="course-card__body">
+                    {item.highlighted && idx === 0 && filteredItems.length > 1 && <span className="tag course-badge">{item.tag}</span>}
+                    <h3>{item.title}</h3>
+                    <p className="course-card__desc">{item.description}</p>
+                    <small>{item.level}</small>
+                    {item.levelBar && <LevelBar bar={item.levelBar} />}
                     {startingPrice(item) && (
-                      <div style={s.metaItem}>
-                        <span style={s.metaLabel}>Học phí</span>
-                        <span>
-                          <span style={s.price}>Từ {formatVnd(startingPrice(item).monthlyPrice)}/tháng</span>
-                          {startingPrice(item).id === "nhom" ? ", học nhóm" : ", học 1-1"}
-                        </span>
-                      </div>
+                      <span className="course-price">
+                        Từ {formatVnd(startingPrice(item).monthlyPrice)}/tháng{startingPrice(item).id === "nhom" ? ", học nhóm" : ", học 1-1"}
+                      </span>
                     )}
+                    {item.id === recommendedId && <span className="tag course-badge">Hợp với bạn</span>}
+                    <button
+                      type="button"
+                      className="course-open"
+                      aria-label={`Xem chi tiết khóa học ${item.title}`}
+                      onClick={(e) => { e.stopPropagation(); setSelectedCourse(item); }}
+                    >
+                      Xem chi tiết khóa học →
+                    </button>
                   </div>
-
-                  <button
-                    type="button"
-                    style={s.viewDetailHint}
-                    aria-label={`Xem chi tiết khóa học ${item.title}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedCourse(item);
-                    }}
-                  >
-                    Xem chi tiết khóa học →
-                  </button>
                 </div>
-              </motion.div>
-            ))
+              ))}
+            </div>
           )}
         </motion.div>
       </AnimatePresence>

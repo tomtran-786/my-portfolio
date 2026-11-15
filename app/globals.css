@@ -1893,3 +1893,88 @@ html[data-color-mode='dark'] .pf-contribution-image {
   background-attachment: local, local;
   color: var(--teach-text);
 }
+
+/* Thẻ khóa học /teaching: khóa nổi bật là thẻ giấy lớn, các khóa còn lại gọn,
+   bốn cột. Chốt từ live mode (biến thể 2). */
+.course-grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.course-card {
+  background: var(--teach-surface);
+  border: 1px solid var(--teach-border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  overflow: hidden;
+  padding: 0 0 var(--sp-4);
+  transition: border-color 0.2s;
+}
+
+.course-card:hover { border-color: var(--teach-brand); }
+.course-card img { aspect-ratio: 16 / 10; height: auto; object-fit: cover; width: 100%; }
+
+.course-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4) 0;
+}
+
+.course-card h3 { color: var(--teach-ink); font-size: var(--fs-h3); margin: 0; }
+.course-card small { color: var(--teach-text-secondary); font-family: var(--teach-mono); font-size: var(--fs-label); }
+/* Mô tả chỉ hiện ở thẻ nổi bật; thẻ gọn dựa vào band, thanh level và giá. */
+.course-card__desc { display: none; }
+.course-price { color: var(--teach-brand-deep); font-family: var(--teach-mono); font-weight: 700; }
+.course-badge { align-self: flex-start; }
+.course-empty { color: var(--teach-text); padding: 3rem 0; text-align: center; }
+
+.course-open {
+  background: none;
+  border: none;
+  color: var(--teach-brand-deep);
+  cursor: pointer;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  padding: var(--sp-2) 0;
+  text-align: left;
+}
+
+/* Thẻ nổi bật: giấy đào trên bảng, ảnh bên trái, chữ mực xanh đen. */
+.course-card--feature {
+  --c-border: rgba(14, 23, 51, 0.18);
+  --c-border-strong: rgba(14, 23, 51, 0.4);
+  --c-brand-soft: rgba(249, 134, 3, 0.2);
+  --c-brand-deep: #7a3800;
+  background: var(--teach-paper);
+  border: 0;
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.35);
+  color: var(--teach-board);
+  display: grid;
+  gap: var(--sp-5);
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  padding: 0;
+}
+
+.course-card--feature img { aspect-ratio: auto; height: 100%; min-height: 18rem; }
+.course-card--feature .course-card__body { gap: var(--sp-3); justify-content: center; padding: var(--sp-5) var(--sp-5) var(--sp-5) 0; }
+.course-card--feature h3 { color: var(--teach-board); font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.02em; }
+.course-card--feature .course-card__desc { display: block; font-size: var(--fs-body); line-height: 1.6; margin: 0; }
+.course-card--feature small { color: #4a557f; }
+.course-card--feature .course-price { color: #7a3800; font-size: 1.5rem; }
+.course-card--feature .course-open { color: #7a3800; }
+
+@media (max-width: 1000px) {
+  .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .course-card--feature { grid-template-columns: 1fr; }
+  .course-card--feature .course-card__body { padding: 0 var(--sp-4) var(--sp-4); }
+}
+
+@media (max-width: 560px) {
+  .course-grid { grid-template-columns: 1fr; }
+}

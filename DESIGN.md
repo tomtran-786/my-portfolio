@@ -29,10 +29,10 @@ Each route has its own palette, mapped to shared role tokens so primitives work 
 
 | Role (`--c-*`) | `/` (`--pf-*`) | `/teaching` (`--teach-*`) |
 |---|---|---|
-| `--c-brand` | `--pf-brand` #0c498f | `--teach-brand` #f79747 |
-| `--c-brand-deep` | `--pf-brand-deep` #003865 | `--teach-brand-deep` #8f4100 |
-| `--c-ink` | `--pf-ink` #172636 | `--teach-ink` #2f2723 |
-| `--c-text` | `--pf-text` #404040 | `--teach-text` #4a403b |
+| `--c-brand` | `--pf-brand` #0c498f | `--teach-brand` #f98603 |
+| `--c-brand-deep` | `--pf-brand-deep` #003865 | `--teach-brand-deep` #ffb866 (orange chalk) |
+| `--c-ink` | `--pf-ink` #172636 | `--teach-ink` #f4f6fc (chalk) |
+| `--c-text` | `--pf-text` #404040 | `--teach-text` #dde3f3 |
 | `--c-text-2` | `--pf-text-secondary` | `--teach-text-secondary` |
 | `--c-border` | `--pf-border` | `--teach-border` |
 
@@ -81,3 +81,14 @@ These are signature effects the owner chose to keep. They are marked with `data-
 | Hover scale on hero buttons | `page.js` (framer-motion) | none needed |
 
 Modal backdrops keep a light `backdrop-filter: blur()` because it separates layers.
+
+## `/teaching` world: chalkboard and notebook
+
+Direction chosen by the owner (decision page, pinned in their words). Palette 3 from the owner's reference image: orange `#f98603`, navy `#0e1733`, white `#f4f6fc`, peach `#ffe4ca`.
+
+- Ground: navy board with a dot grid (SVG background on `.teaching-body`). Light and dark mode are both the board; dark is a deeper navy (`#080e22`).
+- Orange is for things to press or notice (Zalo, prices, active filters). Peach is the name card paper.
+- Hero: name card pinned on the board, a chalk prompt line (`> Bạn muốn đạt band nào?`) with three goal buttons that filter the courses through the `teach:goal` window event, and a chalk list of courses (band and starting price in `--teach-mono`).
+- Course detail modal is a ruled notebook page: `.course-modal-panel` overrides the `--teach-*` and `--c-*` tokens to paper, with SVG ruled lines and a red margin line. The `--c-*` tokens must be redeclared there because they are resolved on `.teaching-body`.
+- The AI flavour is visual language only (prompt line, dot grid, monospace numerals). The page must not claim any AI feature.
+- Kept effects: blinking prompt cursor is marked `data-impeccable-ignore="decorative-blinking-cursor"` and stops under reduced motion.

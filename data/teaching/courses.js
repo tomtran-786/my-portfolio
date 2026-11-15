@@ -22,6 +22,7 @@ const coursesData = {
       description:
         "Dành cho học viên Band 3.5–5.0 chưa quen với IELTS Academic. Xây dựng ngữ pháp, phát âm và 4 kỹ năng từ gốc rễ để đạt Band 5.5–6.0.",
       level: "Band 3.5–5.0 → 5.5–6.0",
+      levelBar: { scale: [3, 7], now: [3.5, 5.0], goal: [5.5, 6.0] },
       format: "1-1",
       duration: "Linh hoạt theo học viên",
       highlighted: false,
@@ -62,6 +63,7 @@ const coursesData = {
       description:
         "Dành cho học viên Band 5.0–5.5 bị kẹt và không biết mình sai ở đâu. Lộ trình cá nhân hóa theo chẩn đoán lỗi, nâng toàn bộ 4 tiêu chí lên Band 6.5 đồng đều.",
       level: "Band 5.0–5.5 → 6.5",
+      levelBar: { scale: [3, 7], now: [5.0, 5.5], goal: [6.5, 6.5] },
       format: "1-1",
       duration: "Linh hoạt theo học viên",
       highlighted: true,
@@ -101,6 +103,7 @@ const coursesData = {
       description:
         "Nắm vững cấu trúc đề thi TOEIC và chiến lược làm bài để đạt mục tiêu 200–300 điểm. Phù hợp cho người mới tiếp cận TOEIC.",
       level: "Beginner → 200–300",
+      levelBar: { scale: [0, 990], goal: [200, 300] },
       format: "1-1 hoặc nhóm 3–5",
       duration: "Linh hoạt theo học viên",
       highlighted: false,
@@ -141,10 +144,11 @@ const coursesData = {
       description:
         "Nâng điểm TOEIC lên 500+ với lộ trình luyện đề chuyên sâu, mở rộng từ vựng business và tăng tốc độ xử lý Listening & Reading.",
       level: "Intermediate → 500+",
+      levelBar: { scale: [0, 990], goal: [500, 990] },
       format: "1-1 hoặc nhóm 3–5",
       duration: "Linh hoạt theo học viên",
       category: "toeic",
-      highlighted: true,
+      highlighted: false,
 
       detail: {
         image: { src: "/teaching/toeic-intermediate-avt.png", alt: "TOEIC Intermediate" },

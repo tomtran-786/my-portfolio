@@ -1826,3 +1826,38 @@ html[data-color-mode='dark'] .pf-contribution-image {
     padding: 5.5rem 1.25rem 2.5rem;
   }
 }
+
+/* Level bar (thẻ khóa học /teaching): đoạn xám là trình độ hiện tại, đoạn
+   cam là mục tiêu. Chỉ là hình minh họa; nghĩa nằm ở chữ bên cạnh. */
+.level-bar {
+  background: var(--c-border);
+  border-radius: var(--r-pill);
+  display: block;
+  height: 8px;
+  position: relative;
+  width: 100%;
+}
+
+.level-bar__seg {
+  border-radius: var(--r-pill);
+  bottom: 0;
+  position: absolute;
+  top: 0;
+}
+
+.level-bar__seg--now { background: var(--c-border-strong); }
+.level-bar__seg--goal { background: var(--c-brand); }
+
+/* Lời học viên /teaching: xếp cột, thẻ không bị cắt giữa chừng. */
+.teach-stories {
+  column-gap: var(--sp-4);
+  column-width: 20rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.teach-story {
+  break-inside: avoid;
+  margin-bottom: var(--sp-4);
+}

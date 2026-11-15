@@ -469,6 +469,15 @@ html[data-color-mode='dark'] .theme-toggle-sun {
   outline-offset: 3px !important;
 }
 
+/* Trên giấy (đào hoặc trắng) vòng focus màu đào sẽ biến mất; dùng xanh đen. */
+.teaching-body .hero-page,
+.teaching-body .course-card--feature,
+.teaching-body .story-feature,
+.teaching-body .cta-slip,
+.teaching-body .tf-badge {
+  --teach-focus: #0e1733;
+}
+
 .teaching-body::-webkit-scrollbar-track,
 .teaching-body *::-webkit-scrollbar-track {
   background: var(--teach-bg);
@@ -1868,6 +1877,8 @@ html[data-color-mode='dark'] .pf-contribution-image {
   --c-surface-muted: #ffe4ca;
   --c-border: rgba(14, 23, 51, 0.18);
   --c-border-strong: rgba(156, 71, 0, 0.5);
+  /* Ô tích gốc không được lấy color-scheme: dark của chế độ tối trên giấy trắng. */
+  color-scheme: light;
   background-color: var(--teach-bg);
   /* Dòng kẻ ngang xanh nhạt và lề đỏ, đều vẽ bằng SVG. */
   background-image:
@@ -1920,6 +1931,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .course-empty { color: var(--teach-text); padding: 3rem 0; text-align: center; }
 
 .course-open {
+  margin-top: auto;
   background: none;
   border: none;
   color: var(--teach-brand-deep);
@@ -1955,6 +1967,13 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .course-card--feature small { color: #4a557f; }
 .course-card--feature .course-price { color: #7a3800; font-size: 1.5rem; }
 .course-card--feature .course-open { color: #7a3800; }
+.course-card--feature .level-bar { --c-border: rgba(14, 23, 51, 0.18); --c-border-strong: rgba(14, 23, 51, 0.4); --c-brand: #0e1733; }
+
+/* Giá và gói không bị ngắt giữa chừng: giá nằm một dòng, gói xuống dòng nếu hết chỗ. */
+.course-price-row { column-gap: var(--sp-2); display: flex; flex-wrap: wrap; }
+.course-price-row .course-price { white-space: nowrap; }
+.course-plan { color: var(--teach-text-secondary); font-size: var(--fs-label); }
+.course-card--feature .course-plan { color: #4a557f; }
 
 @media (max-width: 1000px) {
   .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2103,7 +2122,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 .cta-btn:hover { box-shadow: 0 6px 0 rgba(14, 23, 51, 0.25); transform: translateY(-3px); }
 
 .cta-slip__tear { border-top: 2px dashed rgba(14, 23, 51, 0.35); margin-top: var(--sp-5); padding-top: var(--sp-4); }
-.cta-slip__tear p { color: #25305e; font-family: var(--teach-mono); font-size: var(--fs-small); margin: 0 0 var(--sp-2); }
+.cta-slip__tear p { color: #25305e; font-family: var(--teach-mono); font-size: var(--fs-small); margin: 0 0 var(--sp-2); text-wrap: balance; }
 .cta-slip__note { align-items: center; display: inline-flex; gap: var(--sp-2); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2157,7 +2176,7 @@ html[data-color-mode='dark'] .pf-contribution-image {
 
 .tf-lists { display: grid; gap: var(--sp-5); grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tf-lists h3 { color: var(--teach-text-secondary); font-size: var(--fs-label); margin: 0 0 var(--sp-3); }
-.tf-lists li { border-top: 2px dashed var(--teach-border); padding: var(--sp-3) 0; }
+.tf-lists li { border-top: 2px dashed var(--teach-border); padding: var(--sp-1) 0; }
 
 .tf-link {
   background: none;
@@ -2166,6 +2185,9 @@ html[data-color-mode='dark'] .pf-contribution-image {
   cursor: pointer;
   font: inherit;
   font-size: var(--fs-body);
+  align-items: center;
+  display: inline-flex;
+  min-height: 44px;
   padding: 0;
   text-align: left;
   text-decoration: none;

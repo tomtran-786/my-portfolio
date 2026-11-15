@@ -102,6 +102,8 @@ export default function HeroSection() {
         .hero-card img { border-radius: var(--r-sm); object-fit: cover; }
         .hero-card b { display: block; font-size: 1.25rem; line-height: 1.1; }
         .hero-card small { font-family: var(--teach-mono); font-size: var(--fs-label); }
+        .hero-creds { display: flex; flex-wrap: wrap; gap: 0 var(--sp-3); }
+        .hero-creds span { white-space: nowrap; }
         .hero-h { color: #0e1733; font-size: var(--fs-h3); font-weight: 700; margin: 0 0 var(--sp-3); }
         .hero-list { list-style: none; margin: 0; padding: 0; }
         .hero-list a {
@@ -115,11 +117,12 @@ export default function HeroSection() {
         }
         .hero-list a:hover b { color: #9c4700; }
         .hero-list small { color: #4a557f; display: block; font-family: var(--teach-mono); font-size: var(--fs-label); }
-        .hero-list em { color: #9c4700; font-family: var(--teach-mono); font-style: normal; font-weight: 700; }
+        .hero-list em { color: #9c4700; font-family: var(--teach-mono); font-style: normal; font-weight: 700; white-space: nowrap; }
 
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr; }
           .hero-page { margin-top: var(--sp-7); transform: none; }
+          .hero-list a { grid-template-columns: minmax(0, 1fr); gap: var(--sp-1); }
         }
         @media (prefers-reduced-motion: reduce) {
           .hero-cursor { animation: none; }
@@ -161,7 +164,7 @@ export default function HeroSection() {
             <Image src="/teaching/me.jpeg" alt="Thầy Tom" width={56} height={66} />
             <div>
               <b>Tuấn (Tom) Tran</b>
-              <small>{creds.slice(0, 2).map((c) => c.replace(/ /g, "\u00a0")).join(" · ")}</small>
+              <small className="hero-creds">{creds.slice(0, 2).map((c) => <span key={c}>{c}</span>)}</small>
             </div>
           </div>
           <h2 className="hero-h">Các khóa đang dạy</h2>
@@ -173,9 +176,9 @@ export default function HeroSection() {
                   <a href="#courses" onClick={(e) => { e.preventDefault(); pickGoal(item.category); }}>
                     <span>
                       <b>{item.title}</b>
-                      <small>{item.level}</small>
+                      <small>{item.level.replace(/ → /g, "\u00a0→\u00a0")}</small>
                     </span>
-                    {plan && <em>{formatVnd(plan.monthlyPrice)}</em>}
+                    {plan && <em>từ {formatVnd(plan.monthlyPrice)}/tháng</em>}
                   </a>
                 </li>
               );

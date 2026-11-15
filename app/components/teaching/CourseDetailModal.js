@@ -266,6 +266,7 @@ syllabusLink: {
     marginBottom: "0.6rem",
   },
   planPrice: {
+    fontFamily: "var(--teach-mono)",
     fontWeight: 700,
     color: "var(--teach-ink)",
     fontSize: "1.9rem",

@@ -215,11 +215,12 @@ export default function CoursesSection() {
                     {item.highlighted && idx === 0 && filteredItems.length > 1 && <span className="tag course-badge">{item.tag}</span>}
                     <h3>{item.title}</h3>
                     <p className="course-card__desc">{item.description}</p>
-                    <small>{item.level}</small>
+                    <small>{item.level.replace(/ → /g, "\u00a0→\u00a0")}</small>
                     {item.levelBar && <LevelBar bar={item.levelBar} />}
                     {startingPrice(item) && (
-                      <span className="course-price">
-                        Từ {formatVnd(startingPrice(item).monthlyPrice)}/tháng{startingPrice(item).id === "nhom" ? ", học nhóm" : ", học 1-1"}
+                      <span className="course-price-row">
+                        <span className="course-price">Từ {formatVnd(startingPrice(item).monthlyPrice)}/tháng</span>
+                        <span className="course-plan">{startingPrice(item).id === "nhom" ? "học nhóm" : "học 1-1"}</span>
                       </span>
                     )}
                     {item.id === recommendedId && <span className="tag course-badge">Hợp với bạn</span>}

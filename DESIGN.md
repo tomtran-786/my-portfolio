@@ -103,6 +103,7 @@ Section map (all styles in `app/globals.css`)
 | Testimonials | `TestimonialsSection.js` | `.story-feature`, `.story-grid`, `.story-card` | first student featured on paper, six compact cards |
 | About | `AboutSection.js` | `.about-profile`, `.about-photo`, `.about-stats` | text left, tilted polaroid right, dashed monospace stats strip |
 | CTA | `CTASection.js` | `.cta-slip` | peach slip pinned to the board, contact line under a dashed tear line |
+| Class photo | `ClassMomentsSection.js` | `.moment-frame`, `.moment-shot`, `.moment-nav` | viewfinder frame with corner brackets and a mono counter |
 | Footer | `TeachingFooter.js` | `.tf`, `.tf-badge`, `.tf-lists` | lanyard name-tag badge plus chalk link lists |
 
 Kept effects: the blinking prompt cursor in the hero is marked `data-impeccable-ignore="decorative-blinking-cursor"` and stops under reduced motion.

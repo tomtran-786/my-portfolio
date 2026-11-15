@@ -6,9 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import classMoments, { classMomentsHeading } from "@/data/teaching/classMoments";
 
 const s = {
-  wrapper: {
-    margin: 0,
-  },
   heading: {
     fontWeight: 700,
     color: "var(--teach-brand-deep)",
@@ -17,34 +14,10 @@ const s = {
     margin: 0,
     maxWidth: "36rem",
   },
-  stage: {
-    position: "relative",
-    width: "100%",
-    aspectRatio: "16 / 8.2",
-    borderRadius: "var(--r-lg)",
-    overflow: "hidden",
-    background: "var(--teach-surface-muted)",
-    border: "1px solid var(--teach-border)",
-  },
-  img: { width: "100%", height: "100%", objectFit: "cover", display: "block" },
   caption: {
     color: "var(--teach-text)",
     fontSize: "var(--fs-body)",
     lineHeight: 1.6,
-  },
-  navBtn: {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    width: 44, height: 44,
-    borderRadius: "50%",
-    background: "rgba(47, 39, 35, 0.62)",
-    color: "#fff",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "none",
-    cursor: "pointer",
   },
   dots: { display: "flex", justifyContent: "center", marginTop: "0.75rem" },
   // Vùng bấm 32px, chấm nhìn thấy vẫn nhỏ.
@@ -82,17 +55,10 @@ export default function ClassMomentsSection() {
     setIndex(((i % total) + total) % total);
   };
 
-  return (
-    <section className="teach-section teach-section-soft" style={s.wrapper} id="class-moments">
-      <style>{`
-        .moment-nav-btn { transition: background-color 0.2s ease, transform 0.2s ease; }
-        .moment-nav-btn:hover { background: rgba(var(--teach-brand-rgb), 0.92) !important; color: var(--teach-on-brand) !important; transform: translateY(-50%) scale(1.06); }
-        .moment-dot-mark { transition: background-color 0.2s ease, width 0.2s ease; }
-        @media (max-width: 600px) {
-          .moment-stage { aspect-ratio: 4 / 3 !important; border-radius: var(--r-md) !important; }
-        }
-      `}</style>
+  const pad = (n) => String(n).padStart(2, "0");
 
+  return (
+    <section className="teach-section teach-section-soft" id="class-moments">
       <div className="teach-section-heading">
         <h2 style={s.heading}>{classMomentsHeading}</h2>
         {current.caption && (
@@ -102,41 +68,45 @@ export default function ClassMomentsSection() {
         )}
       </div>
 
-      <div className="moment-stage" style={s.stage}>
-        <AnimatePresence mode="wait">
-          {/* Bọc motion.div quanh next/image: <Image fill> tự set position/inset
-              nên không nhận được style animate trực tiếp như motion.img trước đây. */}
-          <motion.div
-            key={current.src}
-            style={{ position: "absolute", inset: 0 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-          >
-            <Image
-              src={current.src}
-              alt={current.caption}
-              fill
-              sizes="(max-width: 900px) 100vw, 75rem"
-              priority
-              style={{ objectFit: "cover" }}
-            />
-          </motion.div>
-        </AnimatePresence>
+      {/* Khung ngắm: bốn góc ngoặc cam, bộ đếm đơn cách bên dưới. */}
+      <div className="moment-frame">
+        <div className="moment-shot">
+          <i className="tl" aria-hidden="true" />
+          <i className="tr" aria-hidden="true" />
+          <i className="bl" aria-hidden="true" />
+          <i className="br" aria-hidden="true" />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.src}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+            >
+              <Image
+                className="moment-img"
+                src={current.src}
+                alt={current.caption}
+                width={1600}
+                height={900}
+                sizes="(max-width: 900px) 100vw, 70rem"
+                priority
+              />
+            </motion.div>
+          </AnimatePresence>
 
-        {hasMultiple && (
-          <>
-            <button aria-label="Ảnh trước" className="moment-nav-btn"
-              style={{ ...s.navBtn, left: "1rem" }} onClick={() => goTo(index - 1)}>
-              <ArrowIcon direction="prev" />
-            </button>
-            <button aria-label="Ảnh tiếp theo" className="moment-nav-btn"
-              style={{ ...s.navBtn, right: "1rem" }} onClick={() => goTo(index + 1)}>
-              <ArrowIcon direction="next" />
-            </button>
-          </>
-        )}
+          {hasMultiple && (
+            <>
+              <button type="button" aria-label="Ảnh trước" className="moment-nav moment-nav--prev" onClick={() => goTo(index - 1)}>
+                <ArrowIcon direction="prev" />
+              </button>
+              <button type="button" aria-label="Ảnh tiếp theo" className="moment-nav moment-nav--next" onClick={() => goTo(index + 1)}>
+                <ArrowIcon direction="next" />
+              </button>
+            </>
+          )}
+        </div>
+        <p className="moment-count">{pad(index + 1)} / {pad(classMoments.length)}</p>
       </div>
 
       {hasMultiple && (

@@ -322,4 +322,4 @@ Owner asked for a big change of design language and to roll variants to choose f
 ### After the independent review (`567b48c`, next commit)
 - Fixed: peach focus ring on paper (now navy), modal checkbox `color-scheme`, "từ X/tháng" in the hero list, mid-token wraps, monospace modal prices, 44px footer links, navy level-bar goal on the peach card.
 - Owner decision: the footer badge no longer repeats the contact line and the 2-hour note; they live only on the CTA slip. Zalo and email links stay in both.
-- Still open: the "Những buổi học thật" block (Class Moments) keeps the generic dark Meet screenshot and brown arrows; not yet rolled.
+- Class Moments ("Những buổi học thật") rolled in live mode: viewfinder frame with four orange corner brackets and a mono counter (variant 2). Carousel arrows are now navy with a peach ring (were brown, off palette) and show only when there are several photos; there is one photo today.

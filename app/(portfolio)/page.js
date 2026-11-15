@@ -83,7 +83,7 @@ export default function Portfolio() {
           </h1>
 
           <p className="pf-hero-role" data-impeccable-ignore="decorative-blinking-cursor">
-            <span aria-hidden="true" style={{ color: 'var(--pf-accent)' }}>{'// '}</span>
+            <span aria-hidden="true" style={{ color: 'var(--pf-link)' }}>{'// '}</span>
             {reduceMotion ? (
               <span>{ROLES[0]}</span>
             ) : (
@@ -179,7 +179,7 @@ export default function Portfolio() {
             <CountUp value={String(certs.length)} start={statsInView} />
           </div>
           <p className="pf-stat-label">
-            <strong>Certifications</strong> from {issuers.slice(0, -1).join(', ')} and {issuers.at(-1)}
+            <strong>Certifications</strong> from {issuers.slice(0, -1).join(', ')}, and {issuers.at(-1)}
           </p>
         </div>
       </div>

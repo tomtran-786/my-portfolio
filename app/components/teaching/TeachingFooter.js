@@ -71,10 +71,10 @@ export default function TeachingFooter() {
           align-items: center;
           background: var(--teach-surface-muted);
           border: 1px solid var(--teach-border);
-          border-radius: 8px;
+          border-radius: var(--r-sm);
           color: var(--teach-text-secondary);
           display: flex;
-          font-size: 12px;
+          font-size: var(--fs-label);
           gap: 0.5rem;
           justify-content: space-between;
           margin: 2.5rem auto 0;

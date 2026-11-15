@@ -401,8 +401,8 @@ html[data-color-mode='dark'] .teaching-body {
   font-weight: 500;
   gap: var(--sp-1);
   line-height: 1.35;
+  max-width: 100%;
   padding: 0.15rem 0.55rem;
-  white-space: nowrap;
 }
 
 /* Card: một cách tạo cạnh duy nhất (viền), bóng chỉ xuất hiện khi hover. */
@@ -1565,6 +1565,17 @@ html[data-color-mode='dark'] .pf-contribution-image {
   .pf-footer-bottom {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pf-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-stat-cell + .pf-stat-cell {
+    border-top: 1px solid var(--pf-border);
+    padding-left: 0;
   }
 }
 

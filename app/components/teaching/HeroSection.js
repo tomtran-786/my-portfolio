@@ -125,6 +125,10 @@ export default function HeroSection() {
   align-items: center;
 }
         .hero-text { text-align: left; }
+        .hero-headline-part { display: block; }
+        @media (max-width: 600px) {
+          .hero-headline-part { display: inline; }
+        }
         .hero-cta-row { display: flex; justify-content: flex-start; }
         .hero-social-row { display: flex; justify-content: flex-start; }
 
@@ -143,8 +147,8 @@ export default function HeroSection() {
 
           <motion.h1 variants={fadeUp} style={s.headline}>
             {/* Ngắt dòng đúng chỗ data đã tách, để không cắt đôi cụm từ. */}
-            <span style={{ display: "block" }}>{headline.before}</span>
-            <span style={{ display: "block" }}>{headline.after}</span>
+            <span className="hero-headline-part">{headline.before}</span>{" "}
+            <span className="hero-headline-part">{headline.after}</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} className="hero-subtext" style={s.subtext}>

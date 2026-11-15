@@ -184,7 +184,9 @@ const categoryList = [FEATURED,'Investment Analysis', 'Market Research', 'Data A
 function ToolTag({ tag }) {
   const { color, bg, logo } = getToolStyle(tag)
   return (
-    <span className="tag" style={{ background: bg, color }}>
+    // Màu hãng gốc quá nhạt trên nền pastel (Looker 3.1:1), pha thêm đen để
+    // chữ đạt 4.5:1 mà vẫn giữ sắc của hãng.
+    <span className="tag" style={{ background: bg, color: `color-mix(in srgb, ${color} 72%, #000)` }}>
       {logo && <Image src={logo} alt="" width={14} height={14} style={{ objectFit: 'contain' }} />}
       {tag}
     </span>

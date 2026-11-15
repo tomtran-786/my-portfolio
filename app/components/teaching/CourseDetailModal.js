@@ -29,10 +29,11 @@ const s = {
     position: "relative",
     width: "100%",
     maxWidth: "64rem",
-    background: "var(--teach-surface)",
+    // Nền (giấy kẻ ô) nằm ở .course-modal-panel trong globals.css.
     border: "1px solid var(--teach-border)",
     borderRadius: "var(--r-lg)",
-    padding: "2.5rem",
+    // Chừa chỗ bên trái cho lề đỏ của trang vở.
+    padding: "2.5rem 2.5rem 2.5rem 4.25rem",
     boxShadow: "var(--teach-modal-shadow)",
   },
   closeBtn: {
@@ -653,7 +654,7 @@ function openSyllabus() {
         }
         @media (max-width: 700px) {
           .course-modal-intro { grid-template-columns: 1fr !important; }
-          .course-modal-panel { padding: 3.5rem 1.25rem 1.5rem !important; border-radius: 1.25rem !important; }
+          .course-modal-panel { padding: 3.5rem 1.25rem 1.5rem 2.75rem !important; border-radius: 1.25rem !important; background-position: 0 0, 24px 0 !important; }
         }
       `}</style>
 

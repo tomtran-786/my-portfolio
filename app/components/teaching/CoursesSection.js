@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import coursesData from "@/data/teaching/courses";
 import testimonialsData from "@/data/teaching/testimonials";
 import CourseDetailModal from "./CourseDetailModal";
+import { formatVnd, startingPrice, GOAL_EVENT } from "./courseUtils";
 
 const CATEGORIES = coursesData.categories;
 const categoryLabel = (id) => CATEGORIES.find((cat) => cat.id === id)?.label ?? id;
@@ -19,15 +20,6 @@ const LEVEL_CHOICES = [
   { id: "start", label: "Mới bắt đầu hoặc mất gốc" },
   { id: "base", label: "Đã có nền tảng" },
 ];
-
-const formatVnd = (n) => `${n.toLocaleString("vi-VN")}đ`;
-
-// Giá thấp nhất trong các gói của khóa, lấy thẳng từ dữ liệu bảng giá để khớp modal.
-function startingPrice(item) {
-  const plans = item.detail?.pricing?.plans ?? [];
-  if (plans.length === 0) return null;
-  return plans.reduce((min, plan) => (plan.monthlyPrice < min.monthlyPrice ? plan : min));
-}
 
 // Thanh level: đoạn xám là trình độ hiện tại, đoạn cam là mục tiêu. Chỉ là hình
 // minh họa (aria-hidden); chữ "Trình độ" bên cạnh mới là nội dung chính.
@@ -239,6 +231,16 @@ export default function CoursesSection() {
   const askLevel = Boolean(PATHS[activeCategory]);
   const recommendedId = PATHS[activeCategory]?.[level] ?? null;
   const recommended = items.find((item) => item.id === recommendedId);
+
+  // Hero có dòng prompt "Bạn muốn đạt band nào?": nó phát sự kiện này để lọc khóa.
+  useEffect(() => {
+    const onGoal = (e) => {
+      setActiveCategory(e.detail);
+      setLevel(null);
+    };
+    window.addEventListener(GOAL_EVENT, onGoal);
+    return () => window.removeEventListener(GOAL_EVENT, onGoal);
+  }, []);
 
   const chooseCategory = (id) => {
     setActiveCategory(id);

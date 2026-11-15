@@ -45,3 +45,5 @@ next-env.d.ts
 /.impeccable/config.local.json
 /.impeccable/hook.cache.json
 /.impeccable/live/
+
+.impeccable/mocks/

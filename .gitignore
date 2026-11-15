@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# impeccable: downloaded per-machine binary and local runtime state
+/.claude/skills/impeccable/scripts/bin/
+/.impeccable/config.local.json
+/.impeccable/hook.cache.json
+/.impeccable/live/

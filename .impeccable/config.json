@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-11-15T06:48:50.327Z",
+        "reason": "Claude triage: only match is .pf-blog-prose blockquote left rule, a standard quotation convention in article prose, not an accent stripe on a card"
+      }
+    ]
+  }
+}

@@ -84,11 +84,25 @@ Modal backdrops keep a light `backdrop-filter: blur()` because it separates laye
 
 ## `/teaching` world: chalkboard and notebook
 
-Direction chosen by the owner (decision page, pinned in their words). Palette 3 from the owner's reference image: orange `#f98603`, navy `#0e1733`, white `#f4f6fc`, peach `#ffe4ca`.
+Direction chosen by the owner (decision page, pinned in their words), then each section rolled in Impeccable live mode with three variants and the owner's pick. Palette 3 from the owner's reference image: orange `#f98603`, navy `#0e1733`, white `#f4f6fc`, peach `#ffe4ca`.
 
+Rules
 - Ground: navy board with a dot grid (SVG background on `.teaching-body`). Light and dark mode are both the board; dark is a deeper navy (`#080e22`).
-- Orange is for things to press or notice (Zalo, prices, active filters). Peach is the name card paper.
-- Hero: name card pinned on the board, a chalk prompt line (`> Bạn muốn đạt band nào?`) with three goal buttons that filter the courses through the `teach:goal` window event, and a chalk list of courses (band and starting price in `--teach-mono`).
-- Course detail modal is a ruled notebook page: `.course-modal-panel` overrides the `--teach-*` and `--c-*` tokens to paper, with SVG ruled lines and a red margin line. The `--c-*` tokens must be redeclared there because they are resolved on `.teaching-body`.
+- Orange is for things to press or notice (Zalo, prices, active filters). Peach (`--teach-paper`) is paper: name card, featured course, featured student, CTA slip, footer badge. Paper surfaces redeclare `--c-*` tokens (and `.btn--secondary` needs its own transparent background there, because it takes `--c-surface`, the board navy).
+- Detail is the notebook: `.course-modal-panel` overrides `--teach-*` and `--c-*` to paper, with SVG ruled lines and a red margin line. The same ruled-paper background is used by the hero course page.
+- Numerals (bands, prices, contact lines) use `--teach-mono`. Long mono lines need `overflow-wrap: anywhere`.
 - The AI flavour is visual language only (prompt line, dot grid, monospace numerals). The page must not claim any AI feature.
-- Kept effects: blinking prompt cursor is marked `data-impeccable-ignore="decorative-blinking-cursor"` and stops under reduced motion.
+- Tilted paper (name card, hero page, slip, badge, featured cards) is static and switched off under `prefers-reduced-motion` or below 800px where noted.
+
+Section map (all styles in `app/globals.css`)
+
+| Section | Component | Classes | Picked in live mode |
+|---|---|---|---|
+| Hero | `HeroSection.js` | inline `<style>`: `.hero-*` | board left (headline, prompt line with goal buttons `teach:goal`, Zalo), notebook page right with the course list, name card clipped on top |
+| Courses | `CoursesSection.js` | `.course-grid`, `.course-card`, `.course-card--feature` | the popular course is a large paper card, the rest compact, 4 columns |
+| Testimonials | `TestimonialsSection.js` | `.story-feature`, `.story-grid`, `.story-card` | first student featured on paper, six compact cards |
+| About | `AboutSection.js` | `.about-profile`, `.about-photo`, `.about-stats` | text left, tilted polaroid right, dashed monospace stats strip |
+| CTA | `CTASection.js` | `.cta-slip` | peach slip pinned to the board, contact line under a dashed tear line |
+| Footer | `TeachingFooter.js` | `.tf`, `.tf-badge`, `.tf-lists` | lanyard name-tag badge plus chalk link lists |
+
+Kept effects: the blinking prompt cursor in the hero is marked `data-impeccable-ignore="decorative-blinking-cursor"` and stops under reduced motion.

@@ -277,3 +277,44 @@ From the `/teaching` critique:
   - `PRODUCT.md` needs `/impeccable init` to match the current Impeccable schema.
 
 The plan for these, in the owner's chosen order, is in [claude.md](claude.md) under "Open roadmap".
+
+
+---
+
+## Third pass: redesign of `/teaching` with live variants (2026-11-15)
+
+Owner asked for a big change of design language and to roll variants to choose from. Scope: `/teaching` only, keep copy and prices. Everything else open.
+
+### Process
+1. Followed the Impeccable `new-work` flow. `concept-seed` dealt a direction; the owner's steer pinned the world in their own words (blackboard, name tag, notebook for course detail, palette 3 from their reference image, "traditional teaching plus AI-era UI"). Decision page options before the pin: boarding pass (assigned), exercise notebook (pick), deep dive, glass wall, plus declined terminal and angura poster (declined for a named reason: its rising-sun ray burst is a loaded symbol).
+2. No image generation was available, so the build was code-led with HTML sketches. The direction contract is in `.impeccable/surfaces/app-teaching-teaching-page-js.md`.
+3. Each section was rolled in live mode: three variants, owner picked, variant merged by hand into semantic classes in `globals.css`. The footer was rolled twice at the owner's request.
+
+### Commits
+| Commit | Change |
+|---|---|
+| `7244baa` | Zalo primary CTA, sticky Zalo bar (before the redesign) |
+| `fe2e2f5`, `8532483`, `b812c1d` | course cards with art/level bar/price, hero copy, polish (before the redesign) |
+| `c026dcf` | tokens to navy board, hero name card and chalk list, notebook modal |
+| `deec4ca` | hero: notebook-page variant |
+| `4b04f16` | course cards: featured paper card plus compact cards |
+| `9f5fa38` | testimonials: featured story plus six compact |
+| `7dd951a` | About: profile board with polaroid |
+| `72cdcec` | CTA: paper slip; fixed the email button colour (secondary button took the board navy as background) |
+| `049e09d` | footer: lanyard badge |
+| `3e69092` | mobile pass |
+
+### Verification
+- Lint, build (Next.js 16.2.6) and the detector on source (0 findings) after each merge.
+- Per section at 1440px: no text under 14px, no AA contrast failures, no horizontal overflow (DOM measurement).
+- Mobile pass at 375 and 320px, dark mode: found and fixed (a) the sticky Zalo bar observed `document.querySelector("footer")`, which matched a `<footer>` inside a testimonial card, (b) 320px overflow from a long monospace email in the footer badge, (c) touch targets under 44px (footer badge links, back and burger buttons, open-details button), (d) "IELTS 7.5" wrapping in the name card, (e) oversized featured price and card art on phones.
+- Course filter, level chooser, hero goal event and course modal checked by script.
+
+### Known remaining issues
+- **About stat "4.9★ Đánh giá trung bình"** and **testimonials #4 and #5 with identical result text** are unsourced or duplicated; owner has not decided.
+- Two students in grade 8 and 9 are shown with photo, school and city; consent not confirmed.
+- Compact course cards no longer show the description (only the featured card does).
+- Card price is the group price while the format line can say 1-1; the 1-1 price is only inside the modal. Also still not stated on the page that lessons are online.
+- Reduced-motion paths are written but were not exercised in a browser (the pane cannot emulate it).
+- The `PRODUCT.md` schema still predates the current Impeccable (`/impeccable init` interviews the owner).
+- `.impeccable/mocks/` (decision sketches) is gitignored.

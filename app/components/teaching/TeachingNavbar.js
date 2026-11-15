@@ -248,7 +248,9 @@ export default function TeachingNavbar() {
           .nav-logo-text { font-size: 17px !important; }
         }
 
-        @media (max-width: 340px) {
+        /* Đo thực tế: chữ thương hiệu cần khoảng 375px mới đủ chỗ cạnh nút back,
+           nút đổi giao diện và burger. Hẹp hơn thì chỉ còn logo, tránh đè nhau. */
+        @media (max-width: 380px) {
           .nav-logo-text { display: none; }
         }
 

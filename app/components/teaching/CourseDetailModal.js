@@ -167,7 +167,10 @@ syllabusLink: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "0.75rem",
+    // Trên màn hẹp, nhãn giữ nguyên một dòng và nhãn "Đóng 1 lần" xuống hàng
+    // riêng thay vì ép "Theo tháng" / "Trọn khóa" gãy làm đôi.
+    flexWrap: "wrap",
+    gap: "0.5rem 0.75rem",
     marginBottom: "1.25rem",
     fontSize: "var(--fs-small)",
   },
@@ -229,6 +232,7 @@ syllabusLink: {
     fontWeight: 700,
     padding: "0.25rem 0.7rem",
     borderRadius: "var(--r-sm)",
+    whiteSpace: "nowrap",
   },
   plansGrid: {
     display: "grid",
@@ -633,10 +637,10 @@ function openSyllabus() {
           box-shadow: var(--teach-shadow-hover);
         }
         .course-modal-syllabus-link:hover {
-          background: rgba(var(--teach-brand-rgb), 0.15) !important;
-          border-color: rgba(var(--teach-brand-rgb), 0.45) !important;
+          background: var(--teach-brand-soft) !important;
+          border-color: var(--teach-border-strong) !important;
           transform: translateY(-2px);
-          box-shadow: 0 4px 16px rgba(var(--teach-brand-rgb), 0.18);
+          box-shadow: var(--teach-shadow-hover);
           color: var(--teach-brand-deep) !important;
         }
         .course-modal-close:hover {
@@ -725,7 +729,7 @@ function openSyllabus() {
           <p style={s.sectionSubtext}>{detail.pricing.subtext}</p>
 
           <div style={s.billingToggleRow}>
-            <span style={{ color: billing === "monthly" ? "var(--teach-ink)" : "var(--teach-text-secondary)" }}>Theo tháng</span>
+            <span style={{ color: billing === "monthly" ? "var(--teach-ink)" : "var(--teach-text-secondary)", whiteSpace: "nowrap" }}>Theo tháng</span>
             <button
               style={s.toggleTrack}
               onClick={() => setBilling(billing === "monthly" ? "annual" : "monthly")}
@@ -739,7 +743,7 @@ function openSyllabus() {
                 transition={{ duration: 0.2, ease: "easeOut" }}
               />
             </button>
-            <span style={{ color: billing === "annual" ? "var(--teach-ink)" : "var(--teach-text-secondary)" }}>Trọn khóa</span>
+            <span style={{ color: billing === "annual" ? "var(--teach-ink)" : "var(--teach-text-secondary)", whiteSpace: "nowrap" }}>Trọn khóa</span>
             <span style={s.savePill}>Đóng 1 lần</span>
           </div>
 

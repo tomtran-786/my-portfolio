@@ -4,7 +4,7 @@ import { portfolioFont } from '../fonts'
 import { colorModeScript } from '@/app/theme'
 
 export const metadata = {
-  title: "My Teaching Career | Tom Tran",
+  title: "Học IELTS, TOEIC, giao tiếp cùng thầy Tom | English with Tom",
   description:
     "Hành trình giảng dạy tiếng Anh: lộ trình cá nhân hóa từ giao tiếp tự tin đến luyện thi học thuật.",
 };

@@ -1,11 +1,14 @@
 const heroData = {
   headline: {
-    before: "Thầy giáo tiếng Anh giúp bạn",
-    after: "chinh phục mọi kì thi",
+    before: "Thầy Tom dạy IELTS,",
+    after: "TOEIC và giao tiếp",
   },
 
   subtext:
-    "Lộ trình tiếng Anh cá nhân hóa, từ giao tiếp tự tin đến luyện thi IELTS và TOEIC, xây theo mục tiêu của riêng bạn.",
+    "Học 1-1 hoặc nhóm nhỏ, lộ trình cá nhân hóa theo điểm xuất phát và mục tiêu của bạn. Học thử 30 phút miễn phí trước khi quyết định.",
+
+  // Bằng chứng ngắn: chỉ dùng thông tin đã có ở phần Về tôi.
+  proof: "TOEIC 980 · IELTS 7.5 · Chuyên Anh, THPT Chuyên Nguyễn Tất Thành",
 
   // Zalo là kênh chính; nút phụ cuộn tới danh sách khóa học.
   cta: {
@@ -20,8 +23,7 @@ const heroData = {
   },
 
   socialProof: {
-    rating: "4.9/5",
-    count: "30+ Học viên hài lòng",
+    count: "30+ học viên đã học cùng tôi",
     avatars: [
       { src: "/teaching/feedback_Chau.png", alt: "Tô Bảo Châu" },
       { src: "/teaching/feedback_MinhThu.png", alt: "Trần Minh Thư" },

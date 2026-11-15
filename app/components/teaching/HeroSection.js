@@ -41,7 +41,7 @@ wrapper: {
   subtext: {
     color: "var(--teach-text)",
     fontSize: "var(--fs-lead)",
-    margin: "0 0 2.5rem 0",
+    margin: "0 0 0.75rem 0",
     lineHeight: 1.7,
   },
   ctaRow: {
@@ -70,17 +70,11 @@ wrapper: {
     objectFit: "cover",
     marginLeft: 0,
   },
-  ratingWrap: { textAlign: "left" },
-  stars: {
-    display: "flex",
-    alignItems: "center",
-    gap: "0.35rem",
-    color: "var(--teach-brand-deep)",
-  },
-  ratingText: {
+  proof: {
     color: "var(--teach-ink)",
+    fontSize: "var(--fs-small)",
     fontWeight: 600,
-    fontSize: 15,
+    margin: "0 0 2.5rem 0",
   },
   ratingCount: {
     color: "var(--teach-text)",
@@ -89,16 +83,8 @@ wrapper: {
   },
 };
 
-function StarIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path d="M10 1l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L10 15.3 4.4 18.2l1.1-6.2L1 7.6l6.2-.9z" />
-    </svg>
-  );
-}
-
 export default function HeroSection() {
-  const { headline, subtext, cta, socialProof } = heroData;
+  const { headline, subtext, proof, cta, socialProof } = heroData;
 
   return (
     <motion.section
@@ -155,6 +141,8 @@ export default function HeroSection() {
             {subtext}
           </motion.p>
 
+          <motion.p variants={fadeUp} style={s.proof}>{proof}</motion.p>
+
           <motion.div variants={fadeUp} className="hero-cta-row" style={s.ctaRow}>
             <a
               href={cta.primary.href}
@@ -192,13 +180,7 @@ export default function HeroSection() {
                 />
               ))}
             </div>
-            <div style={s.ratingWrap}>
-              <div style={s.stars}>
-                {Array.from({ length: 5 }).map((_, i) => <StarIcon key={i} />)}
-                <span style={s.ratingText}>{socialProof.rating}</span>
-              </div>
-              <p style={s.ratingCount}>{socialProof.count}</p>
-            </div>
+            <p style={s.ratingCount}>{socialProof.count}</p>
           </motion.div>
         </div>
 

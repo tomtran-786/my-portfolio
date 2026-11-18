@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-17T04:00:29.476Z",
+  "lastUpdated": "2026-11-18T04:54:50.446Z",
   "dailyCounts": {
     "2025-06-25": 79,
     "2025-06-26": 307,
@@ -174,14 +174,14 @@
     "2026-11-14": 44,
     "2026-11-15": 78,
     "2026-11-16": 139,
-    "2026-11-17": 39
+    "2026-11-17": 160
   },
   "stats": {
     "currentStreak": 41,
     "longestStreak": 41,
-    "totalReviews": 15287,
+    "totalReviews": 15408,
     "totalDays": 174,
-    "totalCardsStudied": 2320,
+    "totalCardsStudied": 2332,
     "firstStudyDate": "2025-06-25",
     "lastStudyDate": "2026-11-17"
   }
